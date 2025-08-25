@@ -34,45 +34,53 @@
         <div class="message received">
             <p><strong>Bonjour, aujourd’hui tu vas recevoir un mail important.<br><br>Ne le rates pas !</strong></p>
         </div>
+        <!-- Zone des réponses rapides -->
+        <div class="zone-reponses" id="zone-reponses">
+            <button class="reponse-choix" onclick="choisirReponse('Bien reçu, je m’en occupe !')">Bien reçu, je m’en occupe !</button>
+            <button class="reponse-choix" onclick="choisirReponse('Je vais le vérifier dès maintenant.')">Je vais le vérifier dès maintenant.</button>
+            <button class="reponse-choix" onclick="choisirReponse('Merci pour l’info !')">Merci pour l’info !</button>
+        </div>
 
         <div class="input-area">
-            <input type="text" placeholder="Tapez un message...">
-            <button class="send-btn">Envoyer</button>
+            <input id="input" type="text" placeholder="Tapez un message..." readonly>
+            <button class="bouton-envoyer" onclick="envoyerMessage()">Envoyer</button>
         </div>
     </section>
 </main>
 
-<!-- Script pour le message du boss -->
+<!-- Script pour la sélection de réponse au message -->
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const messageElement = document.querySelector(".message.received");
-        const textElement = messageElement.querySelector("p");
-        const fullHTML = textElement.innerHTML; // texte complet avec balises HTML
-        textElement.innerHTML = ""; // on vide pour l'animation
+    function choisirReponse(texte) {
+        document.getElementById('input').value = texte;
+    }
+</script>
 
-        // Ajouter classe pour faire apparaître la bulle
-        setTimeout(() => {
-            messageElement.classList.add("show");
-        }, 100);
+<!-- Script qui envoie le message et supprime les boutons de réponse -->
+<script>
+    // Envoyer le message et supprimer les boutons de réponses
+    function envoyerMessage() {
+        const champ = document.getElementById('input');
+        const texte = champ.value.trim();
+        if (texte === "") return; // ne rien faire si vide
 
-        // Crée le span pour les 3 points
-        const typingDots = document.createElement("span");
-        typingDots.textContent = "...";
-        textElement.appendChild(typingDots);
+        // Créer une nouvelle bulle de message
+        const messages = document.querySelector('.messages');
+        const nouvelleBulle = document.createElement('div');
+        nouvelleBulle.classList.add('message-envoye'); // ajouter une nouvelle classe CSS
+        nouvelleBulle.innerHTML = `<p>${texte}</p>`;
 
-        let dotVisible = true;
-        const dotInterval = setInterval(() => {
-            typingDots.style.visibility = dotVisible ? "hidden" : "visible";
-            dotVisible = !dotVisible;
-        }, 500);
+        // Ajouter le message avant la zone de saisie
+        messages.insertBefore(nouvelleBulle, document.querySelector('.input-area'));
 
-        // Après 1.5 secondes, on affiche le texte entier
-        setTimeout(() => {
-            clearInterval(dotInterval);
-            textElement.removeChild(typingDots);
-            textElement.innerHTML = fullHTML;
-        }, 1500); // durée des 3 points (1.5s)
-    });
+        // Supprimer la zone de réponses rapides
+        const zoneReponses = document.getElementById('zone-reponses');
+        if (zoneReponses) {
+            zoneReponses.remove();
+        }
+
+        // Vider le champ texte
+        champ.value = "";
+    }
 </script>
 
 </body>

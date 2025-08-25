@@ -1,0 +1,242 @@
+html {
+    font-family: 'Orbitron', sans-serif;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Ajuste le main pour qu'il s'arrête juste au-dessus du footer */
+main {
+    flex: 1;
+    display: flex;
+    margin-bottom: 91px; /* laisse un petit espace au-dessus du footer */
+    box-sizing: border-box;
+}
+
+header {
+    display: flex;
+    align-items: center;         /* aligne verticalement les éléments */
+    justify-content: space-between; /* espace entre icône+texte et la croix */
+    padding: 10px 20px;
+    background: linear-gradient(90deg, #93FBAB, #08B99D); /* dégradé horizontal */
+    color: black;
+    margin-top: -8px;
+}
+
+header img:first-child {
+    height: 40px;
+    margin-right: 10px;
+}
+
+header h1 {
+    font-size: 24px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+header img:last-child {
+    height: 25px;
+    cursor: pointer;
+}
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+header img {
+    height: 30px;
+}
+
+.close-btn {
+    background: red;
+    border-radius: 50%;
+    padding: 5px;
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+}
+
+/* === LAYOUT PRINCIPAL === */
+.chat-container {
+    display: flex;
+    height: 500px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* === CONTACTS === */
+.contacts {
+    width: 200px;
+    background: #eaf0ff;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.contact {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 10px;
+    background: white;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bolder;
+}
+
+.contact img {
+    height: 20px;
+}
+
+.contact.active {
+    background: linear-gradient(90deg, #9be15d, #00e3ae);
+    color: black;
+}
+
+/* === ZONE DE MESSAGES === */
+.messages {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #f6faff;
+    padding: 15px;
+}
+
+.message {
+    max-width: 60%;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 5px 0;
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+.received {
+    background: #bde8e6;
+    align-self: flex-start;
+}
+/* === BULLE DE CHAT AVEC FADE-IN DU TEXTE === */
+.message.received {
+    background: #bde8e6;
+    align-self: flex-start;
+    border-radius: 10px;
+    padding: 10px;
+    max-width: 60%;
+    margin: 5px 0;
+    font-size: 15px;
+    line-height: 1.4;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.message.received.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+.message.received p.full-text {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.message.received p.full-text.show {
+    opacity: 1;
+}
+
+
+.message.received span.typing-dots {
+    display: inline-block;
+    font-weight: bold;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    10%, 50%, 100% { opacity: 1; }
+    25%, 75% { opacity: 0; }
+}
+
+.input-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-top: 1px solid #ccc;
+    padding: 10px;
+}
+
+.input-area input {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid #20B2AA;
+    border-radius: 10px;
+    outline: none;
+    font-size: 14px;
+}
+
+.send-btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 10px;
+    background: cadetblue;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.send-btn:hover {
+    background: linear-gradient(90deg, #20B2AA, #4CAF50);
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    height: 91px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.6);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+}
+footer .logo img {
+    margin: 5px;
+}
+footer nav img {
+    height: 60px;
+    margin: 20px;
+}
+
+.icon-notification img {
+    max-height: 60px;
+}
+.icon-notification {
+    margin-right: 10px;
+
+}
+
+footer nav {
+    padding: 0;
+    margin: 0;
+}
+footer a {
+    text-decoration: none;
+}
+footer img {
+    filter:drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}

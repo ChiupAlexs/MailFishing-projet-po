@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Mailfishing</title>
+    <link rel="stylesheet" href="../css/message.css">
+</head>
+<body>
+<header>
+    <div class="header-left">
+        <img src="../images/icon-message.png" alt="logo">
+        <h1>Message</h1>
+    </div>
+    <img src="../images/croix.png" alt="fermer" class="close-btn">
+</header>
+
+<main class="chat-container">
+    <aside class="contacts">
+        <button class="contact active">
+            <img src="../images/user.png" alt="user"> Boss
+        </button>
+        <button class="contact">
+            <img src="../images/user.png" alt="user"> Collègue
+        </button>
+        <button class="contact">
+            <img src="../images/user.png" alt="user"> Collègue
+        </button>
+        <button class="contact">
+            <img src="../images/user.png" alt="user"> Collègue
+        </button>
+    </aside>
+
+    <section class="messages">
+        <div class="message received">
+            <p><strong>Bonjour, aujourd’hui tu vas recevoir un mail important.<br><br>Ne le rates pas !</strong></p>
+        </div>
+
+        <div class="input-area">
+            <input type="text" placeholder="Tapez un message...">
+            <button class="send-btn">Envoyer</button>
+        </div>
+    </section>
+</main>
+
+<!-- Script pour le message du boss -->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const messageElement = document.querySelector(".message.received");
+        const textElement = messageElement.querySelector("p");
+        const fullHTML = textElement.innerHTML; // texte complet avec balises HTML
+        textElement.innerHTML = ""; // on vide pour l'animation
+
+        // Ajouter classe pour faire apparaître la bulle
+        setTimeout(() => {
+            messageElement.classList.add("show");
+        }, 100);
+
+        // Crée le span pour les 3 points
+        const typingDots = document.createElement("span");
+        typingDots.textContent = "...";
+        textElement.appendChild(typingDots);
+
+        let dotVisible = true;
+        const dotInterval = setInterval(() => {
+            typingDots.style.visibility = dotVisible ? "hidden" : "visible";
+            dotVisible = !dotVisible;
+        }, 500);
+
+        // Après 1.5 secondes, on affiche le texte entier
+        setTimeout(() => {
+            clearInterval(dotInterval);
+            textElement.removeChild(typingDots);
+            textElement.innerHTML = fullHTML;
+        }, 1500); // durée des 3 points (1.5s)
+    });
+</script>
+
+</body>
+<footer>
+    <a href="JavaScript:void(0)" onclick="fonctions" class="logo">
+        <img src="../icon/Logo.png" alt="logo du jeu">
+    </a>
+    <nav>
+        <a href="">
+            <img src="../images/web.png" alt="icone du navigateur">
+        </a>
+        <a href="">
+            <img src="../images/message.png" alt="icone de la messagerie">
+        </a>
+        <a href="">
+            <img src="../images/mail.png" alt="icone de l'application de mail">
+        </a>
+    </nav>
+    <a href="JavaScript:void(0)" onclick="fonctions" class="icon-notification">
+        <img src="../images/bell.png" alt="logo du jeu">
+    </a>
+</footer>
+
+</html>

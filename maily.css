@@ -1,11 +1,50 @@
 header {
-    background-color: #41B6FF;
+    background: linear-gradient(to right, #41B6FF, #0022FF);
+    .iconMaily {
+        width: 40px;
+        height: 40px;
+        margin-left: 20px;
+    }
+    .iconQuitter {
+        width: 40px;
+        height: 40px;
+        margin-right: 20px;
+    }
+    h1 {
+        color: #000;
+        font-size: 20px;
+        font-family: 'Orbitron', sans-serif;
+    }
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 1280px;
+    height: 85px;
 }
 
 body {
-    background-color: #41B6FF;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
 }
 
 footer {
-    background-color: #41B6FF;
+    .appBarreTache {
+        img {
+             width: 50px;
+            height: 50px;
+        }
+    }
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background-color: #D9E4FF;
+    width: 1280px;
+    height: 91px;
 }

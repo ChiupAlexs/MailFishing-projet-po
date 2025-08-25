@@ -3,7 +3,39 @@ body {
     margin: 0;
     background-image: url("../images/wallpaper.jpg");
     background-size: cover;
+    font-family: orbitron, sans-serif;
 }
+
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px;
+}
+
+.dossier {
+    display: inline-block;
+    max-width: 100px;
+    text-align: center;
+}
+.dossier p {
+    display: inline-block;
+    margin: 3px 0;
+    width: 100%;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+.dossier img {
+    margin: 3px auto;
+}
+
+/*********************************
+
+   Pied de page (barre des tâches)
+
+*********************************/
 footer {
     position: fixed;
     bottom: 0;
@@ -13,9 +45,12 @@ footer {
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     border-radius: 5px;
+}
+footer .logo img {
+    margin: 5px;
 }
 footer nav img {
     height: 60px;
@@ -29,3 +64,16 @@ footer nav {
 footer a {
     text-decoration: none;
 }
+
+
+/***************************
+
+    Polices font-face
+
+***************************/
+@font-face {
+    font-family: "orbitron";
+    src: url("../fonts/orbitron.woff2") format("woff2");
+    font-weight: normal;
+}
+

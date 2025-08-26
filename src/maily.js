@@ -6,7 +6,7 @@ const createWindow = () => {
         height: 600
     })
 
-    win.loadFile('maily.html')
+    win.loadFile('src/html/maily.html')
 }
 
 app.whenReady().then(() => {

@@ -5,16 +5,19 @@
 
 header {
     background: linear-gradient(to right, #41B6FF, #0022FF);
+
     .iconMaily {
         width: 50px;
         height: 50px;
         margin-left: 20px;
     }
+
     .iconQuitter {
         width: 50px;
         height: 50px;
         margin-right: 20px;
     }
+
     .iconQuitter:hover {
         cursor: pointer;
     }
@@ -77,6 +80,7 @@ body {
         float: left;
         margin-left: 20px;
         padding-top: 20px;
+
         p {
             margin-left: 10px;
         }
@@ -84,6 +88,7 @@ body {
 
     .containerRecepetion {
         float: left;
+        margin-top: -10px;
     }
 
     .containerHautMail {
@@ -93,6 +98,7 @@ body {
         margin-top: 20px;
         margin-left: 340px;
     }
+
     .non-lus {
         opacity: 0.5;
         font-family: 'Orbitron', sans-serif;
@@ -113,10 +119,6 @@ body {
         padding: 20px;
     }
 
-    .containerMails {
-        float: left;
-    }
-
     .mail {
         width: 50px;
         height: 50px;
@@ -127,7 +129,7 @@ body {
     }
 
     .mails, .mails1 {
-        float : right;
+        float: right;
         margin-top: 5px;
         background-color: #E3E3E3;
         padding: 10px;
@@ -137,8 +139,9 @@ body {
 
     .mails1:hover {
         cursor: pointer;
-        background: linear-gradient(to right, #41B6FF, #E3E3E3 );
+        background: linear-gradient(to right, #41B6FF, #E3E3E3);
     }
+
     .mails:hover {
         cursor: pointer;
         background: linear-gradient(to right, #41B6FF, #E3E3E3);
@@ -154,28 +157,33 @@ body {
 }
 
 footer {
+    border-top: 2px solid lightgray;
+    position: fixed;
     bottom: 0;
     height: 91px;
     width: 100%;
     background-color: rgba(255, 255, 255, 0.6);
+    margin: 0;
     padding: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-radius: 5px;
-    border-top: 1px solid #ccc;
 }
+
 footer .logo img {
     margin: 5px;
 }
+
 footer nav img {
-    height: 60px;
+    height: 70px;
     margin: 20px;
 }
 
 .icon-notification img {
-    max-height: 60px;
+    max-height: 70px;
 }
+
 .icon-notification {
     margin-right: 10px;
 
@@ -185,9 +193,11 @@ footer nav {
     padding: 0;
     margin: 0;
 }
+
 footer a {
     text-decoration: none;
 }
+
 footer img {
-    filter:drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
 }

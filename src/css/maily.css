@@ -164,7 +164,7 @@ body {
 }
 
 footer {
-    border-top: 2px solid #2372FF;
+    border-top: 2px solid lightgray;
     position: fixed;
     bottom: 0;
     height: 91px;

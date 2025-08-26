@@ -2,9 +2,13 @@ body {
     padding: 0;
     margin: 0;
     background-image: url("../images/wallpaper.png");
-    background-size: cover;
+    background-size: cover;      /* L’image couvre tout l’écran */
+    background-position: center; /* Centrée pour éviter les décalages */
+    background-repeat: no-repeat; /* Pas de répétition */
+    width: 100%;
     font-family: orbitron, sans-serif;
 }
+
 
 main {
     display: flex;
@@ -23,7 +27,7 @@ main {
     margin: 3px 0;
     width: 100%;
     text-decoration: none;
-    color: black;
+    color: white;
     font-weight: bold;
     font-size: 0.8rem;
 }
@@ -42,7 +46,7 @@ footer {
     bottom: 0;
     height: 91px;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: white;
     margin: 0;
     padding: 0;
     display: flex;

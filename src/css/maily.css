@@ -169,7 +169,7 @@ footer {
     bottom: 0;
     height: 91px;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: white;
     margin: 0;
     padding: 0;
     display: flex;
@@ -177,11 +177,9 @@ footer {
     align-items: center;
     border-radius: 5px;
 }
-
 footer .logo img {
     margin: 5px;
 }
-
 footer nav img {
     height: 70px;
     margin: 20px;
@@ -190,7 +188,6 @@ footer nav img {
 .icon-notification img {
     max-height: 70px;
 }
-
 .icon-notification {
     margin-right: 10px;
 
@@ -200,11 +197,9 @@ footer nav {
     padding: 0;
     margin: 0;
 }
-
 footer a {
     text-decoration: none;
 }
-
 footer img {
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+    filter:drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
 }

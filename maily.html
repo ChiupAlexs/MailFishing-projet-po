@@ -6,8 +6,9 @@
     <link rel="stylesheet" href="maily.css">
 </head>
 <header>
-    <img class="iconMaily" src="img/mailyIcon.png" alt="logo de maily"></img>
-    <h1>Maily</h1>
+        <img class="iconMaily" src="img/mailyIcon.png" alt="logo de maily"></img>
+        <h1>Maily</h1>
+
     <img class="iconQuitter" src="img/iconQuitter.png" alt="icon pour quitter"></img>
 </header>
 <body>
@@ -16,17 +17,19 @@
     <p class="mailGestion">info.gestion@gngng.com</p>
 </div>
 
-<div class="containerStatuMail">
-    <p>Tous</p>
-    <p>non-lus(1)</p>
-</div>
-<button class="suppBouton">Supprimer</button>
-<div class="containerRecepetion">
-    <p class="reception">Boîte de reception</p>
+<div class="containerHautMail">
+    <p class="Tous">Tous</p>
+    <p class="non-lus">non-lus(1)</p>
+    <button class="suppBouton">Supprimer</button>
 </div>
 
+
+
 <div class="containerMails">
-    <div class="mails">
+    <div class="containerRecepetion">
+        <p class="reception">Boîte de reception</p>
+    </div>
+    <div class="mails1">
         <img class="mail" src="img/mail1.png" alt="mailPP"></img>
         <p class="mailHeure">12:00</p>
     </div>
@@ -64,7 +67,7 @@
             <img src="img/Message.png" alt="icone de la messagerie">
         </a>
         <a href="">
-            <img src="img/mailyIcon.png" alt="icone de l'application de mail">
+            <img class="mailyBarreTache" src="img/mailyIcon.png" alt="icone de l'application de mail">
         </a>
     </nav>
     <a href="JavaScript:void(0)" onclick="fonctions" class="icon-notification">

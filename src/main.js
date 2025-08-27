@@ -18,10 +18,12 @@ async function loadMails() {
     for (let index in listFauxMail) {
         listMailEl.innerHTML += `
         <div class="mails1" onclick="ouvrirMail(${index})">
-            <img class="mail" src="../images/mail1.png" alt="mailPP">
+            <img class="mail-picture" src="../images/mail1.png" alt="mailPP">
+            <div class="info-apercu">
+                <p class="apercu-sender">${listFauxMail.at(index).sender}</p>
+                <p class="apercu-object">${listFauxMail.at(index).object}</p>
+            </div>
             <p class="mailHeure">${listFauxMail.at(index).time}
-            <p class="apercu-sender">${listFauxMail.at(index).sender}</p>
-            <p class="apercu-objet">${listFauxMail.at(index).object}</p>
         </div>`
     }
 }

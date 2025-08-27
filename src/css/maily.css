@@ -120,7 +120,7 @@ body {
         padding: 20px;
     }
 
-    .mail {
+    .mail-picture {
         width: 50px;
         height: 50px;
     }
@@ -166,6 +166,32 @@ body {
         cursor: pointer;
     }
 
+    .apercu-sender,
+    .apercu-object {
+        display: inline-block;
+    }
+
+    .mails,
+    .mails1 {
+    }
+
+    .info-apercu {
+        display: inline-flex;
+        flex-direction: column;
+        margin-top: -20px;
+        position: relative;
+        top: -20px;
+        margin-left: 5px;
+    }
+
+    .info-apercu p {
+        margin: 0;
+    }
+
+    .apercu-sender {
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
     /* Écrans de 1024px ou moins */
     @media screen and (min-width: 1824px) {
         .mails, .mails1 {
@@ -193,6 +219,8 @@ body {
         color: #000;
         float: right;
         opacity: 0.5;
+        display: inline-block;
+        margin-top: 0;
     }
 }
 

@@ -1,14 +1,16 @@
+* {
+    box-sizing: border-box;
+}
 body {
     padding: 0;
     margin: 0;
-    background-image: url("../images/wallpaper.png");
-    background-size: cover;      /* L’image couvre tout l’écran */
-    background-position: center; /* Centrée pour éviter les décalages */
-    background-repeat: no-repeat; /* Pas de répétition */
+    background-image: url("../images/wallpaper.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
     width: 100%;
+    height: 100vh;
     font-family: orbitron, sans-serif;
 }
-
 
 main {
     display: flex;
@@ -55,6 +57,7 @@ footer {
     align-items: center;
     border-radius: 5px;
 }
+
 footer .logo img {
     margin: 5px;
 }

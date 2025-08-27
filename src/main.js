@@ -6,6 +6,8 @@ const listMailEl = document.querySelector('.containerMails')
 let listFauxMail = []
 let listVraiMail = []
 
+let listMails = []
+
 async function loadMails() {
     let response = await fetch("../json/mail.json");
     let response2 = await fetch("../json/vraimail.json");
@@ -15,15 +17,17 @@ async function loadMails() {
     data = await response2.json();
     listVraiMail = data.mails
 
-    for (let index in listFauxMail) {
+    listMails.push(...listFauxMail)
+    listMails.push(...listVraiMail)
+    for (let index in listMails) {
         listMailEl.innerHTML += `
         <div class="mails1" onclick="ouvrirMail(${index})">
             <img class="mail-picture" src="../images/mail1.png" alt="mailPP">
             <div class="info-apercu">
-                <p class="apercu-sender">${listFauxMail.at(index).sender}</p>
-                <p class="apercu-object">${listFauxMail.at(index).object}</p>
+                <p class="apercu-sender">${listMails.at(index).sender}</p>
+                <p class="apercu-object">${listMails.at(index).object}</p>
             </div>
-            <p class="mailHeure">${listFauxMail.at(index).time}
+            <p class="mailHeure">${listMails.at(index).time}
         </div>`
     }
 }
@@ -33,7 +37,7 @@ async function ouvrirMail(id) {
 
     mailOuvertEl.style.display = 'block'
 
-    const mail = listFauxMail[id]
+    const mail = listMails[id]
     mailOuvertEl.querySelector('.sender').textContent = "Sender : " + mail.sender
     mailOuvertEl.querySelector('.objet').textContent = "Objet : " + mail.object
     mailOuvertEl.querySelector('.time').textContent = "Time : " + mail.time

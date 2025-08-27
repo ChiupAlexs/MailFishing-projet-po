@@ -144,6 +144,10 @@ body {
         }
     }
 
+    .mail-ouvert {
+        display: none;
+    }
+
     .mails1:hover {
         cursor: pointer;
         background: linear-gradient(to right, #41B6FF, #E3E3E3);

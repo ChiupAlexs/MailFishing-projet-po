@@ -39,3 +39,10 @@ const listMailEl = document.querySelector('.containerMails')
 
     console.log("test")
 }
+
+function fermerMail() {
+    const mailOuvertEl = document.getElementById('mail-ouvert')
+    const listMailEl = document.querySelector('.containerMails')
+    mailOuvertEl.style.display = 'none'
+    listMailEl.style.display = 'block'
+}

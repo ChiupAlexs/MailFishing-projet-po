@@ -143,7 +143,6 @@ body {
         background-color: #E3E3E3;
         padding: 10px;
         width: 1150px;
-        padding-bottom: 100px;
     }
 
     .sender, .objet {
@@ -155,6 +154,16 @@ body {
     .time {
         opacity: 0.5;
         padding-bottom: 10px;
+    }
+
+    .message {
+        padding-bottom: 50px;
+    }
+
+    .retour {
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
     }
 
     /* Écrans de 1024px ou moins */

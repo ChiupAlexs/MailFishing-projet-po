@@ -38,10 +38,11 @@ async function ouvrirMail(id) {
     mailOuvertEl.style.display = 'block'
 
     const mail = listMails[id]
+    let message = mail.body.replace(/\n/g, "<br>");
     mailOuvertEl.querySelector('.sender').textContent = "Sender : " + mail.sender
     mailOuvertEl.querySelector('.objet').textContent = "Objet : " + mail.object
     mailOuvertEl.querySelector('.time').textContent = "Time : " + mail.time
-    mailOuvertEl.querySelector('.message').textContent = "Message : " + mail.body
+    mailOuvertEl.querySelector('.message').innerHTML = "Message : " + message
 
     listMailEl.style.display = 'none'
 

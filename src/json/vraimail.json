@@ -17,6 +17,12 @@
       "object": "abonnement youtube premium",
       "time": "14:12",
       "body": "Bonjour,\n\nvotre abonnement youtube premium arrive à expiration.\n\nSi vous souhaitez le renouveler cliquez ici.\n\nCordialement \n\nL'équipe Youtube"
-    }
+    },
+      {
+        "sender": "julien.dupont@gngngn.ch",
+        "object": "Mise à jour du rapport trimestriel",
+        "time": "11:20",
+        "body": "Salut,\n\nJe viens de terminer les modifications sur le rapport trimestriel. Peux-tu jeter un œil et me dire si tout est correct avant l'envoi à la direction ?\n\nLien vers le fichier : https://gngngn.ch/rapports/trimestriel_Q3.xlsx\n\nMerci !\nJulien"
+      }
   ]
 }

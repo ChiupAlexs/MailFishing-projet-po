@@ -274,3 +274,14 @@ footer a {
 footer img {
     filter:drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
 }
+
+/***************************
+
+    Polices font-face
+
+***************************/
+@font-face {
+    font-family: "orbitron";
+    src: url("../fonts/orbitron.woff2") format("woff2");
+    font-weight: normal;
+}

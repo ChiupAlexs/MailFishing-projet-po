@@ -35,6 +35,78 @@
       "object": "Promo pour le lavabo en sodium",
       "time": "10:15",
       "body": "Profitez d'une promotion unique de 50% sur notre nouveau lavabo en sodium en cliquant sur ce lien : https://bosh-promo.fr"
+    },
+    {
+      "sender": "TikTouk@mail.ch",
+      "object": "Votre nouveau clip est prêt",
+      "time": "10:34",
+      "body": "Vous avez récemment créer un clip sur notre plateform.\n\nAppuyez sur ce lien pour le visualiser : https://www.tiktouk.com/@gngngn_user/video/1234567890123456789\n\n\nService d'informations TikTouk"
+    },
+    {
+      "sender": "StreamFlow@info.net",
+      "object": "Votre vidéo est maintenant en ligne",
+      "time": "11:02",
+      "body": "Bonjour,\n\nVotre dernière vidéo a été publiée avec succès.\n\nCliquez ici pour la visionner : https://www.streamflow.com/watch/abcdef123456\n\n-StreamFlow-"
+    },
+    {
+      "sender": "QuickShop@support.org",
+      "object": "Confirmation de votre commande #4721",
+      "time": "14:17",
+      "body": "Merci pour votre achat sur QuickShop !\n\nVous pouvez suivre votre commande en cliquant sur ce lien : https://www.quickshop.com/orders/4721\n\n¨QuickShop c'est du rapide !¨\n"
+    },
+    {
+      "sender": "PicShare@service.com",
+      "object": "Vous avez un nouvel abonné",
+      "time": "09:48",
+      "body": "Félicitations !\n\nUn nouvel utilisateur s’est abonné à votre profil.\n\nDécouvrez-le ici : https://www.picshare.com/@my_profile/followers\n"
+    },
+    {
+      "sender": "MailFast@notify.fr",
+      "object": "Nouvelle connexion détectée",
+      "time": "07:56",
+      "body": "Nous avons remarqué une connexion à votre compte MailFast.\n\nVérifiez votre activité : https://www.mailfast.com/security/logincheck\n"
+    },
+    {
+      "sender": "GameZone@update.eu",
+      "object": "Mise à jour disponible",
+      "time": "13:21",
+      "body": "Une nouvelle mise à jour est prête pour votre jeu préféré.\n\nTéléchargez-la dès maintenant : https://www.gamezone.com/update/98765\n"
+    },
+    {
+      "sender": "Foodly@order.com",
+      "object": "Votre repas est en route",
+      "time": "19:42",
+      "body": "Votre commande Foodly est actuellement en livraison.\n\nSuivez votre livreur en temps réel : https://www.foodly.com/track/54321\n"
+    },
+    {
+      "sender": "Travelio@booking.net",
+      "object": "Votre billet est confirmé",
+      "time": "08:33",
+      "body": "Votre réservation a bien été enregistrée.\n\nRetrouvez vos billets ici : https://www.travelio.com/ticket/abc987654\n"
+    },
+    {
+      "sender": "FitLife@club.org",
+      "object": "Nouvelle séance disponible",
+      "time": "16:29",
+      "body": "Bonjour !\n\nUne nouvelle séance d’entraînement personnalisée vous attend.\n\nDécouvrez-la : https://www.fitlife.com/sessions/123abc\n"
+    },
+    {
+      "sender": "SoundBeat@music.ch",
+      "object": "Votre playlist est prête",
+      "time": "12:55",
+      "body": "Nous avons créé une playlist rien que pour vous.\n\nÉcoutez-la maintenant : https://www.soundbeat.com/playlist/xyz654321\n"
+    },
+    {
+      "sender": "WorkNet@career.pro",
+      "object": "Nouvelle offre d’emploi disponible",
+      "time": "17:10",
+      "body": "Un recruteur a publié une offre correspondant à votre profil.\n\nConsultez-la ici : https://www.worknet.com/jobs/offer123\n"
+    },
+    {
+      "sender": "FortNight@epicgames.com",
+      "object": "Votre récompense FortNight est disponible",
+      "time": "21:07",
+      "body": "Bonjour joueur,\n\nVotre compte Fortnite a reçu une nouvelle récompense exclusive.\n\nCliquez ici pour la récupérer : https://www.fortnightly.com/reward/bonus123\n"
     }
   ]
 }

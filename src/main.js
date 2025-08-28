@@ -9,16 +9,25 @@ let listVraiMail = []
 let listMails = []
 
 async function loadMails() {
-    let response = await fetch("../json/mail.json");
-    let response2 = await fetch("../json/vraimail.json");
-    let data = await response.json();
-    listFauxMail = data.mails
 
-    data = await response2.json();
-    listVraiMail = data.mails
+    if (sessionStorage.getItem('mails') === null) {
 
-    listMails.push(...listFauxMail)
-    listMails.push(...listVraiMail)
+        let response = await fetch("../json/mail.json");
+        let response2 = await fetch("../json/vraimail.json");
+        let data = await response.json();
+        listFauxMail = data.mails
+
+        data = await response2.json();
+        listVraiMail = data.mails
+
+        listMails.push(...listFauxMail)
+        listMails.push(...listVraiMail)
+
+        sauvegarderMail()
+    } else {
+        listMails = JSON.parse(sessionStorage.getItem('mails'));
+    }
+    console.log(listMails)
     for (let index in listMails) {
         listMailEl.innerHTML += `
         <div class="mails1" onclick="ouvrirMail(${index})">
@@ -31,6 +40,7 @@ async function loadMails() {
         </div>`
     }
 }
+
 addEventListener('load', loadMails)
 
 async function ouvrirMail(id) {
@@ -54,4 +64,8 @@ function fermerMail() {
     const listMailEl = document.querySelector('.containerMails')
     mailOuvertEl.style.display = 'none'
     listMailEl.style.display = 'block'
+}
+
+function sauvegarderMail() {
+    sessionStorage.setItem('mails', JSON.stringify(listMails))
 }

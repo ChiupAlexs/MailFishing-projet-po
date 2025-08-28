@@ -46,6 +46,8 @@ async function ouvrirMail(id) {
 
     listMailEl.style.display = 'none'
 
+    document.getElementById("supp").style.display = "block"  // affiche
+
     console.log("test")
 }
 
@@ -54,4 +56,5 @@ function fermerMail() {
     const listMailEl = document.querySelector('.containerMails')
     mailOuvertEl.style.display = 'none'
     listMailEl.style.display = 'block'
+    document.getElementById("supp").style.display = "none"  // masque
 }

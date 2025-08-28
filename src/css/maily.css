@@ -68,9 +68,19 @@ body {
         border: none;
         border-radius: 10px;
         padding: 10px;
-        float: right;
-        margin-right: 50px;
         width: 200px;
+        display: block;
+        margin-left: auto;
+        margin-right: 55px;
+    }
+
+    @media screen and (min-width: 1824px) {
+        .suppBouton {
+            font-size: 20px;   /* garde la même taille de texte */
+            width: 200px;      /* garde la même largeur */
+            padding: 10px;     /* garde le même padding */
+            margin-right: 440px;
+        }
     }
 
     .suppBouton:hover {
@@ -88,8 +98,8 @@ body {
     }
 
     .containerRecepetion {
+        position: absolute;
         float: left;
-        margin-top: -15px;
     }
 
     .containerHautMail {

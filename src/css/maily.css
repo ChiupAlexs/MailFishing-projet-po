@@ -118,14 +118,15 @@ p {
     margin-left: 20px;
     padding-top: 20px;
 
-    position:fixed;
+    position: fixed;
+    top: 60px;
 }
 .containerProfilGestion p {
     margin-left: 10px;
 }
 
 .containerRecepetion {
-    position: absolute;
+    position: fixed;
     float: left;
 }
 

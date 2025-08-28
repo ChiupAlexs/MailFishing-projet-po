@@ -15,20 +15,40 @@ async function loadMails() {
 
         let response = await fetch("../json/mail.json");
         let response2 = await fetch("../json/vraimail.json");
-        let data = await response.json();
-        listFauxMail = data.mails
+        let dataFaux = await response.json();
+        let dataVrai = await response2.json();
+        listFauxMail = dataFaux.mails
+        listVraiMail = dataVrai.mails
 
-        data = await response2.json();
-        listVraiMail = data.mails
+        // Tirage aléatoire de 9 mails de mail.json
+        let mailsFauxChoisis = []
+        while (mailsFauxChoisis.length < 9 && listFauxMail.length > 0) {
+            let index = Math.floor(Math.random() * listFauxMail.length)
+            mailsFauxChoisis.push(listFauxMail.splice(index, 1)[0])
+        }
 
-        listMails.push(...listFauxMail)
-        listMails.push(...listVraiMail)
+        // Tirage aléatoire de 1 mail de vraimail.json
+        let mailVraiChoisi = null
+        if (listVraiMail.length > 0) {
+            let indexVrai = Math.floor(Math.random() * listVraiMail.length)
+            mailVraiChoisi = listVraiMail[indexVrai]
+        }
 
+        listMails = [...mailsFauxChoisis]
+        if (mailVraiChoisi) listMails.push(mailVraiChoisi)
+
+
+        listMails.sort(() => Math.random() - 0.5)
+
+        // Sauvegarder
         sauvegarderMail()
     } else {
         listMails = JSON.parse(sessionStorage.getItem('mails'));
     }
+
     console.log(listMails)
+
+    listMailEl.innerHTML = ""
     for (let index in listMails) {
         listMailEl.innerHTML += `
         <div class="mails1" onclick="ouvrirMail(${index})">
@@ -52,7 +72,7 @@ async function ouvrirMail(id) {
 
     const mail = listMails[id]
     let message = mail.body.replace(/\n/g, "<br>");
-    mailOuvertEl.querySelector('.sender').textContent = "Sender : " + mail.sender
+    mailOuvertEl.querySelector('.sender').textContent ="Sender : "+ mail.sender
     mailOuvertEl.querySelector('.objet').textContent = "Objet : " + mail.object
     mailOuvertEl.querySelector('.time').textContent = "Time : " + mail.time
     mailOuvertEl.querySelector('.message').innerHTML = "Message : " + message

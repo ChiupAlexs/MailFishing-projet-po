@@ -2,10 +2,11 @@
   "name": "mailfishing",
   "version": "1.0.0",
   "description": "Jeu pour les portes ouvertes",
-  "main": "MenuDemarrage.js",
+  "main": "src/bureau.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron ."
+    "test":"echo "Error: no test specified" && exit 1",
+    "start": "electron .",
+    "dist": "electron-builder"
   },
   "repository": {
     "type": "git",
@@ -14,11 +15,35 @@
   "author": "Alexsandra, Florian, Luca, Léo",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^37.3.1"
+    "electron": "^37.3.1",
+    "electron-builder": "^26.0.12"
   },
   "dependencies": {
     "pinia": "^3.0.3",
     "vue": "^3.5.18",
     "vue-router": "^4.5.1"
+  },
+  "build": {
+    "appId": "com.mailfishing.app",
+    "productName": "MailFishing",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/*/",
+      "package.json"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.ico"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "assets/icons/"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "assets/icon.icns"
+    }
   }
 }

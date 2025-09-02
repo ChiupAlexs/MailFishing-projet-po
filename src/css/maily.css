@@ -158,7 +158,7 @@ p {
     padding: 20px;
 }
 
-.mail-picture {
+.icon {
     width: 65px;
     height: 65px;
     border-radius: 50px;
@@ -184,14 +184,43 @@ p {
     margin-left: 330px;
     margin-top: 5px;
     background-color: #E3E3E3;
-    padding: 10px;
+    padding: 20px;
     width: 1150px;
+    border-radius: 10px;
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    transition: background-image 0.5s ease-in-out;
 }
+
+.mail-ouvert::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(227, 227, 227, 0.85); /* gris clair transparent */
+    z-index: -1;
+    border-radius: 10px;
+}
+
+.mail-ouvert .sender,
+.mail-ouvert .objet,
+.mail-ouvert .time,
+.mail-ouvert .message,
+.mail-ouvert .icon {
+    position: relative;
+    z-index: 1;
+}
+
+.mail-ouvert .label {
+    font-weight: bold;
+}
+
 
 .sender, .objet {
     font-family: 'Orbitron', sans-serif;
     font-size: 17px;
-    color: #000
+    color: #000;
 }
 
 .time {
@@ -227,7 +256,7 @@ p {
     margin: 0;
 }
 
-.apercu-sender {
+.apercu-realName {
     font-weight: bold;
     font-size: 1.2rem;
 }

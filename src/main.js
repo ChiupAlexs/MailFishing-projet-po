@@ -70,8 +70,6 @@ function afficherListeMails() {
     }
 }
 
-addEventListener('load', loadMails)
-
 async function ouvrirMail(id) {
 
     currentMailIndex = id

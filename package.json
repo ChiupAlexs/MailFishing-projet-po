@@ -4,7 +4,7 @@
   "description": "Jeu pour les portes ouvertes",
   "main": "src/bureau.js",
   "scripts": {
-    "test":"echo "Error: no test specified" && exit 1",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
     "dist": "electron-builder"
   },
@@ -30,7 +30,7 @@
       "output": "dist"
     },
     "files": [
-      "src/*/",
+      "src/**/*",
       "package.json"
     ],
     "win": {

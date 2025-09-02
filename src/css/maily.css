@@ -1,0 +1,371 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.feedback {
+    visibility: hidden;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 8px;
+    padding: 12px;
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.5s, visibility 0.5s;
+}
+
+.feedback.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+body {
+    background-color: #ffffff;
+    margin: 0;
+    overflow: auto;
+}
+
+body::-webkit-scrollbar {
+    display: none; /* Chrome, Safari et Edge */
+}
+
+/***********************************
+
+        En-tête de la page
+
+***********************************/
+header {
+    background: linear-gradient(to right, #41B6FF, #0022FF);
+    width: 100%;
+    position: fixed;
+    top: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    color: black;
+    z-index: 3;
+}
+
+header h1 {
+    font-size: 24px;
+    position: absolute;
+    margin-left: 90px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.iconMaily {
+    width: 50px;
+    height: 50px;
+    margin-left: 20px;
+}
+
+.iconQuitter {
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+}
+
+.iconQuitter:hover {
+    cursor: pointer;
+}
+
+/***************************************
+
+           corps de la page
+
+***************************************/
+
+main {
+    margin-top: 74px;
+    margin-bottom: 100px;
+}
+
+p {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 15px;
+    color: #000;
+}
+
+.ppGestion {
+    width: 50px;
+    height: 50px;
+
+    float: left;
+}
+
+.mailGestion {
+    float: right;
+}
+
+.suppBouton {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 20px;
+    background-color: #FF3F3F;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    width: 200px;
+    display: block;
+    margin-left: auto;
+    margin-right: 55px;
+}
+
+@media screen and (min-width: 1824px) {
+    .suppBouton {
+        font-size: 20px;   /* garde la même taille de texte */
+        width: 200px;      /* garde la même largeur */
+        padding: 10px;     /* garde le même padding */
+        margin-right: 440px;
+    }
+}
+
+.suppBouton:hover {
+    cursor: pointer;
+}
+
+.containerProfilGestion {
+    float: left;
+    margin-left: 20px;
+    padding-top: 20px;
+
+    position: fixed;
+    top: 60px;
+}
+.containerProfilGestion p {
+    margin-left: 10px;
+}
+
+.containerRecepetion {
+    position: fixed;
+    float: left;
+}
+
+.containerHautMail {
+    padding-top: 43px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-left: 340px;
+}
+
+.non-lus {
+    opacity: 0.5;
+    font-family: 'Orbitron', sans-serif;
+    color: #000;
+}
+
+.Tous {
+    font-family: 'Orbitron', sans-serif;
+    color: #000;
+}
+
+.reception {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 20px;
+    color: #000;
+    background: linear-gradient(to right, #E3E3E3, #41B6FF);
+    width: 300px;
+    padding: 20px;
+}
+
+.icon {
+    width: 65px;
+    height: 65px;
+    border-radius: 50px;
+}
+
+.mails1 {
+    border-left: 5px solid #2372FF;
+}
+
+.mails, .mails1 {
+    margin-left: 330px;
+    margin-top: 5px;
+    background-color: #E3E3E3;
+    padding: 10px;
+    width: 1150px;
+}
+
+.mails1 .mail-picture{
+    margin-top: 20px;
+}
+
+.mail-ouvert {
+    margin-left: 330px;
+    margin-top: 5px;
+    background-color: #E3E3E3;
+    padding: 20px;
+    width: 1150px;
+    border-radius: 10px;
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    transition: background-image 0.5s ease-in-out;
+}
+
+.mail-ouvert::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(227, 227, 227, 0.85); /* gris clair transparent */
+    z-index: -1;
+    border-radius: 10px;
+}
+
+.mail-ouvert .sender,
+.mail-ouvert .objet,
+.mail-ouvert .time,
+.mail-ouvert .message,
+.mail-ouvert .icon {
+    position: relative;
+    z-index: 1;
+}
+
+.mail-ouvert .label {
+    font-weight: bold;
+}
+
+
+.sender, .objet {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 17px;
+    color: #000;
+}
+
+.time {
+    opacity: 0.5;
+    padding-bottom: 10px;
+}
+
+.message {
+    padding-bottom: 50px;
+}
+
+.retour {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.apercu-sender,
+.apercu-object {
+    display: inline-block;
+}
+
+.info-apercu {
+    display: inline-flex;
+    flex-direction: column;
+    margin-top: -20px;
+    position: relative;
+    top: -35px;
+    margin-left: 5px;
+}
+
+.info-apercu p {
+    margin: 0;
+}
+
+.apercu-realName {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+/* Écrans de 1024px ou moins */
+@media screen and (min-width: 1824px) {
+    .mails, .mails1 {
+        width: 1540px;
+    }
+}
+
+.mail-ouvert {
+    display: none;
+
+}
+
+.mails1:hover {
+    cursor: pointer;
+    background: linear-gradient(to right, #41B6FF, #E3E3E3);
+}
+
+.mails:hover {
+    cursor: pointer;
+    background: linear-gradient(to right, #41B6FF, #E3E3E3);
+}
+
+.mailHeure {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 15px;
+    color: #000;
+    float: right;
+    opacity: 0.5;
+    display: inline-block;
+    margin-top: 0;
+}
+
+/***********************************
+
+            Pied-de-page
+
+**********************************/
+
+footer {
+    border-top: 2px solid lightgray;
+    position: fixed;
+    bottom: 0;
+    height: 91px;
+    width: 100%;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+}
+footer .logo img {
+    margin: 5px;
+}
+footer nav img {
+    height: 70px;
+    margin: 20px;
+}
+
+.icon-notification img {
+    max-height: 70px;
+}
+.icon-notification {
+    margin-right: 10px;
+
+}
+
+footer nav {
+    padding: 0;
+    margin: 0;
+}
+footer a {
+    text-decoration: none;
+}
+footer img {
+    filter:drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+/***************************
+
+    Polices font-face
+
+***************************/
+@font-face {
+    font-family: "orbitron";
+    src: url("../fonts/orbitron.woff2") format("woff2");
+    font-weight: normal;
+}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mailfishing</title>
+    <link rel="stylesheet" href="../css/maily.css">
+</head>
+<div id="feedback" class="feedback">Mail supprimé avec succès !</div>
+<body>
+<header>
+    <img class="iconMaily" src="../images/mailyIcon.png" alt="logo de maily">
+    <h1>Maily</h1>
+
+    <a href="bureau.html"><img class="iconQuitter" src="../images/iconQuitter.png" alt="icon pour quitter"></a>
+</header>
+<main>
+<div class="containerProfilGestion">
+    <img class="ppGestion" src="../images/InfoGestion.png" alt="profil du joueur">
+    <p class="mailGestion">info.gestion@gngng.com</p>
+</div>
+
+<div class="containerHautMail">
+    <button id="supp" class="suppBouton" style="display: none" onclick="effacerMail()">Supprimer</button>
+</div>
+
+<div class="containerRecepetion">
+    <p class="reception">Boîte de reception</p>
+</div>
+<div class="containerMails">
+    <!--<div class="mails1" onclick="ouvrirMail(0)">
+        <img class="mail" src="../images/mail1.png" alt="mailPP">
+        <p class="mailHeure">12:00</p>
+    </div>
+    <div class="mails">
+        <img class="mail" src="../images/mail2.png" alt="mailPP">
+        <p class="mailHeure">11:54</p>
+    </div>
+    <div class="mails">
+        <img class="mail" src="../images/mail3.png" alt="mailPP">
+        <p class="mailHeure">11:42</p>
+    </div>
+    <div class="mails">
+        <img class="mail" src="../images/mail4.png" alt="mailPP">
+        <p class="mailHeure">11:39</p>
+    </div>
+    <div class="mails">
+        <img class="mail" src="../images/mail5.png" alt="mailPP">
+        <p class="mailHeure">11:21</p>
+    </div>
+    <div class="mails">
+        <img class="mail" src="../images/mail6.png" alt="mailPP">
+        <p class="mailHeure">11:06</p>
+    </div>-->
+</div>
+
+<div class="mail-ouvert" id="mail-ouvert">
+    <img class="icon" src="" alt=""/>
+    <p class="sender"></p>
+    <p class="objet"></p>
+    <p class="time"></p>
+    <p class="message"></p>
+
+    <img onclick="fermerMail()" class="retour" src="../images/retour.png" alt="mail ouvert">
+</div>
+</main>
+<footer>
+    <a href="JavaScript:void(0)" onclick="fonctions" class="logo">
+        <img src="../images/mailFishingLogo.svg" alt="logo du jeu">
+    </a>
+    <nav>
+        <a href="">
+            <img src="../images/browser-icon.png" alt="icone du navigateur">
+        </a>
+        <a href="">
+            <img src="../images/Message.png" alt="icone de la messagerie">
+        </a>
+        <a href="bureau.html">
+            <img class="mailyBarreTache" src="../images/mailyIcon.png" alt="icone de l'application de mail">
+        </a>
+    </nav>
+    <a href="JavaScript:void(0)" onclick="fonctions" class="icon-notification">
+        <img src="../images/notification-icon.png" alt="logo du jeu">
+    </a>
+</footer>
+</body>
+<script src="../main.js"></script>
+</html>

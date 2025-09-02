@@ -122,6 +122,20 @@ function effacerMail() {
         }
 
         currentMailIndex = null
+
+        // Affiche le feedback
+        afficherfeedback("Le mail a bien été supprimé !");
     }
 }
+
+function afficherfeedback(message) {
+    const popup = document.getElementById("feedback");
+    popup.textContent = message;
+    popup.classList.add("show");
+
+    setTimeout(() => {
+        popup.classList.remove("show");
+    }, 2000);
+}
+
 

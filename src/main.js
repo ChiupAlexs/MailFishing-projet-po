@@ -50,15 +50,17 @@ async function loadMails() {
 
     listMailEl.innerHTML = ""
     for (let index in listMails) {
+        const mail = listMails[index]
+
         listMailEl.innerHTML += `
-        <div class="mails1" onclick="ouvrirMail(${index})">
-            <img class="mail-picture" src="../images/mail1.png" alt="mailPP">
-            <div class="info-apercu">
-                <p class="apercu-sender">${listMails.at(index).sender}</p>
-                <p class="apercu-object">${listMails.at(index).object}</p>
-            </div>
-            <p class="mailHeure">${listMails.at(index).time}
-        </div>`
+    <div class="mails1" onclick="ouvrirMail(${index})">
+        <img class="mail-picture" src="../images/${mail.icon || 'default.png'}" alt="mailPP">
+        <div class="info-apercu">
+            <p class="apercu-sender">${mail.sender}</p>
+            <p class="apercu-object">${mail.object}</p>
+        </div>
+        <p class="mailHeure">${mail.time}</p>
+    </div>`
     }
 }
 
@@ -72,7 +74,7 @@ async function ouvrirMail(id) {
 
     const mail = listMails[id]
     let message = mail.body.replace(/\n/g, "<br>");
-    mailOuvertEl.querySelector('.sender').textContent ="Sender : "+ mail.sender
+    mailOuvertEl.querySelector('.sender').textContent = "Sender : " + mail.sender
     mailOuvertEl.querySelector('.objet').textContent = "Objet : " + mail.object
     mailOuvertEl.querySelector('.time').textContent = "Time : " + mail.time
     mailOuvertEl.querySelector('.message').innerHTML = "Message : " + message
@@ -110,17 +112,18 @@ function effacerMail() {
         // Recharger l'affichage de la liste
         listMailEl.innerHTML = ""   // on vide
         for (let index in listMails) {
-            listMailEl.innerHTML += `
-            <div class="mails1" onclick="ouvrirMail(${index})">
-                <img class="mail-picture" src="../images/mail1.png" alt="mailPP">
-                <div class="info-apercu">
-                    <p class="apercu-sender">${listMails.at(index).sender}</p>
-                    <p class="apercu-object">${listMails.at(index).object}</p>
-                </div>
-                <p class="mailHeure">${listMails.at(index).time}
-            </div>`
-        }
+            const mail = listMails[index]
 
+            listMailEl.innerHTML += `
+    <div class="mails1" onclick="ouvrirMail(${index})">
+        <img class="mail-picture" src="../images/${mail.icon || 'mail1.png'}" alt="mailPP">
+        <div class="info-apercu">
+            <p class="apercu-sender">${mail.sender}</p>
+            <p class="apercu-object">${mail.object}</p>
+        </div>
+        <p class="mailHeure">${mail.time}</p>
+    </div>`
+        }
         currentMailIndex = null
     }
 }

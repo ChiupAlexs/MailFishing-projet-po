@@ -207,7 +207,6 @@ p {
     padding: 20px;
     width: 1150px;
     border-radius: 10px;
-    position: relative;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -289,6 +288,7 @@ p {
 
 .mail-ouvert {
     display: none;
+
 }
 
 .mails1:hover {

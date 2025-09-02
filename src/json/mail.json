@@ -1,108 +1,126 @@
 {
   "mails": [
     {
+      "icon": "laPoste.png",
       "sender": "postier@jaimelaposte.ch",
       "object": "colis pris par la douane",
       "time": "13:29",
       "body": "Bonjour,\n\nVotre colis n°LY98217357FR est en attente de confirmation. En raison d’une erreur dans vos informations de paiement, la livraison ne peut être finalisée.\n\nPour éviter le retour de votre colis à l’expéditeur, merci de régulariser votre situation sous 48h en cliquant sur le lien ci-dessous :\n\n  Cliquez ici pour régulariser votyre livraison\n\nVous devrez confirmer vos coordonnées bancaires pour valider la transaction (frais de 1,49€).\n\nSans action de votre part, le colis sera retourné et des frais supplémentaires pourront s’appliquer.\n\nMerci de votre compréhension,\n\nLe Service Client – La Poste"
     },
     {
+      "icon": "gngngnDirection.png",
       "sender": "direction@gnnggn.ch",
       "object": "nouvelle politique gngngn",
       "time": "8:00",
       "body": "Bonjour tout le monde,\n\nCette annonce concerne tous les employés de gngngn.\n\nLa direction vous informe qu'une nouvelle politique d'entreprise en matière de congés, de rémunération et d'indemnités en cas de maladie va entrée en vigueur d'ici la fin de l'année 2025. Les changements décrits dans le documents visent les membres du personnel travaillant à temps plein et à temps partiel, ainsi que ceux ayant droit à des prestations sociales. il est donc obligatoire que tout le monde prenne connaissance de cette nouvelle politique.\n\nCette nouvelle politique est accessible via ce lien : https://politiquegngngn.ch/fr\n\nMerci pour votre lecture.\nLa direction"
     },
     {
+      "icon": "licepo.png",
       "sender": "lapolice@lesflics.ch",
       "object": "suspission d'activité illégale",
       "time": "11:00",
       "body": "A votre attention\n\nNous vous prions de prendre connaissance des faits qui vous sont reprochés.\nVous êtes invité par la suite, à nous répondre dans les heures qui suivront.\n\nFaute de quoi, nous serons obligés de procéder a votre interpellation et arrestation de manière irrevocable.\n\nvoici le formulaire pour répondre : https://lapolice.cz\n\nM. Luca Lement"
     },
     {
+      "icon": "fnak.png",
       "sender": "service-client@fnak.ch",
       "time": "12:45",
       "object": "1er Prix",
       "body": "Bonjour,\n\nje suis très heureux de vous annoncer que vous êtes l'heureux gagnant d'un MacBook Pro 16 M4 Max 2024 16C CPU/40C GPU/2 TB/128 GB d'une valeur de 5000 CHF.\n\nPour réclamer votre prix veuillez remplir vos informations sur ce formulaire : https://gagnant.fnak.ch\n\nVotre prix est réclamable jusqu'à 17 heures.\n\nService client - Jean Marc"
     },
     {
-      "sender": "labanque@labenque.ch",
+      "icon": "banque.png",
+      "sender": "labanque@bcj.ch",
       "object": "Activités hinhabituelles sur votre compte.",
       "time": "14:20",
       "body": "Monsieur,\n\nvous avez récemment eu des transactions suspectes sur votre compte.\n\nA savoir : \n - Rindfleischetikettierungsüberwachungsaufgabenübertragungsgesetz\n - Hans Güller\n - Société des sociétaires de la société\n\nSi vous croyez que c'est une erreur répondez à ce formulaire : https://minasuojelensinua.bankre.de \n\nSalutations."
     },
     {
+      "icon": "bosh.png",
       "sender": "publicites@bosh.ch",
       "object": "Promo pour le lavabo en sodium",
       "time": "10:15",
       "body": "Profitez d'une promotion unique de 50% sur notre nouveau lavabo en sodium en cliquant sur ce lien : https://bosh-promo.fr"
     },
     {
+      "icon": "tiktouk.png",
       "sender": "TikTouk@mail.ch",
       "object": "Votre nouveau clip est prêt",
       "time": "10:34",
       "body": "Vous avez récemment créer un clip sur notre plateform.\n\nAppuyez sur ce lien pour le visualiser : https://www.tiktouk.com/@gngngn_user/video/1234567890123456789\n\n\nService d'informations TikTouk"
     },
     {
+      "icon": "streamFlow.png",
       "sender": "StreamFlow@info.net",
       "object": "Votre vidéo est maintenant en ligne",
       "time": "11:02",
       "body": "Bonjour,\n\nVotre dernière vidéo a été publiée avec succès.\n\nCliquez ici pour la visionner : https://www.streamflow.com/watch/abcdef123456\n\n-StreamFlow-"
     },
     {
+      "icon": "quickShop.png",
       "sender": "QuickShop@support.org",
       "object": "Confirmation de votre commande #4721",
       "time": "14:17",
       "body": "Merci pour votre achat sur QuickShop !\n\nVous pouvez suivre votre commande en cliquant sur ce lien : https://www.quickshop.com/orders/4721\n\n¨QuickShop c'est du rapide !¨\n"
     },
     {
+      "icon": "picShare.png",
       "sender": "PicShare@service.com",
       "object": "Vous avez un nouvel abonné",
       "time": "09:48",
       "body": "Félicitations !\n\nUn nouvel utilisateur s’est abonné à votre profil.\n\nDécouvrez-le ici : https://www.picshare.com/@my_profile/followers\n"
     },
     {
+      "icon": "mailFast.png",
       "sender": "MailFast@notify.fr",
       "object": "Nouvelle connexion détectée",
       "time": "07:56",
       "body": "Nous avons remarqué une connexion à votre compte MailFast.\n\nVérifiez votre activité : https://www.mailfast.com/security/logincheck\n"
     },
     {
+      "icon": "gameZone.png",
       "sender": "GameZone@update.eu",
       "object": "Mise à jour disponible",
       "time": "13:21",
       "body": "Une nouvelle mise à jour est prête pour votre jeu préféré.\n\nTéléchargez-la dès maintenant : https://www.gamezone.com/update/98765\n"
     },
     {
+      "icon": "foodly.png",
       "sender": "Foodly@order.com",
       "object": "Votre repas est en route",
       "time": "19:42",
       "body": "Votre commande Foodly est actuellement en livraison.\n\nSuivez votre livreur en temps réel : https://www.foodly.com/track/54321\n"
     },
     {
+      "icon": "travelio.png",
       "sender": "Travelio@booking.net",
       "object": "Votre billet est confirmé",
       "time": "08:33",
       "body": "Votre réservation a bien été enregistrée.\n\nRetrouvez vos billets ici : https://www.travelio.com/ticket/abc987654\n"
     },
     {
+      "icon": "fitLife.png",
       "sender": "FitLife@club.org",
       "object": "Nouvelle séance disponible",
       "time": "16:29",
       "body": "Bonjour !\n\nUne nouvelle séance d’entraînement personnalisée vous attend.\n\nDécouvrez-la : https://www.fitlife.com/sessions/123abc\n"
     },
     {
+      "icon": "soundBeat.png",
       "sender": "SoundBeat@music.ch",
       "object": "Votre playlist est prête",
       "time": "12:55",
       "body": "Nous avons créé une playlist rien que pour vous.\n\nÉcoutez-la maintenant : https://www.soundbeat.com/playlist/xyz654321\n"
     },
     {
+      "icon": "workNet.png",
       "sender": "WorkNet@career.pro",
       "object": "Nouvelle offre d’emploi disponible",
       "time": "17:10",
       "body": "Un recruteur a publié une offre correspondant à votre profil.\n\nConsultez-la ici : https://www.worknet.com/jobs/offer123\n"
     },
     {
+      "icon": "fortNight.png",
       "sender": "FortNight@epicgames.com",
       "object": "Votre récompense FortNight est disponible",
       "time": "21:07",

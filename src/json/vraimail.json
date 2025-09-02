@@ -1,24 +1,28 @@
 {
     "mails": [
     {
+      "icon": "boss.png",
       "sender": "boss@gngngn.ch",
       "object": "Demande de modification des comptes de l'entreprise",
       "time": "9:30",
       "body": "Salut,\n\ntu peux modifier ce fichier excel et y intégrer les nouvelles données s'il-te-plait.\n\nVoici le lien du fichier excel : https://gngngn.ch/lebonfichier.xlsx\n\nil y a ci-joint le fichier avec les nouvelles données.\n\nMerci gars t'es un bon."
     },
     {
+      "icon": "fabriceLellouche.png",
       "sender": "fabrice.lellouche@microsoft.com",
       "object": "licences microsoft",
       "time": "12:45",
       "body": "Salut,\n\nvoila les codes des licences microsoft pour utiliser les applications de bureau etc.\n\nLes codes sont : \n\n- FDF2-CACD-235D-DIOD\n- GHC4-HF82-ZUXW-ABCD\n\nTu peux les activer sur ce lien : https://licences.microsoft.com/activation\n\nBonne journée.\n\nFabrice Lellouche du service client"
     },
     {
+      "icon": "youtube.png",
       "sender": "costumer@youtube.com",
       "object": "abonnement youtube premium",
       "time": "14:12",
       "body": "Bonjour,\n\nvotre abonnement youtube premium arrive à expiration.\n\nSi vous souhaitez le renouveler cliquez ici.\n\nCordialement \n\nL'équipe Youtube"
     },
       {
+        "icon": "julienDupont.png",
         "sender": "julien.dupont@gngngn.ch",
         "object": "Mise à jour du rapport trimestriel",
         "time": "11:20",

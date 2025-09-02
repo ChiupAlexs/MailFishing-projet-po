@@ -179,8 +179,9 @@ p {
 }
 
 .mail-picture {
-    width: 50px;
-    height: 50px;
+    width: 65px;
+    height: 65px;
+    border-radius: 50px;
 }
 
 .mails1 {
@@ -193,6 +194,10 @@ p {
     background-color: #E3E3E3;
     padding: 10px;
     width: 1150px;
+}
+
+.mails1 .mail-picture{
+    margin-top: 20px;
 }
 
 .mail-ouvert {
@@ -234,7 +239,7 @@ p {
     flex-direction: column;
     margin-top: -20px;
     position: relative;
-    top: -20px;
+    top: -35px;
     margin-left: 5px;
 }
 

@@ -71,7 +71,9 @@ function afficherListeMails() {
 }
 
 async function ouvrirMail(id) {
+
     currentMailIndex = id
+
     mailOuvertEl.style.display = 'block'
 
     const mail = listMails[id]
@@ -89,6 +91,10 @@ async function ouvrirMail(id) {
     } else {
         mailOuvertEl.style.backgroundImage = "none"
     }
+    mailOuvertEl.querySelector('.sender').textContent ="Sender : " + mail.sender
+    mailOuvertEl.querySelector('.objet').textContent = "Objet : " + mail.object
+    mailOuvertEl.querySelector('.time').textContent = "Time : " + mail.time
+    mailOuvertEl.querySelector('.message').innerHTML = "Message : " + message
 
     listMailEl.style.display = 'none'
     document.getElementById("supp").style.display = "block"
@@ -97,7 +103,6 @@ async function ouvrirMail(id) {
     listMails[id].lu = true
     sauvegarderMail()
 }
-
 
 function fermerMail() {
     mailOuvertEl.style.display = 'none'
@@ -127,5 +132,20 @@ function effacerMail() {
         afficherListeMails()
 
         currentMailIndex = null
+
+        // Affiche le feedback
+        afficherfeedback("Le mail a bien été supprimé !");
     }
 }
+
+function afficherfeedback(message) {
+    const popup = document.getElementById("feedback");
+    popup.textContent = message;
+    popup.classList.add("show");
+
+    setTimeout(() => {
+        popup.classList.remove("show");
+    }, 2000);
+}
+
+

@@ -1,0 +1,73 @@
+/* Style général */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #0d0d0d, #1a1a1a, #262626);
+    font-family: 'Orbitron', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    overflow: hidden;
+}
+
+/* Logo centré */
+.logo {
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+    max-width: 500px;
+    text-align: center;
+    margin-bottom: -100px; /* réduit l'espace sous le logo */
+    animation: fadeInDown 1.2s ease-out;
+}
+
+/* Menu */
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* réduit l'espacement entre les boutons */
+    text-align: center;
+    animation: fadeInUp 1.2s ease-out;
+}
+
+/* Boutons du menu */
+.menu button {
+    background: transparent;
+    border: 2px solid #fff;
+    border-radius: 12px;
+    padding: 12px 35px; /* légèrement réduit */
+    font-size: 18px; /* plus compact */
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+}
+
+.menu button:hover {
+    background: #fff;
+    color: #000;
+    transform: scale(1.1);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}

@@ -70,6 +70,8 @@ function afficherListeMails() {
     }
 }
 
+addEventListener('load', loadMails)
+
 async function ouvrirMail(id) {
 
     currentMailIndex = id
@@ -91,10 +93,6 @@ async function ouvrirMail(id) {
     } else {
         mailOuvertEl.style.backgroundImage = "none"
     }
-    mailOuvertEl.querySelector('.sender').textContent ="Sender : " + mail.sender
-    mailOuvertEl.querySelector('.objet').textContent = "Objet : " + mail.object
-    mailOuvertEl.querySelector('.time').textContent = "Time : " + mail.time
-    mailOuvertEl.querySelector('.message').innerHTML = "Message : " + message
 
     listMailEl.style.display = 'none'
     document.getElementById("supp").style.display = "block"

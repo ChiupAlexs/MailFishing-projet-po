@@ -1,5 +1,5 @@
 'use strict';
-const { app } = require('electron');
+
 const mailOuvertEl = document.getElementById('mail-ouvert')
 const listMailEl = document.querySelector('.containerMails')
 

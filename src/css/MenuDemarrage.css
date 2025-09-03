@@ -4,7 +4,7 @@ body {
     padding: 0;
     height: 100vh;
     background: linear-gradient(135deg, #0d0d0d, #1a1a1a, #262626);
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Sora', sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -13,14 +13,13 @@ body {
     overflow: hidden;
 }
 
-/* Logo centré */
 .logo {
     display: block;
     margin: 0 auto;
     width: 50%;
     max-width: 500px;
     text-align: center;
-    margin-bottom: -100px; /* réduit l'espace sous le logo */
+    margin-bottom: -100px;
     animation: fadeInDown 1.2s ease-out;
 }
 
@@ -28,18 +27,23 @@ body {
 .menu {
     display: flex;
     flex-direction: column;
-    gap: 12px; /* réduit l'espacement entre les boutons */
+    gap: 12px;
     text-align: center;
     animation: fadeInUp 1.2s ease-out;
 }
 
 /* Boutons du menu */
 .menu button {
+    width: 180px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     background: transparent;
     border: 2px solid #fff;
     border-radius: 12px;
-    padding: 12px 35px; /* légèrement réduit */
-    font-size: 18px; /* plus compact */
+    font-size: 18px;
     font-weight: bold;
     color: #fff;
     cursor: pointer;
@@ -51,14 +55,18 @@ body {
 
 .menu button:hover {
     background: #fff;
-    color: #000;
+    color: black;
     transform: scale(1.1);
     box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
 }
 
 a {
     text-decoration: none;
-    color: #fff;
+    color: white;
+}
+
+.menu a:hover {
+    color: black;
 }
 
 /* Animations */
@@ -70,4 +78,9 @@ a {
 @keyframes fadeInUp {
     from { opacity: 0; transform: translateY(40px); }
     to { opacity: 1; transform: translateY(0); }
+}
+@font-face {
+    font-family: "Sora";
+    src: url("../fonts/Sora-VariableFont_wght.ttf") format("ttf");
+    font-weight: normal;
 }

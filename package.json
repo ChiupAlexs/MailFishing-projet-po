@@ -4,19 +4,19 @@
   "description": "Jeu pour les portes ouvertes",
   "main": "src/launch.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
     "dist": "electron-builder"
   },
   "repository": {
     "type": "git",
-    "url": "http://github.com/ChiupAlexs/MailFishing-projet-po/projects?query=is%3Aopen"
+    "url": "http://github.com/ChiupAlexs/MailFishing-projet-po"
   },
   "author": "Alexsandra, Florian, Luca, Léo",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^37.3.1",
-    "electron-builder": "^26.0.12"
+    "electron": "^37.4.0",
+    "electron-builder": "^26.0.12",
+    "electron-packager": "^17.1.2"
   },
   "dependencies": {
     "pinia": "^3.0.3",
@@ -26,24 +26,21 @@
   "build": {
     "appId": "com.mailfishing.app",
     "productName": "MailFishing",
+    "asar": true,
     "directories": {
       "output": "dist"
     },
     "files": [
       "src/**/*",
-      "package.json"
+      "assets/**/*"
     ],
     "win": {
       "target": "nsis",
       "icon": "assets/icon.ico"
     },
-    "linux": {
-      "target": "AppImage",
-      "icon": "assets/icons/"
-    },
-    "mac": {
-      "target": "dmg",
-      "icon": "assets/icon.icns"
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
     }
   }
 }

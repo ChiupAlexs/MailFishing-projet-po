@@ -1,5 +1,5 @@
 'use strict';
-
+const { app } = require('electron');
 const mailOuvertEl = document.getElementById('mail-ouvert')
 const listMailEl = document.querySelector('.containerMails')
 
@@ -10,6 +10,13 @@ let listMails = []
 let currentMailIndex = null
 
 let scroll = 0
+
+/*************************** Menu de démarrage *******************************/
+
+function quitter() {
+    window.close();
+}
+/*************************** Maily *******************************/
 
 async function loadMails() {
 

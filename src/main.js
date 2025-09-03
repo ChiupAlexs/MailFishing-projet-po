@@ -91,9 +91,9 @@ async function ouvrirMail(id) {
     const mail = listMails[id]
     let message = mail.body.replace(/\n/g, "<br>");
     mailOuvertEl.querySelector('.icon').src = `../images/${mail.icon}`
-    mailOuvertEl.querySelector('.sender').innerHTML = "<span class='label'>Sender :</span> " + mail.sender
+    mailOuvertEl.querySelector('.sender').innerHTML = "<span class='label'>De :</span> " + mail.sender
     mailOuvertEl.querySelector('.objet').innerHTML = "<span class='label'>Objet :</span> " + mail.object
-    mailOuvertEl.querySelector('.time').innerHTML = "<span class='label'>Time :</span> "+ mail.time
+    mailOuvertEl.querySelector('.time').innerHTML = `<strong>${mail.time}</strong>`
     mailOuvertEl.querySelector('.message').innerHTML = message
 
     if (mail.backgroundImage) {

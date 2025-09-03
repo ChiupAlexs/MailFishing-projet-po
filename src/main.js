@@ -9,6 +9,8 @@ let listVraiMail = []
 let listMails = []
 let currentMailIndex = null
 
+let scroll = 0
+
 async function loadMails() {
 
     if (sessionStorage.getItem('mails') === null) {
@@ -73,6 +75,9 @@ function afficherListeMails() {
 async function ouvrirMail(id) {
 
     currentMailIndex = id
+    scroll = window.scrollY
+
+    window.scrollTo(0, 0)
 
     mailOuvertEl.style.display = 'block'
 
@@ -107,6 +112,8 @@ function fermerMail() {
 
     // Réaffiche la liste mise à jour
     afficherListeMails()
+
+    window.scrollTo(0, scroll)
 }
 
 function sauvegarderMail() {
@@ -143,5 +150,3 @@ function afficherfeedback(message) {
         popup.classList.remove("show");
     }, 2000);
 }
-
-

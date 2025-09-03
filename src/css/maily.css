@@ -210,15 +210,6 @@ p {
     transition: background-image 0.5s ease-in-out;
 }
 
-.mail-ouvert::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(227, 227, 227, 0.85); /* gris clair transparent */
-    z-index: -1;
-    border-radius: 10px;
-}
-
 .mail-ouvert .sender,
 .mail-ouvert .objet,
 .mail-ouvert .time,
@@ -304,6 +295,24 @@ p {
     opacity: 0.5;
     display: inline-block;
     margin-top: 0;
+}
+
+/*@keyframes slideOut {
+    from{
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(1150px); /* part à droite (part) *//*
+    }
+}*/
+
+@keyframes slideIn {
+    0% {
+        transform: translateX(1150px);
+    }
+    100% {
+        transform: translateX(0px); /* part à gauche (arrive) */
+    }
 }
 
 /***********************************

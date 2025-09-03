@@ -1,6 +1,6 @@
 * {
     box-sizing: border-box;
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Sora', sans-serif;
 }
 
 .feedback {
@@ -59,7 +59,6 @@ header h1 {
     display: flex;
     align-items: center;
     gap: 10px;
-    font-family: 'Orbitron', sans-serif;
 }
 
 .iconMaily {
@@ -90,7 +89,6 @@ main {
 }
 
 p {
-    font-family: 'Orbitron', sans-serif;
     font-size: 15px;
     color: #000;
 }
@@ -107,7 +105,6 @@ p {
 }
 
 .suppBouton {
-    font-family: 'Orbitron', sans-serif;
     font-size: 20px;
     background-color: #FF3F3F;
     color: #fff;
@@ -160,17 +157,16 @@ p {
 
 .non-lus {
     opacity: 0.5;
-    font-family: 'Orbitron', sans-serif;
+
     color: #000;
 }
 
 .Tous {
-    font-family: 'Orbitron', sans-serif;
+
     color: #000;
 }
 
 .reception {
-    font-family: 'Orbitron', sans-serif;
     font-size: 20px;
     color: #000;
     background: linear-gradient(to right, #E3E3E3, #41B6FF);
@@ -238,7 +234,6 @@ p {
 
 
 .sender, .objet {
-    font-family: 'Orbitron', sans-serif;
     font-size: 17px;
     color: #000;
 }
@@ -303,7 +298,6 @@ p {
 }
 
 .mailHeure {
-    font-family: 'Orbitron', sans-serif;
     font-size: 15px;
     color: #000;
     float: right;
@@ -367,5 +361,10 @@ footer img {
 @font-face {
     font-family: "orbitron";
     src: url("../fonts/orbitron.woff2") format("woff2");
+    font-weight: normal;
+}
+@font-face {
+    font-family: "Sora";
+    src: url("../fonts/Sora-VariableFont_wght.ttf") format("ttf");
     font-weight: normal;
 }

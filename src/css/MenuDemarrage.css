@@ -13,14 +13,13 @@ body {
     overflow: hidden;
 }
 
-/* Logo centré */
 .logo {
     display: block;
     margin: 0 auto;
     width: 50%;
     max-width: 500px;
     text-align: center;
-    margin-bottom: -100px; /* réduit l'espace sous le logo */
+    margin-bottom: -100px;
     animation: fadeInDown 1.2s ease-out;
 }
 
@@ -28,18 +27,23 @@ body {
 .menu {
     display: flex;
     flex-direction: column;
-    gap: 12px; /* réduit l'espacement entre les boutons */
+    gap: 12px;
     text-align: center;
     animation: fadeInUp 1.2s ease-out;
 }
 
 /* Boutons du menu */
 .menu button {
+    width: 180px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     background: transparent;
     border: 2px solid #fff;
     border-radius: 12px;
-    padding: 12px 35px; /* légèrement réduit */
-    font-size: 18px; /* plus compact */
+    font-size: 18px;
     font-weight: bold;
     color: #fff;
     cursor: pointer;
@@ -61,7 +65,7 @@ a {
     color: white;
 }
 
-.menu button:hover a {
+.menu a:hover {
     color: black;
 }
 

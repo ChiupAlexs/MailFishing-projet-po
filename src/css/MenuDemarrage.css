@@ -11,25 +11,44 @@ body {
     justify-content: center;
     color: #fff;
     overflow: hidden;
+    position: relative; /* nécessaire pour bien gérer les couches */
 }
 
+/* Vidéo en arrière-plan */
+.video-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* remplissage sans déformation */
+    z-index: -1; /* envoie derrière le contenu */
+}
+
+/* Logo */
 .logo {
+    position: fixed;
     display: block;
-    margin: 0 auto;
+    top: -50px;
     width: 50%;
     max-width: 500px;
     text-align: center;
-    margin-bottom: -100px;
     animation: fadeInDown 1.2s ease-out;
+
+    z-index: 1; /* reste au-dessus de la vidéo */
 }
 
 /* Menu */
 .menu {
+    position: fixed;
+    top: 700px;
     display: flex;
     flex-direction: column;
     gap: 12px;
     text-align: center;
     animation: fadeInUp 1.2s ease-out;
+
+    z-index: 1; /* reste au-dessus de la vidéo */
 }
 
 /* Boutons du menu */
@@ -39,8 +58,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-
-    background: transparent;
+    background-color: rgba(128, 128, 128, 0.6);
     border: 2px solid #fff;
     border-radius: 12px;
     font-size: 18px;
@@ -79,8 +97,9 @@ a {
     from { opacity: 0; transform: translateY(40px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
 @font-face {
     font-family: "Sora";
-    src: url("../fonts/Sora-VariableFont_wght.ttf") format("ttf");
+    src: url("../fonts/Sora-VariableFont_wght.ttf") format("truetype");
     font-weight: normal;
 }

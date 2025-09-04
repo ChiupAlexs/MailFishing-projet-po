@@ -81,10 +81,7 @@ function afficherListeMails() {
 
 async function ouvrirMail(id) {
 
-    currentMailIndex = id
-    scroll = window.scrollY
-
-    window.scrollTo(0, 0)
+    listMailEl.style.display = 'none'
 
     mailOuvertEl.style.display = 'block'
 
@@ -104,7 +101,14 @@ async function ouvrirMail(id) {
         mailOuvertEl.style.backgroundImage = "none"
     }
 
-    listMailEl.style.display = 'none'
+    currentMailIndex = id
+    scroll = window.scrollY
+
+    window.scrollTo(0, 0)
+
+    mailOuvertEl.style.animationName = 'slideIn'
+    mailOuvertEl.style.animationDuration = '0.2s'
+
     document.getElementById("supp").style.display = "block"
 
     // Marquer comme lu
@@ -113,8 +117,11 @@ async function ouvrirMail(id) {
 }
 
 function fermerMail() {
-    mailOuvertEl.style.display = 'none'
+
+    mailOuvertEl.style.display = 'none';
+
     listMailEl.style.display = 'block'
+
     document.getElementById("supp").style.display = "none"
 
     // Réaffiche la liste mise à jour

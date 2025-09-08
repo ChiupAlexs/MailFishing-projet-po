@@ -75,7 +75,8 @@ footer nav img {
 
 footer nav {
     padding: 0;
-    margin: 0;
+    margin: 0 auto;
+    text-align: center; /* Enlever une fois les autres application implémentées*/
 }
 footer a {
     text-decoration: none;

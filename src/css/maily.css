@@ -238,6 +238,12 @@ p {
     padding-bottom: 50px;
 }
 
+.secret {
+    text-align: right;
+    margin: 0 auto;
+    color: white;
+}
+
 .retour {
     width: 30px;
     height: 30px;

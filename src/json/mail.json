@@ -8,6 +8,7 @@
       "time": "13:29",
       "date": "08/09/2025",
       "body": "Bonjour,\n\nVotre colis n°LY98217357FR est en attente de confirmation. En raison d’une erreur dans vos informations de paiement, la livraison ne peut être finalisée.\n\nPour éviter le retour de votre colis à l’expéditeur, merci de régulariser votre situation sous 48h en cliquant sur le lien ci-dessous :\n\n  Cliquez ici pour régulariser votyre livraison\n\nVous devrez confirmer vos coordonnées bancaires pour valider la transaction (frais de 1,49€).\n\nSans action de votre part, le colis sera retourné et des frais supplémentaires pourront s’appliquer.\n\nMerci de votre compréhension,\n\nLe Service Client – La Poste",
+      "secret" : "",
       "backgroundImage": "posteBackground.png"
     },
     {
@@ -18,6 +19,7 @@
       "time": "08:00",
       "date": "09/10/2025",
       "body": "Bonjour tout le monde,\n\nCette annonce concerne tous les employés de gngngn.\n\nLa direction vous informe qu'une nouvelle politique d'entreprise en matière de congés, de rémunération et d'indemnités en cas de maladie va entrée en vigueur d'ici la fin de l'année 2025. Les changements décrits dans le documents visent les membres du personnel travaillant à temps plein et à temps partiel, ainsi que ceux ayant droit à des prestations sociales. il est donc obligatoire que tout le monde prenne connaissance de cette nouvelle politique.\n\nCette nouvelle politique est accessible via ce lien : https://politiquegngngn.ch/fr\n\nMerci pour votre lecture.\nLa direction",
+      "secret" : "",
       "backgroundImage": "gngngnDirectionBackground.png"
     },
     {
@@ -28,6 +30,7 @@
       "time": "11:00",
       "date": "08/10/2025",
       "body": "A votre attention\n\nNous vous prions de prendre connaissance des faits qui vous sont reprochés.\nVous êtes invité par la suite, à nous répondre dans les heures qui suivront.\n\nFaute de quoi, nous serons obligés de procéder a votre interpellation et arrestation de manière irrevocable.\n\nvoici le formulaire pour répondre : https://lapolice.cz\n\nM. Luca Lement",
+      "secret" : "",
       "backgroundImage": "policeBackground.png"
     },
     {
@@ -38,16 +41,18 @@
       "date": "08/10/2025",
       "object": "1er Prix",
       "body": "Bonjour,\n\nje suis très heureux de vous annoncer que vous êtes l'heureux gagnant d'un MacBook Pro 16 M4 Max 2024 16C CPU/40C GPU/2 TB/128 GB d'une valeur de 5000 CHF.\n\nPour réclamer votre prix veuillez remplir vos informations sur ce formulaire : https://gagnant.fnak.ch\n\nVotre prix est réclamable jusqu'à 17 heures.\n\nService client - Jean Marc",
+      "secret" : "",
       "backgroundImage": "fnakBackground.png"
     },
     {
       "icon": "banque.png",
       "realName":"Banque BCJ",
-      "sender": "labanque@bcj.ch",
+      "sender": "Mabanque@bcj.fr",
       "object": "Activités inhabituelles sur votre compte.",
       "time": "14:20",
       "date": "05/09/2025",
       "body": "Monsieur,\n\nvous avez récemment eu des transactions suspectes sur votre compte.\n\nA savoir : \n - Rindfleischetikettierungsüberwachungsaufgabenübertragungsgesetz\n - Hans Güller\n - Société des sociétaires de la société\n\nSi vous croyez que c'est une erreur répondez à ce formulaire : https://minasuojelensinua.bankre.de \n\nSalutations.",
+      "secret" : "",
       "backgroundImage": "banqueBackground.png"
     },
     {
@@ -58,16 +63,18 @@
       "time": "10:15",
       "date": "08/09/2025",
       "body": "Profitez d'une promotion unique de 50% sur notre nouveau lavabo en sodium en cliquant sur ce lien : https://bosh-promo.fr",
+      "secret" : "",
       "backgroundImage": "boshBackground.png"
     },
     {
       "icon": "tiktouk.png",
       "realName":"TikTok",
-      "sender": "TikTouk@mail.ch",
+      "sender": "TikTok@gmail.ch",
       "object": "Votre nouveau clip est prêt",
       "time": "10:34",
       "date": "08/10/2025",
       "body": "Vous avez récemment créer un clip sur notre plateform.\n\nAppuyez sur ce lien pour le visualiser : https://www.tiktouk.com/@gngngn_user/video/1234567890123456789\n\n\nService d'informations TikTouk",
+      "secret" : "",
       "backgroundImage": "tiktoukBackground.png"
     },
     {
@@ -78,6 +85,7 @@
       "time": "11:02",
       "date": "02/09/2025",
       "body": "Bonjour,\n\nVotre dernière vidéo a été publiée avec succès.\n\nCliquez ici pour la visionner : https://www.streamflow.com/watch/xuafliam123456\n\n-StreamFlow-",
+      "secret" : "",
       "backgroundImage": "streamFlowBackground.png"
     },
     {
@@ -88,6 +96,7 @@
       "time": "14:17",
       "date": "10/10/2025",
       "body": "Merci pour votre achat sur QuickShop !\n\nVous pouvez suivre votre commande en cliquant sur ce lien : https://www.quickshop.com/orders/4721\n\n¨QuickShop c'est du rapide !¨\n",
+      "secret" : "",
       "backgroundImage": "quickShopBackground.png"
     },
     {
@@ -97,7 +106,8 @@
       "object": "Vous avez un nouvel abonné",
       "time": "09:48",
       "date": "15/09/2025",
-      "body": "Félicitations !\n\nUn nouvel utilisateur s’est abonné à votre profil.\n\nDécouvrez-le ici : https://www.picshare.com/@my_profile/followers\n",
+      "body": "Félicitations !\n\nUn nouvel utilisateur s’est abonné à votre profil.\n\nDécouvrez-le ici : https://www.jeTaiEu.com/@my_profile/followers\n",
+      "secret" : "",
       "backgroundImage": "picShareBackground.png"
     },
     {
@@ -107,7 +117,8 @@
       "object": "Nouvelle connexion détectée",
       "time": "07:56",
       "date": "09/10/2025",
-      "body": "Nous avons remarqué une connexion à votre compte MailFast.\n\nVérifiez votre activité : https://www.mailfast.com/security/logincheck\n",
+      "body": "Nous avons remarqué une connexion à votre compte MailFist.\n\nVérifiez votre activité : https://www.mailfist.com/security/logincheck\n",
+      "secret" : "",
       "backgroundImage": "mailFastBackground.png"
     },
     {
@@ -118,36 +129,40 @@
       "time": "13:21",
       "date": "08/10/2025",
       "body": "Une nouvelle mise à jour est prête pour votre jeu préféré.\n\nTéléchargez-la dès maintenant : https://www.gamezone.com/update/98765\n",
+      "secret" : "",
       "backgroundImage": "gameZoneBackground.png"
     },
     {
       "icon": "foodly.png",
       "realName":"Foodly",
-      "sender": "Foodly@order.com",
+      "sender": "Robert@LeCamembert.com",
       "object": "Votre repas est en route",
       "time": "19:42",
       "date": "08/10/2025",
       "body": "Votre commande Foodly est actuellement en livraison.\n\nSuivez votre livreur en temps réel : https://www.foodly.com/track/54321\n",
+      "secret" : "",
       "backgroundImage": "foodlyBackground.png"
     },
     {
       "icon": "travelio.png",
       "realName":"Travelio",
-      "sender": "Travelio@booking.net",
+      "sender": "Travelyo@booking.net",
       "object": "Votre billet est confirmé",
       "time": "08:33",
       "date": "10/09/2025",
       "body": "Votre réservation a bien été enregistrée.\n\nRetrouvez vos billets ici : https://www.travelio.com/ticket/abc987654\n",
+      "secret" : "",
       "backgroundImage": "travelioBackground.png"
     },
     {
       "icon": "fitLife.png",
       "realName": "FitLife",
-      "sender": "FitLife@club.org",
-      "object": "Nouvelle séance disponible",
+      "sender": "FitLife@club.com",
+      "object": "Lien vers le virus",
       "time": "16:29",
       "date": "08/10/2025",
       "body": "Bonjour !\n\nUne nouvelle séance d’entraînement personnalisée vous attend.\n\nDécouvrez-la : https://www.fitlife.com/sessions/123abc\n",
+      "secret" : "",
       "backgroundImage": "fitLifeBackground.png"
     },
     {
@@ -157,7 +172,8 @@
       "object": "Votre playlist est prête",
       "time": "12:55",
       "date": "22/09/2025",
-      "body": "Nous avons créé une playlist rien que pour vous.\n\nÉcoutez-la maintenant : https://www.soundbeat.com/playlist/xyz654321\n",
+      "body": "Nous avons créé une playlist rien que pour vous.\n\nÉcoutez-la maintenant : http://www.soundbeat.com/playlist/xyz654321\n",
+      "secret" : "",
       "backgroundImage": "soundBeatBackground.png"
     },
     {
@@ -168,6 +184,7 @@
       "time": "17:10",
       "date": "13/09/2025",
       "body": "Un recruteur a publié une offre correspondant à votre profil.\n\nConsultez-la ici : https://www.worknet.com/jobs/offer123\n",
+      "secret" : "Je suis le virus",
       "backgroundImage": "workNetBackground.png"
     },
     {
@@ -178,6 +195,7 @@
       "time": "21:07",
       "date": "09/09/2025",
       "body": "Bonjour joueur,\n\nVotre compte Fortnite a reçu une nouvelle récompense exclusive.\n\nCliquez ici pour la récupérer : https://www.fortnightly.com/reward/bonus123\n",
+      "secret" : "",
       "backgroundImage": "fortNightBackground.png"
     }
   ]

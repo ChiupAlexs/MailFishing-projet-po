@@ -130,7 +130,6 @@ function afficherListeMails() {
         </div>
         <p class="mailHeure">${mail.time}</p>
         <p class="mailDate">${mail.date}</p>
-        
     </div>`
     }
 }
@@ -148,6 +147,8 @@ async function ouvrirMail(id) {
     mailOuvertEl.querySelector('.objet').innerHTML = "<span class='label'>Objet :</span> " + mail.object
     mailOuvertEl.querySelector('.time').innerHTML = `<strong>${mail.time}</strong>`
     mailOuvertEl.querySelector('.message').innerHTML = message
+    mailOuvertEl.querySelector('.secret').innerHTML = `${mail.secret}`
+
 
     if (mail.backgroundImage) {
         mailOuvertEl.style.backgroundImage = `linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('../images/${mail.backgroundImage}')`

@@ -105,9 +105,7 @@ p {
 }
 
 .suppBouton {
-    /*font-size: 20px;*/
     background-color: #FF3F3F;
-    /*color: #fff;*/
     border-radius: 10px;
     padding: 8px 10px;
     max-height: 50px;
@@ -242,13 +240,6 @@ p {
     opacity: 0.5;
     padding-bottom: 10px;
 }
-
-.retour {
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-}
-
 .apercu-sender,
 .apercu-object {
     display: inline-block;

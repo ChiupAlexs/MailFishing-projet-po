@@ -297,11 +297,13 @@ p {
     background: linear-gradient(to right, #41B6FF, #E3E3E3);
 }
 
-.mailHeure {
+.mailHeure, .mailDate {
     font-size: 15px;
     color: #000;
     float: right;
     opacity: 0.5;
+    margin-left: 5px;
+    margin-right: 5px;
     display: inline-block;
     margin-top: 0;
 }

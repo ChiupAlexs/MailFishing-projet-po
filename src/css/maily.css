@@ -240,6 +240,17 @@ p {
     opacity: 0.5;
     padding-bottom: 10px;
 }
+
+.message {
+    padding-bottom: 50px;
+}
+
+.secret {
+    text-align: right;
+    margin: 0 auto;
+    color: white;
+}
+
 .apercu-sender,
 .apercu-object {
     display: inline-block;
@@ -284,11 +295,13 @@ p {
     background: linear-gradient(to right, #41B6FF, #E3E3E3);
 }
 
-.mailHeure {
+.mailHeure, .mailDate {
     font-size: 15px;
     color: #000;
     float: right;
     opacity: 0.5;
+    margin-left: 5px;
+    margin-right: 5px;
     display: inline-block;
     margin-top: 0;
 }

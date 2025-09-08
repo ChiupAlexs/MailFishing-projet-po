@@ -20,7 +20,10 @@
 </div>
 
 <div class="containerHautMail">
-    <button id="supp" class="suppBouton" style="display: none" onclick="effacerMail()">Supprimer</button>
+    <img onclick="fermerMail()" class="bouton-retour" src="../images/bouton-retour.png" alt="mail ouvert"/>
+
+    <img id="supp" class="suppBouton" onclick="fermerMail()" src="../images/corbeille.png" alt="icon-corbeille"/>
+    <!--<button id="supp" class="suppBouton" style="display: none" onclick="effacerMail()">Supprimer</button>-->
 </div>
 
 <div class="containerRecepetion">
@@ -52,8 +55,6 @@
         <p class="mailHeure">11:06</p>
     </div>-->
 </div>
-
-    <img onclick="fermerMail()" class="bouton-retour" src="../images/retour.png" alt="mail ouvert"/>
 
 <div class="mail-ouvert" id="mail-ouvert">
     <img class="icon" src="" alt=""/>

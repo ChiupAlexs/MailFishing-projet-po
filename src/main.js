@@ -105,7 +105,6 @@ async function loadMails() {
         listMails = listMails.map(mail => ({...mail, lu: false}))
 
         listMails.sort(() => Math.random() - 0.5)
-
         // Sauvegarder
         sauvegarderMail()
     } else {

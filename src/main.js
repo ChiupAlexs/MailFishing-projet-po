@@ -1,6 +1,7 @@
 'use strict';
 
 const mailOuvertEl = document.getElementById('mail-ouvert')
+const boutonRetourEl = document.querySelector('.bouton-retour')
 const listMailEl = document.querySelector('.containerMails')
 
 let listFauxMail = []
@@ -84,6 +85,7 @@ async function ouvrirMail(id) {
     listMailEl.style.display = 'none'
 
     mailOuvertEl.style.display = 'block'
+    boutonRetourEl.style.display = 'block'
 
     const mail = listMails[id]
     let message = mail.body.replace(/\n/g, "<br>");
@@ -106,6 +108,9 @@ async function ouvrirMail(id) {
 
     window.scrollTo(0, 0)
 
+    boutonRetourEl.style.animationName = "slideIn"
+    boutonRetourEl.style.animationDuration = '0.2s'
+
     mailOuvertEl.style.animationName = 'slideIn'
     mailOuvertEl.style.animationDuration = '0.2s'
 
@@ -121,6 +126,8 @@ function fermerMail() {
     mailOuvertEl.style.display = 'none';
 
     listMailEl.style.display = 'block'
+
+    boutonRetourEl.style.display = 'none'
 
     document.getElementById("supp").style.display = "none"
 

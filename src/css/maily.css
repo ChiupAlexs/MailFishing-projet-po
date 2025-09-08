@@ -229,13 +229,19 @@ p {
     color: #000;
 }
 
+.bouton-retour {
+    left: 340px;
+    top: 130px;
+    max-width: 30px;
+    position: absolute;
+    display: none;
+    cursor: pointer;
+
+}
+
 .time {
     opacity: 0.5;
     padding-bottom: 10px;
-}
-
-.message {
-    padding-bottom: 50px;
 }
 
 .retour {

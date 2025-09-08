@@ -117,7 +117,7 @@ p {
 @media screen and (min-width: 1824px) {
     .suppBouton {
         font-size: 20px;   /* garde la même taille de texte */
-        width: 200px;      /* garde la même largeur */
+            /* garde la même largeur */
         padding: 10px;     /* garde le même padding */
         margin-right: 440px;
     }

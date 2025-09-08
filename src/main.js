@@ -16,7 +16,61 @@ let scroll = 0
 function quitter() {
     window.close();
 }
+
 /*************************** Maily *******************************/
+
+// --- Helpers robustes ---
+function getDateParts(str) {
+    if (!str || typeof str !== "string") return null;
+    const s = str.trim();
+    let m;
+    // jj/mm/aaaa
+    if ((m = s.match(/^(\d{2})\/(\d{2})\/(\d{4})$/))) {
+        return { d: +m[1], m: +m[2], y: +m[3] };
+    }
+    // aaaa-mm-jj
+    if ((m = s.match(/^(\d{4})-(\d{2})-(\d{2})$/))) {
+        return { d: +m[3], m: +m[2], y: +m[1] };
+    }
+    return null;
+}
+
+function getTimeParts(str) {
+    if (!str || typeof str !== "string") return { h: 0, min: 0 };
+    const m = str.trim().match(/^(\d{1,2}):(\d{2})$/);
+    if (!m) return { h: 0, min: 0 };
+    return { h: +m[1], min: +m[2] };
+}
+
+// Normalise le champ mail.date en jj/mm/aaaa (si possible)
+function normaliserDateFormat(mail) {
+    const p = getDateParts(mail.date);
+    if (!p) return mail;
+    const dd = String(p.d).padStart(2, "0");
+    const mm = String(p.m).padStart(2, "0");
+    const yyyy = String(p.y);
+    mail.date = `${dd}/${mm}/${yyyy}`;
+    return mail;
+}
+
+function toTimestamp(mail) {
+    const dp = getDateParts(mail.date);
+    if (!dp) return -Infinity;
+    const tp = getTimeParts(mail.time);
+    return new Date(dp.y, dp.m - 1, dp.d, tp.h, tp.min).getTime();
+}
+
+// --- Tri principal ---
+function trierMailsParDateHeure() {
+    // normaliser les dates (utile si sessionStorage contient encore des dates ISO)
+    listMails = listMails.map(normaliserDateFormat);
+
+    // trier du plus récent au plus ancien
+    listMails.sort((a, b) => toTimestamp(b) - toTimestamp(a));
+
+    sauvegarderMail();
+}
+
 
 async function loadMails() {
 
@@ -47,7 +101,7 @@ async function loadMails() {
         if (mailVraiChoisi) listMails.push(mailVraiChoisi)
 
         // Ajouter la propriété "lu = false" à chaque mail
-        listMails = listMails.map(mail => ({ ...mail, lu: false }))
+        listMails = listMails.map(mail => ({...mail, lu: false}))
 
         listMails.sort(() => Math.random() - 0.5)
 
@@ -56,7 +110,7 @@ async function loadMails() {
     } else {
         listMails = JSON.parse(sessionStorage.getItem('mails'));
     }
-
+    trierMailsParDateHeure()
     afficherListeMails()
 }
 
@@ -75,6 +129,8 @@ function afficherListeMails() {
             <p class="apercu-object">${mail.object}</p>
         </div>
         <p class="mailHeure">${mail.time}</p>
+        <p class="mailDate">${mail.date}</p>
+        
     </div>`
     }
 }

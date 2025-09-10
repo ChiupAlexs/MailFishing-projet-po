@@ -7,6 +7,10 @@ body {
     margin: 0;
     background-color: #3d3d3d;
 }
+img {
+    -webkit-user-drag: none;
+}
+
 /*********************************
 
     En-tete de la page des quêtes

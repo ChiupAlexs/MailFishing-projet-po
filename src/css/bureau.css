@@ -19,12 +19,14 @@ main {
     padding: 10px;
 }
 
-.dossier {
+.dossier,
+.fichier {
     display: inline-block;
     max-width: 100px;
     text-align: center;
 }
-.dossier p {
+.dossier p,
+.fichier p{
     display: inline-block;
     margin: 3px 0;
     width: 100%;
@@ -33,7 +35,8 @@ main {
     font-weight: bold;
     font-size: 0.8rem;
 }
-.dossier img {
+.dossier img,
+.fichier img{
     margin: 3px auto;
     filter:drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
 }

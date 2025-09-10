@@ -4,10 +4,9 @@
 }
 
 body {
-    background-image: url("../images/wallpaper-login.png");
+    background-image: url("../images/wallpaper-login.svg");
     background-size: cover;
     background-repeat: no-repeat;
-    backdrop-filter: blur(5px);
     padding: 0;
     margin: 0;
 }
@@ -19,7 +18,6 @@ img {
     align-items: center;
     margin-left: 43%;
     margin-top: 10%;
-    animation: fadeInDown 1s ease-out;
     padding: 20px;
 }
 
@@ -27,7 +25,6 @@ h1 {
     color: #ffffff;
     text-align: center;
     font-size: 30px;
-    animation: fadeInDown 1s ease-out;
 }
 
 input {
@@ -36,7 +33,6 @@ input {
     border-radius: 7px;
     margin-left: 40%;
     margin-top: 10px;
-    animation: fadeInDown 1s ease-out;
     background: rgba(255,255,255, 0.1);
     border-color: white;
     border-width: 1px;
@@ -45,10 +41,15 @@ input {
     font-size: 20px;
     padding-left: 10px;
     padding-right: 10px;
-
 }
 
 /*Animations*/
+
+/* Animation d’entrée */
+.fade-in-down {
+    animation: fadeInDown 1s ease-out;
+}
+
 @keyframes fadeInDown {
     from { opacity: 0; transform: translateY(-40px); }
     to { opacity: 1; transform: translateY(0); }
@@ -70,8 +71,8 @@ input {
 }
 
 button {
-    margin-left: 47%;
-    margin-top: 15px;
+    margin-left: 46%;
+    margin-top: 20px;
     padding: 10px 20px;
     border-radius: 7px;
     border: none;
@@ -89,4 +90,19 @@ button:hover {
 input::placeholder {
     color: rgba(255,255,255,0.5);
     font-size: 15px;
+}
+
+/* Secousse */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-8px); }
+    40% { transform: translateX(8px); }
+    60% { transform: translateX(-8px); }
+    80% { transform: translateX(8px); }
+    100% { transform: translateX(0); }
+}
+
+input.error {
+    border-bottom: 2px solid #ff3f3f;
+    animation: shake 0.3s;
 }

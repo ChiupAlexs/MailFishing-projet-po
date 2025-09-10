@@ -2,7 +2,7 @@ document.getElementById("loginBtn").addEventListener("click", function() {
     const password = document.getElementById("password").value;
 
     // le mdp
-    if (password === "AlFloLuLe4") {
+    if (password === "1234") {
         const container = document.getElementById("login-container");
         container.classList.add("fade-out");
 
@@ -10,6 +10,12 @@ document.getElementById("loginBtn").addEventListener("click", function() {
             window.location.href = "bureau.html";
         }, 1000);
     } else {
-        alert("Mot de passe incorrect !");
+        const input = document.getElementById("password");
+
+        input.classList.add("error");
+
+        setTimeout(() => {
+            input.classList.remove("error");
+        }, 300);
     }
 });

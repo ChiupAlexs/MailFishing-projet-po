@@ -1,6 +1,11 @@
 * {
     box-sizing: border-box;
     font-family: 'Sora', sans-serif;
+    -webkit-user-drag: none;
+}
+
+*::selection {
+    background: transparent;
 }
 
 body {

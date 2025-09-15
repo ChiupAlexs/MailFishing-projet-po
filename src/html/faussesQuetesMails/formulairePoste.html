@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Formulaire bancaire</title>
+    <link rel="stylesheet" href="../../css/faussesQuetesMails/formulairePoste.css" />
+</head>
+<body>
+<div class="form-container">
+    <h2>Coordonnées bancaires</h2>
+
+    <!-- role="form" non nécessaire mais on garde id pour JS -->
+    <form id="bankForm" novalidate>
+        <div class="form-group">
+            <label for="fullName">Nom complet :</label>
+            <input
+                    type="text"
+                    id="fullName"
+                    placeholder="Jean Dupont"
+                    required
+            />
+        </div>
+            <button type="button" id="confirmBtn" onclick="confirmer()">Confirmer</button>
+    </form>
+</div>
+<div id="successPopup" class="popup">
+    <div class="popup-content">
+        <p id="successMessage">Paiement réussi !</p>
+        <button id="closePopup">Fermer</button>
+    </div>
+</div>
+<script src="../../main.js"></script>
+</body>
+
+</html>

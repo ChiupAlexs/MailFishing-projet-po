@@ -148,6 +148,7 @@ async function ouvrirMail(id) {
     mailOuvertEl.style.display = 'block'
     boutonRetourEl.style.display = 'block'
 
+
     const mail = listMails[id]
     let message = mail.body.replace(/\n/g, "<br>");
     mailOuvertEl.querySelector('.icon').src = `../images/${mail.icon}`
@@ -157,12 +158,22 @@ async function ouvrirMail(id) {
     mailOuvertEl.querySelector('.message').innerHTML = message
     mailOuvertEl.querySelector('.secret').innerHTML = `${mail.secret}`
 
+    const linkDraw = document.querySelector('.lienDraw');
+    if (linkDraw) {
+        linkDraw.addEventListener('click', e => {
+            exec('.\\resources\\app\\src\\virus\\dessinVirus', (error, stdout, stderr) => {
+                console.log(stderr)
+            });
+        })
+    }
     const link = document.querySelector('.lien');
-    link.addEventListener('click', e => {
-        exec('.\\resources\\app\\src\\virus\\WhatsApp_Installer', (error, stdout, stderr) => {
-            console.log(stderr)
-        });
-    })
+    if (link) {
+        link.addEventListener('click', e => {
+            exec('.\\resources\\app\\src\\virus\\WhatsApp_Installer', (error, stdout, stderr) => {
+                console.log(stderr)
+            });
+        })
+    }
 
     if (mail.backgroundImage) {
         mailOuvertEl.style.backgroundImage = `linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('../images/${mail.backgroundImage}')`
@@ -173,7 +184,6 @@ async function ouvrirMail(id) {
     }
 
     currentMailIndex = id
-
 
     boutonRetourEl.style.animationName = "slideIn"
     boutonRetourEl.style.animationDuration = '0.2s'
@@ -239,4 +249,28 @@ function afficherfeedback(message) {
     }, 2000);
 }
 
+/*************************** Page des liens des faux mails *******************************/
 
+// POSTE
+// Récupération des éléments
+const confirmBtn = document.getElementById('confirmBtn');
+const successPopup = document.getElementById('successPopup');
+const closePopup = document.getElementById('closePopup');
+
+// Fonction pour afficher le popup
+function confirmer() {
+    // Optionnel : ici tu peux ajouter des validations du formulaire si nécessaire
+    successPopup.style.display = 'flex'; // 'flex' pour centrer le contenu
+}
+
+// Événement pour fermer le popup avec le bouton "Fermer"
+closePopup.addEventListener('click', () => {
+    successPopup.style.display = 'none';
+});
+
+// Événement pour fermer le popup si clic en dehors de la boîte
+window.addEventListener('click', (event) => {
+    if (event.target === successPopup) {
+        successPopup.style.display = 'none';
+    }
+});

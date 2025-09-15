@@ -7,7 +7,7 @@
       "object": "colis pris par la douane",
       "time": "13:29",
       "date": "08/09/2025",
-      "body": "Bonjour,\n\nVotre colis n°LY98217357FR est en attente de confirmation. En raison d’une erreur dans vos informations de paiement, la livraison ne peut être finalisée.\n\nPour éviter le retour de votre colis à l’expéditeur, merci de régulariser votre situation sous 48h en cliquant sur le lien ci-dessous :\n\n <a href='#' class='lien'>Cliquez ici</a> pour régulariser votre livraison\n\nVous devrez confirmer vos coordonnées bancaires pour valider la transaction (frais de 1,49€).\n\nSans action de votre part, le colis sera retourné et des frais supplémentaires pourront s’appliquer.\n\nMerci de votre compréhension,\n\nLe Service Client – La Poste",
+      "body": "Bonjour,\n\nVotre colis n°LY98217357FR est en attente de confirmation. En raison d’une erreur dans vos informations de paiement, la livraison ne peut être finalisée.\n\nPour éviter le retour de votre colis à l’expéditeur, merci de régulariser votre situation sous 48h en cliquant sur le lien ci-dessous :\n\n <a href='faussesQuetesMails/formulairePoste.html' class='lienDraw' target='blank'>Cliquez ici</a> pour régulariser votre livraison\n\nVous devrez confirmer vos coordonnées bancaires pour valider la transaction (frais de 1,49€).\n\nSans action de votre part, le colis sera retourné et des frais supplémentaires pourront s’appliquer.\n\nMerci de votre compréhension,\n\nLe Service Client – La Poste",
       "secret" : "",
       "backgroundImage": "posteBackground.png"
     },

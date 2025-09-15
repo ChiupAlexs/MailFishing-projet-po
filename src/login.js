@@ -19,3 +19,16 @@ document.getElementById("loginBtn").addEventListener("click", function() {
         }, 300);
     }
 });
+
+cacheOeuil = true
+function changer() {
+    if (cacheOeuil) {
+        document.getElementById("password").setAttribute("type", "text");
+        document.getElementById("eye").src = "../images/eyeOpen.png";
+        cacheOeuil = false
+    } else {
+        document.getElementById("password").setAttribute("type", "password");
+        document.getElementById("eye").src = "../images/eyeClosed.png";
+        cacheOeuil = true
+    }
+}

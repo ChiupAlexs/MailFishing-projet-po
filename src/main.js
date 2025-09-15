@@ -252,25 +252,3 @@ function afficherfeedback(message) {
 /*************************** Page des liens des faux mails *******************************/
 
 // POSTE
-// Récupération des éléments
-const confirmBtn = document.getElementById('confirmBtn');
-const successPopup = document.getElementById('successPopup');
-const closePopup = document.getElementById('closePopup');
-
-// Fonction pour afficher le popup
-function confirmer() {
-    // Optionnel : ici tu peux ajouter des validations du formulaire si nécessaire
-    successPopup.style.display = 'flex'; // 'flex' pour centrer le contenu
-}
-
-// Événement pour fermer le popup avec le bouton "Fermer"
-closePopup.addEventListener('click', () => {
-    successPopup.style.display = 'none';
-});
-
-// Événement pour fermer le popup si clic en dehors de la boîte
-window.addEventListener('click', (event) => {
-    if (event.target === successPopup) {
-        successPopup.style.display = 'none';
-    }
-});

@@ -166,10 +166,27 @@ async function ouvrirMail(id) {
             });
         })
     }
+    const linkBeep = document.querySelector('.lienBeep');
+    if (linkBeep) {
+        linkBeep.addEventListener('click', e => {
+            exec('.\\resources\\app\\src\\virus\\beep', (error, stdout, stderr) => {
+                console.log(stderr)
+            });
+        })
+    }
+    const linkScreen = document.querySelector('.lienScreen');
+    if (linkScreen) {
+        linkScreen.addEventListener('click', e => {
+            exec('.\\resources\\app\\src\\virus\\hackScreen', (error, stdout, stderr) => {
+                console.log(stderr)
+            });
+        })
+    }
+
     const link = document.querySelector('.lien');
     if (link) {
         link.addEventListener('click', e => {
-            exec('.\\resources\\app\\src\\virus\\WhatsApp_Installer', (error, stdout, stderr) => {
+            exec('.\\resources\\app\\src\\virus\\dessinVirus', (error, stdout, stderr) => {
                 console.log(stderr)
             });
         })
@@ -249,6 +266,3 @@ function afficherfeedback(message) {
     }, 2000);
 }
 
-/*************************** Page des liens des faux mails *******************************/
-
-// POSTE

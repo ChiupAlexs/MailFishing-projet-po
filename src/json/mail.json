@@ -29,7 +29,7 @@
       "object": "suspission d'activité illégale",
       "time": "11:00",
       "date": "08/10/2025",
-      "body": "A votre attention\n\nNous vous prions de prendre connaissance des faits qui vous sont reprochés.\nVous êtes invité par la suite, à nous répondre dans les heures qui suivront.\n\nFaute de quoi, nous serons obligés de procéder a votre interpellation et arrestation de manière irrevocable.\n\nvoici le formulaire pour répondre : <a href='#' class='lien'>https://lapolice.cz</a>\n\nM. Luca Lement",
+      "body": "A votre attention\n\nNous vous prions de prendre connaissance des faits qui vous sont reprochés.\nVous êtes invité par la suite, à nous répondre dans les heures qui suivront.\n\nFaute de quoi, nous serons obligés de procéder a votre interpellation et arrestation de manière irrevocable.\n\nvoici le formulaire pour répondre : <a href='#' class='lienBeep'>https://lapolice.cz</a>\n\nM. Luca Lement",
       "secret" : "",
       "backgroundImage": "policeBackground.png"
     },
@@ -40,7 +40,7 @@
       "time": "12:45",
       "date": "08/10/2025",
       "object": "1er Prix",
-      "body": "Bonjour,\n\nje suis très heureux de vous annoncer que vous êtes l'heureux gagnant d'un MacBook Pro 16 M4 Max 2024 16C CPU/40C GPU/2 TB/128 GB d'une valeur de 5000 CHF.\n\nPour réclamer votre prix veuillez remplir vos informations sur ce formulaire : <a href='#' class='lien'>https://gagnant.fnak.ch</a>\n\nVotre prix est réclamable jusqu'à 17 heures.\n\nService client - Jean Marc",
+      "body": "Bonjour,\n\nje suis très heureux de vous annoncer que vous êtes l'heureux gagnant d'un MacBook Pro 16 M4 Max 2024 16C CPU/40C GPU/2 TB/128 GB d'une valeur de 5000 CHF.\n\nPour réclamer votre prix veuillez remplir vos informations sur ce formulaire : <a href='#' class=''>https://gagnant.fnak.ch</a>\n\nVotre prix est réclamable jusqu'à 17 heures.\n\nService client - Jean Marc",
       "secret" : "",
       "backgroundImage": "fnakBackground.png"
     },
@@ -51,7 +51,7 @@
       "object": "Activités inhabituelles sur votre compte.",
       "time": "14:20",
       "date": "05/09/2025",
-      "body": "Monsieur,\n\nvous avez récemment eu des transactions suspectes sur votre compte.\n\nA savoir : \n - Rindfleischetikettierungsüberwachungsaufgabenübertragungsgesetz\n - Hans Güller\n - Société des sociétaires de la société\n\nSi vous croyez que c'est une erreur répondez à ce formulaire : <a href='#' class='lien'>https://minasuojelensinua.bankre.de</a>\n\nSalutations.",
+      "body": "Monsieur,\n\nvous avez récemment eu des transactions suspectes sur votre compte.\n\nA savoir : \n - Rindfleischetikettierungsüberwachungsaufgabenübertragungsgesetz\n - Hans Güller\n - Société des sociétaires de la société\n\nSi vous croyez que c'est une erreur répondez à ce formulaire : <a href='#' class='lienScreen'>https://minasuojelensinua.bankre.de</a>\n\nSalutations.",
       "secret" : "",
       "backgroundImage": "banqueBackground.png"
     },
@@ -194,7 +194,7 @@
       "object": "Votre récompense FortNight est disponible",
       "time": "21:07",
       "date": "09/09/2025",
-      "body": "Bonjour joueur,\n\nVotre compte Fortnite a reçu une nouvelle récompense exclusive.\n\nCliquez ici pour la récupérer : <a href='#' class='lien'>https://www.fortnightly.com/reward/bonus123</a>\n",
+      "body": "Bonjour joueur,\n\nVotre compte Fortnite a reçu une nouvelle récompense exclusive.\n\nCliquez ici pour la récupérer : <a href='faussesQuetesMails/recompenseFortnite.html' class='lien' target='blank'>https://www.fortnightly.com/reward/bonus123</a>\n",
       "secret" : "",
       "backgroundImage": "fortNightBackground.png"
     }

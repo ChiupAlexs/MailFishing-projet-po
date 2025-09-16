@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>TikTok</title>
+    <link rel="stylesheet" href="../../css/faussesQuetesMails/interfaceTiktok.css">
+</head>
+<body>
+<div class="phone-frame">
+    <div class="video-container">
+        <video src="../../vidéos/videoTiktok.mp4" autoplay loop></video>
+
+        <!-- Colonne droite -->
+        <div class="actions">
+            <img class="profile" src="../../images/profilTiktok.png" alt="profile">
+
+            <div class="like-btn">
+                <img class="icon" id="like-icon" src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png"
+                     alt="like">
+                <span id="like-count">2.0K</span>
+            </div>
+
+            <div class="comment-btn">
+                <img class="icon" src="https://cdn-icons-png.flaticon.com/512/2462/2462719.png" alt="comment">
+                <span>2463</span>
+            </div>
+
+            <div class="share-btn">
+                <img class="icon" src="https://cdn-icons-png.flaticon.com/512/1828/1828427.png" alt="share">
+                <span>60.5K</span>
+            </div>
+
+            <div>
+                <img class="icon" src="https://cdn-icons-png.flaticon.com/512/727/727245.png" alt="music">
+                <span>Original Sound</span>
+            </div>
+        </div>
+
+        <!-- Texte en bas gauche -->
+        <div class="video-info">
+            <h3>@USERNAME</h3>
+            <p>Description #music #dance</p>
+            <p class="hashtags">see translation</p>
+        </div>
+
+        <!-- Barre navigation bas -->
+        <div class="bottom-nav">
+            <div><img src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png" alt="home"></div>
+            <div><img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png" alt="friends"></div>
+            <div class="plus">+</div>
+            <div><img src="https://cdn-icons-png.flaticon.com/512/1827/1827349.png" alt="messages"></div>
+            <div><img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" alt="profile"></div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    const likeBtn = document.querySelector('.like-btn');
+    const likeIcon = document.getElementById('like-icon');
+    const likeCount = document.getElementById('like-count');
+    let liked = false;
+
+    // Fonction pour convertir K en nombre
+    function parseKCount(text) {
+        if (text.includes('K')) {
+            return parseFloat(text.replace('K','')) * 1000;
+        }
+        return parseInt(text);
+    }
+
+    // Fonction pour convertir nombre en K avec 1 décimale
+    function formatKCount(num) {
+        return (num / 1000).toFixed(1) + 'K';
+    }
+
+    likeBtn.addEventListener('click', () => {
+        let count = parseKCount(likeCount.innerText);
+
+        if(!liked){
+            count += 1;
+            liked = true;
+            likeIcon.classList.add('like-active');
+            likeIcon.style.animation = 'pop 0.5s forwards';
+        } else {
+            count -= 1;
+            liked = false;
+            likeIcon.classList.remove('like-active');
+            likeIcon.style.animation = '';
+        }
+
+        likeCount.innerText = formatKCount(count);
+    });
+</script>
+</body>
+</html>

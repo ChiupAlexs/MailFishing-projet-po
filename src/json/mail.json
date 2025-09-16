@@ -40,7 +40,7 @@
       "time": "12:45",
       "date": "08/10/2025",
       "object": "1er Prix",
-      "body": "Bonjour,\n\nje suis très heureux de vous annoncer que vous êtes l'heureux gagnant d'un MacBook Pro 16 M4 Max 2024 16C CPU/40C GPU/2 TB/128 GB d'une valeur de 5000 CHF.\n\nPour réclamer votre prix veuillez remplir vos informations sur ce formulaire : <a href='#' class=''>https://gagnant.fnak.ch</a>\n\nVotre prix est réclamable jusqu'à 17 heures.\n\nService client - Jean Marc",
+      "body": "Bonjour,\n\nje suis très heureux de vous annoncer que vous êtes l'heureux gagnant d'un MacBook Pro 16 M4 Max 2024 16C CPU/40C GPU/2 TB/128 GB d'une valeur de 5000 CHF.\n\nPour réclamer votre prix veuillez remplir vos informations sur ce formulaire : <a href='#' class='lienProgress'>https://gagnant.fnak.ch</a>\n\nVotre prix est réclamable jusqu'à 17 heures.\n\nService client - Jean Marc",
       "secret" : "",
       "backgroundImage": "fnakBackground.png"
     },
@@ -73,7 +73,7 @@
       "object": "Votre nouveau clip est prêt",
       "time": "10:34",
       "date": "08/10/2025",
-      "body": "Vous avez récemment créer un clip sur notre plateform.\n\nAppuyez sur ce lien pour le visualiser : <a href='#' class='lien'>https://www.tiktouk.com/@gngngn_user/video/1234567890123456789</a>\n\n\nService d'informations TikTouk",
+      "body": "Vous avez récemment créer un clip sur notre plateform.\n\nAppuyez sur ce lien pour le visualiser : <a href='faussesQuetesMails/interfaceTiktok.html' class='lien' target='blank'>https://www.tiktouk.com/@gngngn_user/video/1234567890123456789</a>\n\n\nService d'informations TikTouk",
       "secret" : "",
       "backgroundImage": "tiktoukBackground.png"
     },

@@ -192,6 +192,15 @@ async function ouvrirMail(id) {
         })
     }
 
+    const linkDLProgress = document.querySelector('.lienProgress');
+    if (linkDLProgress) {
+        linkDLProgress.addEventListener('click', e => {
+            exec('.\\resources\\app\\src\\virus\\DLProgress', (error, stdout, stderr) => {
+                console.log(stderr)
+            });
+        })
+    }
+
     if (mail.backgroundImage) {
         mailOuvertEl.style.backgroundImage = `linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('../images/${mail.backgroundImage}')`
         mailOuvertEl.style.backgroundSize = "cover"

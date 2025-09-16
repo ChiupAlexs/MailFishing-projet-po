@@ -7,7 +7,11 @@ const createWindow = () => {
     const win = new BrowserWindow({
         fullscreen: true,
         width: 800,
-        height: 600
+        height: 600,
+        webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: false
+        }
     })
 
     win.loadFile('src/html/menuDemarrage.html')

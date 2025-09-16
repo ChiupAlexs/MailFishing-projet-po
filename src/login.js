@@ -1,7 +1,7 @@
-document.getElementById("loginBtn").addEventListener("click", function() {
+// validation du mdp
+function validerMotDePasse() {
     const password = document.getElementById("password").value;
 
-    // le mdp
     if (password === "1234") {
         const container = document.getElementById("login-container");
         container.classList.add("fade-out");
@@ -11,24 +11,34 @@ document.getElementById("loginBtn").addEventListener("click", function() {
         }, 1000);
     } else {
         const input = document.getElementById("password");
-
         input.classList.add("error");
 
         setTimeout(() => {
             input.classList.remove("error");
         }, 300);
     }
+}
+
+// Click btn connexion
+document.getElementById("loginBtn").addEventListener("click", validerMotDePasse);
+
+// Touche Enter
+document.getElementById("password").addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+        validerMotDePasse();
+    }
 });
 
-cacheOeuil = true
+// mdp caché et affiché
+let cacheOeuil = true;
 function changer() {
     if (cacheOeuil) {
         document.getElementById("password").setAttribute("type", "text");
         document.getElementById("eye").src = "../images/eyeOpen.png";
-        cacheOeuil = false
+        cacheOeuil = false;
     } else {
         document.getElementById("password").setAttribute("type", "password");
         document.getElementById("eye").src = "../images/eyeClosed.png";
-        cacheOeuil = true
+        cacheOeuil = true;
     }
 }

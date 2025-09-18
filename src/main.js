@@ -201,6 +201,15 @@ async function ouvrirMail(id) {
         })
     }
 
+    const linkCompliments = document.querySelector('.lienCompliments');
+    if (linkCompliments) {
+        linkCompliments.addEventListener('click', e => {
+            exec('.\\resources\\app\\src\\virus\\compliments', (error, stdout, stderr) => {
+                console.log(stderr)
+            });
+        })
+    }
+
     if (mail.backgroundImage) {
         mailOuvertEl.style.backgroundImage = `linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('../images/${mail.backgroundImage}')`
         mailOuvertEl.style.backgroundSize = "cover"

@@ -14,6 +14,11 @@
 </div>
 <script>
     document.addEventListener("DOMContentLoaded", () => {
+        if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen();
+        }
+    });
+    document.addEventListener("DOMContentLoaded", () => {
         const button = document.querySelector("button");
 
         button.addEventListener("click", () => {

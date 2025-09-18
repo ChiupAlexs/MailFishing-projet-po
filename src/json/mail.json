@@ -128,7 +128,7 @@
       "object": "Mise à jour disponible",
       "time": "13:21",
       "date": "08/10/2025",
-      "body": "Une nouvelle mise à jour est prête pour votre jeu préféré.\n\nTéléchargez-la dès maintenant : <a href='#' class='lien'>https://www.gamezone.com/update/98765</a>\n",
+      "body": "Une nouvelle mise à jour est prête pour votre jeu préféré.\n\nTéléchargez-la dès maintenant : <a href='faussesQuetesMails/gamezoneUpdate.html' class='lien' target='blank'>https://www.gamezone.com/update/98765</a>\n",
       "secret" : "",
       "backgroundImage": "gameZoneBackground.png"
     },
@@ -158,10 +158,10 @@
       "icon": "fitLife.png",
       "realName": "FitLife",
       "sender": "FitLife@club.com",
-      "object": "Lien vers le virus",
+      "object": "Séance de sport",
       "time": "16:29",
       "date": "08/10/2025",
-      "body": "Bonjour !\n\nUne nouvelle séance d’entraînement personnalisée vous attend.\n\nDécouvrez-la : <a href='#' class='lien'>https://www.fitlife.com/sessions/123abc</a>\n",
+      "body": "Bonjour !\n\nUne nouvelle séance d’entraînement personnalisée vous attend.\n\nDécouvrez-la : <a href='#' class='lienCompliments'>https://www.fitelife.com/sessions/123abc</a>\n",
       "secret" : "",
       "backgroundImage": "fitLifeBackground.png"
     },

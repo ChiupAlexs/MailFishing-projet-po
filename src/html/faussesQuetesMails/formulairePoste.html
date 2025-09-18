@@ -42,7 +42,11 @@
         popup.style.display = 'flex';
         popup.removeAttribute('hidden'); // affiche le popup
     });
-
+    document.addEventListener("DOMContentLoaded", () => {
+        if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen();
+        }
+    });
     // au clic sur "Fermer"
     document.getElementById('closePopup').addEventListener('click', function () {
         const popup = document.getElementById('successPopup');

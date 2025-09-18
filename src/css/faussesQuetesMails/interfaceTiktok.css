@@ -1,21 +1,24 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
+    background-image: url("../../images/tiktoukBackground.png");
+    background-repeat: no-repeat;
+    background-size: cover;
     font-family: Arial, sans-serif;
-    background-color: #000;
+    background-color: black;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 99vh;
 }
 
 .phone-frame {
-    width: 360px;
-    height: 560px;
-    border: 10px solid #000; /* cadre plus fin */
+    width: 380px;
+    height: 540px;
+    border: 10px solid grey;
     border-radius: 25px;
     overflow: hidden;
     position: relative;
-    background-color: #000;
+    background-color: grey;
 }
 
 .video-container {
@@ -30,7 +33,6 @@ video {
     object-fit: cover;
 }
 
-/* Overlay droite */
 .actions {
     position: absolute;
     right: 10px;
@@ -126,4 +128,212 @@ video {
     color: #000;
     border-radius: 50%;
     padding: 4px 7px;
+}
+
+.iconMusic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    animation: rotation 4s linear infinite;
+}
+
+.musicText {
+    font-size: 10px;
+}
+
+/* Animation de rotation */
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    justify-content: end;
+    align-items: end;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* État actif */
+.overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+/* Contenu de l’overlay */
+.overlay-content {
+    background: #fff;
+    width: 400px;
+    max-width: 90%;
+    border-radius: 12px;
+    padding: 20px;
+    position: relative;
+    max-height: 70%;
+    overflow-y: auto;
+    transform: translateY(30px);
+    transition: transform 0.3s ease;
+}
+
+/* Quand overlay actif → slide-in */
+.overlay.active .overlay-content {
+    transform: translateY(0);
+}
+
+/* Bouton fermer */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+
+/* Variables (facile à customiser) */
+:root{
+    --bg-overlay: rgba(15,20,25,0.55);
+    --panel-bg: #ffffff;
+    --panel-border: rgba(16,24,32,0.06);
+    --muted: #6b7280; /* grey for author / meta */
+    --text: #0f172a;
+    --accent: #0ea5a4; /* subtle accent if needed */
+    --radius: 12px;
+    --shadow: 0 8px 30px rgba(16,24,40,0.12);
+    --max-width: 720px;
+}
+
+/* Overlay backdrop */
+#commentOverlay.overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    align-items: end;
+    justify-content: end;
+    width: 380px; /* même largeur que phone-frame */
+    height: 560px; /* même hauteur que phone-frame */
+    background: rgba(0,0,0,0.6); /* semi-transparent */
+    z-index: 1000;
+    border-radius: 25px; /* même border-radius que phone-frame */
+}
+
+/* Contenu de l'overlay */
+#commentOverlay .overlay-content {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    border-radius: 25px; /* même border-radius */
+    overflow-y: auto;
+    box-shadow: 0 8px 30px rgba(16,24,40,0.12);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Visible state */
+#commentOverlay.overlay.show{
+    display: flex;
+}
+
+/* The white panel */
+#commentOverlay .overlay-content{
+    background: var(--panel-bg);
+    color: var(--text);
+    border-radius: var(--radius);
+    width: min(var(--max-width), 100%);
+    max-width: var(--max-width);
+    max-height: 80vh;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--panel-border);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+#commentOverlay .overlay-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px 18px;
+    border-bottom: 1px solid rgba(16,24,40,0.04);
+}
+#commentOverlay .overlay-header h2{
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+    color: var(--text);
+}
+#commentOverlay .overlay-header .close-btn{
+    background: transparent;
+    border: none;
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 8px;
+    color: var(--muted);
+}
+#commentOverlay .overlay-header .close-btn:hover{
+    background: rgba(0,0,0,0.04);
+    color: var(--text);
+}
+
+/* Comment list area (scrollable) */
+#commentOverlay .comment-list{
+    padding: 12px 12px 18px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Individual comment */
+#commentOverlay .comment{
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: linear-gradient(180deg, rgba(250,250,250,1), rgba(244,246,248,1));
+    border: 1px solid rgba(16,24,40,0.03);
+    box-shadow: 0 1px 0 rgba(255,255,255,0.5) inset;
+    user-select: text; /* allow copying */
+    cursor: default;   /* indicates read-only */
+}
+
+/* Author + text */
+#commentOverlay .comment .author{
+    margin: 0 0 6px 0;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: capitalize;
+    letter-spacing: 0.2px;
+}
+#commentOverlay .comment .text{
+    margin: 0;
+    font-size: 0.98rem;
+    line-height: 1.45;
+    color: var(--text);
+    white-space: normal;
+}
+
+/* Small responsive touch-ups */
+@media (max-width: 420px){
+    #commentOverlay .overlay-header h2{ font-size: 1rem; }
+    #commentOverlay .comment{ padding: 10px; }
+    #commentOverlay .comment-list{ padding: 10px; }
 }

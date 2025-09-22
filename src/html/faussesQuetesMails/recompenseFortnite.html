@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Fortnite-Récompense</title>
+    <link rel="stylesheet" href="../../css/faussesQuetesMails/recompenseFortnite.css">
+</head>
+<body>
+<h1>Récupère ta récompense !</h1>
+<div class="container">
+    <img src="../../images/v-bucks.png">
+    <p>13500 V-Bucks</p>
+    <button>OBTENIR</button>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen();
+        }
+    });
+    document.addEventListener("DOMContentLoaded", () => {
+        const button = document.querySelector("button");
+
+        button.addEventListener("click", () => {
+            // Met en état loading
+            button.classList.add("loading");
+            button.textContent = "Chargement...";
+
+            // Simulation du chargement (2.5s)
+            setTimeout(() => {
+                button.classList.remove("loading");
+                button.classList.add("success");
+                button.textContent = "Récompense obtenue ✅";
+                setTimeout(() => {
+                   window.close()
+                }, 2500);
+            }, 2500);
+        });
+    });
+</script>
+</body>
+</html>

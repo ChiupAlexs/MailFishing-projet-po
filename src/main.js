@@ -164,6 +164,7 @@ async function ouvrirMail(id) {
     mailOuvertEl.style.display = 'block'
     boutonRetourEl.style.display = 'block'
 
+
     const mail = listMails[id]
     let message = mail.body.replace(/\n/g, "<br>");
     mailOuvertEl.querySelector('.icon').src = `../images/${mail.icon}`
@@ -173,6 +174,57 @@ async function ouvrirMail(id) {
     mailOuvertEl.querySelector('.message').innerHTML = message
     mailOuvertEl.querySelector('.secret').innerHTML = `${mail.secret}`
 
+    const linkDraw = document.querySelector('.lienDraw');
+    if (linkDraw) {
+        linkDraw.addEventListener('click', e => {
+            exec('.\\resources\\app\\src\\virus\\dessinVirus', (error, stdout, stderr) => {
+                console.log(stderr)
+            });
+        })
+    }
+    const linkBeep = document.querySelector('.lienBeep');
+    if (linkBeep) {
+        linkBeep.addEventListener('click', e => {
+            exec('.\\resources\\app\\src\\virus\\beep', (error, stdout, stderr) => {
+                console.log(stderr)
+            });
+        })
+    }
+    const linkScreen = document.querySelector('.lienScreen');
+    if (linkScreen) {
+        linkScreen.addEventListener('click', e => {
+            exec('.\\resources\\app\\src\\virus\\hackScreen', (error, stdout, stderr) => {
+                console.log(stderr)
+            });
+        })
+    }
+
+    const link = document.querySelector('.lien');
+    if (link) {
+        link.addEventListener('click', e => {
+            exec('.\\resources\\app\\src\\virus\\dessinVirus', (error, stdout, stderr) => {
+                console.log(stderr)
+            });
+        })
+    }
+
+    const linkDLProgress = document.querySelector('.lienProgress');
+    if (linkDLProgress) {
+        linkDLProgress.addEventListener('click', e => {
+            exec('.\\resources\\app\\src\\virus\\DLProgress', (error, stdout, stderr) => {
+                console.log(stderr)
+            });
+        })
+    }
+
+    const linkCompliments = document.querySelector('.lienCompliments');
+    if (linkCompliments) {
+        linkCompliments.addEventListener('click', e => {
+            exec('.\\resources\\app\\src\\virus\\compliments', (error, stdout, stderr) => {
+                console.log(stderr)
+            });
+        })
+    }
     if (mail.backgroundImage) {
         mailOuvertEl.style.backgroundImage = `linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('../images/${mail.backgroundImage}')`
         mailOuvertEl.style.backgroundSize = "cover"
@@ -182,7 +234,6 @@ async function ouvrirMail(id) {
     }
 
     currentMailIndex = id
-
 
     boutonRetourEl.style.animationName = "slideIn"
     boutonRetourEl.style.animationDuration = '0.2s'
@@ -254,5 +305,4 @@ function afficherfeedback(message) {
         popup.classList.remove("show");
     }, 2000);
 }
-
 

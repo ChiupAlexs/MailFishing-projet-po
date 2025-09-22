@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>Formulaire bancaire</title>
+    <link rel="stylesheet" href="../../css/faussesQuetesMails/formulairePoste.css"/>
+</head>
+<body>
+<div class="form-container">
+    <h2>Coordonnées bancaires</h2>
+    <form id="bankForm" novalidate>
+        <div class="form-group">
+            <label for="fullName">Nom complet</label>
+            <input type="text" id="fullName" placeholder="Jean Dupont" required/>
+            <label for="cardNumber">Numéro de carte</label>
+            <input type="tel" id="cardNumber" placeholder="xxxx xxxx xxxx xxxx" required/>
+            <label for="validity">code de validité</label>
+            <input type="tel" id="validity" placeholder="MM/AA" required/>
+            <label for="CVV">CVV</label>
+            <input type="tel" id="CVV" placeholder="xxx" required/>
+        </div>
+
+        <div class="form-actions">
+            <button id="confirmBtn" type="button" onclick="confirmer()">Confirmer</button>
+        </div>
+    </form>
+</div>
+
+<div id="successPopup" class="popup" hidden>
+    <div class="popup-content">
+        <p id="successMessage">transaction terminée!</p>
+        <button id="closePopup">Fermer</button>
+    </div>
+</div>
+<script src="../../main.js"></script>
+<script type="text/javascript">
+    // au clic sur "Confirmer"
+    document.getElementById('confirmBtn').addEventListener('click', function (e) {
+        e.preventDefault(); // empêche l'envoi du formulaire si c'est dans <form>
+        const popup = document.getElementById('successPopup');
+        popup.style.display = 'flex';
+        popup.removeAttribute('hidden'); // affiche le popup
+    });
+    document.addEventListener("DOMContentLoaded", () => {
+        if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen();
+        }
+    });
+    // au clic sur "Fermer"
+    document.getElementById('closePopup').addEventListener('click', function () {
+        const popup = document.getElementById('successPopup');
+        popup.setAttribute('hidden', 'hidden'); // cache le popup
+        window.close();
+    });
+</script>
+</body>
+
+</html>

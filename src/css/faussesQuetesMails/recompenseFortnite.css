@@ -1,0 +1,135 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Sora', Arial, sans-serif;
+    background: linear-gradient(135deg, #0d1b2a, #1b263b, #1e3a8a); /* bleu sobre */
+    color: #fff;
+    text-align: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 1s ease-in; /* apparition fluide */
+}
+
+/* Animation d’apparition du body */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+h1 {
+    font-size: 2.2rem;
+    text-transform: uppercase;
+    color: #e0f7ff;
+    text-shadow: 0 0 8px rgba(0, 212, 255, 0.5);
+    margin-bottom: 1.5rem;
+    animation: slideDown 1s ease-out;
+}
+
+/* Animation titre qui descend */
+@keyframes slideDown {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+p {
+    font-size: 1.2rem;
+    color: #dbeafe;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+    margin-bottom: 1rem;
+    animation: fadeIn 1.5s ease-in;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.05); /* sobre et transparent */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 350px;
+    backdrop-filter: blur(6px); /* effet verre dépoli */
+    animation: fadeUp 1.2s ease-out;
+}
+
+/* Animation container qui monte doucement */
+@keyframes fadeUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.container img {
+    width: 140px;
+    margin-bottom: 1.2rem;
+    animation: pulse 3s infinite ease-in-out; /* animation douce */
+}
+
+/* Effet pulsant sur l'image */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(0,212,255,0.5)); }
+    50% { transform: scale(1.05); filter: drop-shadow(0 0 12px rgba(0,212,255,0.7)); }
+}
+
+button {
+    background: linear-gradient(120deg, #00d4ff, #0077ff);
+    border: none;
+    padding: 0.9rem 2rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    border-radius: 8px;
+    cursor: pointer;
+    text-transform: uppercase;
+    box-shadow: 0 0 12px rgba(0, 212, 255, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: buttonPulse 2.5s infinite ease-in-out;
+}
+
+/* Effet bouton qui respire doucement */
+@keyframes buttonPulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 12px rgba(0, 212, 255, 0.3); }
+    50% { transform: scale(1.05); box-shadow: 0 0 20px rgba(0, 212, 255, 0.6); }
+}
+
+button:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 25px rgba(0, 212, 255, 0.9);
+}
+
+
+/* Spinner pour le chargement */
+button.loading {
+    position: relative;
+    pointer-events: none;
+    color: transparent; /* cache le texte pendant le spin */
+}
+
+button.loading::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top: 3px solid #fff;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+/* Animation du spinner */
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+
+/* État succès */
+button.success {
+    background: linear-gradient(120deg, #28a745, #218838);
+    box-shadow: 0 0 15px rgba(40, 167, 69, 0.6);
+}

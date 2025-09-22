@@ -6,8 +6,6 @@ const test = require("node:test");
 const createWindow = () => {
     const win = new BrowserWindow({
         fullscreen: true,
-        width: 800,
-        height: 600,
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false

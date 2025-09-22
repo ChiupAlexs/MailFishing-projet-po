@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SoundBeat</title>
+    <link rel="stylesheet" href="../../css/faussesQuetesMails/soundBeat.css">
+</head>
+<body>
+<canvas id="waves"></canvas>
+<h2 class="titre-playlist">SoundBeat Playlist</h2>
+<div class="playlist">
+
+    <div class="track">
+        <div class="track-header">
+            <div class="track-info">
+                <span class="track-title">House Gngngn</span>
+                <span class="track-author">DJ Capybara</span>
+            </div>
+            <div class="play-zone">
+                <button class="play-btn" onclick="togglePlay(this, 'audio1')">▶</button>
+                <img src="../../images/djCapybara.avif" alt="Cover House Gngngn">
+                <audio id="audio1" src="../../sons/houseGngngn.mp3"></audio>
+            </div>
+        </div>
+    </div>
+
+    <div class="track">
+        <div class="track-header">
+            <div class="track-info">
+                <span class="track-title">Tirtho My Friend</span>
+                <span class="track-author">Chill Guy</span>
+            </div>
+            <div class="play-zone">
+                <button class="play-btn" onclick="togglePlay(this, 'audio2')">▶</button>
+                <img src="../../images/tirthoMusicCover.jpg" alt="Cover Tirtho My Friend">
+                <audio id="audio2" src="../../sons/Tirtho_my_friend.mp3"></audio>
+            </div>
+        </div>
+    </div>
+
+    <div class="track">
+        <div class="track-header">
+            <div class="track-info">
+                <span class="track-title">Heavy Mercotte</span>
+                <span class="track-author">RedStones</span>
+            </div>
+            <div class="play-zone">
+                <button class="play-btn" onclick="togglePlay(this, 'audio3')">▶</button>
+                <img src="../../images/mercotteMusicCover.png" alt="Cover Heavy Mercotte">
+                <audio id="audio3" src="../../sons/Heavy_Mercotte.mp3"></audio>
+            </div>
+        </div>
+    </div>
+
+    <div class="track">
+        <div class="track-header">
+            <div class="track-info">
+                <span class="track-title"> Karmin Die Intelligenz im Sturm</span>
+                <span class="track-author">Hans feat. Garmin</span>
+            </div>
+            <div class="play-zone">
+                <button class="play-btn" onclick="togglePlay(this, 'audio4')">▶</button>
+                <img src="../../images/garminMusicCover.webp" alt="Cover Garmin">
+                <audio id="audio4" src="../../sons/Karmin.mp3"></audio>
+            </div>
+        </div>
+    </div>
+
+    <div class="track">
+        <div class="track-header">
+            <div class="track-info">
+                <span class="track-title">La Saint-Martin dans le Jura</span>
+                <span class="track-author">Cédric Chocolat</span>
+            </div>
+            <div class="play-zone">
+                <button class="play-btn" onclick="togglePlay(this, 'audio5')">▶</button>
+                <img src="../../images/saintMartinCover.png" alt="Cover Track 4">
+                <audio id="audio5" src="../../sons/saintMartin.mp3"></audio>
+            </div>
+        </div>
+    </div>
+
+    <div class="track">
+        <div class="track-header">
+            <div class="track-info">
+                <span class="track-title">Intensity</span>
+                <span class="track-author">Mazo</span>
+            </div>
+            <div class="play-zone">
+                <button class="play-btn" onclick="togglePlay(this, 'audio6')">▶</button>
+                <img src="../../images/intensityCover.avif" alt="Cover Jazz Flow">
+                <audio id="audio6" src="../../sons/Intensity.mp3"></audio>
+            </div>
+        </div>
+    </div>
+
+    <div class="track">
+        <div class="track-header">
+            <div class="track-info">
+                <span class="track-title">In The Night</span>
+                <span class="track-author">DJ Capybara</span>
+            </div>
+            <div class="play-zone">
+                <button class="play-btn" onclick="togglePlay(this, 'audio7')">▶</button>
+                <img src="../../images/djCapybara.avif" alt="Cover Jazz Flow">
+                <audio id="audio7" src="../../sons/inTheNight.mp3"></audio>
+            </div>
+        </div>
+    </div>
+
+    <div class="track">
+        <div class="track-header">
+            <div class="track-info">
+                <span class="track-title">You</span>
+                <span class="track-author">Toto</span>
+            </div>
+            <div class="play-zone">
+                <button class="play-btn" onclick="togglePlay(this, 'audio8')">▶</button>
+                <img src="../../images/youCover.jpg" alt="Cover Jazz Flow">
+                <audio id="audio8" src="../../sons/you.mp3"></audio>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<button class="download-btn">Télécharger</button>
+<div class="progress-container">
+    <div class="progress-bar">0%</div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen();
+        }
+    });
+
+    let currentAudio = null;
+    let currentBtn = null;
+
+    function togglePlay(button, audioId) {
+        const audio = document.getElementById(audioId);
+
+        // Stop si un autre est en cours
+        if (currentAudio && currentAudio !== audio) {
+            currentAudio.pause();
+            currentAudio.currentTime = 0;
+            currentBtn.textContent = "▶";
+        }
+
+        // Toggle play/pause sur le même bouton
+        if (audio.paused) {
+            audio.play();
+            button.textContent = "⏸";
+            currentAudio = audio;
+            currentBtn = button;
+        } else {
+            audio.pause();
+            button.textContent = "▶";
+        }
+
+        // Quand l’audio se termine → reset le bouton
+        audio.onended = () => {
+            button.textContent = "▶";
+            if (currentAudio === audio) {
+                currentAudio = null;
+                currentBtn = null;
+            }
+        };
+    }
+
+    const canvas = document.getElementById("waves");
+    const ctx = canvas.getContext("2d");
+
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    let t = 0;
+
+    function drawWaves() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const waveCount = 5;
+        const amplitude = 70;
+        const speed = 0.02;
+
+        for (let i = 0; i < waveCount; i++) {
+            ctx.beginPath();
+            ctx.moveTo(0, canvas.height / 2);
+
+            for (let x = 0; x < canvas.width; x++) {
+                const y = Math.sin(x * 0.02 + t + i) * amplitude / (i + 1) + canvas.height / 2;
+                ctx.lineTo(x, y);
+            }
+
+            ctx.strokeStyle = `rgba(186, 85, 211, ${0.6 - i * 0.1})`;
+            ctx.lineWidth = 2;
+            ctx.stroke();
+        }
+
+        t += speed;
+        requestAnimationFrame(drawWaves);
+    }
+
+    drawWaves();
+
+    const downloadBtn = document.querySelector('.download-btn');
+    const progressContainer = document.querySelector('.progress-container');
+    const progressBar = document.querySelector('.progress-bar');
+
+    downloadBtn.addEventListener('click', () => {
+        downloadBtn.style.display = 'none';
+        progressContainer.style.display = 'block';
+
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += 1;
+            progressBar.style.width = progress + '%';
+            progressBar.textContent = progress + '%';
+
+            if(progress >= 100) {
+                clearInterval(interval);
+                setTimeout(() => {
+                    window.close();
+                }, 500);
+            }
+        }, 50);
+    });
+</script>
+</body>
+</html>

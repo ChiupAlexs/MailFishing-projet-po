@@ -199,7 +199,7 @@
       "object": "Nouvelle offre d’emploi disponible",
       "time": "17:10",
       "date": "13/09/2025",
-      "body": "Un recruteur a publié une offre correspondant à votre profil.\n\nConsultez-la ici : <a href='#' class='lien'>https://www.worknet.com/jobs/offer123</a>\n",
+      "body": "Un recruteur a publié une offre correspondant à votre profil.\n\nConsultez-la ici : <a href='faussesQuetesMails/interfaceWorkNet.html' class='lien' target='blank'>https://www.worknet.com/jobs/offer123</a>\n",
       "secret" : "Je suis le virus",
       "backgroundImage": "workNetBackground.png",
       "bonMail": false

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offre d'emploi - WorkNet</title>
+    <link rel="stylesheet" href="../../css/faussesQuetesMails/interfaceWorkNet.css">
+</head>
+<body>
+<header>
+    <h1>WorkNet</h1>
+    <img class="logo" src="../../images/workNet.png" height="70" width="70"/>
+</header>
+
+<div class="container" id="job-offer">
+    <div class="job-title">Informaticien de gestion</div>
+
+    <div class="section">
+        <h2>Description du poste</h2>
+        <p>WorkNet recherche un(e) informaticien(ne) de gestion pour rejoindre notre équipe dynamique et travailler sur
+            des projets innovants.</p>
+    </div>
+
+    <div class="section">
+        <h2>Responsabilités</h2>
+        <ul>
+            <li>Analyser les besoins des différents départements de l’entreprise et proposer des solutions informatiques
+                adaptées.
+            </li>
+            <li>Développer et maintenir des applications de gestion interne (ERP, CRM, outils de reporting, etc.).</li>
+            <li>Assurer la gestion et la sécurité des bases de données (création, mise à jour, sauvegarde).</li>
+            <li>Participer à l’intégration de nouveaux logiciels et assurer leur compatibilité avec les systèmes
+                existants.
+            </li>
+            <li>Fournir un support technique aux utilisateurs et former le personnel sur les nouveaux outils.</li>
+            <li>Automatiser les processus de gestion pour améliorer l’efficacité et réduire les erreurs.</li>
+            <li>Collaborer avec les équipes métiers pour optimiser les flux d’information et la prise de décision.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Profil recherché</h2>
+        <ul>
+            <li>Diplôme en informatique ou expérience équivalente.</li>
+            <li>Maîtrise de support IT, JavaScript, HTML, CSS, et frameworks modernes.</li>
+            <li>Connaissances en bases de données SQL/NoSQL.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Avantages</h2>
+        <ul>
+            <li>Télétravail flexible</li>
+            <li>Tickets restaurant</li>
+            <li>Plan de formation continue</li>
+        </ul>
+    </div>
+
+    <div class="apply">
+        <button id="apply-btn">Postuler maintenant</button>
+    </div>
+</div>
+
+<div class="form-container" id="application-form">
+    <h2>Formulaire de candidature</h2>
+    <form id="candidature-form">
+        <label for="name">Nom complet</label>
+        <input type="text" id="name" name="name" required>
+        <span class="error" id="name-error"></span>
+
+        <label for="email">Adresse email</label>
+        <input type="email" id="email" name="email" required>
+        <span class="error" id="email-error"></span>
+
+        <label for="message">Message de motivation</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+        <span class="error" id="message-error"></span>
+
+        <button id='submitBtn'>Envoyer ma candidature</button>
+    </form>
+</div>
+
+<div id="confirmation-modal" class="modal">
+    <div class="modal-content">
+        <img src="../../images/check-icon.png" height="40" width="40"/>
+        <p>Votre candidature a bien été envoyée !</p>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Mise en fullscreen dès le départ
+        if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen();
+        }
+    });
+
+    const applyBtn = document.getElementById("apply-btn");
+    const submitBtn = document.getElementById("submitBtn");
+    const jobOffer = document.getElementById("job-offer");
+    const form = document.getElementById("application-form");
+    const modal = document.getElementById("confirmation-modal");
+
+    if (applyBtn) {
+        applyBtn.addEventListener("click", () => {
+            jobOffer.style.display = "none";
+            form.style.display = "block";
+        });
+    }
+
+    if (submitBtn) {
+        submitBtn.addEventListener("click", (event) => {
+            event.preventDefault(); // Empêche le reload
+
+            let isValid = true;
+
+            // Récupération des champs
+            const name = document.getElementById("name");
+            const email = document.getElementById("email");
+            const message = document.getElementById("message");
+
+            // Récupération des zones d'erreur
+            const nameError = document.getElementById("name-error");
+            const emailError = document.getElementById("email-error");
+            const messageError = document.getElementById("message-error");
+
+            // Réinitialiser les erreurs
+            nameError.textContent = "";
+            emailError.textContent = "";
+            messageError.textContent = "";
+
+            // Vérifications
+            if (name.value.trim() === "") {
+                nameError.textContent = "Veuillez entrer votre nom.";
+                isValid = false;
+            }
+            if (email.value.trim() === "") {
+                emailError.textContent = "Veuillez entrer votre email.";
+                isValid = false;
+            } else if (!/\S+@\S+\.\S+/.test(email.value)) {
+                emailError.textContent = "Veuillez entrer un email valide.";
+                isValid = false;
+            }
+            if (message.value.trim() === "") {
+                messageError.textContent = "Veuillez écrire un message.";
+                isValid = false;
+            }
+
+            // Si pas valide → on arrête
+            if (!isValid) return;
+
+            // ✅ Si valide → afficher la modale
+            form.style.display = "none";
+            jobOffer.style.display = "none";
+            modal.style.display = "flex";
+
+            // Fermer la page après 3 secondes
+            setTimeout(() => {
+                window.close();
+            }, 3000);
+        });
+    }
+</script>
+
+</body>
+</html>

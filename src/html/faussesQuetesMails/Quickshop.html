@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QuickShop</title>
+    <link rel="stylesheet" href="../../css/faussesQuetesMails/Quickshop.css">
+</head>
+<header>
+    <img class="QuickShop" src="../../images/quickShop.png" alt="Logo Quickshop">
+</header>
+<body>
+<div class="container-quickshop">
+    <h1 class="SuivreColis">Oh ! Votre colis est en route, suivez le maintenant !</h1>
+    <div class="Suivis">
+        <img class="commande" src="../../images/fichier.png" alt="commande faite">
+        <img class="commande" src="../../images/supprimer.png" alt="commande faite">
+        <img class="commande" src="../../images/paquet%20(1).png" alt="paquet attente">
+        <img class="commande" src="../../images/supprimer.png" alt="commande faite">
+        <img class="commande" src="../../images/avion.png" alt="expedié">
+        <img class="commande" src="../../images/supprimer.png" alt="commande faite">
+        <img class="commande" src="../../images/paquet%20(1).png" alt="paquet attente">
+        <img class="commande" src="../../images/supprimer.png" alt="commande faite">
+        <img class="commande" src="../../images/camion-de-livraison.png" alt="cours de livraison">
+        <img class="commande" src="../../images/supprimer.png" alt="commande faite">
+        <img class="commandeFin" src="../../images/succes.png" alt="arrivé">
+    </div>
+    <p>Vous pouvez suivre vos colis en appuyant sur le bouton "Suivre"<br> afin de voir quand votre commande sera chez vous.</p>
+
+    <button>Suivre📦</button>
+</div>
+
+
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", () => {
+        if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen();
+        }
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const button = document.querySelector("button");
+
+        button.addEventListener("click", () => {
+            // Met en état loading
+            button.classList.add("loading");
+            button.textContent = "En cours...";
+
+            // Simulation du chargement (2.5s)
+            setTimeout(() => {
+                button.classList.remove("loading");
+                button.classList.add("success");
+                setTimeout(() => {
+                    window.close()
+                }, 1500);
+            }, 1500);
+        });
+    });
+</script>
+</body>
+</html>

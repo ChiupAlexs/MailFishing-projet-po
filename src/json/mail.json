@@ -91,7 +91,7 @@
       "object": "Votre vidéo est maintenant en ligne",
       "time": "11:02",
       "date": "02/09/2025",
-      "body": "Bonjour,\n\nVotre dernière vidéo a été publiée avec succès.\n\nCliquez ici pour la visionner : <a href='#' class='lien'>https://www.streamflow.com/watch/xuafliam123456</a>\n\n-StreamFlow-",
+      "body": "Bonjour,\n\nVotre dernière vidéo a été publiée avec succès.\n\nCliquez ici pour la visionner : <a href='faussesQuetesMails/streamflow.html' class='lien' target='blank'>https://www.streamflow.com/watch/xuafliam123456</a>\n\n-StreamFlow-",
       "secret" : "",
       "backgroundImage": "streamFlowBackground.png",
       "bonMail": false

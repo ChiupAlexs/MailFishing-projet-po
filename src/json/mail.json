@@ -151,7 +151,7 @@
       "object": "Votre repas est en route",
       "time": "19:42",
       "date": "08/10/2025",
-      "body": "Votre commande Foodly est actuellement en livraison.\n\nSuivez votre livreur en temps réel : <a href='#' class='lien'>https://www.foodly.com/track/54321</a>\n",
+      "body": "Votre commande Foodly est actuellement en livraison.\n\nSuivez votre livreur en temps réel : <a href='faussesQuetesMails/interfaceFoodly.html' class='lien' target='blank'>https://www.foodly.com/track/54321</a>\n",
       "secret" : "",
       "backgroundImage": "foodlyBackground.png",
       "bonMail": false

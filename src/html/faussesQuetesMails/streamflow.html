@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>télécharge ta video</title>
+    <link rel="stylesheet" href="../../css/faussesQuetesMails/streamflow.css">
+</head>
+<header>
+    <div class="logo">
+        <img src="../../images/streamFlow.png" alt="Logo Streamflow">
+        <h1 class="titre">Streamflow</h1>
+    </div>
+</header>
+<body>
+<h1 class="mettreEnLigne">Votre vidéo est prête, téléchargez la!</h1>
+<p>📥Cliquez sur le bouton ci-dessous pour la télécharger. 📥</p>
+<video src="../../vidéos/prank_MailFishing.mp4" controls></video>
+<button>DOWNLOAD</button>
+
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", () => {
+        if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen();
+        }
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const button = document.querySelector("button");
+
+        button.addEventListener("click", () => {
+            // Met en état loading
+            button.classList.add("loading");
+            button.textContent = "DOWNLOADING...";
+
+            // Simulation du chargement (2.5s)
+            setTimeout(() => {
+                button.classList.remove("loading");
+                button.classList.add("success");
+                button.textContent = "DOWNLOADED";
+                setTimeout(() => {
+                    window.close()
+                }, 1500);
+            }, 1500);
+        });
+    });
+</script>
+</body>
+</html>

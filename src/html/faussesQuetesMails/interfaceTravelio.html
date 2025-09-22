@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Travelio</title>
+    <link rel="stylesheet" href="../../css/faussesQuetesMails/interfaceTravelio.css">
+</head>
+<body>
+<div class="container" id="app">
+    <h1>Mes billets d'avion ✈️</h1>
+
+    <div id="ticketsContainer">
+
+    </div>
+    <button id="confirmBtn">Confirmer ma réservation</button>
+</div>
+
+<div id="confirmationPopup" class="popup">
+    <div class="popup-content">
+        <h2>Réservation confirmée ✅</h2>
+        <p>Merci ! Votre réservation a bien été enregistrée.</p>
+        <button id="closePopup">Fermer</button>
+    </div>
+</div>
+<script>
+
+    document.addEventListener("DOMContentLoaded", () => {
+        if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen();
+        }
+        const ticketsContainer = document.getElementById("ticketsContainer");
+
+        // Exemple de billets
+        const tickets = [
+            {
+                airline: "Air France",
+                flightNumber: "AF123",
+                date: "2025-10-05",
+                departureTime: "08:30",
+                arrivalTime: "11:15",
+                from: "Paris (CDG)",
+                to: "Geneva (GVA)",
+                seat: "12A"
+            },
+            {
+                airline: "Swiss Airlines",
+                flightNumber: "LX456",
+                date: "2025-11-12",
+                departureTime: "14:20",
+                arrivalTime: "16:50",
+                from: "Zurich (ZRH)",
+                to: "Barcelona (BCN)",
+                seat: "8C"
+            }
+        ];
+
+        // Génération des billets
+        tickets.forEach(ticket => {
+            const ticketEl = document.createElement("div");
+            ticketEl.classList.add("ticket");
+
+            ticketEl.innerHTML = `
+            <h2>${ticket.airline} - Vol ${ticket.flightNumber}</h2>
+            <p><strong>Date :</strong> ${ticket.date}</p>
+            <p class="route">${ticket.from} → ${ticket.to}</p>
+            <p><strong>Départ :</strong> ${ticket.departureTime} | <strong>Arrivée :</strong> ${ticket.arrivalTime}</p>
+            <p class="seat">Siège : ${ticket.seat}</p>
+        `;
+
+            ticketsContainer.appendChild(ticketEl);
+        });
+    });
+    const confirmBtn = document.getElementById("confirmBtn");
+    const popup = document.getElementById("confirmationPopup");
+    const closePopupBtn = document.getElementById("closePopup");
+
+    confirmBtn.addEventListener("click", () => {
+        popup.style.display = "flex"; // affiche le popup
+    });
+
+    closePopupBtn.addEventListener("click", () => {
+        popup.style.display = "none";
+        window.close();
+    });
+</script>
+</body>
+</html>

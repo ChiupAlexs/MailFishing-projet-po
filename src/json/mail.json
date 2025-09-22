@@ -127,7 +127,7 @@
       "object": "Nouvelle connexion détectée",
       "time": "07:56",
       "date": "09/10/2025",
-      "body": "Nous avons remarqué une connexion à votre compte MailFist.\n\nVérifiez votre activité : <a href='#' class='lien'>https://www.mailfist.com/security/logincheck</a>\n",
+      "body": "Nous avons remarqué une connexion à votre compte MailFist.\n\nVérifiez votre activité : <a href='#' class='lienGoose'>https://www.mailfist.com/security/logincheck</a>\n",
       "secret" : "",
       "backgroundImage": "mailFastBackground.png",
       "bonMail": false
@@ -151,7 +151,7 @@
       "object": "Votre repas est en route",
       "time": "19:42",
       "date": "08/10/2025",
-      "body": "Votre commande Foodly est actuellement en livraison.\n\nSuivez votre livreur en temps réel : <a href='#' class='lien'>https://www.foodly.com/track/54321</a>\n",
+      "body": "Votre commande Foodly est actuellement en livraison.\n\nSuivez votre livreur en temps réel : <a href='faussesQuetesMails/interfaceFoodly.html' class='lien' target='blank'>https://www.foodly.com/track/54321</a>\n",
       "secret" : "",
       "backgroundImage": "foodlyBackground.png",
       "bonMail": false
@@ -163,7 +163,7 @@
       "object": "Votre billet est confirmé",
       "time": "08:33",
       "date": "10/09/2025",
-      "body": "Votre réservation a bien été enregistrée.\n\nRetrouvez vos billets ici : <a href='#' class='lien'>https://www.travelio.com/ticket/abc987654</a>\n",
+      "body": "Votre réservation a bien été enregistrée.\n\nRetrouvez vos billets ici : <a href='faussesQuetesMails/interfaceTravelio.html' class='lien' target='blank'>https://www.travelio.com/ticket/abc987654</a>\n",
       "secret" : "",
       "backgroundImage": "travelioBackground.png",
       "bonMail": false

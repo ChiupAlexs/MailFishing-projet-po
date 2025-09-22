@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Foodly</title>
+    <link rel="stylesheet" href="../../css/faussesQuetesMails/interfaceFoodly.css">
+</head>
+<header>
+    <button id="exitBtn">Quitter</button>
+</header>
+<body>
+<div class="container" id="app">
+    <h1>Suivi de la commande</h1>
+    <div class="map-container" id="mapContainer">
+        <div class="map-wrapper">
+            <img src="../../images/mapFoodly.png" alt="Carte" id="mapImage">
+            <svg class="path">
+                <polyline id="route" points="850,300 600,390 520,400 405,410 345,400 330,340 330,340 320,250" stroke="orange" stroke-width="4" fill="none" style="display: none;"/>
+                <circle id="driver" class="driver" r="8" style="display: none;"/>
+                <image href="../../images/home.png" id="homeIcon" x="305" y="230" width="30" height="30" style="display: none;"/>
+            </svg>
+        </div>
+
+        <div class="infos-adresse">
+            <h2>Adresse :</h2>
+            <p>Av. de la gare 33</p>
+            <p>2800 Delémont</p>
+            <h2>Estimation du temps de livraison</h2>
+            <p id="timer">3 minutes</p>
+            <h2>Restaurant :</h2>
+            <div class="restaurant-details">
+                <img src="../../images/macdonalds.png" alt="McDonald's Delémont" class="restaurant-logo">
+                <div class="restaurant-text">
+                    <p><strong>McDonald's Delémont</strong></p>
+                    <p>Av. de la Gare 15</p>
+                    <p>2800 Delémont</p>
+                    <p>📞 032 420 12 34</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="status">Votre commande est en route 🚗💨</div>
+
+    <a class="button" id="trackBtn">Suivre en temps réel</a>
+    <a class="button hidden retour" id="backBtn">Retour</a>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen();
+        }
+    });
+
+    const exitBtn = document.getElementById("exitBtn");
+    const btnTrack = document.getElementById("trackBtn");
+    const btnBack = document.getElementById("backBtn");
+    const app = document.getElementById("app");
+    const driver = document.getElementById("driver");
+    const route = document.getElementById("route");
+    const homeIcon = document.getElementById("homeIcon");
+
+    btnTrack.addEventListener("click", () => {
+        app.classList.add("expanded");
+        route.style.display = "block";
+        driver.style.display = "block";
+        homeIcon.style.display = "block";
+        btnTrack.classList.add("hidden");
+        btnBack.classList.remove("hidden");
+        animateDriver();
+        startTimer();
+    });
+
+    btnBack.addEventListener("click", () => {
+        app.classList.remove("expanded");
+        route.style.display = "none";
+        driver.style.display = "none";
+        homeIcon.style.display = "none";
+        btnBack.classList.add("hidden");
+        btnTrack.classList.remove("hidden");
+    });
+
+    exitBtn.addEventListener("click", () => {
+        window.close()
+    })
+
+    function animateDriver() {
+        const pathLength = route.getTotalLength();
+        let progress = 0;
+        let speed = 0.06;
+
+        function move() {
+            if (progress <= pathLength && route.style.display === "block") {
+                const point = route.getPointAtLength(progress);
+                driver.setAttribute("cx", point.x);
+                driver.setAttribute("cy", point.y);
+                progress += speed;
+                requestAnimationFrame(move);
+            }
+        }
+
+        move();
+    }
+    const timerEl = document.getElementById("timer");
+    let remainingMinutes = 3;
+
+    function startTimer() {
+        const interval = setInterval(() => {
+            if (remainingMinutes > 1) {
+                remainingMinutes--;
+                timerEl.textContent = `${remainingMinutes} minutes`;
+            } else {
+                clearInterval(interval);
+                timerEl.textContent = "Votre commande est arrivée 🍽️";
+            }
+        }, 60000); // 1 minute = 60000ms
+    }
+
+    // Démarre le timer dès que la page est chargée
+    document.addEventListener("DOMContentLoaded", () => {
+        if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen();
+        }
+    });
+</script>
+</body>
+</html>

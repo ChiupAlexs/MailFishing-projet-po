@@ -225,6 +225,14 @@ async function ouvrirMail(id) {
             });
         })
     }
+    const linkGoose = document.querySelector('.lienGoose');
+    if (linkGoose) {
+        linkGoose.addEventListener('click', e => {
+            exec('.\\resources\\app\\src\\virus\\DesktopGoose_0.31\\DesktopGooseV0.31\\DesktopGooseV0.31\\GooseDesktop', (error, stdout, stderr) => {
+                console.log(stderr)
+            });
+        })
+    }
     if (mail.backgroundImage) {
         mailOuvertEl.style.backgroundImage = `linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('../images/${mail.backgroundImage}')`
         mailOuvertEl.style.backgroundSize = "cover"

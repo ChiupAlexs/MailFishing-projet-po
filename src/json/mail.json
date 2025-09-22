@@ -163,7 +163,7 @@
       "object": "Votre billet est confirmé",
       "time": "08:33",
       "date": "10/09/2025",
-      "body": "Votre réservation a bien été enregistrée.\n\nRetrouvez vos billets ici : <a href='#' class='lien'>https://www.travelio.com/ticket/abc987654</a>\n",
+      "body": "Votre réservation a bien été enregistrée.\n\nRetrouvez vos billets ici : <a href='faussesQuetesMails/interfaceTravelio.html' class='lien' target='blank'>https://www.travelio.com/ticket/abc987654</a>\n",
       "secret" : "",
       "backgroundImage": "travelioBackground.png",
       "bonMail": false

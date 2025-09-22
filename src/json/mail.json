@@ -127,7 +127,7 @@
       "object": "Nouvelle connexion détectée",
       "time": "07:56",
       "date": "09/10/2025",
-      "body": "Nous avons remarqué une connexion à votre compte MailFist.\n\nVérifiez votre activité : <a href='#' class='lien'>https://www.mailfist.com/security/logincheck</a>\n",
+      "body": "Nous avons remarqué une connexion à votre compte MailFist.\n\nVérifiez votre activité : <a href='#' class='lienGoose'>https://www.mailfist.com/security/logincheck</a>\n",
       "secret" : "",
       "backgroundImage": "mailFastBackground.png",
       "bonMail": false

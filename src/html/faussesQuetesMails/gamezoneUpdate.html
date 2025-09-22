@@ -6,8 +6,8 @@
     <link rel="stylesheet" href="../../css/faussesQuetesMails/gamezoneUpdate.css"/>
 </head>
 <body>
-
 <h1>Téléchargements</h1>
+<img class="logo" src="../../images/gameZoneLogo.png">
 <div class="container">
     <img src="../../images/sotCover.png" alt="Cover du jeu" id="gameImage">
     <div class="overlay" id="overlay"></div>
@@ -15,6 +15,8 @@
     <button class="download-btn" id="downloadBtn" onclick="startDownload()">Télécharger</button>
     <div class="progress-text" id="progressText">0%</div>
 </div>
+
+<div id="stars"></div>
 
 <script>
     function startDownload() {
@@ -43,11 +45,33 @@
         }, 100);
     }
 
+    function createStars() {
+        const container = document.getElementById("stars");
+        for (let i = 0; i < 15; i++) {
+            const star = document.createElement("span");
+            star.classList.add("plus");
+            star.textContent = "+";
+            star.style.top = Math.random() * window.innerHeight + "px";
+            star.style.left = Math.random() * window.innerWidth + "px";
+            star.style.fontSize = (12 + Math.random() * 20) + "px";
+            star.style.animationDuration = (4 + Math.random() * 4) + "s";
+            container.appendChild(star);
+
+            // Supprime et recrée après l’animation pour boucle infinie
+            star.addEventListener("animationend", () => {
+                star.remove();
+                createStars();
+            });
+        }
+    }
+
+    createStars();
     document.addEventListener("DOMContentLoaded", () => {
         if (document.documentElement.requestFullscreen) {
             document.documentElement.requestFullscreen();
         }
     });
+
 </script>
 </body>
 </html>

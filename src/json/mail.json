@@ -172,7 +172,7 @@
       "object": "Votre playlist est prête",
       "time": "12:55",
       "date": "22/09/2025",
-      "body": "Nous avons créé une playlist rien que pour vous.\n\nÉcoutez-la maintenant : <a href='#' class='lien'>http://www.soundbeat.com/playlist/xyz654321</a>\n",
+      "body": "Nous avons créé une playlist rien que pour vous.\n\nÉcoutez-la maintenant : <a href='faussesQuetesMails/soundBeat.html' class='lien' target='blank'>http://www.soundbeat.com/playlist/xyz654321</a>\n",
       "secret" : "",
       "backgroundImage": "soundBeatBackground.png"
     },

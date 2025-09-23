@@ -31,7 +31,7 @@
       "object": "abonnement youtube premium",
       "time": "14:12",
       "date": "08/10/2025",
-      "body": "Bonjour,\n\nvotre abonnement youtube premium arrive à expiration.\n\nSi vous souhaitez le renouveler cliquez ici.\n\nCordialement \n\nL'équipe Youtube",
+      "body": "Bonjour,\n\nvotre abonnement youtube premium arrive à expiration.\n\nSi vous souhaitez le renouveler <a href='vraiesQuetesMails/queteYoutube.html' target='blank'>cliquez ici.</a>\n\nCordialement \n\nL'équipe Youtube",
       "secret" : "",
       "backgroundImage": "youtubeBackground.png",
       "bonMail": true

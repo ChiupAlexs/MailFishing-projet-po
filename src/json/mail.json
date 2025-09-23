@@ -103,7 +103,7 @@
       "object": "Confirmation de votre commande #4721",
       "time": "14:17",
       "date": "10/10/2025",
-      "body": "Merci pour votre achat sur QuickShop !\n\nVous pouvez suivre votre commande en cliquant sur ce lien : <a href='faussesQuetesMails/Quickshop.html' class='lien'>https://www.quickshop.com/orders/4721</a>\n\n¨QuickShop c'est du rapide !¨\n",
+      "body": "Merci pour votre achat sur QuickShop !\n\nVous pouvez suivre votre commande en cliquant sur ce lien : <a href='faussesQuetesMails/Quickshop.html' class='lien' target='blank'>https://www.quickshop.com/orders/4721</a>\n\n¨QuickShop c'est du rapide !¨\n",
       "secret" : "",
       "backgroundImage": "quickShopBackground.png",
       "bonMail": false

@@ -67,7 +67,7 @@
       "object": "Promo pour le lavabo en sodium",
       "time": "10:15",
       "date": "08/09/2025",
-      "body": "Profitez d'une promotion unique de 50% sur notre nouveau lavabo en sodium en cliquant sur ce lien : <a href='#' class='lien'>https://bosh-promo.fr</a>",
+      "body": "Profitez d'une promotion unique de 50% sur notre nouveau lavabo en sodium en cliquant sur ce lien : <a href='faussesQuetesMails/boshLavabo.html' class='lien'>https://bosh-promo.fr</a>",
       "secret" : "",
       "backgroundImage": "boshBackground.png",
       "bonMail": false
@@ -115,7 +115,7 @@
       "object": "Vous avez un nouvel abonné",
       "time": "09:48",
       "date": "15/09/2025",
-      "body": "Félicitations !\n\nUn nouvel utilisateur s’est abonné à votre profil.\n\nDécouvrez-le ici : <a href='#' class='lien'>https://www.jeTaiEu.com/@my_profile/followers</a>\n",
+      "body": "Félicitations !\n\nUn nouvel utilisateur s’est abonné à votre profil.\n\nDécouvrez-le ici : <a href='faussesQuetesMails/picShare.html' class='lien'>https://www.jeTaiEu.com/@my_profile/followers</a>\n",
       "secret" : "",
       "backgroundImage": "picShareBackground.png",
       "bonMail": false

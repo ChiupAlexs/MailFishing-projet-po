@@ -44,7 +44,7 @@
             // Met en état loading
             button.classList.add("loading");
             button.textContent = "En cours...";
-
+        });
             // Simulation du chargement (2.5s)
             setTimeout(() => {
                 button.classList.remove("loading");
@@ -53,7 +53,6 @@
                     window.close()
                 }, 1500);
             }, 1500);
-        });
     });
 </script>
 </body>

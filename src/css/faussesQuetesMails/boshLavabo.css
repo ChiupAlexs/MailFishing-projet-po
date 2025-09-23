@@ -1,0 +1,74 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 300px;
+    margin: auto;
+    padding: 30px;
+    text-align: center;
+}
+img {
+    max-width: 100%;
+}
+
+h1 {
+    margin: 0;
+}
+
+img.lavabo {
+    border: rgba(20, 20, 20, 0.5) 4px solid;
+    border-radius: 10px;
+    max-width: 100%;
+    padding: 5px;
+}
+
+img.logo {
+    max-width: 150%;
+    margin-left: -75px;
+    margin-top: -40px;
+    margin-bottom: -40px;
+}
+
+.promo {
+    background-color: red;
+    color: white;
+    border-radius: 15px;
+    padding: 10px;
+    display: inline-block;
+    font-weight: bold;
+    font-size: 1.5rem;
+    position: relative;
+    right: 100px;
+    top: 60px;
+    animation: ease appear;
+    animation-duration: 1s;
+    animation-iteration-count: 2;
+}
+
+.prix strong {
+    text-decoration: line-through;
+    color: red;
+}
+.prix {
+    font-style: italic;
+    font-size: 1.9rem;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.prix:not(strong) {
+    font-weight: 900;
+}
+
+.commander {
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    border-radius: 15px;
+    padding: 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+@keyframes appear {
+    0% { opacity: 1; }
+    50% { opacity: 1; transform: scale(2, 2)}
+    100% { opacity: 1; }
+}

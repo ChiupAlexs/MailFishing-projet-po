@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lavabo</title>
+    <link rel="stylesheet" href="../../css/faussesQuetesMails/boshLavabo.css">
+</head>
+<body>
+<img src="../../images/BoschFormulaire.png" alt="logo de bosch" class="logo">
+<h1>Lavabo en sodium</h1>
+<div class="promo">-50%</div>
+<img src="../../images/lavabo.jpg" alt="photo de lavabo" class="lavabo">
+<p class="prix">250 CHF <strong>500 CHF</strong></p>
+<button class="commander" onclick="commander()">COMMANDER MAINTENANT</button>
+<audio autoplay>
+    <source src="../../sons/lavabo-sodium.mp3"></source>
+</audio>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen();
+        }
+    });
+
+    function commander() {
+        window.close()
+    }
+</script>
+
+</body>
+</html>

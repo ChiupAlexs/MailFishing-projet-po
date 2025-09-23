@@ -1,0 +1,110 @@
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background-color: forestgreen;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+header h1 {
+    color: white;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.shine {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+            120deg,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.4) 50%,
+            rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-25deg);
+    pointer-events: none;
+}
+
+main {
+    margin-top: 100px;
+    padding: 20px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #f5f5f5;
+    position: relative;
+}
+table {
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: white;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+th, td {
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+}
+input {
+    width: 100%;
+    border: none;
+    padding: 5px;
+}
+.btn-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+    position: relative;
+    width: 400px;
+    height: 60px;
+}
+button {
+    padding: 8px 8px;
+    background: forestgreen;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+#addRow {
+    padding: 5px;
+}
+
+#saveData {
+    position: absolute;
+    left: 50%;
+    top: 80px;
+    transform: translateX(-50%);
+}
+button:hover {
+    background: #0ea5a4;
+}
+#message {
+    margin-top: 15px;
+    font-weight: bold;
+    position: relative;
+}
+.success {
+    bottom: -10%;
+    color: green;
+}
+
+.error {
+    bottom: -10%;
+    color: red;
+}

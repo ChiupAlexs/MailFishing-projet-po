@@ -64,6 +64,7 @@ img.logo {
     border-radius: 15px;
     padding: 10px;
     font-size: 1.2rem;
+    cursor: pointer;
 }
 
 @keyframes appear {

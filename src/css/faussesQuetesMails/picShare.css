@@ -1,0 +1,53 @@
+body {
+    font-family: Arial, sans-serif;
+
+}
+main {
+    max-width: 500px;
+    margin: 100px auto 0 auto;
+    text-align: center;
+}
+header {
+    background: linear-gradient(45deg, #7369F2 0%, #7369F2 40%, #B24CFC 60%, #B24CFC 100%);
+    min-width: 100vw;
+    max-height: 80px;
+    position: fixed;
+    top: 0;
+    left: 0
+}
+h1 {
+    text-align: center;
+}
+.photo-profile {
+    max-width: 200px;
+    border-radius: 100%;
+    border: 5px solid #7369F2;
+    margin: auto;
+    text-align: center;
+}
+
+.logo {
+    max-height: 80px;
+    margin: 0 calc(50vw - 40px);
+}
+
+.subscriber {
+    border: 5px solid #7369F2;
+    border-radius: 20px;
+    padding: 20px 0;
+    max-width: 300px;
+    margin: auto;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.bouton-pic-share {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: white;
+    background: linear-gradient(45deg, #7369F2 0%, #7369F2 40%, #B24CFC 60%, #B24CFC 100%);
+    padding: 10px;
+    border-radius: 15px;
+    margin-top: 20px;
+    cursor: pointer;
+}

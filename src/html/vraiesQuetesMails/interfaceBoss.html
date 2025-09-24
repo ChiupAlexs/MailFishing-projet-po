@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Excel</title>
+    <link rel="stylesheet" href="../../css/vraiesQuetesMails/interfaceBoss.css">
+</head>
+<body>
+<header>
+    <h1>Données Utilisateur</h1>
+    <div class="shine" id="shine"></div>
+    <h1 style="color: white; text-align: center; line-height: 100px;"></h1>
+</header>
+<table id="excelTable">
+    <thead>
+    <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Email</th>
+        <th>Âge</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><input type="text" placeholder="Nom"></td>
+        <td><input type="text" placeholder="Prénom"></td>
+        <td><input type="email" placeholder="Email"></td>
+        <td><input type="number" placeholder="Âge"></td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="btn-container">
+    <button id="addRow">+ Ajouter une ligne</button>
+    <button id="removeRow">- Retirer une ligne</button>
+    <button id="saveData">💾 Sauvegarder les données</button>
+</div>
+
+<p id="message"></p>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen();
+        }
+    });
+
+    const shine = document.getElementById('shine');
+
+    function animateShine() {
+        // Position aléatoire de départ
+        shine.style.left = '-50%';
+        shine.style.transition = 'none';
+
+        // Petit délai avant de lancer le mouvement
+        setTimeout(() => {
+            shine.style.transition = 'left 1s ease-in-out';
+            shine.style.left = '100%';
+        }, 50);
+
+        // Rejouer l'animation après un temps aléatoire entre 1 et 3 secondes
+        setTimeout(animateShine, 1000 + Math.random() * 2000);
+    }
+
+    animateShine();
+
+    const addBtn = document.getElementById("addRow");
+    const saveBtn = document.getElementById("saveData");
+    const message = document.getElementById("message");
+
+    let prankCycles = 5;
+    let prankActive = true;
+    let moving = false;
+
+    addBtn.addEventListener("click", () => {
+        let table = document.getElementById("excelTable").getElementsByTagName("tbody")[0];
+        let newRow = table.insertRow();
+        ["Nom", "Prénom", "Email", "Âge"].forEach(type => {
+            let cell = newRow.insertCell();
+            let input = document.createElement("input");
+            input.type = (type === "Âge") ? "number" : (type === "Email" ? "email" : "text");
+            input.placeholder = type;
+            cell.appendChild(input);
+        });
+    });
+    const removeBtn = document.getElementById("removeRow");
+
+    removeBtn.addEventListener("click", () => {
+        const tableBody = document.getElementById("excelTable").getElementsByTagName("tbody")[0];
+        const rowCount = tableBody.rows.length;
+
+        if (rowCount > 1) { // Toujours garder au moins une ligne
+            tableBody.deleteRow(rowCount - 1);
+        } else {
+            message.textContent = "⚠️ Impossible de supprimer la dernière ligne.";
+            message.className = "error";
+        }
+    });
+
+    function allFieldsValid() {
+        return [...document.querySelectorAll("#excelTable tbody input")]
+            .every(input => input.value.trim() !== "");
+    }
+
+    function moveButton() {
+        if (!prankActive || !allFieldsValid()) return;
+
+        if (prankCycles <= 0) {
+            prankActive = false;
+            return;
+        }
+
+        const btnWidth = saveBtn.offsetWidth;
+        const btnHeight = saveBtn.offsetHeight;
+        const maxX = window.innerWidth - btnWidth - 10; // -10 pour ne pas toucher les bords
+        const maxY = window.innerHeight - btnHeight - 10;
+
+        const targetX = Math.random() * maxX;
+        const targetY = Math.random() * maxY;
+
+        let currentX = saveBtn.offsetLeft;
+        let currentY = saveBtn.offsetTop;
+
+        let step = 20; // vitesse plus rapide
+
+        function animate() {
+            const dx = targetX - currentX;
+            const dy = targetY - currentY;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < step) {
+                currentX = targetX;
+                currentY = targetY;
+                saveBtn.style.left = currentX + "px";
+                saveBtn.style.top = currentY + "px";
+                prankCycles--;
+            } else {
+                currentX += dx / dist * step;
+                currentY += dy / dist * step;
+                saveBtn.style.left = currentX + "px";
+                saveBtn.style.top = currentY + "px";
+                requestAnimationFrame(animate);
+            }
+        }
+
+        animate();
+    }
+
+    saveBtn.addEventListener("mouseenter", moveButton);
+
+    saveBtn.addEventListener("click", () => {
+        if (allFieldsValid() && !prankActive) {
+            message.textContent = "✅ Données sauvegardées avec succès !";
+            message.className = "success";
+            addBtn.disabled = true;
+            setTimeout(() => {
+                window.close()
+            },3000)
+        } else if (!allFieldsValid() && prankActive) {
+            message.textContent = "⚠️ Remplis tous les champs avant de sauvegarder.";
+            message.className = "error";
+        }
+    });
+</script>
+</body>
+</html>

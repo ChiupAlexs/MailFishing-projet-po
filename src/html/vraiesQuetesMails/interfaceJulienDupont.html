@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rapport trimestriel</title>
+    <link rel="stylesheet" href="../../css/vraiesQuetesMails/interfaceJulienDupont.css">
+</head>
+<body>
+<header>
+    <h1>Rapport Trimestriel</h1>
+    <h2>Entreprise gngngn</h2>
+    <p id="date"></p>
+</header>
+
+<main>
+    <section>
+        <h3>Résumé Exécutif</h3>
+        <p>
+            Au cours de ce trimestre, l’entreprise <strong>gngngn</strong> a consolidé sa position
+            sur le marché grâce à une croissance stable et des investissements ciblés dans
+            la recherche et développement.
+        </p>
+    </section>
+
+    <section>
+        <h3>Résultats Financiers</h3>
+        <ul>
+            <li>Chiffre d’affaires :
+                <input type="number" id="ca" value="2500000" step="50000"> CHF
+            </li>
+            <li>Bénéfice net :
+                <input type="number" id="benefice" value="450000" step="10000"> CHF
+            </li>
+            <li>Marge opérationnelle :
+                <input type="number" id="marge" value="18" step="1"> %
+            </li>
+        </ul>
+    </section>
+
+    <section>
+        <h3>Réalisations Clés</h3>
+        <ol>
+            <li>Lancement du produit <em>Alpha</em>.</li>
+            <li>Ouverture d’un nouveau bureau à Porrentruy.</li>
+            <li>Partenariat stratégique avec l’entreprise Tirole électricité Sàrl.</li>
+        </ol>
+    </section>
+
+    <section>
+        <h3>Objectifs pour le Prochain Trimestre</h3>
+        <p>
+            Augmenter la part de marché de 5 %, améliorer la satisfaction client,
+            et développer une nouvelle gamme de services numériques.
+        </p>
+    </section>
+    <div class="actions">
+        <button id="confirmBtn">Confirmer le rapport</button>
+        <p id="confirmMsg"></p>
+    </div>
+</main>
+<div id="popupOverlay" class="overlay hidden">
+    <div class="popup">
+        <h3>Confirmer le rapport</h3>
+        <p id="popupContent"></p>
+        <div class="popup-actions">
+            <button id="popupCancel">Annuler</button>
+            <button id="popupOk">Confirmer</button>
+        </div>
+    </div>
+</div>
+<footer>
+    <p>&copy; 2025 gngngn - Rapport trimestriel</p>
+</footer>
+<script>
+
+    document.addEventListener("DOMContentLoaded", () => {
+        if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen();
+        }
+        const dateEl = document.getElementById("date");
+        const today = new Date();
+        const options = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
+        dateEl.textContent = "Date du rapport : " + today.toLocaleDateString("fr-FR", options);
+
+        // Popup éléments
+        const confirmBtn = document.getElementById("confirmBtn");
+        const confirmMsg = document.getElementById("confirmMsg");
+        const overlay = document.getElementById("popupOverlay");
+        const popupContent = document.getElementById("popupContent");
+        const popupCancel = document.getElementById("popupCancel");
+        const popupOk = document.getElementById("popupOk");
+
+        // Ouvrir le popup
+        confirmBtn.addEventListener("click", () => {
+            const ca = document.getElementById("ca").value;
+            const benefice = document.getElementById("benefice").value;
+            const marge = document.getElementById("marge").value;
+
+            popupContent.innerHTML = `
+            <strong>Chiffre d’affaires :</strong> ${ca} €<br>
+            <strong>Bénéfice net :</strong> ${benefice} €<br>
+            <strong>Marge opérationnelle :</strong> ${marge} %
+        `;
+
+            overlay.classList.remove("hidden");
+        });
+
+        // Fermer popup (annuler)
+        popupCancel.addEventListener("click", () => {
+            overlay.classList.add("hidden");
+            confirmMsg.textContent = "❌ Confirmation annulée.";
+            confirmMsg.style.color = "red";
+        });
+
+        // Valider popup (confirmer)
+        popupOk.addEventListener("click", () => {
+            overlay.classList.add("hidden");
+            confirmMsg.textContent = "✅ Rapport confirmé avec succès !";
+            confirmMsg.style.color = "#28a745";
+            confirmBtn.disabled = true;
+            setTimeout(() => {
+                window.close()
+            },3000)
+        });
+    });
+
+</script>
+</body>
+</html>

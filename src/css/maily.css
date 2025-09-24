@@ -321,14 +321,13 @@ p {
     position: fixed;
     bottom: 150px;
     right: 20px;
-    background-color: #32CD32;
     z-index: 5;
     padding: 10px;
     min-width: 300px;
     border-radius: 10px;
+    color: white;
 }
 .notification p {
-    color: white;
     font-weight: bold;
     margin: 0 0 10px;
     border-radius: 20px;
@@ -344,7 +343,18 @@ p {
 .body-notification {
 
 }
-.notif-non-complete
+.notif-non-complete {
+    background-color: #FAF3DD;
+}
+.notif-complete {
+    background-color: #32CD32;
+}
+.notif-non-complete p {
+    color: black;
+}
+.notif-complete p {
+    color: white;
+}
 .notification p:nth-last-of-type(1) {
     position: relative;
     top: 8px;

@@ -87,8 +87,8 @@ function loadQuetes() {
     if (sessionStorage.getItem('quetes') === null) {
 
         quetes = [
-            {id: 1, points: 0, fini: false, label: "Supprimer 5 mails mauvais"},
-            {id: 2, points: 0, fini: false, label: "Garder un bon mail"}, // TODO : modifier le label
+            {id: 1, points: 0, but: 5, fini: false, label: "Supprimer 5 mails mauvais"},
+            {id: 2, points: 0, but: 1, fini: false, label: "Garder un bon mail"}, // TODO : modifier le label
         ]
 
         sessionStorage.setItem('quetes', JSON.stringify(quetes));
@@ -314,11 +314,9 @@ function effacerMail() {
 
             if (quetes[0].points == NBRE_DE_MAUVAIS_MAILS_A_SUPP) {
                 quetes[0].fini = true
-                afficherReussiteQuete(0)
             }
-            /*if (quetes[0].points == NBRE_DE_MAUVAIS_MAILS_A_SUPP) {
 
-            }*/
+            afficherReussiteQuete(0)
 
             console.log(quetes)
             sauvegarderEtatQuetes()
@@ -357,6 +355,7 @@ function afficherReussiteQuete(id) {
 
     fermerNotification()
 
+    // création de tous les éléments
     const notificationDivElement = document.createElement("div")
     const headPElement = document.createElement("p")
     const bodyPElement = document.createElement("p")
@@ -364,23 +363,42 @@ function afficherReussiteQuete(id) {
     const checkboxDivElement = document.createElement("div")
     const imgElement = document.createElement("img")
 
-    imgElement.src = "../images/check-icon.png"
-    checkboxDivElement.appendChild(imgElement)
-    checkboxDivElement.classList.add("check-box")
-    notificationDivElement.classList.add("notification");
-
+    // élément <a> pour la fermeture de la notif
     const imgCroixFermetureElement = document.createElement("img")
     imgCroixFermetureElement.src = "../images/bouton-quitter-fichier.png"
+
+    // head
+    headPElement.innerText = "Quêtes"
+    headPElement.classList.add("head-notification")
+
+    // body
+    bodyPElement.innerText = quetes[id].label + " : " + quetes[id].points + "/" + quetes[id].but
+    bodyPElement.classList.add("body-notification")
+
+    // changer la couleur d'arrière plan suivant la réussite de la quête ou pas
+    if (quetes[id].points >= quetes[id].but) {
+        imgCroixFermetureElement.src = "../images/bouton-quitter-fichier.png"
+        imgElement.src = "../images/check-icon.png"
+        notificationDivElement.classList.add("notif-complete")
+        notificationDivElement.classList.remove("notif-non-complete")
+    } else {
+        imgCroixFermetureElement.src = "../images/bouton-quitter-noir.png"
+        notificationDivElement.classList.add("notif-non-complete")
+        notificationDivElement.classList.remove("notif-complete")
+
+    }
+
     fermerAElement.appendChild(imgCroixFermetureElement)
     fermerAElement.href = "javascript:void(0)"
     fermerAElement.onclick = fermerNotification
 
-    headPElement.innerText = "Quêtes"
-    headPElement.classList.add("head-notification")
 
-    bodyPElement.innerText = quetes[id].label
-    bodyPElement.classList.add("body-notification")
+    // check box
+    checkboxDivElement.appendChild(imgElement)
+    checkboxDivElement.classList.add("check-box")
+    notificationDivElement.classList.add("notification");
 
+    // ajout de tous les éléments dans la notificationDivElement
     notificationDivElement.appendChild(fermerAElement)
     notificationDivElement.appendChild(headPElement)
     notificationDivElement.appendChild(checkboxDivElement)

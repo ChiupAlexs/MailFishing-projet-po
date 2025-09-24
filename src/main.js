@@ -354,11 +354,19 @@ function afficherfeedback(message) {
 }
 
 function afficherReussiteQuete(id) {
+
+    fermerNotification()
+
     const notificationDivElement = document.createElement("div")
     const headPElement = document.createElement("p")
     const bodyPElement = document.createElement("p")
     const fermerAElement = document.createElement("a")
+    const checkboxDivElement = document.createElement("div")
+    const imgElement = document.createElement("img")
 
+    imgElement.src = "../images/check-icon.png"
+    checkboxDivElement.appendChild(imgElement)
+    checkboxDivElement.classList.add("check-box")
     notificationDivElement.classList.add("notification");
 
     const imgCroixFermetureElement = document.createElement("img")
@@ -370,21 +378,29 @@ function afficherReussiteQuete(id) {
     headPElement.innerText = "Quêtes"
     headPElement.classList.add("head-notification")
 
-    bodyPElement.innerText = quetes[id].label + " : Terminée !"
+    bodyPElement.innerText = quetes[id].label
     bodyPElement.classList.add("body-notification")
 
     notificationDivElement.appendChild(fermerAElement)
     notificationDivElement.appendChild(headPElement)
+    notificationDivElement.appendChild(checkboxDivElement)
     notificationDivElement.appendChild(bodyPElement)
 
     notificationDivElement.style.animationName = "appear"
-    notificationDivElement.style.animationDuration = '0.5s'
+    notificationDivElement.style.animationDuration = '5s'
 
     document.body.appendChild(notificationDivElement)
+
+    setTimeout(() => {
+        notificationDivElement.style.display = "none"
+    }, 4900);
 }
 
 function fermerNotification() {
-    const notification = document.querySelector(".notification")
-
-    notification.parentNode.removeChild(notification);
+    const notification = document.querySelectorAll('.notification')
+    if (notification) {
+        notification.forEach(el => {
+            el.parentNode.removeChild(el)
+        })
+    }
 }

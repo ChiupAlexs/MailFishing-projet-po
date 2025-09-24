@@ -323,24 +323,50 @@ p {
     right: 20px;
     background-color: #32CD32;
     z-index: 5;
+    padding: 10px;
+    min-width: 300px;
+    border-radius: 10px;
 }
 .notification p {
     color: white;
     font-weight: bold;
-    margin: 10px 10px;
+    margin: 0 0 10px;
     border-radius: 20px;
 }
 .notification a {
     float: right;
 
 }
-.notification img {
+.notification img:not(.check-box img) {
     max-width: 20px;
 }
 
 .body-notification {
 
 }
+.notif-non-complete
+.notification p:nth-last-of-type(1) {
+    position: relative;
+    top: 8px;
+    left: 5px;
+}
+.notification .check-box {
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border: 5px solid black;
+    float: left;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.notification .check-box img {
+    max-height: 40px;
+    position: relative;
+    bottom: 10px;
+    right: 5px;
+}
+
 /*@keyframes slideOut {
     from{
         transform: translateX(0);
@@ -360,11 +386,20 @@ p {
 }
 
 @keyframes appear {
-    from {
+    0% {
         opacity: 0;
     }
-    to {
+    10% {
         opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    99% {
+        opacity: 0;
+    }
+    100% {
+        display: none;
     }
 }
 

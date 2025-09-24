@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>Renouvellement d'abonnement — YOUTUBE</title>
+    <link rel="stylesheet" href="../../css/vraiesQuetesMails/queteYoutube.css">
+</head>
+
+<body>
+<!-- Header -->
+<header>
+    <div class="logo">
+        <img src="../../images/YoutubeLogo.png" height="90" width="140"/>
+    </div>
+    <div class="actions">
+        <div class="profile"><img class="photo-profile"src="../../images/PPCapybara.png" height="40" width="40"/></div>
+    </div>
+</header>
+
+<!-- Main content -->
+<div class="main">
+    <img src="../../images/YoutubePremium.png" height="63" width="326"/>
+    <h1>Tout YouTube, sans interruption.</h1>
+    <p>YouTube et YouTube Music sans pub, hors connexion, et en arrière plan</p>
+    <p>Prix individuel : 17,90 CHF/mois • Résiliable à tout moment</p>
+    <button id="renewBtn"><a class="button">Renouveler l'abonnement</a></button>
+</div>
+
+<div class="overlay" id="overlay">
+    <div class="popup" id="popup">
+        <h2>Confirmation</h2>
+        <p>Voulez-vous vraiment renouveler votre abonnement YouTube Premium ?</p>
+        <button class="confirm" id="confirmBtn">Oui, renouveler</button>
+        <button class="cancel" id="cancelBtn">Annuler</button>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Mise en fullscreen dès le départ
+        if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen();
+        }
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const renewBtn = document.getElementById("renewBtn");
+        const overlay = document.getElementById("overlay");
+        const cancelBtn = document.getElementById("cancelBtn");
+        const confirmBtn = document.getElementById("confirmBtn");
+        const popup = document.getElementById("popup");
+
+        // Ouverture du popup de confirmation
+        renewBtn.addEventListener("click", () => {
+            overlay.style.display = "flex";
+        });
+
+        // Fermer avec "Annuler"
+        cancelBtn.addEventListener("click", () => {
+            overlay.style.display = "none";
+        });
+
+        // Action quand on confirme
+        confirmBtn.addEventListener("click", () => {
+            // Met le bouton en état "chargement"
+            confirmBtn.classList.add("loading");
+            confirmBtn.disabled = true;
+
+            // Simule un délai de chargement (1.5s)
+            setTimeout(() => {
+                popup.innerHTML = `
+                    <h2>Confirmation</h2>
+                    <div><img src="../../images/check-icon.png"</div>
+                    <p>Votre abonnement a été renouvelé avec succès !</p>
+                    <button class="cancel" id="closeBtn">Fermer</button>
+                `;
+
+                // Ajout de l'action "Fermer"
+                document.getElementById("closeBtn").addEventListener("click", () => {
+                    overlay.style.display = "none";
+                    window.close()
+                });
+            }, 1500);
+        });
+    });
+</script>
+</body>
+</html>

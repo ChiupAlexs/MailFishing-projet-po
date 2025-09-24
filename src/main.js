@@ -7,10 +7,14 @@ const mailOuvertEl = document.getElementById('mail-ouvert')
 const boutonRetourEl = document.querySelector('.bouton-retour')
 const listMailEl = document.querySelector('.containerMails')
 
+const NBRE_DE_MAUVAIS_MAILS_A_SUPP = 5;
+
+
 let listFauxMail = []
 let listVraiMail = []
 let listMails = []
 let currentMailIndex = null
+let quetes = []
 
 let scroll = 0
 
@@ -79,6 +83,31 @@ function trierMailsParDateHeure() {
     sauvegarderMail();
 }
 
+function loadQuetes() {
+    if (sessionStorage.getItem('quetes') === null) {
+
+        quetes = [
+            {id: 1, points: 0, fini: false, label: "Supprimer 5 mails mauvais"},
+            {id: 2, points: 0, fini: false, label: "Garder un bon mail"}, // TODO : modifier le label
+        ]
+
+        sessionStorage.setItem('quetes', JSON.stringify(quetes));
+    } else {
+         quetes = JSON.parse(sessionStorage.getItem('quetes'));
+    }
+
+    if (quetes[0].fini) {
+        document.querySelector(".suppMail img").src = "../images/check-icon.png"
+    }
+    if (quetes[1].fini) {
+        document.querySelector(".garderMail img").src = "../images/check-icon.png"
+    }
+    document.querySelector(".suppMail p ").innerText = `Supprimer 5 mauvais mails : ${quetes[0].points} / 5`
+}
+
+function sauvegarderEtatQuetes() {
+    sessionStorage.setItem('quetes', JSON.stringify(quetes));
+}
 
 async function loadMails() {
 
@@ -134,6 +163,7 @@ async function loadMails() {
 
 window.addEventListener('load', () => {
     loadMails()
+    loadQuetes()
 })
 
 function afficherListeMails() {
@@ -278,6 +308,22 @@ function sauvegarderMail() {
 
 function effacerMail() {
     if (currentMailIndex !== null) {
+
+        if (!listMails[currentMailIndex].bonMail) {
+            quetes[0].points += 1
+
+            if (quetes[0].points == NBRE_DE_MAUVAIS_MAILS_A_SUPP) {
+                quetes[0].fini = true
+                afficherReussiteQuete(0)
+            }
+            /*if (quetes[0].points == NBRE_DE_MAUVAIS_MAILS_A_SUPP) {
+
+            }*/
+
+            console.log(quetes)
+            sauvegarderEtatQuetes()
+        }
+
         // Retirer le mail de la liste
         listMails.splice(currentMailIndex, 1)
 
@@ -307,3 +353,38 @@ function afficherfeedback(message) {
     }, 2000);
 }
 
+function afficherReussiteQuete(id) {
+    const notificationDivElement = document.createElement("div")
+    const headPElement = document.createElement("p")
+    const bodyPElement = document.createElement("p")
+    const fermerAElement = document.createElement("a")
+
+    notificationDivElement.classList.add("notification");
+
+    const imgCroixFermetureElement = document.createElement("img")
+    imgCroixFermetureElement.src = "../images/bouton-quitter-fichier.png"
+    fermerAElement.appendChild(imgCroixFermetureElement)
+    fermerAElement.href = "javascript:void(0)"
+    fermerAElement.onclick = fermerNotification
+
+    headPElement.innerText = "Quêtes"
+    headPElement.classList.add("head-notification")
+
+    bodyPElement.innerText = quetes[id].label + " : Terminée !"
+    bodyPElement.classList.add("body-notification")
+
+    notificationDivElement.appendChild(fermerAElement)
+    notificationDivElement.appendChild(headPElement)
+    notificationDivElement.appendChild(bodyPElement)
+
+    notificationDivElement.style.animationName = "appear"
+    notificationDivElement.style.animationDuration = '0.5s'
+
+    document.body.appendChild(notificationDivElement)
+}
+
+function fermerNotification() {
+    const notification = document.querySelector(".notification")
+
+    notification.parentNode.removeChild(notification);
+}

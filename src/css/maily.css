@@ -250,7 +250,7 @@ p {
 }
 
 .message {
-    padding-bottom: 50px;
+    margin-bottom: 50px;
 }
 
 .secret {
@@ -314,6 +314,33 @@ p {
     margin-top: 0;
 }
 
+/***********************************
+  notification de réussite de quête
+************************************/
+.notification {
+    position: fixed;
+    bottom: 150px;
+    right: 20px;
+    background-color: #32CD32;
+    z-index: 5;
+}
+.notification p {
+    color: white;
+    font-weight: bold;
+    margin: 10px 10px;
+    border-radius: 20px;
+}
+.notification a {
+    float: right;
+
+}
+.notification img {
+    max-width: 20px;
+}
+
+.body-notification {
+
+}
 /*@keyframes slideOut {
     from{
         transform: translateX(0);
@@ -329,6 +356,15 @@ p {
     }
     100% {
         transform: translateX(0px); /* part à gauche (arrive) */
+    }
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
     }
 }
 
@@ -366,7 +402,6 @@ footer nav img {
 }
 .icon-notification {
     margin-right: 10px;
-
 }
 
 footer nav {

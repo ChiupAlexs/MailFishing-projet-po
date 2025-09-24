@@ -14,13 +14,8 @@
         <img src="../../images/YoutubeLogo.png" height="90" width="140"/>
     </div>
     <div class="actions">
-        <button id="notifBtn"><img src="../../images/ClocheYoutube.png" height="40" width="40"/></button>
         <div class="profile"><img class="photo-profile"src="../../images/PPCapybara.png" height="40" width="40"/></div>
     </div>
-    <!--<div class="notifs" id="popNotif">
-        <h3>Notifications</h3>
-        <p>Votre abonnement expire bientôt.</p>
-    </div>-->
 </header>
 
 <!-- Main content -->
@@ -55,9 +50,8 @@
         const cancelBtn = document.getElementById("cancelBtn");
         const confirmBtn = document.getElementById("confirmBtn");
         const popup = document.getElementById("popup");
-        <!--const notifBtn = document.getElementById("notifBtn");-->
 
-        // Ouvrir le popup
+        // Ouverture du popup de confirmation
         renewBtn.addEventListener("click", () => {
             overlay.style.display = "flex";
         });

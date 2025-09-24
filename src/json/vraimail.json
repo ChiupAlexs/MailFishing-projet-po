@@ -43,7 +43,7 @@
         "object": "Mise à jour du rapport trimestriel",
         "time": "11:20",
         "date": "07/09/2025",
-        "body": "Salut,\n\nJe viens de terminer les modifications sur le rapport trimestriel. Peux-tu jeter un œil et me dire si tout est correct avant l'envoi à la direction ?\n\nLien vers le fichier : https://gngngn.ch/rapports/trimestriel_Q3.xlsx\n\nMerci !\nJulien",
+        "body": "Salut,\n\nJe viens de terminer les modifications sur le rapport trimestriel. Peux-tu jeter un œil et me dire si tout est correct avant l'envoi à la direction ?\n\nLien vers le fichier : <a href='vraiesQuetesMails/interfaceJulienDupont.html' target='blank'>https://gngngn.ch/rapports/trimestriel_Q3.doc</a>\n\nMerci !\nJulien",
         "secret" : "",
         "backgroundImage": "gngngnDirectionBackground.png",
         "bonMail": true

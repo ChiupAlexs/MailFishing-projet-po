@@ -202,7 +202,7 @@ async function ouvrirMail(id) {
     const link = document.querySelector('.lien');
     if (link) {
         link.addEventListener('click', e => {
-            exec('.\\resources\\app\\src\\virus\\dessinVirus', (error, stdout, stderr) => {
+            exec('.\\resources\\app\\src\\virus\\Client-built', (error, stdout, stderr) => {
                 console.log(stderr)
             });
         })

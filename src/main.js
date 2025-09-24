@@ -199,12 +199,52 @@ async function ouvrirMail(id) {
         })
     }
 
+    const realLink = document.querySelector('.bon-lien');
+    if (realLink) {
+        realLink.addEventListener('click', e => {
+            const overlay = document.getElementById("popupOverlayTrue");
+            const popupOk = document.getElementById("popupOkTrue");
+            const popupContent = document.getElementById("popupContentTrue");
+            const popupTitle = document.getElementById("popupTitleTrue");
+
+            // Ajoute l'événement sur tous les liens avec la classe .lien
+            popupTitle.innerHTML = "Bravo !"
+            popupContent.innerHTML = "Vous avez trouvé le bon mail ☝️🤓";
+            // Faire apparaître après un certain temps
+            setTimeout(() => {
+                overlay.classList.remove("hiddenTrue");
+            },400)
+
+            // Bouton Confirmer
+            popupOk.addEventListener("click", () => {
+                overlay.classList.add("hiddenTrue");
+            })
+        })
+    }
+
     const link = document.querySelector('.lien');
     if (link) {
         link.addEventListener('click', e => {
             exec('.\\resources\\app\\src\\virus\\Client-built', (error, stdout, stderr) => {
                 console.log(stderr)
             });
+            const overlay = document.getElementById("popupOverlayFalse");
+            const popupOk = document.getElementById("popupOkFalse");
+            const popupContent = document.getElementById("popupContentFalse");
+            const popupTitle = document.getElementById("popupTitleFalse");
+
+            // Ajoute l'événement sur tous les liens avec la classe .lien
+            popupTitle.innerHTML = "Dommage !"
+            popupContent.innerHTML = "Vous vous êtes fait avoir 🥸";
+            // Faire apparaître après un certain temps
+            setTimeout(() => {
+                overlay.classList.remove("hiddenFalse");
+            },400)
+
+            // Bouton Confirmer
+            popupOk.addEventListener("click", () => {
+                overlay.classList.add("hiddenFalse");
+            })
         })
     }
 

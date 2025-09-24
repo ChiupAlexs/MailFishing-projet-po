@@ -396,3 +396,144 @@ footer img {
     src: url("../fonts/Sora-VariableFont_wght.ttf") format("ttf");
     font-weight: normal;
 }
+
+
+/***************************
+
+    Feedbacks Vrai ou Faux
+
+***************************/
+
+.overlayFalse {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.hiddenFalse {
+    display: none;
+}
+
+.popupFalse {
+    background: #ffebeb; /* fond rouge clair */
+    border: 2px solid #ff4d4d; /* contour rouge vif */
+    padding: 25px 30px;
+    border-radius: 12px;
+    width: 380px;
+    max-width: 90%;
+    box-shadow: 0 5px 20px rgba(255, 0, 0, 0.5);
+    text-align: center;
+    animation: shake 0.5s ease-in-out;
+}
+
+.popupFalse h3 {
+    margin-top: 0;
+    color: #ff1a1a;
+    font-size: 1.4em;
+}
+
+.popupFalse p {
+    font-weight: bold;
+    color: #a10000;
+    margin: 15px 0 0 0;
+}
+
+.popup-actionsFalse {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.popup-actionsFalse button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.2s;
+}
+
+#popupOkFalse {
+    background: #ff4d4d;
+    color: white;
+}
+
+#popupOkFalse:hover {
+    background: #e60000;
+    transform: scale(1.05);
+}
+
+.overlayTrue {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.hiddenTrue {
+    display: none;
+}
+
+.popupTrue {
+    background: #b2d4b4;
+    border: 2px solid white;
+    padding: 25px 30px;
+    border-radius: 12px;
+    width: 380px;
+    max-width: 90%;
+    box-shadow: 0 5px 20px rgba(102, 232, 109);
+    text-align: center;
+    animation: shake 0.5s ease-in-out;
+}
+
+.popupTrue h3 {
+    margin-top: 0;
+    color: seagreen;
+    font-size: 1.4em;
+}
+
+.popupTrue p {
+    font-weight: bold;
+    color: darkslategrey;
+    margin: 15px 0 0 0;
+}
+
+.popup-actionsTrue {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.popup-actionsTrue button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.2s;
+}
+
+#popupOkTrue {
+    background: green;
+    color: white;
+}
+
+#popupOkTrue:hover {
+    background: forestgreen;
+    transform: scale(1.05);
+}

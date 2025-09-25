@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Quêtes</title>
     <link rel="stylesheet" href="../css/quetes.css">
+    <link rel="stylesheet" href="../css/personnage.css">
 </head>
 <body>
 <header>
@@ -16,7 +17,6 @@
             <img src="../images/bouton-quitter-fichier.png" alt="bouton-quitter-fichier">
         </div>
     </a>
-
 </header>
 <main>
     <h1>Les quêtes</h1>
@@ -65,6 +65,88 @@
         <img src="../images/notification-icon.png" alt="logo du jeu">
     </a>-->
 </footer>
+<!-- Fenêtre tutoriel -->
+<div id="tutoriel" class="tutoriel hidden">
+    <div class="perso">
+        <img id="perso-img" src="../images/perso1.png" alt="petit bonhomme">
+    </div>
+    <div class="bulle">
+        <p id="tuto-text">Bienvenue ! Voici tes quêtes. Tu devras accomplir chaque tâche pour progresser dans le jeu.</p>
+        <div class="tuto-buttons">
+            <button id="btn-suivant">Suivant</button>
+            <button id="btn-ok" class="hidden">OK</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const tutoriel = document.getElementById("tutoriel");
+        const persoImg = document.getElementById("perso-img");
+        const tutoText = document.getElementById("tuto-text");
+        const btnSuivant = document.getElementById("btn-suivant");
+        const btnOk = document.getElementById("btn-ok");
+
+        // Étapes du tutoriel
+        const etapes = [
+            {
+                texte: "BONJOUR! Tu dois être le nouveau! Je suis ton Boss!",
+                image: "../images/pointe.png"
+            },
+            {
+                texte: "Je vais t'expliquer ce que tu devras faire aujourd'hui !",
+                image: "../images/pointe.png"
+            },
+            {
+                texte: "Voici tes tâches. Tu devras toute les accomplir pour progresser.",
+                image: "../images/montre.png"
+            },
+            {
+                texte: "ATTENTION! Je ne vais pas non plus te donner toute la journée pour ces quelques tâches haha. Tu auras un peu de temps pour tout finir.",
+                image: "../images/montre.png"
+            },
+            {
+                texte: "Petit conseil... fait attention au petits cliques",
+                image: "../images/pouce.png"
+            },
+            {
+                texte: "Bon.. au travail! Moi je vais m'occuper du problème qui concerne la timbreuse...",
+                image: "../images/pouce.png"
+            }
+        ];
+
+        let index = 0;
+
+        // Vérifie si le tuto a déjà été vu (sessionStorage = une fois par lancement)
+        if (!sessionStorage.getItem("tutorielVu")) {
+            tutoriel.classList.remove("hidden");
+            afficherEtape(index);
+        }
+
+        function afficherEtape(i) {
+            persoImg.src = etapes[i].image;
+            tutoText.textContent = etapes[i].texte;
+
+            // Si dernière étape -> on cache "Suivant" et on montre "OK"
+            if (i === etapes.length - 1) {
+                btnSuivant.classList.add("hidden");
+                btnOk.classList.remove("hidden");
+            }
+        }
+
+        btnSuivant.addEventListener("click", () => {
+            if (index < etapes.length - 1) {
+                index++;
+                afficherEtape(index);
+            }
+        });
+
+        btnOk.addEventListener("click", () => {
+            tutoriel.classList.add("hidden");
+            sessionStorage.setItem("tutorielVu", "true");
+        });
+    });
+</script>
 <script src="../main.js"></script>
 </body>
 </html>

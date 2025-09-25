@@ -250,7 +250,7 @@ p {
 }
 
 .message {
-    padding-bottom: 50px;
+    margin-bottom: 50px;
 }
 
 .secret {
@@ -314,6 +314,69 @@ p {
     margin-top: 0;
 }
 
+/***********************************
+  notification de réussite de quête
+************************************/
+.notification {
+    position: fixed;
+    bottom: 150px;
+    right: 20px;
+    z-index: 5;
+    padding: 10px;
+    min-width: 300px;
+    border-radius: 10px;
+    color: white;
+}
+.notification p {
+    font-weight: bold;
+    margin: 0 0 10px;
+    border-radius: 20px;
+}
+.notification a {
+    float: right;
+
+}
+.notification img:not(.check-box img) {
+    max-width: 20px;
+}
+
+.body-notification {
+
+}
+.notif-non-complete {
+    background-color: #FAF3DD;
+}
+.notif-complete {
+    background-color: #32CD32;
+}
+.notif-non-complete p {
+    color: black;
+}
+.notif-complete p {
+    color: white;
+}
+.notification p:nth-last-of-type(1) {
+    position: relative;
+    top: 8px;
+    left: 5px;
+}
+.notification .check-box {
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border: 5px solid black;
+    float: left;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.notification .check-box img {
+    max-height: 40px;
+    position: relative;
+    bottom: 10px;
+    right: 5px;
+}
+
 /*@keyframes slideOut {
     from{
         transform: translateX(0);
@@ -329,6 +392,24 @@ p {
     }
     100% {
         transform: translateX(0px); /* part à gauche (arrive) */
+    }
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    99% {
+        opacity: 0;
+    }
+    100% {
+        display: none;
     }
 }
 
@@ -366,7 +447,6 @@ footer nav img {
 }
 .icon-notification {
     margin-right: 10px;
-
 }
 
 footer nav {
@@ -395,4 +475,145 @@ footer img {
     font-family: "Sora";
     src: url("../fonts/Sora-VariableFont_wght.ttf") format("ttf");
     font-weight: normal;
+}
+
+
+/***************************
+
+    Feedbacks Vrai ou Faux
+
+***************************/
+
+.overlayFalse {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.hiddenFalse {
+    display: none;
+}
+
+.popupFalse {
+    background: #ffebeb; /* fond rouge clair */
+    border: 2px solid #ff4d4d; /* contour rouge vif */
+    padding: 25px 30px;
+    border-radius: 12px;
+    width: 380px;
+    max-width: 90%;
+    box-shadow: 0 5px 20px rgba(255, 0, 0, 0.5);
+    text-align: center;
+    animation: shake 0.5s ease-in-out;
+}
+
+.popupFalse h3 {
+    margin-top: 0;
+    color: #ff1a1a;
+    font-size: 1.4em;
+}
+
+.popupFalse p {
+    font-weight: bold;
+    color: #a10000;
+    margin: 15px 0 0 0;
+}
+
+.popup-actionsFalse {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.popup-actionsFalse button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.2s;
+}
+
+#popupOkFalse {
+    background: #ff4d4d;
+    color: white;
+}
+
+#popupOkFalse:hover {
+    background: #e60000;
+    transform: scale(1.05);
+}
+
+.overlayTrue {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.hiddenTrue {
+    display: none;
+}
+
+.popupTrue {
+    background: #b2d4b4;
+    border: 2px solid white;
+    padding: 25px 30px;
+    border-radius: 12px;
+    width: 380px;
+    max-width: 90%;
+    box-shadow: 0 5px 20px rgba(102, 232, 109);
+    text-align: center;
+    animation: shake 0.5s ease-in-out;
+}
+
+.popupTrue h3 {
+    margin-top: 0;
+    color: seagreen;
+    font-size: 1.4em;
+}
+
+.popupTrue p {
+    font-weight: bold;
+    color: darkslategrey;
+    margin: 15px 0 0 0;
+}
+
+.popup-actionsTrue {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.popup-actionsTrue button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.2s;
+}
+
+#popupOkTrue {
+    background: green;
+    color: white;
+}
+
+#popupOkTrue:hover {
+    background: forestgreen;
+    transform: scale(1.05);
 }

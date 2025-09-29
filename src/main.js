@@ -88,6 +88,7 @@ function trierMailsParDateHeure() {
 }
 
 function loadQuetes() {
+    console.log(32323)
     if (sessionStorage.getItem('quetes') === null) {
 
         quetes = [
@@ -180,7 +181,6 @@ window.addEventListener('load', () => {
     }
 
     if (btnOk) {
-        loadQuetes()
         btnOk.addEventListener("click", () => {
             introFini = true;
             sessionStorage.setItem('introFini', JSON.stringify(true));
@@ -188,16 +188,21 @@ window.addEventListener('load', () => {
             lockerQuetes.remove()
         });
         if (introFini) {
-            appLockQuetes.classList.remove("lockedQuetes");
-            lockerQuetes.remove()
+            if (appLockQuetes && lockerQuetes) {
+                appLockQuetes.classList.remove("lockedQuetes");
+                lockerQuetes.remove()
+            }
         }
     }
     if (introFini === true) {
-        fleche.style.display = "none";
-        voile.classList.remove("voile");
-        appLock.classList.remove("locked");
-        locker.remove()
+        if (fleche && voile && appLock && locker) {
+            fleche.style.display = "none";
+            voile.classList.remove("voile");
+            appLock.classList.remove("locked");
+            locker.remove()
+        }
     }
+    loadQuetes()
 }, loadMails())
 
 function afficherListeMails() {

@@ -31,7 +31,7 @@
         <div>
             <img src="" alt="">
         </div>
-        <p>Garder les bons mails</p>
+        <p>Consulter le bon mail</p>
     </div>
     <div class="taches suppMail">
         <div>
@@ -53,11 +53,21 @@
         <a href="">
             <img src="../images/Message.png" alt="icone de la messagerie">
         </a>-->
-        <a href="maily.html">
-            <img src="../images/mailyIcon.png" alt="icone de l'application de mail">
-        </a>
+        <div id="appContainerQuetes" class="app-container lockedQuetes">
+            <!-- .locked = icône verrouillée (changer ou retirer la classe pour déverrouiller) -->
+            <a href="maily.html" class="app-link" aria-disabled="true" tabindex="-1">
+                <img class="maily" src="../images/mailyIcon.png" alt="icone de l'application de mail">
+            </a>
+            <!-- badge cadenas (SVG inline pour pas dépendre d'une image externe) -->
+            <span id="lockerQuetes" class="lock-badge">
+                    <svg viewBox="0 0 24 24" width="14" height="14" role="img" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17 8h-1V6a4 4 0 0 0-8 0v2H7a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1zM9 6a3 3 0 0 1 6 0v2H9V6z"
+                              fill="currentColor"/>
+                    </svg>
+                </span>
+        </div>
         <a href="bureau.html">
-            <img src="../images/fichier-text-icon.png" alt="icone de l'application de fichier">
+            <img class="iconeFichier" src="../images/fichier-text-icon.png" alt="icone de l'application de fichier">
         </a>
     </nav>
     <!--
@@ -71,7 +81,8 @@
         <img id="perso-img" src="../images/perso1.png" alt="petit bonhomme">
     </div>
     <div class="bulle">
-        <p id="tuto-text">Bienvenue ! Voici tes quêtes. Tu devras accomplir chaque tâche pour progresser dans le jeu.</p>
+        <p id="tuto-text">Bienvenue ! Voici tes quêtes. Tu devras accomplir chaque tâche pour progresser dans le
+            jeu.</p>
         <div class="tuto-buttons">
             <button id="btn-suivant">Suivant</button>
             <button id="btn-ok" class="hidden">OK</button>
@@ -106,7 +117,7 @@
                 image: "../images/montre.png"
             },
             {
-                texte: "Petit conseil... fait attention au petits cliques",
+                texte: "Petit conseil... fait attention où tu cliques",
                 image: "../images/pouce.png"
             },
             {

@@ -68,8 +68,9 @@
 <!-- Fenêtre tutoriel -->
 <div id="tutoriel" class="tutoriel hidden">
     <div class="perso">
-        <img id="perso-img" src="../images/perso1.png" alt="petit bonhomme">
+        <video id="perso-video" autoplay muted playsinline></video>
     </div>
+    <img class="dialog-pointer" src="../images/dialog pointer.png" alt="pointeur de dialogue">
     <div class="bulle">
         <p id="tuto-text">Bienvenue ! Voici tes quêtes. Tu devras accomplir chaque tâche pour progresser dans le jeu.</p>
         <div class="tuto-buttons">
@@ -80,64 +81,74 @@
 </div>
 
 <script>
+    const sonApparition = new Audio("../music/animal-crossing-catch-sound.mp3");
+    const sonPop = new Audio("../music/pop-animal-crossing.m4a");
+
     document.addEventListener("DOMContentLoaded", () => {
         const tutoriel = document.getElementById("tutoriel");
-        const persoImg = document.getElementById("perso-img");
+        const persoVideo = document.getElementById("perso-video");
         const tutoText = document.getElementById("tuto-text");
         const btnSuivant = document.getElementById("btn-suivant");
         const btnOk = document.getElementById("btn-ok");
 
-        // Étapes du tutoriel
         const etapes = [
-            {
-                texte: "BONJOUR! Tu dois être le nouveau! Je suis ton Boss!",
-                image: "../images/pointe.png"
-            },
-            {
-                texte: "Je vais t'expliquer ce que tu devras faire aujourd'hui !",
-                image: "../images/pointe.png"
-            },
-            {
-                texte: "Voici tes tâches. Tu devras toute les accomplir pour progresser.",
-                image: "../images/montre.png"
-            },
-            {
-                texte: "ATTENTION! Je ne vais pas non plus te donner toute la journée pour ces quelques tâches haha. Tu auras un peu de temps pour tout finir.",
-                image: "../images/montre.png"
-            },
-            {
-                texte: "Petit conseil... fait attention au petits cliques",
-                image: "../images/pouce.png"
-            },
-            {
-                texte: "Bon.. au travail! Moi je vais m'occuper du problème qui concerne la timbreuse...",
-                image: "../images/pouce.png"
-            }
+            { texte: "BONJOUR! Tu dois être le nouveau! Je suis ton Boss! Je vais t'expliquer ce que tu dois faire aujourd'hui !",
+                video: "../vidéos/frame1.mp4" },
+            { texte: "ATTENTION! Je ne vais pas non plus te donner toute la journée pour faire ton travail Haha! Tu auras un peu de temps pour tout finir.",
+                video: "../vidéos/frame2.mp4" },
+            { texte: "Voici tes tâches... Tu devras toute les accomplir pour progresser.",
+                video: "../vidéos/frame3.mp4" },
+            { texte: "Bon.. au travail! Moi je vais m'occuper du problème qui concerne la timbreuse...",
+                video: "../vidéos/frame4.mp4" },
         ];
 
         let index = 0;
 
-        // Vérifie si le tuto a déjà été vu (sessionStorage = une fois par lancement)
-        if (!sessionStorage.getItem("tutorielVu")) {
-            tutoriel.classList.remove("hidden");
-            afficherEtape(index);
-        }
+        const bulle = document.querySelector(".bulle");
+        const dialogPointer = document.querySelector(".dialog-pointer");
 
         function afficherEtape(i) {
-            persoImg.src = etapes[i].image;
+            persoVideo.classList.remove("anime");
+            void persoVideo.offsetWidth;
+            persoVideo.classList.add("anime");
+
+            //Animation bulle et pointeur seulement la première fois
+            if (i === 0) {
+                bulle.classList.remove("anime");
+                void bulle.offsetWidth;
+                bulle.classList.add("anime");
+
+                dialogPointer.classList.remove("anime");
+                void dialogPointer.offsetWidth;
+                dialogPointer.classList.add("anime");
+            }
+
+            persoVideo.src = etapes[i].video;
+            persoVideo.play().catch(err => console.log("Lecture bloquée :", err));
             tutoText.textContent = etapes[i].texte;
 
-            // Si dernière étape -> on cache "Suivant" et on montre "OK"
             if (i === etapes.length - 1) {
                 btnSuivant.classList.add("hidden");
                 btnOk.classList.remove("hidden");
             }
         }
 
+
+        if (!sessionStorage.getItem("tutorielVu")) {
+            tutoriel.classList.remove("hidden");
+            afficherEtape(index);
+
+            sonApparition.currentTime = 0;
+            sonApparition.play().catch(err => console.log("Lecture bloquée :", err));
+        }
+
         btnSuivant.addEventListener("click", () => {
             if (index < etapes.length - 1) {
                 index++;
                 afficherEtape(index);
+
+                sonPop.currentTime = 0;
+                sonPop.play().catch(err => console.log("Lecture bloquée :", err));
             }
         });
 
@@ -146,20 +157,6 @@
             sessionStorage.setItem("tutorielVu", "true");
         });
     });
-
-    function afficherEtape(i) {
-        persoImg.classList.remove("anime");
-        void persoImg.offsetWidth;
-        persoImg.classList.add("anime");
-
-        persoImg.src = etapes[i].image;
-        tutoText.textContent = etapes[i].texte;
-
-        if (i === etapes.length - 1) {
-            btnSuivant.classList.add("hidden");
-            btnOk.classList.remove("hidden");
-        }
-    }
 </script>
 <script src="../main.js"></script>
 </body>

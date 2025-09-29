@@ -1,0 +1,47 @@
+.tutoriel {
+    position: fixed;
+    bottom: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: flex-end;
+    z-index: 1000;
+}
+
+.tutoriel.hidden {
+    display: none;
+}
+
+.tutoriel .perso img {
+    height: 400px;
+}
+
+.tutoriel .bulle {
+    background: white;
+    color: black;
+    padding: 15px;
+    margin-left: 5px;
+    border-radius: 10px;
+    max-width: 350px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.tuto-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.tuto-buttons button {
+    padding: 6px 15px;
+    border: none;
+    background: #3d3d3d;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.hidden {
+    display: none;
+}

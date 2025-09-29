@@ -7,7 +7,7 @@
       "object": "Demande de modification des comptes de l'entreprise",
       "time": "8:30",
       "date": "10/09/2025",
-      "body": "Salut,\n\nTu peux modifier ce fichier excel et y intégrer les nouvelles données s'il-te-plait.\n\nVoici le lien du fichier excel : <a href='vraiesQuetesMails/interfaceBoss.html' target='blank'>https://gngngn.ch/lebonfichier.xlsx</a>\n\nil y a ci-joint le fichier avec les nouvelles données.\n\nMerci gars t'es un bon.",
+      "body": "Salut,\n\nTu peux modifier ce fichier et y intégrer les nouvelles données s'il-te-plait.\n\nVoici le lien du fichier : <a href='vraiesQuetesMails/interfaceBoss.html' class='bon-lien' target='blank'>https://gngngn.ch/lebonfichier.data</a>\n\nil y a ci-joint le fichier avec les nouvelles données.\n\nMerci gars t'es un bon.",
       "secret" : "",
       "backgroundImage": "gngngnDirectionBackground.png",
       "bonMail": true
@@ -43,7 +43,7 @@
         "object": "Mise à jour du rapport trimestriel",
         "time": "11:20",
         "date": "07/09/2025",
-        "body": "Salut,\n\nJe viens de terminer les modifications sur le rapport trimestriel. Peux-tu jeter un œil et me dire si tout est correct avant l'envoi à la direction ?\n\nLien vers le fichier : <a href='vraiesQuetesMails/interfaceJulienDupont.html' target='blank'>https://gngngn.ch/rapports/trimestriel_Q3.doc</a>\n\nMerci !\nJulien",
+        "body": "Salut,\n\nJe viens de terminer les modifications sur le rapport trimestriel. Peux-tu jeter un œil et me dire si tout est correct avant l'envoi à la direction ?\n\nLien vers le fichier : <a href='vraiesQuetesMails/interfaceJulienDupont.html' class='bon-lien' target='blank'>https://gngngn.ch/rapports/trimestriel_Q3.doc</a>\n\nMerci !\nJulien",
         "secret" : "",
         "backgroundImage": "gngngnDirectionBackground.png",
         "bonMail": true

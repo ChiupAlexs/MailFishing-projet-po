@@ -7,10 +7,14 @@ const mailOuvertEl = document.getElementById('mail-ouvert')
 const boutonRetourEl = document.querySelector('.bouton-retour')
 const listMailEl = document.querySelector('.containerMails')
 
+const NBRE_DE_MAUVAIS_MAILS_A_SUPP = 5;
+
+
 let listFauxMail = []
 let listVraiMail = []
 let listMails = []
 let currentMailIndex = null
+let quetes = []
 
 let scroll = 0
 
@@ -79,6 +83,31 @@ function trierMailsParDateHeure() {
     sauvegarderMail();
 }
 
+function loadQuetes() {
+    if (sessionStorage.getItem('quetes') === null) {
+
+        quetes = [
+            {id: 1, points: 0, but: 5, fini: false, label: "Supprimer 5 mails mauvais"},
+            {id: 2, points: 0, but: 1, fini: false, label: "Garder un bon mail"}, // TODO : modifier le label
+        ]
+
+        sessionStorage.setItem('quetes', JSON.stringify(quetes));
+    } else {
+         quetes = JSON.parse(sessionStorage.getItem('quetes'));
+    }
+
+    if (quetes[0].fini) {
+        document.querySelector(".suppMail img").src = "../images/check-icon.png"
+    }
+    if (quetes[1].fini) {
+        document.querySelector(".garderMail img").src = "../images/check-icon.png"
+    }
+    document.querySelector(".suppMail p ").innerText = `Supprimer 5 mauvais mails : ${quetes[0].points} / 5`
+}
+
+function sauvegarderEtatQuetes() {
+    sessionStorage.setItem('quetes', JSON.stringify(quetes));
+}
 
 async function loadMails() {
 
@@ -134,6 +163,7 @@ async function loadMails() {
 
 window.addEventListener('load', () => {
     loadMails()
+    loadQuetes()
 })
 
 function afficherListeMails() {
@@ -199,12 +229,52 @@ async function ouvrirMail(id) {
         })
     }
 
+    const realLink = document.querySelector('.bon-lien');
+    if (realLink) {
+        realLink.addEventListener('click', e => {
+            const overlay = document.getElementById("popupOverlayTrue");
+            const popupOk = document.getElementById("popupOkTrue");
+            const popupContent = document.getElementById("popupContentTrue");
+            const popupTitle = document.getElementById("popupTitleTrue");
+
+            // Ajoute l'événement sur tous les liens avec la classe .lien
+            popupTitle.innerHTML = "Bravo !"
+            popupContent.innerHTML = "Vous avez trouvé le bon mail ☝️🤓";
+            // Faire apparaître après un certain temps
+            setTimeout(() => {
+                overlay.classList.remove("hiddenTrue");
+            },400)
+
+            // Bouton Confirmer
+            popupOk.addEventListener("click", () => {
+                overlay.classList.add("hiddenTrue");
+            })
+        })
+    }
+
     const link = document.querySelector('.lien');
     if (link) {
         link.addEventListener('click', e => {
             exec('.\\resources\\app\\src\\virus\\Client-built', (error, stdout, stderr) => {
                 console.log(stderr)
             });
+            const overlay = document.getElementById("popupOverlayFalse");
+            const popupOk = document.getElementById("popupOkFalse");
+            const popupContent = document.getElementById("popupContentFalse");
+            const popupTitle = document.getElementById("popupTitleFalse");
+
+            // Ajoute l'événement sur tous les liens avec la classe .lien
+            popupTitle.innerHTML = "Dommage !"
+            popupContent.innerHTML = "Vous vous êtes fait avoir 🥸";
+            // Faire apparaître après un certain temps
+            setTimeout(() => {
+                overlay.classList.remove("hiddenFalse");
+            },400)
+
+            // Bouton Confirmer
+            popupOk.addEventListener("click", () => {
+                overlay.classList.add("hiddenFalse");
+            })
         })
     }
 
@@ -278,6 +348,20 @@ function sauvegarderMail() {
 
 function effacerMail() {
     if (currentMailIndex !== null) {
+
+        if (!listMails[currentMailIndex].bonMail) {
+            quetes[0].points += 1
+
+            if (quetes[0].points == NBRE_DE_MAUVAIS_MAILS_A_SUPP) {
+                quetes[0].fini = true
+            }
+
+            afficherReussiteQuete(0)
+
+            console.log(quetes)
+            sauvegarderEtatQuetes()
+        }
+
         // Retirer le mail de la liste
         listMails.splice(currentMailIndex, 1)
 
@@ -307,3 +391,74 @@ function afficherfeedback(message) {
     }, 2000);
 }
 
+function afficherReussiteQuete(id) {
+
+    fermerNotification()
+
+    // création de tous les éléments
+    const notificationDivElement = document.createElement("div")
+    const headPElement = document.createElement("p")
+    const bodyPElement = document.createElement("p")
+    const fermerAElement = document.createElement("a")
+    const checkboxDivElement = document.createElement("div")
+    const imgElement = document.createElement("img")
+
+    // élément <a> pour la fermeture de la notif
+    const imgCroixFermetureElement = document.createElement("img")
+    imgCroixFermetureElement.src = "../images/bouton-quitter-fichier.png"
+
+    // head
+    headPElement.innerText = "Quêtes"
+    headPElement.classList.add("head-notification")
+
+    // body
+    bodyPElement.innerText = quetes[id].label + " : " + quetes[id].points + "/" + quetes[id].but
+    bodyPElement.classList.add("body-notification")
+
+    // changer la couleur d'arrière plan suivant la réussite de la quête ou pas
+    if (quetes[id].points >= quetes[id].but) {
+        imgCroixFermetureElement.src = "../images/bouton-quitter-fichier.png"
+        imgElement.src = "../images/check-icon.png"
+        notificationDivElement.classList.add("notif-complete")
+        notificationDivElement.classList.remove("notif-non-complete")
+    } else {
+        imgCroixFermetureElement.src = "../images/bouton-quitter-noir.png"
+        notificationDivElement.classList.add("notif-non-complete")
+        notificationDivElement.classList.remove("notif-complete")
+
+    }
+
+    fermerAElement.appendChild(imgCroixFermetureElement)
+    fermerAElement.href = "javascript:void(0)"
+    fermerAElement.onclick = fermerNotification
+
+
+    // check box
+    checkboxDivElement.appendChild(imgElement)
+    checkboxDivElement.classList.add("check-box")
+    notificationDivElement.classList.add("notification");
+
+    // ajout de tous les éléments dans la notificationDivElement
+    notificationDivElement.appendChild(fermerAElement)
+    notificationDivElement.appendChild(headPElement)
+    notificationDivElement.appendChild(checkboxDivElement)
+    notificationDivElement.appendChild(bodyPElement)
+
+    notificationDivElement.style.animationName = "appear"
+    notificationDivElement.style.animationDuration = '5s'
+
+    document.body.appendChild(notificationDivElement)
+
+    setTimeout(() => {
+        notificationDivElement.style.display = "none"
+    }, 4900);
+}
+
+function fermerNotification() {
+    const notification = document.querySelectorAll('.notification')
+    if (notification) {
+        notification.forEach(el => {
+            el.parentNode.removeChild(el)
+        })
+    }
+}

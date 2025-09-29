@@ -88,7 +88,7 @@ function loadQuetes() {
 
         quetes = [
             {id: 1, points: 0, but: 5, fini: false, label: "Supprimer 5 mails mauvais"},
-            {id: 2, points: 0, but: 1, fini: false, label: "Garder un bon mail"}, // TODO : modifier le label
+            {id: 2, points: 0, but: 1, fini: false, label: "Consulter un bon mail."}, // TODO : modifier le label
         ]
 
         sessionStorage.setItem('quetes', JSON.stringify(quetes));
@@ -248,6 +248,12 @@ async function ouvrirMail(id) {
             // Bouton Confirmer
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenTrue");
+
+                // Permet d'indiquer que la quête d'ouverture du bon mail soit complété
+                quetes[1].points = 1
+                quetes[1].fini = true
+                afficherReussiteQuete(1)
+
             })
         })
     }
@@ -352,14 +358,13 @@ function effacerMail() {
         if (!listMails[currentMailIndex].bonMail) {
             quetes[0].points += 1
 
-            if (quetes[0].points == NBRE_DE_MAUVAIS_MAILS_A_SUPP) {
+            if (quetes[0].points === NBRE_DE_MAUVAIS_MAILS_A_SUPP) {
                 quetes[0].fini = true
             }
 
             afficherReussiteQuete(0)
 
             console.log(quetes)
-            sauvegarderEtatQuetes()
         }
 
         // Retirer le mail de la liste
@@ -448,6 +453,8 @@ function afficherReussiteQuete(id) {
     notificationDivElement.style.animationDuration = '5s'
 
     document.body.appendChild(notificationDivElement)
+
+    sauvegarderEtatQuetes()
 
     setTimeout(() => {
         notificationDivElement.style.display = "none"

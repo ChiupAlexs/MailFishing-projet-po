@@ -88,6 +88,8 @@ function trierMailsParDateHeure() {
 }
 
 function loadQuetes() {
+    const queteGarderMailElement = document.querySelector('.garderMail')
+    const queteSuppMailElement = document.querySelector(".suppMail")
     console.log(32323)
     if (sessionStorage.getItem('quetes') === null) {
 
@@ -102,12 +104,15 @@ function loadQuetes() {
     }
 
     if (quetes[0].fini) {
-        document.querySelector(".suppMail img").src = "../images/check-icon.png"
+        queteSuppMailElement.querySelector("img").src = "../images/check-icon.png"
     }
     if (quetes[1].fini) {
-        document.querySelector(".garderMail img").src = "../images/check-icon.png"
+        queteGarderMailElement.querySelector("img").src = "../images/check-icon.png"
+    } else if (quetes[1].points < 0) {
+        queteGarderMailElement.querySelector("img").src = "../images/croix-rouge.png"
+        queteGarderMailElement.classList.add("perdu")
     }
-    document.querySelector(".suppMail p ").innerText = `Supprimer 5 mauvais mails : ${quetes[0].points} / 5`
+    queteSuppMailElement.querySelector("p").innerText = `Supprimer 5 mauvais mails : ${quetes[0].points} / 5`
 }
 
 function sauvegarderEtatQuetes() {
@@ -404,6 +409,10 @@ function effacerMail() {
             afficherReussiteQuete(0)
 
             console.log(quetes)
+        } else if (quetes[1].points === 0){
+            quetes[1].points = -1
+
+            afficherReussiteQuete(1)
         }
 
         // Retirer le mail de la liste
@@ -456,7 +465,12 @@ function afficherReussiteQuete(id) {
     headPElement.classList.add("head-notification")
 
     // body
-    bodyPElement.innerText = quetes[id].label + " : " + quetes[id].points + "/" + quetes[id].but
+    if (quetes[id].points < 0) {
+        bodyPElement.innerText = quetes[id].label
+    } else {
+        bodyPElement.innerText = quetes[id].label + " : " + quetes[id].points + "/" + quetes[id].but
+    }
+
     bodyPElement.classList.add("body-notification")
 
     // changer la couleur d'arrière plan suivant la réussite de la quête ou pas
@@ -465,17 +479,24 @@ function afficherReussiteQuete(id) {
         imgElement.src = "../images/check-icon.png"
         notificationDivElement.classList.add("notif-complete")
         notificationDivElement.classList.remove("notif-non-complete")
+        notificationDivElement.classList.remove("notif-lost")
+    } else if (quetes[id].points < 0) {
+        imgCroixFermetureElement.src = "../images/bouton-quitter-fichier.png"
+        imgElement.src = "../images/croix-rouge.png"
+        notificationDivElement.classList.add("notif-lost")
+        notificationDivElement.classList.remove("notif-non-complete")
+        notificationDivElement.classList.remove("notif-complete")
     } else {
         imgCroixFermetureElement.src = "../images/bouton-quitter-noir.png"
         notificationDivElement.classList.add("notif-non-complete")
         notificationDivElement.classList.remove("notif-complete")
+        notificationDivElement.classList.remove("notif-lost")
 
     }
 
     fermerAElement.appendChild(imgCroixFermetureElement)
     fermerAElement.href = "javascript:void(0)"
     fermerAElement.onclick = fermerNotification
-
 
     // check box
     checkboxDivElement.appendChild(imgElement)

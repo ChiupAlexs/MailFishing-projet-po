@@ -107,6 +107,13 @@ main {
     right: 5px;
 }
 
+.taches.perdu img {
+    right: 10px;
+    max-height: 50px;
+    bottom: 15px;
+    right: 14px;
+}
+
 /*********************************
 
    Pied de page (barre des tâches)

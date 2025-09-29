@@ -154,6 +154,59 @@ footer img {
     filter:drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
 }
 
+.iconeFichier {
+   position: absolute;
+}
+
+.app-container {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.app-link {
+    display: inline-block;
+    text-decoration: none;
+    outline: none;
+}
+
+.app-link img.maily {
+    display: block;
+    width: 70px;
+    height: 70px;
+}
+
+.lock-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #ffffffcc;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    color: #111;
+    pointer-events: none;
+}
+
+.app-container.lockedQuetes .app-link,
+.app-container.lockedQuetes .app-link img {
+    filter: grayscale(60%);
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.app-container.lockedQuetes .app-link {
+    pointer-events: none;
+}
+
+.app-container.lockedQuetes .lock-badge {
+    background: #ffffffd9;
+}
+
 .notification {
     position: fixed;
 

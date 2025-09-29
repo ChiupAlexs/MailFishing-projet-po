@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,67 +7,76 @@
     <link rel="stylesheet" href="../css/guideFlèches.css">
 </head>
 <body>
-<main>
-<div class="fichier">
-    <div class="fleche-quetes">
-        <a href="quetes.html">
-            <img src="../images/fichier-text-icon.png" alt="icone du dossier">
-            <p>Quêtes.txt</p>
-        </a>
-        <button class="btn-flècheQuêtes"><img class="flècheQuêtes" src="../images/left-arrow.png" alt="flèche pour les dossiers"></button>
-    </div>
-</div>
-    <!--<div class="dossier">
-        <a href="">
+<div id="voile" class="voile">
+    <main>
+        <div class="fichier">
             <div class="fleche-quetes">
-                <img src="../images/folder.png" alt="icone du dossier">
-                <button class="btn-flècheQuêtes"><img class="flècheQuêtes" src="../images/left-arrow.png" alt="icone du dossier"></button>
+                <a href="quetes.html">
+                    <img src="../images/fichier-text-icon.png" alt="icone du dossier">
+                    <p>Quêtes.txt</p>
+                </a>
+                <img id="fleche" src="../images/left-arrow.png" alt="flèche pour les dossiers" width="70" height="70">
             </div>
-            <p>Windows</p>
-        </a>
-    </div>
-    <div class="dossier">
-        <a href="">
-            <div class="fleche-quetes">
-                <img src="../images/folder.png" alt="icone du dossier">
-                <button class="btn-flècheQuêtes"><img class="flècheQuêtes" src="../images/left-arrow.png" alt="icone du dossier"></button>
-            </div>
-            <p>Documents</p>
-        </a>
-    </div>
-    <div class="dossier">
-        <a href="">
-            <div class="fleche-quetes">
-                <img src="../images/folder.png" alt="icone du dossier">
-                <button class="btn-flècheQuêtes"><img class="flècheQuêtes" src="../images/left-arrow.png" alt="icone du dossier"></button>
-            </div>
-            <p>Gngngn</p>
-        </a>
-    </div>-->
-</main>
-<footer>
-    <a href="JavaScript:void(0)" onclick="fonctions" class="logo">
-        <img src="../images/mail-fishing-logo.png" alt="logo du jeu">
-    </a>
-    <nav>
-        <!--
-        <a href="">
-            <img src="../images/browser-icon.png" alt="icone du navigateur">
-        </a>
-        <a href="">
-            <img src="../images/Message.png" alt="icone de la messagerie">
-        </a>-->
-        <div class="fleche-maily">
-            <a href="maily.html">
-                <img class="maily" src="../images/mailyIcon.png" alt="icone de l'application de mail">
+        </div>
+        <!--<div class="dossier">
+            <a href="">
+                <div class="fleche-quetes">
+                    <img src="../images/folder.png" alt="icone du dossier">
+                    <button class="btn-flècheQuêtes"><img class="flècheQuêtes" src="../images/left-arrow.png" alt="icone du dossier"></button>
+                </div>
+                <p>Windows</p>
             </a>
         </div>
-    </nav>
-    <!--
-    <a href="JavaScript:void(0)" onclick="fonctions" class="icon-notification">
-        <img src="../images/notification-icon.png" alt="logo du jeu">
-    </a>-->
-</footer>
-<script src="../bureau.js"></script>
+        <div class="dossier">
+            <a href="">
+                <div class="fleche-quetes">
+                    <img src="../images/folder.png" alt="icone du dossier">
+                    <button class="btn-flècheQuêtes"><img class="flècheQuêtes" src="../images/left-arrow.png" alt="icone du dossier"></button>
+                </div>
+                <p>Documents</p>
+            </a>
+        </div>
+        <div class="dossier">
+            <a href="">
+                <div class="fleche-quetes">
+                    <img src="../images/folder.png" alt="icone du dossier">
+                    <button class="btn-flècheQuêtes"><img class="flècheQuêtes" src="../images/left-arrow.png" alt="icone du dossier"></button>
+                </div>
+                <p>Gngngn</p>
+            </a>
+        </div>-->
+    </main>
+    <footer>
+        <a href="JavaScript:void(0)" onclick="fonctions" class="logo">
+            <img src="../images/mail-fishing-logo.png" alt="logo du jeu">
+        </a>
+        <nav>
+            <!--
+            <a href="">
+                <img src="../images/browser-icon.png" alt="icone du navigateur">
+            </a>
+            <a href="">
+                <img src="../images/Message.png" alt="icone de la messagerie">
+            </a>-->
+
+            <div id="appContainer" class="app-container locked">
+                <a href="maily.html" class="app-link" aria-disabled="true" tabindex="-1">
+                    <img class="maily" src="../images/mailyIcon.png" alt="icone de l'application de mail">
+                </a>
+                <span id="locker" class="lock-badge">
+                    <svg viewBox="0 0 24 24" width="14" height="14" role="img" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17 8h-1V6a4 4 0 0 0-8 0v2H7a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1zM9 6a3 3 0 0 1 6 0v2H9V6z"
+                              fill="currentColor"/>
+                    </svg>
+                </span>
+            </div>
+        </nav>
+        <!--
+        <a href="JavaScript:void(0)" onclick="fonctions" class="icon-notification">
+            <img src="../images/notification-icon.png" alt="logo du jeu">
+        </a>-->
+    </footer>
+    <script src="../main.js"></script>
+</div>
 </body>
 </html>

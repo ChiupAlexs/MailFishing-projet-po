@@ -1,13 +1,3 @@
-.btn-flècheQuêtes {
-    background-color: transparent;
-    border: none;
-    padding: 0;
-    width: 70px;
-    height: 70px;
-    margin-left: 20px;
-    display: flex;
-    animation: bougeHoriz 1.5s ease-in-out infinite;
-}
 
 @keyframes bougeHoriz {
     0%   { transform: translateX(0); }
@@ -15,14 +5,19 @@
     100% { transform: translateX(0); }
 }
 
-.flècheQuêtes {
-    object-fit: cover;
-}
-
-.fleche-quetes {
-    justify-content: space-between;
+#fleche {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    width: 70px;
+    height: 70px;
+    margin-left: 20px;
+    animation: bougeHoriz 1.5s ease-in-out infinite;
+    position: absolute;
+    top: 20px;
+    left: 90px;
     display: flex;
+    justify-content: space-between;
     flex-direction: row;
     align-items: center;
-    margin-left: 10px;
 }

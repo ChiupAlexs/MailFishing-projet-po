@@ -15,6 +15,7 @@ let listVraiMail = []
 let listMails = []
 let currentMailIndex = null
 let quetes = []
+let introFini;
 
 let scroll = 0
 
@@ -23,6 +24,9 @@ let scroll = 0
 function quitter() {
     window.close();
 }
+
+/*************************** Bureau *******************************/
+
 
 /*************************** Maily *******************************/
 
@@ -93,7 +97,7 @@ function loadQuetes() {
 
         sessionStorage.setItem('quetes', JSON.stringify(quetes));
     } else {
-         quetes = JSON.parse(sessionStorage.getItem('quetes'));
+        quetes = JSON.parse(sessionStorage.getItem('quetes'));
     }
 
     if (quetes[0].fini) {
@@ -162,9 +166,39 @@ async function loadMails() {
 }
 
 window.addEventListener('load', () => {
-    loadMails()
-    loadQuetes()
-})
+    const btnOk = document.getElementById("btn-ok");
+    const voile = document.getElementById("voile");
+    const appLock = document.getElementById("appContainer");
+    const appLockQuetes = document.getElementById("appContainerQuetes");
+    const locker = document.getElementById("locker");
+    const lockerQuetes = document.getElementById("lockerQuetes");
+    const fleche = document.getElementById("fleche");
+    if (sessionStorage.getItem("introFini") == null) {
+        sessionStorage.setItem("introFini", JSON.stringify(false));
+    } else {
+        introFini = JSON.parse(sessionStorage.getItem("introFini"))
+    }
+
+    if (btnOk) {
+        loadQuetes()
+        btnOk.addEventListener("click", () => {
+            introFini = true;
+            sessionStorage.setItem('introFini', JSON.stringify(true));
+            appLockQuetes.classList.remove("lockedQuetes");
+            lockerQuetes.remove()
+        });
+        if (introFini) {
+            appLockQuetes.classList.remove("lockedQuetes");
+            lockerQuetes.remove()
+        }
+    }
+    if (introFini === true) {
+        fleche.style.display = "none";
+        voile.classList.remove("voile");
+        appLock.classList.remove("locked");
+        locker.remove()
+    }
+}, loadMails())
 
 function afficherListeMails() {
     listMailEl.innerHTML = ""
@@ -243,7 +277,7 @@ async function ouvrirMail(id) {
             // Faire apparaître après un certain temps
             setTimeout(() => {
                 overlay.classList.remove("hiddenTrue");
-            },400)
+            }, 400)
 
             // Bouton Confirmer
             popupOk.addEventListener("click", () => {
@@ -269,7 +303,7 @@ async function ouvrirMail(id) {
             // Faire apparaître après un certain temps
             setTimeout(() => {
                 overlay.classList.remove("hiddenFalse");
-            },400)
+            }, 400)
 
             // Bouton Confirmer
             popupOk.addEventListener("click", () => {

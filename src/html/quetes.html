@@ -146,6 +146,20 @@
             sessionStorage.setItem("tutorielVu", "true");
         });
     });
+
+    function afficherEtape(i) {
+        persoImg.classList.remove("anime");
+        void persoImg.offsetWidth;
+        persoImg.classList.add("anime");
+
+        persoImg.src = etapes[i].image;
+        tutoText.textContent = etapes[i].texte;
+
+        if (i === etapes.length - 1) {
+            btnSuivant.classList.add("hidden");
+            btnOk.classList.remove("hidden");
+        }
+    }
 </script>
 <script src="../main.js"></script>
 </body>

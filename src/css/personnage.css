@@ -17,26 +17,26 @@
 }
 
 .tutoriel .bulle {
-    background: white;
+    background: #FFF9E6;
     color: black;
     padding: 15px;
     margin-left: 5px;
-    border-radius: 10px;
+    border-radius: 40px;
     max-width: 350px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
 
 .tuto-buttons {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     gap: 10px;
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 .tuto-buttons button {
     padding: 6px 15px;
     border: none;
-    background: #3d3d3d;
+    background: #FFB400;
     color: white;
     cursor: pointer;
     border-radius: 5px;
@@ -45,3 +45,29 @@
 .hidden {
     display: none;
 }
+
+@keyframes perso-apparition {
+    0% {
+        opacity: 0;
+        transform: translateY(50px) scale(0.8);
+    }
+    60% {
+        opacity: 1;
+        transform: translateY(-10px) scale(1.05);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.tutoriel .perso img {
+    height: 400px;
+    opacity: 0;
+    animation: perso-apparition 0.8s ease-out forwards;
+}
+
+.anime {
+    animation: perso-apparition 0.8s ease-out forwards;
+}
+

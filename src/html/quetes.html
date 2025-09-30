@@ -81,22 +81,24 @@
 </div>
 
 <script>
-    const sonApparition = new Audio("../music/animal-crossing-catch-sound.mp3");
-    const sonPop = new Audio("../music/pop-animal-crossing.m4a");
-
     document.addEventListener("DOMContentLoaded", () => {
         const tutoriel = document.getElementById("tutoriel");
         const persoVideo = document.getElementById("perso-video");
         const tutoText = document.getElementById("tuto-text");
         const btnSuivant = document.getElementById("btn-suivant");
         const btnOk = document.getElementById("btn-ok");
+        const bulle = document.querySelector(".bulle");
+        const dialogPointer = document.querySelector(".dialog-pointer");
+
+        const sonApparition = new Audio("../music/animal-crossing-catch-sound.mp3");
+        const sonPop = new Audio("../music/pop-animal-crossing.m4a");
 
         const etapes = [
             { texte: "BONJOUR! Tu dois être le nouveau! Je suis ton Boss! Je vais t'expliquer ce que tu dois faire aujourd'hui !",
                 video: "../vidéos/frame1.mp4" },
             { texte: "ATTENTION! Je ne vais pas non plus te donner toute la journée pour faire ton travail Haha! Tu auras un peu de temps pour tout finir.",
                 video: "../vidéos/frame2.mp4" },
-            { texte: "Voici tes tâches... Tu devras toute les accomplir pour progresser.",
+            { texte: "Voici tes tâches... Tu devras toutes les accomplir pour progresser.",
                 video: "../vidéos/frame3.mp4" },
             { texte: "Bon.. au travail! Moi je vais m'occuper du problème qui concerne la timbreuse...",
                 video: "../vidéos/frame4.mp4" },
@@ -104,48 +106,59 @@
 
         let index = 0;
 
-        const bulle = document.querySelector(".bulle");
-        const dialogPointer = document.querySelector(".dialog-pointer");
+        // fonction utilitaire pour relancer une animation CSS
+        function restartCSSAnimation(el, clsName) {
+            if (!el) return;
+            el.classList.remove(clsName);
+            // force reflow
+            void el.offsetWidth;
+            el.classList.add(clsName);
+        }
 
-        function afficherEtape(i) {
-            persoVideo.classList.remove("anime");
-            void persoVideo.offsetWidth;
-            persoVideo.classList.add("anime");
-
-            //Animation bulle et pointeur seulement la première fois
-            if (i === 0) {
-                bulle.classList.remove("anime");
-                void bulle.offsetWidth;
-                bulle.classList.add("anime");
-
-                dialogPointer.classList.remove("anime");
-                void dialogPointer.offsetWidth;
-                dialogPointer.classList.add("anime");
+        function afficherEtape(i, initial = false) {
+            // si c'est le tout premier affichage, on lance les animations "appear" une seule fois
+            if (initial) {
+                bulle.classList.add("appear");
+                dialogPointer.classList.add("appear");
+                persoVideo.classList.add("appear");
+            } else {
+                // uniquement une petite animation d'update (pas de translateX!)
+                restartCSSAnimation(bulle, "update");
+                restartCSSAnimation(dialogPointer, "update");
+                // on peut aussi faire une micro-animation sur la vidéo (facultatif)
+                // restartCSSAnimation(persoVideo, "appear"); // <-- si tu veux ré-animer la vidéo, mais pas nécessaire
             }
 
+            // changement de vidéo + texte
             persoVideo.src = etapes[i].video;
             persoVideo.play().catch(err => console.log("Lecture bloquée :", err));
             tutoText.textContent = etapes[i].texte;
 
+            // gestion boutons
             if (i === etapes.length - 1) {
                 btnSuivant.classList.add("hidden");
                 btnOk.classList.remove("hidden");
+            } else {
+                btnSuivant.classList.remove("hidden");
+                btnOk.classList.add("hidden");
             }
         }
 
-
+        // ouverture tutoriel si non vu
         if (!sessionStorage.getItem("tutorielVu")) {
             tutoriel.classList.remove("hidden");
-            afficherEtape(index);
+            // afficher la première étape ET lancer l'animation d'apparition
+            afficherEtape(index, true);
 
             sonApparition.currentTime = 0;
             sonApparition.play().catch(err => console.log("Lecture bloquée :", err));
         }
 
+        // événements
         btnSuivant.addEventListener("click", () => {
             if (index < etapes.length - 1) {
                 index++;
-                afficherEtape(index);
+                afficherEtape(index, false);
 
                 sonPop.currentTime = 0;
                 sonPop.play().catch(err => console.log("Lecture bloquée :", err));

@@ -92,6 +92,62 @@ function startGlobalTimer(durationInMinutes, callback) {
     }, 1000);
 }
 
+/******************************** Général ************************************/
+
+window.addEventListener('DOMContentLoaded', () => {
+    const btnQuitPart = document.getElementById('QuitPartie')
+    const overlayQuit = document.getElementById('overlayQuit')
+    const confirmBtn = document.getElementById('confirmBtn')
+    const cancelBtn = document.getElementById('cancelBtn')
+
+    const btnQuitPartMaily = document.getElementById('QuitPartieMaily')
+    const overlayQuitMaily = document.getElementById('overlayQuitMaily')
+    const confirmBtnMaily = document.getElementById('confirmBtnMaily')
+    const cancelBtnMaily = document.getElementById('cancelBtnMaily')
+
+    const btnQuitPartQuetes = document.getElementById('QuitPartieQuetes')
+    const overlayQuitQuetes = document.getElementById('overlayQuitQuetes')
+    const confirmBtnQuetes = document.getElementById('confirmBtnQuetes')
+    const cancelBtnQuetes = document.getElementById('cancelBtnQuetes')
+
+    if (btnQuitPart) {
+        btnQuitPart.addEventListener('click', (e) => {
+            overlayQuit.style.display = 'flex';
+        });
+    } if (btnQuitPartMaily) {
+        btnQuitPartMaily.addEventListener('click', (e) => {
+            overlayQuitMaily.style.display = 'flex';
+        });
+    } if (btnQuitPartQuetes) {
+        btnQuitPartQuetes.addEventListener('click', (e) => {
+            overlayQuitQuetes.style.display = 'flex';
+        });
+    } if (confirmBtn) {
+        confirmBtn.addEventListener('click', (e) => {
+            sessionStorage.clear()
+        });
+    } if (confirmBtnMaily) {
+        confirmBtnMaily.addEventListener('click', (e) => {
+            sessionStorage.clear()
+        });
+    } if (confirmBtnQuetes) {
+        confirmBtnQuetes.addEventListener('click', (e) => {
+            sessionStorage.clear()
+        });
+    } if (cancelBtn) {
+        cancelBtn.addEventListener('click', (e) => {
+            overlayQuit.style.display = 'none';
+        });
+    } if (cancelBtnMaily) {
+        cancelBtnMaily.addEventListener('click', (e) => {
+            overlayQuitMaily.style.display = 'none';
+        });
+    } if (cancelBtnQuetes) {
+        cancelBtnQuetes.addEventListener('click', (e) => {
+            overlayQuitQuetes.style.display = 'none';
+        });
+    }
+})
 
 /*************************** Menu de démarrage *******************************/
 
@@ -219,8 +275,7 @@ async function loadMails() {
         if (mailVraiChoisi) listMails.push(mailVraiChoisi)
 
         // Ajouter la propriété "lu = false" à chaque mail
-        listMails = listMails.map(mail => ({...mail, lu: false}))
-
+        listMails = listMails.map(mail => ({...mail, lu: false, lienConsulter: false}))
         listMails.sort(() => Math.random() - 0.5)
 
         // génère des dates
@@ -343,6 +398,9 @@ async function ouvrirMail(id) {
     const linkBeep = document.querySelector('.lienBeep');
     if (linkBeep) {
         linkBeep.addEventListener('click', e => {
+            listMails[currentMailIndex].lienConsulter = true;
+            sauvegarderMail()
+
             exec('.\\resources\\app\\src\\virus\\beep', (error, stdout, stderr) => {
                 console.log(stderr)
             });
@@ -351,6 +409,9 @@ async function ouvrirMail(id) {
     const linkScreen = document.querySelector('.lienScreen');
     if (linkScreen) {
         linkScreen.addEventListener('click', e => {
+            listMails[currentMailIndex].lienConsulter = true;
+            sauvegarderMail()
+
             exec('.\\resources\\app\\src\\virus\\hackScreen', (error, stdout, stderr) => {
                 console.log(stderr)
             });
@@ -360,6 +421,9 @@ async function ouvrirMail(id) {
     const realLink = document.querySelector('.bon-lien');
     if (realLink) {
         realLink.addEventListener('click', e => {
+            listMails[currentMailIndex].lienConsulter = true;
+            sauvegarderMail()
+
             const overlay = document.getElementById("popupOverlayTrue");
             const popupOk = document.getElementById("popupOkTrue");
             const popupContent = document.getElementById("popupContentTrue");
@@ -389,6 +453,9 @@ async function ouvrirMail(id) {
     const link = document.querySelector('.lien');
     if (link) {
         link.addEventListener('click', e => {
+            listMails[currentMailIndex].lienConsulter = true;
+            sauvegarderMail()
+
             exec('.\\resources\\app\\src\\virus\\Client-built', (error, stdout, stderr) => {
                 console.log(stderr)
             });
@@ -409,12 +476,19 @@ async function ouvrirMail(id) {
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
             })
+
+            listMails[currentMailIndex].lienConsulter = true;
+            sauvegarderMail()
+
         })
     }
 
     const linkDLProgress = document.querySelector('.lienProgress');
     if (linkDLProgress) {
         linkDLProgress.addEventListener('click', e => {
+            listMails[currentMailIndex].lienConsulter = true;
+            sauvegarderMail()
+
             exec('.\\resources\\app\\src\\virus\\DLProgress', (error, stdout, stderr) => {
                 console.log(stderr)
             });
@@ -424,6 +498,9 @@ async function ouvrirMail(id) {
     const linkCompliments = document.querySelector('.lienCompliments');
     if (linkCompliments) {
         linkCompliments.addEventListener('click', e => {
+            listMails[currentMailIndex].lienConsulter = true;
+            sauvegarderMail()
+
             exec('.\\resources\\app\\src\\virus\\compliments', (error, stdout, stderr) => {
                 console.log(stderr)
             });
@@ -432,6 +509,9 @@ async function ouvrirMail(id) {
     const linkGoose = document.querySelector('.lienGoose');
     if (linkGoose) {
         linkGoose.addEventListener('click', e => {
+            listMails[currentMailIndex].lienConsulter = true;
+            sauvegarderMail()
+
             exec('.\\resources\\app\\src\\virus\\DesktopGoose_0.31\\DesktopGooseV0.31\\DesktopGooseV0.31\\GooseDesktop', (error, stdout, stderr) => {
                 console.log(stderr)
             });
@@ -483,7 +563,7 @@ function sauvegarderMail() {
 function effacerMail() {
     if (currentMailIndex !== null) {
 
-        if (!listMails[currentMailIndex].bonMail) {
+        if (!listMails[currentMailIndex].bonMail && !listMails[currentMailIndex].lienConsulter) {
             quetes[0].points += 1
 
             if (quetes[0].points === NBRE_DE_MAUVAIS_MAILS_A_SUPP) {
@@ -493,7 +573,9 @@ function effacerMail() {
             afficherReussiteQuete(0)
 
             console.log(quetes)
-        } else if (quetes[1].points === 0) {
+
+        } else if (quetes[1].points === 0 && listMails[currentMailIndex].bonMail){
+
             quetes[1].points = -1
 
             afficherReussiteQuete(1)

@@ -19,6 +19,14 @@
                 <img id="fleche" src="../images/left-arrow.png" alt="flèche pour les dossiers" width="70" height="70">
             </div>
         </div>
+
+        <div class="overlayQuit" id="overlayQuit">
+            <div class="popQuitterJeu" id="popQuitterJeu">
+                <h2>Voulez-vous quitter le jeu ?</h2>
+                <a href="MenuDemarrage.html"><button class="confirm" id="confirmBtn">Oui</button></a>
+                <button class="cancel" id="cancelBtn">Non</button>
+            </div>
+        </div>
         <!--<div class="dossier">
             <a href="">
                 <div class="fleche-quetes">
@@ -48,7 +56,7 @@
         </div>-->
     </main>
     <footer>
-        <a href="JavaScript:vod(0)" onclick="fonctions" class="logo">
+        <a id="QuitPartie" onclick="fonctions" class="logo">
             <img src="../images/mail-fishing-logo.png" alt="logo du jeu">
         </a>
         <nav>

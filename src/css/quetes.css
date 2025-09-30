@@ -13,6 +13,54 @@ body {
     margin: 0;
     background-color: #505050;
 }
+
+.overlayQuit {
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(6px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.popQuitterJeu {
+    text-align: center;
+}
+
+.popQuitterJeu button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.popQuitterJeu button:hover {
+    background-color: #0055aa;
+}
+
+.confirm {
+    background: #3ea6ff;
+    color: #fff;
+    margin-right: 10px;
+}
+
+.overlayQuit a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.cancel {
+    background: #3ea6ff;
+    color: #fff;
+    margin-left: 10px;
+}
+
 img {
 
 }
@@ -107,6 +155,13 @@ main {
     right: 5px;
 }
 
+.taches.perdu img {
+    right: 10px;
+    max-height: 50px;
+    bottom: 15px;
+    right: 14px;
+}
+
 /*********************************
 
    Pied de page (barre des tâches)
@@ -152,6 +207,59 @@ footer a {
 }
 footer img {
     filter:drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+.iconeFichier {
+   position: absolute;
+}
+
+.app-container {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.app-link {
+    display: inline-block;
+    text-decoration: none;
+    outline: none;
+}
+
+.app-link img.maily {
+    display: block;
+    width: 70px;
+    height: 70px;
+}
+
+.lock-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #ffffffcc;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    color: #111;
+    pointer-events: none;
+}
+
+.app-container.lockedQuetes .app-link,
+.app-container.lockedQuetes .app-link img {
+    filter: grayscale(60%);
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.app-container.lockedQuetes .app-link {
+    pointer-events: none;
+}
+
+.app-container.lockedQuetes .lock-badge {
+    background: #ffffffd9;
 }
 
 .notification {

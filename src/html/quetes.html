@@ -27,11 +27,20 @@
         </div>
         <p>Répondre au patron</p>
     </div>-->
+
+    <div class="overlayQuit" id="overlayQuitQuetes">
+        <div class="popQuitterJeu" id="popQuitterJeuQuetes">
+            <h2>Voulez-vous quitter le jeu ?</h2>
+            <a href="MenuDemarrage.html"><button class="confirm" id="confirmBtnQuetes">Oui</button></a>
+            <button class="cancel" id="cancelBtnQuetes">Non</button>
+        </div>
+    </div>
+
     <div class="taches garderMail">
         <div>
             <img src="" alt="">
         </div>
-        <p>Garder les bons mails</p>
+        <p>Consulter le bon mail</p>
     </div>
     <div class="taches suppMail">
         <div>
@@ -42,7 +51,7 @@
 
 </main>
 <footer>
-    <a href="JavaScript:void(0)" onclick="fonctions" class="logo">
+    <a id="QuitPartieQuetes" onclick="fonctions" class="logo">
         <img src="../images/mail-fishing-logo.png" alt="logo du jeu">
     </a>
     <nav>
@@ -53,11 +62,21 @@
         <a href="">
             <img src="../images/Message.png" alt="icone de la messagerie">
         </a>-->
-        <a href="maily.html">
-            <img src="../images/mailyIcon.png" alt="icone de l'application de mail">
-        </a>
+        <div id="appContainerQuetes" class="app-container lockedQuetes">
+            <!-- .locked = icône verrouillée (changer ou retirer la classe pour déverrouiller) -->
+            <a href="maily.html" class="app-link" aria-disabled="true" tabindex="-1">
+                <img class="maily" src="../images/mailyIcon.png" alt="icone de l'application de mail">
+            </a>
+            <!-- badge cadenas (SVG inline pour pas dépendre d'une image externe) -->
+            <span id="lockerQuetes" class="lock-badge">
+                    <svg viewBox="0 0 24 24" width="14" height="14" role="img" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17 8h-1V6a4 4 0 0 0-8 0v2H7a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1zM9 6a3 3 0 0 1 6 0v2H9V6z"
+                              fill="currentColor"/>
+                    </svg>
+                </span>
+        </div>
         <a href="bureau.html">
-            <img src="../images/fichier-text-icon.png" alt="icone de l'application de fichier">
+            <img class="iconeFichier" src="../images/fichier-text-icon.png" alt="icone de l'application de fichier">
         </a>
     </nav>
     <!--
@@ -72,7 +91,8 @@
     </div>
     <img class="dialog-pointer" src="../images/dialog pointer.png" alt="pointeur de dialogue">
     <div class="bulle">
-        <p id="tuto-text">Bienvenue ! Voici tes quêtes. Tu devras accomplir chaque tâche pour progresser dans le jeu.</p>
+        <p id="tuto-text">Bienvenue ! Voici tes quêtes. Tu devras accomplir chaque tâche pour progresser dans le
+            jeu.</p>
         <div class="tuto-buttons">
             <button id="btn-suivant">Suivant</button>
             <button id="btn-ok" class="hidden">OK</button>
@@ -94,6 +114,7 @@
         const sonPop = new Audio("../music/pop-animal-crossing.m4a");
 
         const etapes = [
+
             { texte: "BONJOUR! Tu dois être le nouveau! Je suis ton Boss! Je vais t'expliquer ce que tu dois faire aujourd'hui !",
                 video: "../vidéos/frame1.mp4" },
             { texte: "ATTENTION! Je ne vais pas non plus te donner toute la journée pour faire ton travail Haha! Tu auras un peu de temps pour tout finir.",
@@ -102,6 +123,7 @@
                 video: "../vidéos/frame3.mp4" },
             { texte: "Bon.. au travail! Moi je vais m'occuper du problème qui concerne la timbreuse...",
                 video: "../vidéos/frame4.mp4" },
+
         ];
 
         let index = 0;

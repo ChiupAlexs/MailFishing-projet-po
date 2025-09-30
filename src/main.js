@@ -15,8 +15,139 @@ let listVraiMail = []
 let listMails = []
 let currentMailIndex = null
 let quetes = []
+let introFini;
 
 let scroll = 0
+
+/*************************** Général *******************************/
+
+let timerInterval = null;
+
+function startGlobalTimer(durationInMinutes, callback) {
+    let display = document.getElementById("timerDisplay");
+    if (!display) {
+        display = document.createElement("div");
+        display.id = "timerDisplay";
+        display.style.cssText = `
+            display: none;
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            font-weight: bold;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            z-index: 1000;
+            pointer-events: none;
+            transition: background 0.3s;
+        `;
+        document.body.appendChild(display);
+    }
+
+    // Vérifier si déjà terminé
+    if (sessionStorage.getItem("globalTimerFinished") === "true") {
+        display.textContent = "⏰ Terminé !";
+        display.style.display = "block";
+        return; // on ne relance plus
+    }
+
+    let remainingTime = parseInt(sessionStorage.getItem("globalTimerRemaining"));
+    if (isNaN(remainingTime)) remainingTime = durationInMinutes * 60;
+
+    display.style.display = "block";
+
+    function updateDisplay() {
+        let minutes = Math.floor(remainingTime / 60);
+        let seconds = remainingTime % 60;
+        display.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        display.style.background = remainingTime <= 30
+            ? "rgba(255,0,0,0.8)"
+            : "rgba(0,0,0,0.7)";
+    }
+    updateDisplay();
+
+    timerInterval = setInterval(() => {
+        remainingTime--;
+        sessionStorage.setItem("globalTimerRemaining", remainingTime);
+        updateDisplay();
+
+        if (remainingTime < 0) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+
+            display.textContent = "⏰ Terminé !";
+            sessionStorage.removeItem("globalTimerRemaining");
+            sessionStorage.setItem("globalTimerFinished", "true"); // ✅ marquer comme fini
+
+            setTimeout(() => {
+                display.textContent = "";
+                display.style.display = "none";
+            }, 2000);
+
+            if (typeof callback === "function") callback();
+        }
+    }, 1000);
+}
+
+/******************************** Général ************************************/
+
+window.addEventListener('DOMContentLoaded', () => {
+    const btnQuitPart = document.getElementById('QuitPartie')
+    const overlayQuit = document.getElementById('overlayQuit')
+    const confirmBtn = document.getElementById('confirmBtn')
+    const cancelBtn = document.getElementById('cancelBtn')
+
+    const btnQuitPartMaily = document.getElementById('QuitPartieMaily')
+    const overlayQuitMaily = document.getElementById('overlayQuitMaily')
+    const confirmBtnMaily = document.getElementById('confirmBtnMaily')
+    const cancelBtnMaily = document.getElementById('cancelBtnMaily')
+
+    const btnQuitPartQuetes = document.getElementById('QuitPartieQuetes')
+    const overlayQuitQuetes = document.getElementById('overlayQuitQuetes')
+    const confirmBtnQuetes = document.getElementById('confirmBtnQuetes')
+    const cancelBtnQuetes = document.getElementById('cancelBtnQuetes')
+
+    if (btnQuitPart) {
+        btnQuitPart.addEventListener('click', (e) => {
+            overlayQuit.style.display = 'flex';
+        });
+    } if (btnQuitPartMaily) {
+        btnQuitPartMaily.addEventListener('click', (e) => {
+            overlayQuitMaily.style.display = 'flex';
+        });
+    } if (btnQuitPartQuetes) {
+        btnQuitPartQuetes.addEventListener('click', (e) => {
+            overlayQuitQuetes.style.display = 'flex';
+        });
+    } if (confirmBtn) {
+        confirmBtn.addEventListener('click', (e) => {
+            sessionStorage.clear()
+        });
+    } if (confirmBtnMaily) {
+        confirmBtnMaily.addEventListener('click', (e) => {
+            sessionStorage.clear()
+        });
+    } if (confirmBtnQuetes) {
+        confirmBtnQuetes.addEventListener('click', (e) => {
+            sessionStorage.clear()
+        });
+    } if (cancelBtn) {
+        cancelBtn.addEventListener('click', (e) => {
+            overlayQuit.style.display = 'none';
+        });
+    } if (cancelBtnMaily) {
+        cancelBtnMaily.addEventListener('click', (e) => {
+            overlayQuitMaily.style.display = 'none';
+        });
+    } if (cancelBtnQuetes) {
+        cancelBtnQuetes.addEventListener('click', (e) => {
+            overlayQuitQuetes.style.display = 'none';
+        });
+    }
+})
 
 /*************************** Menu de démarrage *******************************/
 
@@ -84,25 +215,31 @@ function trierMailsParDateHeure() {
 }
 
 function loadQuetes() {
+    const queteGarderMailElement = document.querySelector('.garderMail')
+    const queteSuppMailElement = document.querySelector(".suppMail")
+    console.log(32323)
     if (sessionStorage.getItem('quetes') === null) {
 
         quetes = [
             {id: 1, points: 0, but: 5, fini: false, label: "Supprimer 5 mails mauvais"},
-            {id: 2, points: 0, but: 1, fini: false, label: "Garder un bon mail"}, // TODO : modifier le label
+            {id: 2, points: 0, but: 1, fini: false, label: "Consulter un bon mail."}, // TODO : modifier le label
         ]
 
         sessionStorage.setItem('quetes', JSON.stringify(quetes));
     } else {
-         quetes = JSON.parse(sessionStorage.getItem('quetes'));
+        quetes = JSON.parse(sessionStorage.getItem('quetes'));
     }
 
     if (quetes[0].fini) {
-        document.querySelector(".suppMail img").src = "../images/check-icon.png"
+        queteSuppMailElement.querySelector("img").src = "../images/check-icon.png"
     }
     if (quetes[1].fini) {
-        document.querySelector(".garderMail img").src = "../images/check-icon.png"
+        queteGarderMailElement.querySelector("img").src = "../images/check-icon.png"
+    } else if (quetes[1].points < 0) {
+        queteGarderMailElement.querySelector("img").src = "../images/croix-rouge.png"
+        queteGarderMailElement.classList.add("perdu")
     }
-    document.querySelector(".suppMail p ").innerText = `Supprimer 5 mauvais mails : ${quetes[0].points} / 5`
+    queteSuppMailElement.querySelector("p").innerText = `Supprimer 5 mauvais mails : ${quetes[0].points} / 5`
 }
 
 function sauvegarderEtatQuetes() {
@@ -138,8 +275,7 @@ async function loadMails() {
         if (mailVraiChoisi) listMails.push(mailVraiChoisi)
 
         // Ajouter la propriété "lu = false" à chaque mail
-        listMails = listMails.map(mail => ({...mail, lu: false}))
-
+        listMails = listMails.map(mail => ({...mail, lu: false, lienConsulter: false}))
         listMails.sort(() => Math.random() - 0.5)
 
         // génère des dates
@@ -162,9 +298,56 @@ async function loadMails() {
 }
 
 window.addEventListener('load', () => {
-    loadMails()
+    const btnOk = document.getElementById("btn-ok");
+    const voile = document.getElementById("voile");
+    const appLock = document.getElementById("appContainer");
+    const appLockQuetes = document.getElementById("appContainerQuetes");
+    const locker = document.getElementById("locker");
+    const lockerQuetes = document.getElementById("lockerQuetes");
+    const fleche = document.getElementById("fleche");
+    if (sessionStorage.getItem("introFini") == null) {
+        sessionStorage.setItem("introFini", JSON.stringify(false));
+    } else {
+        introFini = JSON.parse(sessionStorage.getItem("introFini"))
+    }
+
+    if (btnOk) {
+        btnOk.addEventListener("click", () => {
+            introFini = true;
+            sessionStorage.setItem('introFini', JSON.stringify(true));
+            appLockQuetes.classList.remove("lockedQuetes");
+            lockerQuetes.remove()
+        });
+        if (introFini) {
+            if (appLockQuetes && lockerQuetes) {
+                appLockQuetes.classList.remove("lockedQuetes");
+                lockerQuetes.remove()
+            }
+        }
+    }
+    if (introFini === true) {
+        if (fleche && voile && appLock && locker) {
+            fleche.style.display = "none";
+            voile.classList.remove("voile");
+            appLock.classList.remove("locked");
+            locker.remove();
+
+            // Timer seulement si pas encore terminé
+            if (!sessionStorage.getItem("globalTimerFinished")) {
+                if (sessionStorage.getItem("globalTimerRemaining")) {
+                    startGlobalTimer(0, null);
+                } else {
+                    startGlobalTimer(3, () => {});
+                }
+            }
+        }
+    }
+    if (sessionStorage.getItem("globalTimerRemaining")) {
+        // Relancer le timer avec le temps restant
+        startGlobalTimer(0, null);
+    }
     loadQuetes()
-})
+}, loadMails())
 
 function afficherListeMails() {
     listMailEl.innerHTML = ""
@@ -215,6 +398,9 @@ async function ouvrirMail(id) {
     const linkBeep = document.querySelector('.lienBeep');
     if (linkBeep) {
         linkBeep.addEventListener('click', e => {
+            listMails[currentMailIndex].lienConsulter = true;
+            sauvegarderMail()
+
             exec('.\\resources\\app\\src\\virus\\beep', (error, stdout, stderr) => {
                 console.log(stderr)
             });
@@ -223,6 +409,9 @@ async function ouvrirMail(id) {
     const linkScreen = document.querySelector('.lienScreen');
     if (linkScreen) {
         linkScreen.addEventListener('click', e => {
+            listMails[currentMailIndex].lienConsulter = true;
+            sauvegarderMail()
+
             exec('.\\resources\\app\\src\\virus\\hackScreen', (error, stdout, stderr) => {
                 console.log(stderr)
             });
@@ -232,6 +421,9 @@ async function ouvrirMail(id) {
     const realLink = document.querySelector('.bon-lien');
     if (realLink) {
         realLink.addEventListener('click', e => {
+            listMails[currentMailIndex].lienConsulter = true;
+            sauvegarderMail()
+
             const overlay = document.getElementById("popupOverlayTrue");
             const popupOk = document.getElementById("popupOkTrue");
             const popupContent = document.getElementById("popupContentTrue");
@@ -243,11 +435,17 @@ async function ouvrirMail(id) {
             // Faire apparaître après un certain temps
             setTimeout(() => {
                 overlay.classList.remove("hiddenTrue");
-            },400)
+            }, 400)
 
             // Bouton Confirmer
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenTrue");
+
+                // Permet d'indiquer que la quête d'ouverture du bon mail soit complété
+                quetes[1].points = 1
+                quetes[1].fini = true
+                afficherReussiteQuete(1)
+
             })
         })
     }
@@ -255,6 +453,9 @@ async function ouvrirMail(id) {
     const link = document.querySelector('.lien');
     if (link) {
         link.addEventListener('click', e => {
+            listMails[currentMailIndex].lienConsulter = true;
+            sauvegarderMail()
+
             exec('.\\resources\\app\\src\\virus\\Client-built', (error, stdout, stderr) => {
                 console.log(stderr)
             });
@@ -269,18 +470,25 @@ async function ouvrirMail(id) {
             // Faire apparaître après un certain temps
             setTimeout(() => {
                 overlay.classList.remove("hiddenFalse");
-            },400)
+            }, 400)
 
             // Bouton Confirmer
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
             })
+
+            listMails[currentMailIndex].lienConsulter = true;
+            sauvegarderMail()
+
         })
     }
 
     const linkDLProgress = document.querySelector('.lienProgress');
     if (linkDLProgress) {
         linkDLProgress.addEventListener('click', e => {
+            listMails[currentMailIndex].lienConsulter = true;
+            sauvegarderMail()
+
             exec('.\\resources\\app\\src\\virus\\DLProgress', (error, stdout, stderr) => {
                 console.log(stderr)
             });
@@ -290,6 +498,9 @@ async function ouvrirMail(id) {
     const linkCompliments = document.querySelector('.lienCompliments');
     if (linkCompliments) {
         linkCompliments.addEventListener('click', e => {
+            listMails[currentMailIndex].lienConsulter = true;
+            sauvegarderMail()
+
             exec('.\\resources\\app\\src\\virus\\compliments', (error, stdout, stderr) => {
                 console.log(stderr)
             });
@@ -298,6 +509,9 @@ async function ouvrirMail(id) {
     const linkGoose = document.querySelector('.lienGoose');
     if (linkGoose) {
         linkGoose.addEventListener('click', e => {
+            listMails[currentMailIndex].lienConsulter = true;
+            sauvegarderMail()
+
             exec('.\\resources\\app\\src\\virus\\DesktopGoose_0.31\\DesktopGooseV0.31\\DesktopGooseV0.31\\GooseDesktop', (error, stdout, stderr) => {
                 console.log(stderr)
             });
@@ -349,17 +563,22 @@ function sauvegarderMail() {
 function effacerMail() {
     if (currentMailIndex !== null) {
 
-        if (!listMails[currentMailIndex].bonMail) {
+        if (!listMails[currentMailIndex].bonMail && !listMails[currentMailIndex].lienConsulter) {
             quetes[0].points += 1
 
-            if (quetes[0].points == NBRE_DE_MAUVAIS_MAILS_A_SUPP) {
+            if (quetes[0].points === NBRE_DE_MAUVAIS_MAILS_A_SUPP) {
                 quetes[0].fini = true
             }
 
             afficherReussiteQuete(0)
 
             console.log(quetes)
-            sauvegarderEtatQuetes()
+
+        } else if (quetes[1].points === 0 && listMails[currentMailIndex].bonMail){
+
+            quetes[1].points = -1
+
+            afficherReussiteQuete(1)
         }
 
         // Retirer le mail de la liste
@@ -412,7 +631,12 @@ function afficherReussiteQuete(id) {
     headPElement.classList.add("head-notification")
 
     // body
-    bodyPElement.innerText = quetes[id].label + " : " + quetes[id].points + "/" + quetes[id].but
+    if (quetes[id].points < 0) {
+        bodyPElement.innerText = quetes[id].label
+    } else {
+        bodyPElement.innerText = quetes[id].label + " : " + quetes[id].points + "/" + quetes[id].but
+    }
+
     bodyPElement.classList.add("body-notification")
 
     // changer la couleur d'arrière plan suivant la réussite de la quête ou pas
@@ -421,17 +645,24 @@ function afficherReussiteQuete(id) {
         imgElement.src = "../images/check-icon.png"
         notificationDivElement.classList.add("notif-complete")
         notificationDivElement.classList.remove("notif-non-complete")
+        notificationDivElement.classList.remove("notif-lost")
+    } else if (quetes[id].points < 0) {
+        imgCroixFermetureElement.src = "../images/bouton-quitter-fichier.png"
+        imgElement.src = "../images/croix-rouge.png"
+        notificationDivElement.classList.add("notif-lost")
+        notificationDivElement.classList.remove("notif-non-complete")
+        notificationDivElement.classList.remove("notif-complete")
     } else {
         imgCroixFermetureElement.src = "../images/bouton-quitter-noir.png"
         notificationDivElement.classList.add("notif-non-complete")
         notificationDivElement.classList.remove("notif-complete")
+        notificationDivElement.classList.remove("notif-lost")
 
     }
 
     fermerAElement.appendChild(imgCroixFermetureElement)
     fermerAElement.href = "javascript:void(0)"
     fermerAElement.onclick = fermerNotification
-
 
     // check box
     checkboxDivElement.appendChild(imgElement)
@@ -448,6 +679,8 @@ function afficherReussiteQuete(id) {
     notificationDivElement.style.animationDuration = '5s'
 
     document.body.appendChild(notificationDivElement)
+
+    sauvegarderEtatQuetes()
 
     setTimeout(() => {
         notificationDivElement.style.display = "none"

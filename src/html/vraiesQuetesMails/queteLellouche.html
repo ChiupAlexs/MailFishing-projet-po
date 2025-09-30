@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offre d'emploi - WorkNet</title>
+    <link rel="stylesheet" href="../../css/vraiesQuetesMails/queteLellouche.css">
+</head>
+<body>
+
+<div class="container" id="Activation-licences">
+
+    <div class="licences">
+        <h2>Activation codes licences</h2>
+        <p>Entrez vos codes de licences pour activer les produits.</p>
+    </div>
+
+    <div class="inputLicence" id="licence-input">
+        <div class="licenceWord" id="licenceWord">
+            <input inputmode="latin" pattern="[A-Za-z0-9]{4}" maxlength="4" aria-label="segment 1" class="code"
+                   required/>
+            <span class="sep">-</span>
+            <input inputmode="latin" pattern="[A-Za-z0-9]{4}" maxlength="4" aria-label="segment 2" class="code"
+                   required/>
+            <span class="sep">-</span>
+            <input inputmode="latin" pattern="[A-Za-z0-9]{4}" maxlength="4" aria-label="segment 3" class="code"
+                   required/>
+            <span class="sep">-</span>
+            <input inputmode="latin" pattern="[A-Za-z0-9]{4}" maxlength="4" aria-label="segment 4" class="code"
+                   required/>
+        </div>
+        <div class="licenceExcel" id="licenceExcel">
+            <input inputmode="latin" pattern="[A-Za-z0-9]{4}" maxlength="4" aria-label="segment 1" class="code"
+                   required/>
+            <span class="sep">-</span>
+            <input inputmode="latin" pattern="[A-Za-z0-9]{4}" maxlength="4" aria-label="segment 2" class="code"
+                   required/>
+            <span class="sep">-</span>
+            <input inputmode="latin" pattern="[A-Za-z0-9]{4}" maxlength="4" aria-label="segment 3" class="code"
+                   required/>
+            <span class="sep">-</span>
+            <input inputmode="latin" pattern="[A-Za-z0-9]{4}" maxlength="4" aria-label="segment 4" class="code"
+                   required/>
+        </div>
+    </div>
+
+    <p class="indice">Format : <code>XXXX-XXXX-XXXX-XXXX</code> (lettres et chiffres)</p>
+
+    <div class="apply">
+        <button id="apply-btn">Activer</button>
+    </div>
+</div>
+
+<div class="popConfirm" id="confirmPop">
+    <h2>Vos licences ont bien été activées</h2>
+    <img src="../../images/check-icon.png" height="90" width="90"/>
+    <p>Vous pouvez fermer la page.</p>
+    <div class="fermer">
+        <button id="closeBtn" class="closeBtn">Fermer</button>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen();
+        }
+
+        const applyBtn = document.getElementById("apply-btn");
+        const ActLic = document.getElementById("Activation-licences");
+        const confirmPop = document.getElementById("confirmPop");
+        const closeBtn = document.getElementById("closeBtn");
+
+        const fields = document.querySelectorAll(".code");
+
+        // Message d’erreur
+        const errorMsg = document.createElement("p");
+        errorMsg.style.color = "red";
+        errorMsg.style.fontSize = "14px";
+        errorMsg.style.display = "none";
+        errorMsg.textContent = "Chaque champ doit contenir exactement 4 caractères.";
+        ActLic.appendChild(errorMsg);
+
+        // Auto-majuscule + filtre caractères
+        fields.forEach(f => {
+            f.addEventListener("input", () => {
+                f.value = f.value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 4);
+                // Enlever la bordure rouge si l’utilisateur corrige
+                if (f.value.length === 4) {
+                    f.style.borderColor = "";
+                }
+            });
+        });
+
+        // Validation
+        applyBtn.addEventListener("click", () => {
+            let allFilled = true;
+
+            fields.forEach(f => {
+                if (f.value.length !== 4) {
+                    allFilled = false;
+                    f.style.borderColor = "red"; // met en évidence le champ incorrect
+                }
+            });
+
+            if (!allFilled) {
+                errorMsg.style.display = "block";
+                return; // stop
+            }
+
+            errorMsg.style.display = "none";
+            ActLic.style.display = "none";
+            confirmPop.style.display = "block";
+        });
+
+        closeBtn.addEventListener("click", () => {
+            window.close();
+        });
+    });
+</script>
+</body>
+</html>

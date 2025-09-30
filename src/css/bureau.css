@@ -8,6 +8,12 @@
     background: transparent;
 }
 
+.voile {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
 body {
     padding: 0;
     margin: 0;
@@ -16,6 +22,53 @@ body {
     background-repeat: no-repeat;
     width: 100%;
     height: 100vh;
+}
+
+.overlayQuit {
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(6px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popQuitterJeu {
+    text-align: center;
+}
+
+.popQuitterJeu button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.popQuitterJeu button:hover {
+    background-color: #0055aa;
+}
+
+.confirm {
+    background: #3ea6ff;
+    color: #fff;
+    margin-right: 10px;
+}
+
+.overlayQuit a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.cancel {
+    background: #3ea6ff;
+    color: #fff;
+    margin-left: 10px;
 }
 
 main {
@@ -31,8 +84,9 @@ main {
     max-width: 100px;
     text-align: center;
 }
+
 .dossier p,
-.fichier p{
+.fichier p {
     display: inline-block;
     margin: 3px 0;
     width: 100%;
@@ -41,10 +95,11 @@ main {
     font-weight: bold;
     font-size: 0.8rem;
 }
+
 .dossier img,
-.fichier img{
+.fichier img {
     margin: 3px auto;
-    filter:drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
 }
 
 /*********************************
@@ -70,6 +125,7 @@ footer {
 footer .logo img {
     margin: 5px;
 }
+
 footer nav img {
     height: 70px;
     margin: 20px;
@@ -78,6 +134,7 @@ footer nav img {
 .icon-notification img {
     max-height: 70px;
 }
+
 .icon-notification {
     margin-right: 10px;
 }
@@ -85,13 +142,69 @@ footer nav img {
 footer nav {
     padding: 0;
     margin: 0 auto;
-    text-align: center; /* Enlever une fois les autres application implémentées*/
+    text-align: center;
 }
+
 footer a {
     text-decoration: none;
 }
+
 footer img {
-    filter:drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+.app-container {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.app-link {
+    display: inline-block;
+    text-decoration: none;
+    outline: none;
+}
+
+.app-link img.maily {
+    display: block;
+    width: 70px;
+    height: 70px;
+}
+
+.lock-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #ffffffcc;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    color: #111;
+    pointer-events: none;
+}
+
+.app-container.locked .app-link,
+.app-container.locked .app-link img {
+    filter: grayscale(60%);
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.app-container.locked .app-link {
+    pointer-events: none;
+}
+
+.app-container.locked .lock-badge {
+    background: #ffffffd9;
+}
+
+.notification {
+    position: fixed;
+
 }
 
 
@@ -105,6 +218,7 @@ footer img {
     src: url("../fonts/orbitron.woff2") format("woff2");
     font-weight: normal;
 }
+
 @font-face {
     font-family: "Sora";
     src: url("../fonts/Sora-VariableFont_wght.ttf") format("ttf");

@@ -19,6 +19,14 @@
         <p class="mailGestion">info.gestion@gngngn.ch</p>
     </div>
 
+    <div class="overlayQuit" id="overlayQuitMaily">
+        <div class="popQuitterJeu" id="popQuitterJeuMaily">
+            <h2>Voulez-vous quitter le jeu ?</h2>
+            <a href="MenuDemarrage.html"><button class="confirm" id="confirmBtnMaily">Oui</button></a>
+            <button class="cancel" id="cancelBtnMaily">Non</button>
+        </div>
+    </div>
+
     <div class="containerHautMail">
         <img onclick="fermerMail()" class="bouton-retour" src="../images/bouton-retour.png" alt="mail ouvert"/>
 
@@ -86,7 +94,7 @@
     </div>
 </main>
 <footer>
-    <a href="JavaScript:void(0)" onclick="fonctions" class="logo">
+    <a id="QuitPartieMaily" onclick="fonctions" class="logo">
         <img src="../images/mail-fishing-logo.png" alt="logo du jeu">
     </a>
     <nav>

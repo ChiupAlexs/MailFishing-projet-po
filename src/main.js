@@ -19,6 +19,63 @@ let introFini;
 
 let scroll = 0
 
+/******************************** Général ************************************/
+
+window.addEventListener('DOMContentLoaded', () => {
+    const btnQuitPart = document.getElementById('QuitPartie')
+    const overlayQuit = document.getElementById('overlayQuit')
+    const confirmBtn = document.getElementById('confirmBtn')
+    const cancelBtn = document.getElementById('cancelBtn')
+
+    const btnQuitPartMaily = document.getElementById('QuitPartieMaily')
+    const overlayQuitMaily = document.getElementById('overlayQuitMaily')
+    const confirmBtnMaily = document.getElementById('confirmBtnMaily')
+    const cancelBtnMaily = document.getElementById('cancelBtnMaily')
+
+    const btnQuitPartQuetes = document.getElementById('QuitPartieQuetes')
+    const overlayQuitQuetes = document.getElementById('overlayQuitQuetes')
+    const confirmBtnQuetes = document.getElementById('confirmBtnQuetes')
+    const cancelBtnQuetes = document.getElementById('cancelBtnQuetes')
+
+    if (btnQuitPart) {
+        btnQuitPart.addEventListener('click', (e) => {
+            overlayQuit.style.display = 'flex';
+        });
+    } if (btnQuitPartMaily) {
+        btnQuitPartMaily.addEventListener('click', (e) => {
+            overlayQuitMaily.style.display = 'flex';
+        });
+    } if (btnQuitPartQuetes) {
+        btnQuitPartQuetes.addEventListener('click', (e) => {
+            overlayQuitQuetes.style.display = 'flex';
+        });
+    } if (confirmBtn) {
+        confirmBtn.addEventListener('click', (e) => {
+            sessionStorage.clear()
+        });
+    } if (confirmBtnMaily) {
+        confirmBtnMaily.addEventListener('click', (e) => {
+            sessionStorage.clear()
+        });
+    } if (confirmBtnQuetes) {
+        confirmBtnQuetes.addEventListener('click', (e) => {
+            sessionStorage.clear()
+        });
+    } if (cancelBtn) {
+        cancelBtn.addEventListener('click', (e) => {
+            overlayQuit.style.display = 'none';
+        });
+    } if (cancelBtnMaily) {
+        cancelBtnMaily.addEventListener('click', (e) => {
+            overlayQuitMaily.style.display = 'none';
+        });
+    } if (cancelBtnQuetes) {
+        cancelBtnQuetes.addEventListener('click', (e) => {
+            overlayQuitQuetes.style.display = 'none';
+        });
+    }
+})
+
 /*************************** Menu de démarrage *******************************/
 
 function quitter() {

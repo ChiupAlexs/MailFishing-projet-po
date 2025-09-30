@@ -421,32 +421,40 @@ async function ouvrirMail(id) {
     const realLink = document.querySelector('.bon-lien');
     if (realLink) {
         realLink.addEventListener('click', e => {
+
+            if (listMails[currentMailIndex].lienConsulter === true) {
+                realLink.href = "javascript:void(0)"
+                realLink.target = "_self"
+            }
+
             listMails[currentMailIndex].lienConsulter = true;
             sauvegarderMail()
 
-            const overlay = document.getElementById("popupOverlayTrue");
-            const popupOk = document.getElementById("popupOkTrue");
-            const popupContent = document.getElementById("popupContentTrue");
-            const popupTitle = document.getElementById("popupTitleTrue");
+            if (quetes[1].fini === false) {
+                const overlay = document.getElementById("popupOverlayTrue");
+                const popupOk = document.getElementById("popupOkTrue");
+                const popupContent = document.getElementById("popupContentTrue");
+                const popupTitle = document.getElementById("popupTitleTrue");
 
-            // Ajoute l'événement sur tous les liens avec la classe .lien
-            popupTitle.innerHTML = "Bravo !"
-            popupContent.innerHTML = "Vous avez trouvé le bon mail ☝️🤓";
-            // Faire apparaître après un certain temps
-            setTimeout(() => {
-                overlay.classList.remove("hiddenTrue");
-            }, 400)
+                // Ajoute l'événement sur tous les liens avec la classe .lien
+                popupTitle.innerHTML = "Bravo !"
+                popupContent.innerHTML = "Vous avez trouvé le bon mail ☝️🤓"
+                // Faire apparaître après un certain temps
+                setTimeout(() => {
+                    overlay.classList.remove("hiddenTrue");
+                }, 400)
 
-            // Bouton Confirmer
-            popupOk.addEventListener("click", () => {
-                overlay.classList.add("hiddenTrue");
+                // Bouton Confirmer
+                popupOk.addEventListener("click", () => {
+                    overlay.classList.add("hiddenTrue");
 
-                // Permet d'indiquer que la quête d'ouverture du bon mail soit complété
-                quetes[1].points = 1
-                quetes[1].fini = true
-                afficherReussiteQuete(1)
+                    // Permet d'indiquer que la quête d'ouverture du bon mail soit complété
+                    quetes[1].points = 1
+                    quetes[1].fini = true
+                    afficherReussiteQuete(1)
 
-            })
+                })
+            }
         })
     }
 

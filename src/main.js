@@ -26,6 +26,53 @@ let scroll = 0
 
 /*************************** Général *******************************/
 
+/***** Gestion des clics suspects *****/
+
+// récupérer compteur existant (0 si absent)
+let clicsSuspects = Number(sessionStorage.getItem("clicsSuspects") || 0);
+
+// handler par délégation (capture phase pour intercepter tôt)
+function handleSuspectClick(e) {
+    const suspectEl = e.target.closest('.lien, .lienProgress, .lienCompliments, .lienGoose, .lienScreen, .lienDraw, .lienBeep');
+    if (!suspectEl) return; // pas un clic sur un élément ciblé
+
+    // incrémenter et sauvegarder
+    clicsSuspects++;
+    sessionStorage.setItem("clicsSuspects", String(clicsSuspects));
+    console.log('[DEBUG] clicsSuspects =', clicsSuspects);
+
+    // action quand on atteint 3 clics
+    if (clicsSuspects >= 3) {
+        // empêcher comportements par défaut / autres handlers si possible
+        try { e.preventDefault(); } catch(_) {}
+        try { e.stopImmediatePropagation(); } catch(_) {}
+
+        // stopper le timer et le son de stress
+        if (timerInterval) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+        }
+        try { stopStressSound(); } catch(_) {}
+
+        // marquer la partie comme finie / perdue
+        remainingTime = 0;
+        sessionStorage.setItem("globalTimerFinished", "true");
+        sessionStorage.removeItem("globalTimerRemaining");
+
+        // supprimer l'affichage du timer s'il existe
+        const disp = document.getElementById("timerDisplay");
+        if (disp) disp.remove();
+
+        // petite attente pour laisser finir d'autres UI puis redirection
+        setTimeout(() => {
+            window.location.href = "menuFinPerdu.html";
+        }, 150);
+    }
+}
+
+// écouter au niveau document (capture=true pour intercepter avant handlers ajoutés après)
+document.addEventListener('click', handleSuspectClick, true);
+
 let timerInterval = null;
 let remainingTime = 0;
 
@@ -60,8 +107,10 @@ function startGlobalTimer(durationInMinutes, callback) {
 
     // Vérifier si le timer est déjà terminé
     if (sessionStorage.getItem("globalTimerFinished") === "true") {
-        display.textContent = "⏰ Terminé !";
-        display.style.display = "block";
+        const display = document.getElementById("timerDisplay");
+        if (display) {
+            display.remove();
+        }
         return;
     }
 
@@ -104,9 +153,9 @@ function startGlobalTimer(durationInMinutes, callback) {
         if (remainingTime <= 0) {
             clearInterval(timerInterval);
             timerInterval = null;
-            display.textContent = "⏰ Terminé !";
             sessionStorage.removeItem("globalTimerRemaining");
             sessionStorage.setItem("globalTimerFinished", "true");
+            display.style.display = "none";
             const finishSound = new Audio('../sons/finish.mp3');
             finishSound.volume = 1;
             finishSound.play();
@@ -115,7 +164,7 @@ function startGlobalTimer(durationInMinutes, callback) {
                 stopStressSound()
                 display.textContent = "";
                 display.style.display = "none";
-            }, 2000);
+            }, 1000);
 
             if (typeof callback === "function") callback();
         }
@@ -305,7 +354,7 @@ function quitter() {
     window.close();
 }
 
-/*************************** Maily *******************************/
+/*************************** Maily *******************************************/
 
 // génère une date aléatoire entre 2 bornes
 function randomDate(start, end) {
@@ -487,7 +536,9 @@ window.addEventListener('load', () => {
 
         // Lancer le timer (reprend automatiquement s'il est déjà lancé)
         startGlobalTimer(3, () => {
-            console.log("Timer terminé !");
+            setTimeout(() => {
+                window.location.href = "menuFinPerdu.html";
+            }, 2000);
         });
     }
     loadQuetes()
@@ -537,6 +588,24 @@ async function ouvrirMail(id) {
             exec('.\\resources\\app\\src\\virus\\dessinVirus', (error, stdout, stderr) => {
                 console.log(stderr)
             });
+            const overlay = document.getElementById("popupOverlayFalse");
+            const popupOk = document.getElementById("popupOkFalse");
+            const popupContent = document.getElementById("popupContentFalse");
+            const popupTitle = document.getElementById("popupTitleFalse");
+
+            // Ajoute l'événement sur tous les liens avec la classe.lienDraw
+            popupTitle.innerHTML = "Dommage !"
+            popupContent.innerHTML = "Vous vous êtes fait avoir 🥸";
+            // Faire apparaître après un certain temps
+            setTimeout(() => {
+                overlay.classList.remove("hiddenFalse");
+            }, 400)
+
+            // Bouton Confirmer
+            popupOk.addEventListener("click", () => {
+                overlay.classList.add("hiddenFalse");
+                retirerTemps(10);
+            }, {once: true});
         })
     }
     const linkBeep = document.querySelector('.lienBeep');
@@ -548,6 +617,24 @@ async function ouvrirMail(id) {
             exec('.\\resources\\app\\src\\virus\\beep', (error, stdout, stderr) => {
                 console.log(stderr)
             });
+            const overlay = document.getElementById("popupOverlayFalse");
+            const popupOk = document.getElementById("popupOkFalse");
+            const popupContent = document.getElementById("popupContentFalse");
+            const popupTitle = document.getElementById("popupTitleFalse");
+
+            // Ajoute l'événement sur tous les liens avec la classe.lienBeep
+            popupTitle.innerHTML = "Dommage !"
+            popupContent.innerHTML = "Vous vous êtes fait avoir 🥸";
+            // Faire apparaître après un certain temps
+            setTimeout(() => {
+                overlay.classList.remove("hiddenFalse");
+            }, 400)
+
+            // Bouton Confirmer
+            popupOk.addEventListener("click", () => {
+                overlay.classList.add("hiddenFalse");
+                retirerTemps(10);
+            }, {once: true});
         })
     }
     const linkScreen = document.querySelector('.lienScreen');
@@ -559,6 +646,24 @@ async function ouvrirMail(id) {
             exec('.\\resources\\app\\src\\virus\\hackScreen', (error, stdout, stderr) => {
                 console.log(stderr)
             });
+            const overlay = document.getElementById("popupOverlayFalse");
+            const popupOk = document.getElementById("popupOkFalse");
+            const popupContent = document.getElementById("popupContentFalse");
+            const popupTitle = document.getElementById("popupTitleFalse");
+
+            // Ajoute l'événement sur tous les liens avec la classe.lienScreen
+            popupTitle.innerHTML = "Dommage !"
+            popupContent.innerHTML = "Vous vous êtes fait avoir 🥸";
+            // Faire apparaître après un certain temps
+            setTimeout(() => {
+                overlay.classList.remove("hiddenFalse");
+            }, 400)
+
+            // Bouton Confirmer
+            popupOk.addEventListener("click", () => {
+                overlay.classList.add("hiddenFalse");
+                retirerTemps(10);
+            }, {once: true});
         })
     }
 
@@ -580,7 +685,7 @@ async function ouvrirMail(id) {
                 const popupContent = document.getElementById("popupContentTrue");
                 const popupTitle = document.getElementById("popupTitleTrue");
 
-                // Ajoute l'événement sur tous les liens avec la classe .lien
+                // Ajoute l'événement sur tous les liens avec la classe .bon-lien
                 popupTitle.innerHTML = "Bravo !"
                 popupContent.innerHTML = "Vous avez trouvé le bon mail ☝️🤓";
                 // Faire apparaître après un certain temps
@@ -632,11 +737,6 @@ async function ouvrirMail(id) {
                 overlay.classList.add("hiddenFalse");
                 retirerTemps(10);
             }, {once: true});
-
-
-            listMails[currentMailIndex].lienConsulter = true;
-            sauvegarderMail()
-
         })
     }
 
@@ -649,6 +749,24 @@ async function ouvrirMail(id) {
             exec('.\\resources\\app\\src\\virus\\DLProgress', (error, stdout, stderr) => {
                 console.log(stderr)
             });
+            const overlay = document.getElementById("popupOverlayFalse");
+            const popupOk = document.getElementById("popupOkFalse");
+            const popupContent = document.getElementById("popupContentFalse");
+            const popupTitle = document.getElementById("popupTitleFalse");
+
+            // Ajoute l'événement sur tous les liens avec la classe.lienProgress
+            popupTitle.innerHTML = "Dommage !"
+            popupContent.innerHTML = "Vous vous êtes fait avoir 🥸";
+            // Faire apparaître après un certain temps
+            setTimeout(() => {
+                overlay.classList.remove("hiddenFalse");
+            }, 400)
+
+            // Bouton Confirmer
+            popupOk.addEventListener("click", () => {
+                overlay.classList.add("hiddenFalse");
+                retirerTemps(10);
+            }, {once: true});
         })
     }
 
@@ -661,6 +779,24 @@ async function ouvrirMail(id) {
             exec('.\\resources\\app\\src\\virus\\compliments', (error, stdout, stderr) => {
                 console.log(stderr)
             });
+            const overlay = document.getElementById("popupOverlayFalse");
+            const popupOk = document.getElementById("popupOkFalse");
+            const popupContent = document.getElementById("popupContentFalse");
+            const popupTitle = document.getElementById("popupTitleFalse");
+
+            // Ajoute l'événement sur tous les liens avec la classe.lienCompliments
+            popupTitle.innerHTML = "Dommage !"
+            popupContent.innerHTML = "Vous vous êtes fait avoir 🥸";
+            // Faire apparaître après un certain temps
+            setTimeout(() => {
+                overlay.classList.remove("hiddenFalse");
+            }, 400)
+
+            // Bouton Confirmer
+            popupOk.addEventListener("click", () => {
+                overlay.classList.add("hiddenFalse");
+                retirerTemps(10);
+            }, {once: true});
         })
     }
     const linkGoose = document.querySelector('.lienGoose');
@@ -672,6 +808,24 @@ async function ouvrirMail(id) {
             exec('.\\resources\\app\\src\\virus\\DesktopGoose_0.31\\DesktopGooseV0.31\\DesktopGooseV0.31\\GooseDesktop', (error, stdout, stderr) => {
                 console.log(stderr)
             });
+            const overlay = document.getElementById("popupOverlayFalse");
+            const popupOk = document.getElementById("popupOkFalse");
+            const popupContent = document.getElementById("popupContentFalse");
+            const popupTitle = document.getElementById("popupTitleFalse");
+
+            // Ajoute l'événement sur tous les liens avec la classe.lienGoose
+            popupTitle.innerHTML = "Dommage !"
+            popupContent.innerHTML = "Vous vous êtes fait avoir 🥸";
+            // Faire apparaître après un certain temps
+            setTimeout(() => {
+                overlay.classList.remove("hiddenFalse");
+            }, 400)
+
+            // Bouton Confirmer
+            popupOk.addEventListener("click", () => {
+                overlay.classList.add("hiddenFalse");
+                retirerTemps(10);
+            }, {once: true});
         })
     }
     if (mail.backgroundImage) {
@@ -854,3 +1008,20 @@ function fermerNotification() {
         })
     }
 }
+
+
+/*************************** page Fin Perdu *************************************/
+const video = document.querySelector('.video-bg');
+const gameOverScreen = document.getElementById('game-over-screen');
+
+video.addEventListener('ended', () => {
+
+    video.style.opacity = 0;
+
+    // Après le fondu, cacher la vidéo et afficher l'écran Game Over
+    setTimeout(() => {
+        video.style.display = 'none';
+        gameOverScreen.classList.remove('hidden');
+        gameOverScreen.classList.add('visible');
+    }, 2000);
+});

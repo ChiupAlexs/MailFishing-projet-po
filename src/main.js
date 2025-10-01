@@ -3,9 +3,9 @@
 const {exec} = require("child_process");
 const events = require("node:events");
 
-
 const errorSound = new Audio('../sons/error.m4a');
 const successSound = new Audio('../sons/success.m4a');
+
 const mailOuvertEl = document.getElementById('mail-ouvert')
 const boutonRetourEl = document.querySelector('.bouton-retour')
 const listMailEl = document.querySelector('.containerMails')
@@ -565,10 +565,12 @@ async function ouvrirMail(id) {
     const realLink = document.querySelector('.bon-lien');
     if (realLink) {
         realLink.addEventListener('click', e => {
+
             if (listMails[currentMailIndex].lienConsulter === true) {
                 realLink.href = "javascript:void(0)"
                 realLink.target = "_self"
             }
+
             listMails[currentMailIndex].lienConsulter = true;
             sauvegarderMail()
 
@@ -577,7 +579,6 @@ async function ouvrirMail(id) {
                 const popupOk = document.getElementById("popupOkTrue");
                 const popupContent = document.getElementById("popupContentTrue");
                 const popupTitle = document.getElementById("popupTitleTrue");
-
 
                 // Ajoute l'événement sur tous les liens avec la classe .lien
                 popupTitle.innerHTML = "Bravo !"
@@ -592,12 +593,14 @@ async function ouvrirMail(id) {
                     overlay.classList.add("hiddenTrue");
                     ajouterTemps(15)
 
+
                     // Permet d'indiquer que la quête d'ouverture du bon mail soit complété
                     quetes[1].points = 1
                     quetes[1].fini = true
                     afficherReussiteQuete(1)
 
                 }, {once: true})
+
             }
         })
     }
@@ -629,6 +632,7 @@ async function ouvrirMail(id) {
                 overlay.classList.add("hiddenFalse");
                 retirerTemps(10);
             }, {once: true});
+
 
             listMails[currentMailIndex].lienConsulter = true;
             sauvegarderMail()

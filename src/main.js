@@ -2,6 +2,7 @@
 
 const {exec} = require("child_process");
 const events = require("node:events");
+
 const mailOuvertEl = document.getElementById('mail-ouvert')
 const boutonRetourEl = document.querySelector('.bouton-retour')
 const listMailEl = document.querySelector('.containerMails')
@@ -91,111 +92,7 @@ function startGlobalTimer(durationInMinutes, callback) {
     }, 1000);
 }
 
-function stopStressSound() {
-    stressSound.pause();
-    stressSound.currentTime = 0;
-    stressSound = null;
-}
-
-// Soustrait un temps au timer global et met à jour sessionStorage
-function retirerTemps(secondes) {
-    if (remainingTime <= 0) return;
-
-    remainingTime -= secondes;
-    if (remainingTime < 0) remainingTime = 0;
-
-    sessionStorage.setItem("globalTimerRemaining", remainingTime);
-
-    const display = document.getElementById("timerDisplay");
-    if (display) {
-        let minutes = Math.floor(remainingTime / 60);
-        let secs = remainingTime % 60;
-        display.textContent = `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
-        display.style.background = remainingTime <= 30
-            ? "rgba(255,0,0,0.8)"
-            : "rgba(0,0,0,0.7)";
-    }
-
-    // Animation visuelle du chiffre rouge
-    const anim = document.createElement("div");
-    anim.textContent = `-${secondes}s`;
-    anim.style.cssText = `
-        position: fixed;
-        top: 50px;
-        left: 50%;
-        transform: translateX(-50%);
-        font-family: 'Luckiest Guy', cursive;
-        font-size: 24px;
-        font-weight: bold;
-        color: red;
-        opacity: 1;
-        pointer-events: none;
-        z-index: 2000;
-        transition: transform 1s ease, opacity 1s ease;
-    `;
-    document.body.appendChild(anim);
-
-    setTimeout(() => {
-        anim.style.transform = "translate(-50%, 50px)";
-        anim.style.opacity = "0";
-    }, 50);
-
-    setTimeout(() => anim.remove(), 1050);
-
-    const errorSound = new Audio('../sons/error.m4a');
-    errorSound.volume = 0.2;
-    errorSound.play();
-
-}
-
-
-// Ajoute un temps au timer global et met à jour sessionStorage
-function ajouterTemps(secondes) {
-    if (remainingTime <= 0) return;
-
-    remainingTime += secondes;
-
-    sessionStorage.setItem("globalTimerRemaining", remainingTime);
-
-    const display = document.getElementById("timerDisplay");
-    if (display) {
-        let minutes = Math.floor(remainingTime / 60);
-        let secs = remainingTime % 60;
-        display.textContent = `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
-        display.style.background = remainingTime <= 30
-            ? "rgba(255,0,0,0.8)"
-            : "rgba(0,0,0,0.7)";
-    }
-
-    // Animation visuelle du chiffre vert
-    const anim = document.createElement("div");
-    anim.textContent = `+${secondes}s`;
-    anim.style.cssText = `
-        position: fixed;
-        top: 50px;
-        left: 50%;
-        transform: translateX(-50%);
-        font-family: 'Luckiest Guy', cursive;
-        font-size: 24px;
-        font-weight: bold;
-        color: limegreen;
-        opacity: 1;
-        pointer-events: none;
-        z-index: 2000;
-        transition: transform 1s ease, opacity 1s ease;
-    `;
-    document.body.appendChild(anim);
-
-    setTimeout(() => {
-        anim.style.transform = "translate(-50%, 50px)";
-        anim.style.opacity = "0";
-    }, 50);
-
-    setTimeout(() => anim.remove(), 1050);
-}
-
 /******************************** Général ************************************/
-
 
 window.addEventListener('DOMContentLoaded', () => {
     const btnQuitPart = document.getElementById('QuitPartie')
@@ -524,45 +421,42 @@ async function ouvrirMail(id) {
     const realLink = document.querySelector('.bon-lien');
     if (realLink) {
         realLink.addEventListener('click', e => {
+
             if (listMails[currentMailIndex].lienConsulter === true) {
                 realLink.href = "javascript:void(0)"
                 realLink.target = "_self"
             }
+
             listMails[currentMailIndex].lienConsulter = true;
-            
             sauvegarderMail()
-          
+
             if (quetes[1].fini === false) {
-            const overlay = document.getElementById("popupOverlayTrue");
-            const popupOk = document.getElementById("popupOkTrue");
-            const popupContent = document.getElementById("popupContentTrue");
-            const popupTitle = document.getElementById("popupTitleTrue");
+                const overlay = document.getElementById("popupOverlayTrue");
+                const popupOk = document.getElementById("popupOkTrue");
+                const popupContent = document.getElementById("popupContentTrue");
+                const popupTitle = document.getElementById("popupTitleTrue");
 
-            popupTitle.innerHTML = "Bravo !";
-            popupContent.innerHTML = "Vous avez trouvé le bon mail ☝️🤓";
+                // Ajoute l'événement sur tous les liens avec la classe .lien
+                popupTitle.innerHTML = "Bravo !"
+                popupContent.innerHTML = "Vous avez trouvé le bon mail ☝️🤓"
+                // Faire apparaître après un certain temps
+                setTimeout(() => {
+                    overlay.classList.remove("hiddenTrue");
+                }, 400)
 
-            setTimeout(() => {
-                overlay.classList.remove("hiddenTrue");
-            }, 400);
+                // Bouton Confirmer
+                popupOk.addEventListener("click", () => {
+                    overlay.classList.add("hiddenTrue");
 
-            // Listener unique
-            popupOk.addEventListener("click", () => {
-                overlay.classList.add("hiddenTrue");
-                ajouterTemps(15);
+                    // Permet d'indiquer que la quête d'ouverture du bon mail soit complété
+                    quetes[1].points = 1
+                    quetes[1].fini = true
+                    afficherReussiteQuete(1)
 
-                // Marque la quête comme terminée si ce n'est pas déjà fait
-                    quetes[1].points = 1;
-                    quetes[1].fini = true;
-                    afficherReussiteQuete(1);
-                
+                })
             }
-                listMails[currentMailIndex].lienConsulter = true;
-                sauvegarderMail();
-
-            }, {once: true});
-        });
+        })
     }
-
 
     const link = document.querySelector('.lien');
     if (link) {
@@ -589,10 +483,7 @@ async function ouvrirMail(id) {
             // Bouton Confirmer
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
-
-                retirerTemps(10);
-            }, {once: true});
-
+            })
 
             listMails[currentMailIndex].lienConsulter = true;
             sauvegarderMail()
@@ -656,7 +547,6 @@ async function ouvrirMail(id) {
     listMails[id].lu = true
     sauvegarderMail()
 }
-
 
 function fermerMail() {
 

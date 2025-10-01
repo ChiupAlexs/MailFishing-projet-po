@@ -438,6 +438,28 @@ p {
     bottom: 10px;
 
 }
+a.lien,
+a.lienDraw,
+a.lienBeep,
+a.lienScreen,
+a.bon-lien,
+a.lienProgress,
+a.lienCompliments,
+a.lienGoose {
+    color: #41839a;
+}
+
+.lien:hover,
+.lienDraw:hover,
+.lienBeep:hover,
+.lienScreen:hover,
+.bon-lien:hover,
+.lienProgress:hover,
+.lienCompliments:hover,
+.lienGoose:hover {
+    color: #204bab;
+}
+
 /*@keyframes slideOut {
     from{
         transform: translateX(0);

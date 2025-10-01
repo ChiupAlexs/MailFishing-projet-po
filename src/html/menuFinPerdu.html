@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Game Over</title>
+    <link rel="stylesheet" href="../css/menuFinPerdu.css">
+</head>
+<body>
+<video class="video-bg" autoplay>
+    <source src="../vidéos/finPerdu.mp4" type="video/mp4">
+</video>
+
+<div id="game-over-screen" class="hidden">
+    <h1>Game Over</h1>
+    <button class="retour" onclick="sessionStorage.clear();window.location.href='MenuDemarrage.html'">Retour au menu</button>
+</div>
+
+<script src="../main.js"></script>
+</body>
+</html>

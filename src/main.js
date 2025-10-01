@@ -4,7 +4,6 @@ const {exec} = require("child_process");
 const events = require("node:events");
 
 
-
 const mailOuvertEl = document.getElementById('mail-ouvert')
 const boutonRetourEl = document.querySelector('.bouton-retour')
 const listMailEl = document.querySelector('.containerMails')
@@ -122,9 +121,9 @@ function startGlobalTimer(durationInMinutes, callback) {
 }
 
 function stopStressSound() {
-        stressSound.pause();
-        stressSound.currentTime = 0;
-        stressSound = null;
+    stressSound.pause();
+    stressSound.currentTime = 0;
+    stressSound = null;
 }
 
 // Soustrait un temps au timer global et met à jour sessionStorage
@@ -561,7 +560,6 @@ async function ouvrirMail(id) {
     const realLink = document.querySelector('.bon-lien');
     if (realLink) {
         realLink.addEventListener('click', e => {
-
             listMails[currentMailIndex].lienConsulter = true;
             sauvegarderMail()
 
@@ -570,57 +568,32 @@ async function ouvrirMail(id) {
             const popupContent = document.getElementById("popupContentTrue");
             const popupTitle = document.getElementById("popupTitleTrue");
 
-
-            // Ajoute l'événement sur tous les liens avec la classe .lien
-            popupTitle.innerHTML = "Bravo !"
+            popupTitle.innerHTML = "Bravo !";
             popupContent.innerHTML = "Vous avez trouvé le bon mail ☝️🤓";
-            // Faire apparaître après un certain temps
+
             setTimeout(() => {
                 overlay.classList.remove("hiddenTrue");
-            }, 400)
+            }, 400);
 
-            // Bouton Confirmer
+            // Listener unique
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenTrue");
-                ajouterTemps(15)
+                ajouterTemps(15);
 
+                // Marque la quête comme terminée si ce n'est pas déjà fait
+                if (!quetes[1].fini) {
+                    quetes[1].points = 1;
+                    quetes[1].fini = true;
+                    afficherReussiteQuete(1);
+                }
 
-            /*if (listMails[currentMailIndex].lienConsulter === true) {
-                realLink.href = "javascript:void(0)"
-                realLink.target = "_self"
-            }*/
+                listMails[currentMailIndex].lienConsulter = true;
+                sauvegarderMail();
 
-
-            listMails[currentMailIndex].lienConsulter = true;
-            sauvegarderMail()
-
-            if (quetes[1].fini === false) {
-                const overlay = document.getElementById("popupOverlayTrue");
-                const popupOk = document.getElementById("popupOkTrue");
-                const popupContent = document.getElementById("popupContentTrue");
-                const popupTitle = document.getElementById("popupTitleTrue");
-
-                // Ajoute l'événement sur tous les liens avec la classe .lien
-                popupTitle.innerHTML = "Bravo !"
-                popupContent.innerHTML = "Vous avez trouvé le bon mail ☝️🤓"
-                // Faire apparaître après un certain temps
-                setTimeout(() => {
-                    overlay.classList.remove("hiddenTrue");
-                }, 400)
-
-                // Bouton Confirmer
-                popupOk.addEventListener("click", () => {
-                    overlay.classList.add("hiddenTrue");
-
-                    // Permet d'indiquer que la quête d'ouverture du bon mail soit complété
-                    quetes[1].points = 1
-                    quetes[1].fini = true
-                    afficherReussiteQuete(1)
-
-                },{ once: true })
-            }
-        })
+            }, {once: true});
+        });
     }
+
 
     const link = document.querySelector('.lien');
     if (link) {
@@ -648,7 +621,7 @@ async function ouvrirMail(id) {
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
                 retirerTemps(10);
-            }, { once: true });
+            }, {once: true});
 
             listMails[currentMailIndex].lienConsulter = true;
             sauvegarderMail()
@@ -712,6 +685,7 @@ async function ouvrirMail(id) {
     listMails[id].lu = true
     sauvegarderMail()
 }
+
 
 function fermerMail() {
 

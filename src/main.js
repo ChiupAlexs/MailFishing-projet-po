@@ -3,8 +3,6 @@
 const {exec} = require("child_process");
 const events = require("node:events");
 
-
-
 const mailOuvertEl = document.getElementById('mail-ouvert')
 const boutonRetourEl = document.querySelector('.bouton-retour')
 const listMailEl = document.querySelector('.containerMails')
@@ -19,36 +17,28 @@ let currentMailIndex = null
 let quetes = []
 let introFini;
 
-let stressSound = null;
-
 let scroll = 0
 
 /*************************** Général *******************************/
 
 let timerInterval = null;
-let remainingTime = 0;
 
 function startGlobalTimer(durationInMinutes, callback) {
-    const displayId = "timerDisplay";
-    let display = document.getElementById(displayId);
-
-    // Crée l'affichage si inexistant
+    let display = document.getElementById("timerDisplay");
     if (!display) {
         display = document.createElement("div");
-        display.id = displayId;
+        display.id = "timerDisplay";
         display.style.cssText = `
-            margin-top: -9px;
             display: none;
             position: fixed;
             top: 10px;
             left: 50%;
             transform: translateX(-50%);
-            font-family:'Comic Sans MS', cursive;    
-            font-size: 30px;
-            font-weight: light;
+            font-size: 24px;
+            font-weight: bold;
             background: rgba(0,0,0,0.7);
             color: white;
-            padding: 11px 20px;
+            padding: 8px 16px;
             border-radius: 8px;
             z-index: 1000;
             pointer-events: none;
@@ -57,20 +47,17 @@ function startGlobalTimer(durationInMinutes, callback) {
         document.body.appendChild(display);
     }
 
-    // Vérifier si le timer est déjà terminé
+    // Vérifier si déjà terminé
     if (sessionStorage.getItem("globalTimerFinished") === "true") {
         display.textContent = "⏰ Terminé !";
         display.style.display = "block";
-        return;
+        return; // on ne relance plus
     }
 
-    // Récupérer temps restant depuis sessionStorage si existant
-    remainingTime = parseInt(sessionStorage.getItem("globalTimerRemaining"));
+    let remainingTime = parseInt(sessionStorage.getItem("globalTimerRemaining"));
     if (isNaN(remainingTime)) remainingTime = durationInMinutes * 60;
 
     display.style.display = "block";
-
-    let stressSoundPlayed = sessionStorage.getItem("stressSoundPlayed") === "true";
 
     function updateDisplay() {
         let minutes = Math.floor(remainingTime / 60);
@@ -79,39 +66,23 @@ function startGlobalTimer(durationInMinutes, callback) {
         display.style.background = remainingTime <= 30
             ? "rgba(255,0,0,0.8)"
             : "rgba(0,0,0,0.7)";
-
-        if (remainingTime === 30 && !stressSound) {
-            stressSound = new Audio('../sons/stress.wav');
-            stressSound.volume = 0.6;
-            stressSound.loop = true;
-            stressSound.play();
-        }
     }
-
     updateDisplay();
-
-    // Nettoyer un ancien intervalle si existant
-    if (timerInterval) clearInterval(timerInterval);
 
     timerInterval = setInterval(() => {
         remainingTime--;
-        if (remainingTime < 0) remainingTime = 0;
-
         sessionStorage.setItem("globalTimerRemaining", remainingTime);
         updateDisplay();
 
-        if (remainingTime <= 0) {
+        if (remainingTime < 0) {
             clearInterval(timerInterval);
             timerInterval = null;
+
             display.textContent = "⏰ Terminé !";
             sessionStorage.removeItem("globalTimerRemaining");
-            sessionStorage.setItem("globalTimerFinished", "true");
-            const finishSound = new Audio('../sons/finish.mp3');
-            finishSound.volume = 1;
-            finishSound.play();
+            sessionStorage.setItem("globalTimerFinished", "true"); // ✅ marquer comme fini
 
             setTimeout(() => {
-                stopStressSound()
                 display.textContent = "";
                 display.style.display = "none";
             }, 2000);
@@ -121,108 +92,7 @@ function startGlobalTimer(durationInMinutes, callback) {
     }, 1000);
 }
 
-function stopStressSound() {
-        stressSound.pause();
-        stressSound.currentTime = 0;
-        stressSound = null;
-}
-
-// Soustrait un temps au timer global et met à jour sessionStorage
-function retirerTemps(secondes) {
-    if (remainingTime <= 0) return;
-
-    remainingTime -= secondes;
-    if (remainingTime < 0) remainingTime = 0;
-
-    sessionStorage.setItem("globalTimerRemaining", remainingTime);
-
-    const display = document.getElementById("timerDisplay");
-    if (display) {
-        let minutes = Math.floor(remainingTime / 60);
-        let secs = remainingTime % 60;
-        display.textContent = `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
-        display.style.background = remainingTime <= 30
-            ? "rgba(255,0,0,0.8)"
-            : "rgba(0,0,0,0.7)";
-    }
-
-    // Animation visuelle du chiffre rouge
-    const anim = document.createElement("div");
-    anim.textContent = `-${secondes}s`;
-    anim.style.cssText = `
-        position: fixed;
-        top: 50px;
-        left: 50%;
-        transform: translateX(-50%);
-        font-family: 'Luckiest Guy', cursive;
-        font-size: 24px;
-        font-weight: bold;
-        color: red;
-        opacity: 1;
-        pointer-events: none;
-        z-index: 2000;
-        transition: transform 1s ease, opacity 1s ease;
-    `;
-    document.body.appendChild(anim);
-
-    setTimeout(() => {
-        anim.style.transform = "translate(-50%, 50px)";
-        anim.style.opacity = "0";
-    }, 50);
-
-    setTimeout(() => anim.remove(), 1050);
-
-    const errorSound = new Audio('../sons/error.m4a');
-    errorSound.volume = 0.2;
-    errorSound.play();
-
-}
-
-
-// Ajoute un temps au timer global et met à jour sessionStorage
-function ajouterTemps(secondes) {
-    if (remainingTime <= 0) return;
-
-    remainingTime += secondes;
-
-    sessionStorage.setItem("globalTimerRemaining", remainingTime);
-
-    const display = document.getElementById("timerDisplay");
-    if (display) {
-        let minutes = Math.floor(remainingTime / 60);
-        let secs = remainingTime % 60;
-        display.textContent = `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
-        display.style.background = remainingTime <= 30
-            ? "rgba(255,0,0,0.8)"
-            : "rgba(0,0,0,0.7)";
-    }
-
-    // Animation visuelle du chiffre vert
-    const anim = document.createElement("div");
-    anim.textContent = `+${secondes}s`;
-    anim.style.cssText = `
-        position: fixed;
-        top: 50px;
-        left: 50%;
-        transform: translateX(-50%);
-        font-family: 'Luckiest Guy', cursive;
-        font-size: 24px;
-        font-weight: bold;
-        color: limegreen;
-        opacity: 1;
-        pointer-events: none;
-        z-index: 2000;
-        transition: transform 1s ease, opacity 1s ease;
-    `;
-    document.body.appendChild(anim);
-
-    setTimeout(() => {
-        anim.style.transform = "translate(-50%, 50px)";
-        anim.style.opacity = "0";
-    }, 50);
-
-    setTimeout(() => anim.remove(), 1050);
-}
+/******************************** Général ************************************/
 
 window.addEventListener('DOMContentLoaded', () => {
     const btnQuitPart = document.getElementById('QuitPartie')
@@ -244,43 +114,35 @@ window.addEventListener('DOMContentLoaded', () => {
         btnQuitPart.addEventListener('click', (e) => {
             overlayQuit.style.display = 'flex';
         });
-    }
-    if (btnQuitPartMaily) {
+    } if (btnQuitPartMaily) {
         btnQuitPartMaily.addEventListener('click', (e) => {
             overlayQuitMaily.style.display = 'flex';
         });
-    }
-    if (btnQuitPartQuetes) {
+    } if (btnQuitPartQuetes) {
         btnQuitPartQuetes.addEventListener('click', (e) => {
             overlayQuitQuetes.style.display = 'flex';
         });
-    }
-    if (confirmBtn) {
+    } if (confirmBtn) {
         confirmBtn.addEventListener('click', (e) => {
             sessionStorage.clear()
         });
-    }
-    if (confirmBtnMaily) {
+    } if (confirmBtnMaily) {
         confirmBtnMaily.addEventListener('click', (e) => {
             sessionStorage.clear()
         });
-    }
-    if (confirmBtnQuetes) {
+    } if (confirmBtnQuetes) {
         confirmBtnQuetes.addEventListener('click', (e) => {
             sessionStorage.clear()
         });
-    }
-    if (cancelBtn) {
+    } if (cancelBtn) {
         cancelBtn.addEventListener('click', (e) => {
             overlayQuit.style.display = 'none';
         });
-    }
-    if (cancelBtnMaily) {
+    } if (cancelBtnMaily) {
         cancelBtnMaily.addEventListener('click', (e) => {
             overlayQuitMaily.style.display = 'none';
         });
-    }
-    if (cancelBtnQuetes) {
+    } if (cancelBtnQuetes) {
         cancelBtnQuetes.addEventListener('click', (e) => {
             overlayQuitQuetes.style.display = 'none';
         });
@@ -469,16 +331,14 @@ window.addEventListener('load', () => {
             voile.classList.remove("voile");
             appLock.classList.remove("locked");
             locker.remove();
-        }
-    }
-    if (introFini === true) {
-        // Timer seulement si pas encore terminé
-        if (!sessionStorage.getItem("globalTimerFinished")) {
-            if (sessionStorage.getItem("globalTimerRemaining")) {
-                startGlobalTimer(0, null);
-            } else {
-                startGlobalTimer(3, () => {
-                });
+
+            // Timer seulement si pas encore terminé
+            if (!sessionStorage.getItem("globalTimerFinished")) {
+                if (sessionStorage.getItem("globalTimerRemaining")) {
+                    startGlobalTimer(0, null);
+                } else {
+                    startGlobalTimer(3, () => {});
+                }
             }
         }
     }
@@ -562,34 +422,10 @@ async function ouvrirMail(id) {
     if (realLink) {
         realLink.addEventListener('click', e => {
 
-            listMails[currentMailIndex].lienConsulter = true;
-            sauvegarderMail()
-
-            const overlay = document.getElementById("popupOverlayTrue");
-            const popupOk = document.getElementById("popupOkTrue");
-            const popupContent = document.getElementById("popupContentTrue");
-            const popupTitle = document.getElementById("popupTitleTrue");
-
-
-            // Ajoute l'événement sur tous les liens avec la classe .lien
-            popupTitle.innerHTML = "Bravo !"
-            popupContent.innerHTML = "Vous avez trouvé le bon mail ☝️🤓";
-            // Faire apparaître après un certain temps
-            setTimeout(() => {
-                overlay.classList.remove("hiddenTrue");
-            }, 400)
-
-            // Bouton Confirmer
-            popupOk.addEventListener("click", () => {
-                overlay.classList.add("hiddenTrue");
-                ajouterTemps(15)
-
-
-            /*if (listMails[currentMailIndex].lienConsulter === true) {
+            if (listMails[currentMailIndex].lienConsulter === true) {
                 realLink.href = "javascript:void(0)"
                 realLink.target = "_self"
-            }*/
-
+            }
 
             listMails[currentMailIndex].lienConsulter = true;
             sauvegarderMail()
@@ -617,7 +453,7 @@ async function ouvrirMail(id) {
                     quetes[1].fini = true
                     afficherReussiteQuete(1)
 
-                },{ once: true })
+                })
             }
         })
     }
@@ -647,8 +483,7 @@ async function ouvrirMail(id) {
             // Bouton Confirmer
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
-                retirerTemps(10);
-            }, { once: true });
+            })
 
             listMails[currentMailIndex].lienConsulter = true;
             sauvegarderMail()
@@ -747,7 +582,7 @@ function effacerMail() {
 
             console.log(quetes)
 
-        } else if (quetes[1].points === 0 && listMails[currentMailIndex].bonMail) {
+        } else if (quetes[1].points === 0 && listMails[currentMailIndex].bonMail){
 
             quetes[1].points = -1
 
@@ -819,9 +654,6 @@ function afficherReussiteQuete(id) {
         notificationDivElement.classList.add("notif-complete")
         notificationDivElement.classList.remove("notif-non-complete")
         notificationDivElement.classList.remove("notif-lost")
-        const successSound = new Audio('../sons/success.m4a');
-        successSound.volume = 0.7;
-        successSound.play();
     } else if (quetes[id].points < 0) {
         imgCroixFermetureElement.src = "../images/bouton-quitter-fichier.png"
         imgElement.src = "../images/croix-rouge.png"

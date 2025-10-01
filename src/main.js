@@ -725,9 +725,12 @@ function effacerMail() {
 
             if (quetes[0].points === NBRE_DE_MAUVAIS_MAILS_A_SUPP) {
                 quetes[0].fini = true
+
             }
 
-            afficherReussiteQuete(0)
+            if (quetes[0].points <= NBRE_DE_MAUVAIS_MAILS_A_SUPP) {
+                afficherReussiteQuete(0)
+            }
 
             console.log(quetes)
 

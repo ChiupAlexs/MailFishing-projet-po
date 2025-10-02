@@ -496,6 +496,21 @@ a.lienGoose {
     }
 }
 
+.lien-pop-up {
+    position: fixed;
+    bottom: 91px;
+    left: 0;
+    background-color: #dbeafe;
+    border: #2f2f2f 1px solid;
+    border-radius: 2px;
+    padding: 1px;
+    transition: 0.2s opacity ease;
+    opacity: 0;
+}
+.lien-pop-up.actif {
+    opacity: 1;
+}
+
 /***********************************
 
             Pied-de-page

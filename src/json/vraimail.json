@@ -10,7 +10,8 @@
       "body": "Salut,\n\nTu peux modifier ce fichier et y intégrer les nouvelles données s'il-te-plait.\n\nVoici le lien du fichier : <a href='vraiesQuetesMails/interfaceBoss.html' class='bon-lien' target='blank'>https://gngngn.ch/lebonfichier.data</a>\n\nil y a ci-joint le fichier avec les nouvelles données.\n\nMerci gars t'es un bon.",
       "secret" : "",
       "backgroundImage": "gngngnDirectionBackground.png",
-      "bonMail": true
+      "bonMail": true,
+      "lienPopUp": "https://gngngn.ch/lebonfichier.data"
     },
     {
       "icon": "fabriceLellouche.png",
@@ -22,7 +23,8 @@
       "body": "Salut,\n\nTu peux activer les codes des licences microsoft pour utiliser les applications de bureau avec le lien ci-dessous.\n\nTu trouveras les codes sur ton bureau : \n\n<a href='vraiesQuetesMails/queteLellouche.html' class='bon-lien' target='blank'>https://licences.microsoft.com/activation</a>\n\nBonne journée.\n\nFabrice Lellouche du service client",
       "secret" : "",
       "backgroundImage": "fabriceLelloucheBackground.png",
-      "bonMail": true
+      "bonMail": true,
+      "lienPopUp": "https://microsoft.com/activation-code"
     },
     {
       "icon": "youtube.png",
@@ -34,7 +36,8 @@
       "body": "Bonjour,\n\nVotre abonnement youtube premium arrive à expiration.\n\nSi vous souhaitez le renouveler <a href='vraiesQuetesMails/queteYoutube.html' class='bon-lien' target='blank'>cliquez ici.</a>\n\nCordialement \n\nL'équipe Youtube",
       "secret" : "",
       "backgroundImage": "youtubeBackground.png",
-      "bonMail": true
+      "bonMail": true,
+      "lienPopUp": "https://youtube.com/renouveler-abonnement"
     },
       {
         "icon": "julienDupont.png",
@@ -46,7 +49,8 @@
         "body": "Salut,\n\nJe viens de terminer les modifications sur le rapport trimestriel. Peux-tu jeter un œil et me dire si tout est correct avant l'envoi à la direction ?\n\nLien vers le fichier : <a href='vraiesQuetesMails/interfaceJulienDupont.html' class='bon-lien' target='blank'>https://gngngn.ch/rapports/trimestriel_Q3.doc</a>\n\nMerci !\nJulien",
         "secret" : "",
         "backgroundImage": "gngngnDirectionBackground.png",
-        "bonMail": true
+        "bonMail": true,
+        "lienPopUp": "https://gngngn.ch/rapports/trimestriel_Q3.doc"
       }
   ]
 }

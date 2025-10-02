@@ -564,6 +564,8 @@ function afficherListeMails() {
 
 async function ouvrirMail(id) {
 
+    currentMailIndex = id
+
     scroll = window.scrollY
 
     window.scrollTo(0, 0)
@@ -581,6 +583,17 @@ async function ouvrirMail(id) {
     mailOuvertEl.querySelector('.time').innerHTML = `<strong>${mail.date} ${mail.time}</strong>`
     mailOuvertEl.querySelector('.message').innerHTML = message
     mailOuvertEl.querySelector('.secret').innerHTML = `${mail.secret}`
+
+    const aElement = document.querySelector('.lienDraw, .lienBeep, .lienScreen, .bon-lien, .lien, .lienProgress, .lienCompliments, .lienGoose')
+    const lienPopUpElement = document.querySelector('.lien-pop-up')
+    lienPopUpElement.innerText = listMails[currentMailIndex].lienPopUp
+    aElement.addEventListener('mouseenter', () => {
+        lienPopUpElement.classList.add('actif')
+    })
+
+    aElement.addEventListener('mouseleave', () => {
+        lienPopUpElement.classList.remove('actif')
+    })
 
     const linkDraw = document.querySelector('.lienDraw');
     if (linkDraw) {
@@ -879,9 +892,12 @@ function effacerMail() {
 
             if (quetes[0].points === NBRE_DE_MAUVAIS_MAILS_A_SUPP) {
                 quetes[0].fini = true
+
             }
 
-            afficherReussiteQuete(0)
+            if (quetes[0].points <= NBRE_DE_MAUVAIS_MAILS_A_SUPP) {
+                afficherReussiteQuete(0)
+            }
 
             console.log(quetes)
 

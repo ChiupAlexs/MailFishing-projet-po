@@ -10,7 +10,8 @@
       "body": "Bonjour,\n\nVotre colis n°LY98217357FR est en attente de confirmation. En raison d’une erreur dans vos informations de paiement, la livraison ne peut être finalisée.\n\nPour éviter le retour de votre colis à l’expéditeur, merci de régulariser votre situation sous 48h en cliquant sur le lien ci-dessous :\n\n <a href='faussesQuetesMails/formulairePoste.html' class='lien' target='blank'>Cliquez ici</a> pour régulariser votre livraison\n\nVous devrez confirmer vos coordonnées bancaires pour valider la transaction (frais de 1,49€).\n\nSans action de votre part, le colis sera retourné et des frais supplémentaires pourront s’appliquer.\n\nMerci de votre compréhension,\n\nLe Service Client – La Poste",
       "secret" : "",
       "backgroundImage": "posteBackground.png",
-      "bonMail": false
+      "bonMail": false,
+      "lienPopUp": "https://laposte.ch"
     },
     {
       "icon": "gngngnDirection.png",
@@ -22,7 +23,8 @@
       "body": "Bonjour tout le monde,\n\nCette annonce concerne tous les employés de gngngn.\n\nLa direction vous informe qu'une nouvelle politique d'entreprise en matière de congés, de rémunération et d'indemnités en cas de maladie va entrée en vigueur d'ici la fin de l'année 2025. Les changements décrits dans le documents visent les membres du personnel travaillant à temps plein et à temps partiel, ainsi que ceux ayant droit à des prestations sociales. il est donc obligatoire que tout le monde prenne connaissance de cette nouvelle politique.\n\nCette nouvelle politique est accessible via ce lien : <a href='#' class='lienDraw'>https://politiquegngngn.ch/fr</a>\n\nMerci pour votre lecture.\nLa direction",
       "secret" : "",
       "backgroundImage": "gngngnDirectionBackground.png",
-      "bonMail": false
+      "bonMail": false,
+      "lienPopUp": "https://gnnggn.ch/politique"
     },
     {
       "icon": "licepo.png",
@@ -34,7 +36,8 @@
       "body": "A votre attention\n\nNous vous prions de prendre connaissance des faits qui vous sont reprochés.\nVous êtes invité par la suite, à nous répondre dans les heures qui suivront.\n\nFaute de quoi, nous serons obligés de procéder a votre interpellation et arrestation de manière irrevocable.\n\nvoici le formulaire pour répondre : <a href='#' class='lienBeep'>https://lapolice.cz</a>\n\nM. Luca Lement",
       "secret" : "",
       "backgroundImage": "policeBackground.png",
-      "bonMail": false
+      "bonMail": false,
+      "lienPopUp": "https://lapolice.cz"
     },
     {
       "icon": "fnak.png",
@@ -46,7 +49,8 @@
       "body": "Bonjour,\n\nje suis très heureux de vous annoncer que vous êtes l'heureux gagnant d'un MacBook Pro 16 M4 Max 2024 16C CPU/40C GPU/2 TB/128 GB d'une valeur de 5000 CHF.\n\nPour réclamer votre prix veuillez remplir vos informations sur ce formulaire : <a href='#' class='lienProgress'>https://gagnant.fnak.ch</a>\n\nVotre prix est réclamable jusqu'à 17 heures.\n\nService client - Jean Marc",
       "secret" : "",
       "backgroundImage": "fnakBackground.png",
-      "bonMail": false
+      "bonMail": false,
+      "lienPopUp": "https://gagnant.fnak.ch"
     },
     {
       "icon": "banque.png",
@@ -58,7 +62,8 @@
       "body": "Monsieur,\n\nVous avez récemment eu des transactions suspectes sur votre compte.\n\nA savoir : \n - Rindfleischetikettierungsüberwachungsaufgabenübertragungsgesetz\n - Hans Güller\n - Société des sociétaires de la société\n\nSi vous croyez que c'est une erreur répondez à ce formulaire : <a href='#' class='lienScreen'>https://minasuojelensinua.bankre.de</a>\n\nSalutations.",
       "secret" : "",
       "backgroundImage": "banqueBackground.png",
-      "bonMail": false
+      "bonMail": false,
+      "lienPopUp": "https://minasuojelensinua.bankre.de"
     },
     {
       "icon": "bosh.png",
@@ -70,7 +75,8 @@
       "body": "Profitez d'une promotion unique de 50% sur notre nouveau lavabo en sodium en cliquant sur ce lien : <a href='faussesQuetesMails/boshLavabo.html' class='lien' target='blank'>https://bosh-promo.fr</a>",
       "secret" : "",
       "backgroundImage": "boshBackground.png",
-      "bonMail": false
+      "bonMail": false,
+      "lienPopUp": "https://bosh-promo.fr"
     },
     {
       "icon": "tiktouk.png",
@@ -82,7 +88,8 @@
       "body": "Vous avez récemment créer un clip sur notre plateform.\n\nAppuyez sur ce lien pour le visualiser : <a href='faussesQuetesMails/interfaceTiktok.html' class='lien' target='blank'>https://www.tiktouk.com/@gngngn_user/video/1234567890123456789</a>\n\n\nService d'informations TikTouk",
       "secret" : "",
       "backgroundImage": "tiktoukBackground.png",
-      "bonMail": false
+      "bonMail": false,
+      "lienPopUp": "https://www.tiktouk.com/@gngngn_user/video/1234567890123456789"
     },
     {
       "icon": "streamFlow.png",
@@ -94,7 +101,8 @@
       "body": "Bonjour,\n\nVotre dernière vidéo a été publiée avec succès.\n\nCliquez ici pour la visionner : <a href='faussesQuetesMails/streamflow.html' class='lien' target='blank'>https://www.streamflow.com/watch/xuafliam123456</a>\n\n-StreamFlow-",
       "secret" : "",
       "backgroundImage": "streamFlowBackground.png",
-      "bonMail": false
+      "bonMail": false,
+      "lienPopUp": "https://www.streamflow.com/watch/xuafliam123456"
     },
     {
       "icon": "quickShop.png",
@@ -106,7 +114,8 @@
       "body": "Merci pour votre achat sur QuickShop !\n\nVous pouvez suivre votre commande en cliquant sur ce lien : <a href='faussesQuetesMails/Quickshop.html' class='lien' target='blank'>https://www.quickshop.com/orders/4721</a>\n\n¨QuickShop c'est du rapide !¨\n",
       "secret" : "",
       "backgroundImage": "quickShopBackground.png",
-      "bonMail": false
+      "bonMail": false,
+      "lienPopUp": "https://www.quickshop.com/orders/4721"
     },
     {
       "icon": "picShare.png",
@@ -118,7 +127,8 @@
       "body": "Félicitations !\n\nUn nouvel utilisateur s’est abonné à votre profil.\n\nDécouvrez-le ici : <a href='faussesQuetesMails/picShare.html' class='lien' target='blank'>https://www.jeTaiEu.com/@my_profile/followers</a>\n",
       "secret" : "",
       "backgroundImage": "picShareBackground.png",
-      "bonMail": false
+      "bonMail": false,
+      "lienPopUp": "https://www.jeTaiEu.com/@my_profile/followers"
     },
     {
       "icon": "mailFast.png",
@@ -130,7 +140,8 @@
       "body": "Nous avons remarqué une connexion à votre compte MailFist.\n\nVérifiez votre activité : <a href='#' class='lienGoose'>https://www.mailfist.com/security/logincheck</a>\n",
       "secret" : "",
       "backgroundImage": "mailFastBackground.png",
-      "bonMail": false
+      "bonMail": false,
+      "lienPopUp": "https://www.mailfist.com/security/logincheck"
     },
     {
       "icon": "gameZone.png",
@@ -142,7 +153,8 @@
       "body": "Une nouvelle mise à jour est prête pour votre jeu préféré.\n\nTéléchargez-la dès maintenant : <a href='faussesQuetesMails/gamezoneUpdate.html' class='lien' target='blank'>https://www.gamezone.com/update/98765</a>\n",
       "secret" : "",
       "backgroundImage": "gameZoneBackground.png",
-      "bonMail": false
+      "bonMail": false,
+      "lienPopUp": "https://www.gamezone.com/update/98765"
     },
     {
       "icon": "foodly.png",
@@ -154,7 +166,8 @@
       "body": "Votre commande Foodly est actuellement en livraison.\n\nSuivez votre livreur en temps réel : <a href='faussesQuetesMails/interfaceFoodly.html' class='lien' target='blank'>https://www.foodly.com/track/54321</a>\n",
       "secret" : "",
       "backgroundImage": "foodlyBackground.png",
-      "bonMail": false
+      "bonMail": false,
+      "lienPopUp": "https://www.foodly.com/track/54321"
     },
     {
       "icon": "travelio.png",
@@ -166,7 +179,8 @@
       "body": "Votre réservation a bien été enregistrée.\n\nRetrouvez vos billets ici : <a href='faussesQuetesMails/interfaceTravelio.html' class='lien' target='blank'>https://www.travelio.com/ticket/abc987654</a>\n",
       "secret" : "",
       "backgroundImage": "travelioBackground.png",
-      "bonMail": false
+      "bonMail": false,
+      "lienPopUp": "https://www.travelio.com/ticket/abc987654"
     },
     {
       "icon": "fitLife.png",
@@ -178,7 +192,8 @@
       "body": "Bonjour !\n\nUne nouvelle séance d’entraînement personnalisée vous attend.\n\nDécouvrez-la : <a href='#' class='lienCompliments'>https://www.fitelife.com/sessions/123abc</a>\n",
       "secret" : "",
       "backgroundImage": "fitLifeBackground.png",
-      "bonMail": false
+      "bonMail": false,
+      "lienPopUp": "https://www.fitelife.com/sessions/123abc"
     },
     {
       "icon": "soundBeat.png",
@@ -190,7 +205,8 @@
       "body": "Nous avons créé une playlist rien que pour vous.\n\nÉcoutez-la maintenant : <a href='faussesQuetesMails/soundBeat.html' class='lien' target='blank'>http://www.soundbeat.com/playlist/xyz654321</a>\n",
       "secret" : "",
       "backgroundImage": "soundBeatBackground.png",
-      "bonMail": false
+      "bonMail": false,
+      "lienPopUp": "http://www.soundbeat.com/playlist/xyz654321"
     },
     {
       "icon": "workNet.png",
@@ -202,7 +218,8 @@
       "body": "Un recruteur a publié une offre correspondant à votre profil.\n\nConsultez-la ici : <a href='faussesQuetesMails/interfaceWorkNet.html' class='lien' target='blank'>https://www.worknet.com/jobs/offer123</a>\n",
       "secret" : "Je suis le virus",
       "backgroundImage": "workNetBackground.png",
-      "bonMail": false
+      "bonMail": false,
+      "lienPopUp": "https://www.worknet.com/jobs/offer123"
     },
     {
       "icon": "fortNight.png",
@@ -214,7 +231,8 @@
       "body": "Bonjour joueur,\n\nVotre compte Fortnite a reçu une nouvelle récompense exclusive.\n\nCliquez ici pour la récupérer : <a href='faussesQuetesMails/recompenseFortnite.html' class='lien' target='blank'>https://www.fortnightly.com/reward/bonus123</a>\n",
       "secret" : "",
       "backgroundImage": "fortNightBackground.png",
-      "bonMail": false
+      "bonMail": false,
+      "lienPopUp": "https://www.fortnightly.com/reward/bonus123"
     }
   ]
 }

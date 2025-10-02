@@ -164,10 +164,9 @@ main {
     left: 5px;
     bottom: 3px;
 }
-.taches.perdu img {
-    max-height: 50px;
-    bottom: 15px;
-    right: 14px;
+.taches.perdu div img {
+    max-height: 30px;
+    bottom: 4px;
 }
 
 /*********************************

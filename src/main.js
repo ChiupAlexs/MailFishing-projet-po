@@ -33,7 +33,7 @@ let clicsSuspects = Number(sessionStorage.getItem("clicsSuspects") || 0);
 
 // handler par délégation (capture phase pour intercepter tôt)
 function handleSuspectClick(e) {
-    const suspectEl = e.target.closest('.lien, .lienProgress, .lienCompliments, .lienGoose, .lienScreen, .lienDraw, .lienBeep');
+    const suspectEl = e.target.closest('#popupOkFalse');
     if (!suspectEl) return; // pas un clic sur un élément ciblé
 
     // incrémenter et sauvegarder
@@ -67,6 +67,8 @@ function handleSuspectClick(e) {
         remainingTime = 0;
         sessionStorage.setItem("globalTimerFinished", "true");
         sessionStorage.removeItem("globalTimerRemaining");
+
+        window.location.href = "../html/menuFinPerdu.html"
 
         // supprimer l'affichage du timer s'il existe
         const disp = document.getElementById("timerDisplay");
@@ -539,7 +541,7 @@ window.addEventListener('load', () => {
         locker?.remove();
 
         // Lancer le timer
-        startGlobalTimer(0.1, () => {
+        startGlobalTimer(3, () => {
             console.log("vrai")
             window.location.href = "../html/menuFinPerdu.html";
         });

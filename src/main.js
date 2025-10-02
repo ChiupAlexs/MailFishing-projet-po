@@ -20,7 +20,7 @@ let currentMailIndex = null
 let quetes = []
 let introFini;
 
-let stressSound = null;
+let stressSound = new Audio('../sons/stress.wav');
 
 let scroll = 0
 
@@ -44,15 +44,24 @@ function handleSuspectClick(e) {
     // action quand on atteint 3 clics
     if (clicsSuspects >= 3) {
         // empêcher comportements par défaut / autres handlers si possible
-        try { e.preventDefault(); } catch(_) {}
-        try { e.stopImmediatePropagation(); } catch(_) {}
+        try {
+            e.preventDefault();
+        } catch (_) {
+        }
+        try {
+            e.stopImmediatePropagation();
+        } catch (_) {
+        }
 
         // stopper le timer et le son de stress
         if (timerInterval) {
             clearInterval(timerInterval);
             timerInterval = null;
         }
-        try { stopStressSound(); } catch(_) {}
+        try {
+            stopStressSound();
+        } catch (_) {
+        }
 
         // marquer la partie comme finie / perdue
         remainingTime = 0;
@@ -62,11 +71,6 @@ function handleSuspectClick(e) {
         // supprimer l'affichage du timer s'il existe
         const disp = document.getElementById("timerDisplay");
         if (disp) disp.remove();
-
-        // petite attente pour laisser finir d'autres UI puis redirection
-        setTimeout(() => {
-            window.location.href = "menuFinPerdu.html";
-        }, 150);
     }
 }
 
@@ -75,10 +79,33 @@ document.addEventListener('click', handleSuspectClick, true);
 
 let timerInterval = null;
 let remainingTime = 0;
+const displayId = "timerDisplay";
+let display = document.getElementById(displayId);
+
+function updateDisplay() {
+    let minutes = Math.floor(remainingTime / 60);
+    let seconds = remainingTime % 60;
+    display.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    display.style.background = remainingTime <= 30
+        ? "rgba(255,0,0,0.8)"
+        : "rgba(0,0,0,0.7)";
+
+    if (remainingTime === 30 && !stressSound) {
+        stressSound = new Audio('../sons/stress.wav');
+        stressSound.volume = 0.6;
+        stressSound.loop = true;
+        stressSound.play();
+    }
+}
+
+function stopStressSound() {
+    stressSound.pause();
+    stressSound.currentTime = 0;
+    stressSound = null;
+}
 
 function startGlobalTimer(durationInMinutes, callback) {
-    const displayId = "timerDisplay";
-    let display = document.getElementById(displayId);
+
 
     // Crée l'affichage si inexistant
     if (!display) {
@@ -122,22 +149,6 @@ function startGlobalTimer(durationInMinutes, callback) {
 
     let stressSoundPlayed = sessionStorage.getItem("stressSoundPlayed") === "true";
 
-    function updateDisplay() {
-        let minutes = Math.floor(remainingTime / 60);
-        let seconds = remainingTime % 60;
-        display.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-        display.style.background = remainingTime <= 30
-            ? "rgba(255,0,0,0.8)"
-            : "rgba(0,0,0,0.7)";
-
-        if (remainingTime === 30 && !stressSound) {
-            stressSound = new Audio('../sons/stress.wav');
-            stressSound.volume = 0.6;
-            stressSound.loop = true;
-            stressSound.play();
-        }
-    }
-
     updateDisplay();
 
     // Nettoyer un ancien intervalle si existant
@@ -145,16 +156,15 @@ function startGlobalTimer(durationInMinutes, callback) {
 
     timerInterval = setInterval(() => {
         remainingTime--;
-        if (remainingTime < 0) remainingTime = 0;
 
         sessionStorage.setItem("globalTimerRemaining", remainingTime);
         updateDisplay();
 
-        if (remainingTime <= 0) {
+        if (remainingTime <= 0 || sessionStorage.getItem("globalTimerFinished") === "true") {
             clearInterval(timerInterval);
             timerInterval = null;
-            sessionStorage.removeItem("globalTimerRemaining");
             sessionStorage.setItem("globalTimerFinished", "true");
+            console.log("true")
             display.style.display = "none";
             const finishSound = new Audio('../sons/finish.mp3');
             finishSound.volume = 1;
@@ -169,12 +179,6 @@ function startGlobalTimer(durationInMinutes, callback) {
             if (typeof callback === "function") callback();
         }
     }, 1000);
-}
-
-function stopStressSound() {
-    stressSound.pause();
-    stressSound.currentTime = 0;
-    stressSound = null;
 }
 
 // Soustrait un temps au timer global et met à jour sessionStorage
@@ -534,11 +538,10 @@ window.addEventListener('load', () => {
         appLock?.classList.remove("locked");
         locker?.remove();
 
-        // Lancer le timer (reprend automatiquement s'il est déjà lancé)
-        startGlobalTimer(3, () => {
-            setTimeout(() => {
-                window.location.href = "menuFinPerdu.html";
-            }, 2000);
+        // Lancer le timer
+        startGlobalTimer(0.1, () => {
+            console.log("vrai")
+            window.location.href = "../html/menuFinPerdu.html";
         });
     }
     loadQuetes()

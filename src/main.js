@@ -975,6 +975,8 @@ function afficherReussiteQuete(id) {
     if (quetes[id].points >= quetes[id].but) {
         imgCroixFermetureElement.src = "../images/bouton-quitter-fichier.png"
         imgElement.src = "../images/check-icon.png"
+        imgElement.style.animationName = "quete-logo-appear"
+        imgElement.style.animationDuration = '1s'
         notificationDivElement.classList.add("notif-complete")
         notificationDivElement.classList.remove("notif-non-complete")
         notificationDivElement.classList.remove("notif-lost")
@@ -986,11 +988,15 @@ function afficherReussiteQuete(id) {
         notificationDivElement.classList.add("notif-lost")
         notificationDivElement.classList.remove("notif-non-complete")
         notificationDivElement.classList.remove("notif-complete")
+
+        imgElement.style.animationName = "quete-logo-appear"
+        imgElement.style.animationDuration = '1s'
     } else {
         imgCroixFermetureElement.src = "../images/bouton-quitter-noir.png"
         notificationDivElement.classList.add("notif-non-complete")
         notificationDivElement.classList.remove("notif-complete")
         notificationDivElement.classList.remove("notif-lost")
+
 
     }
 

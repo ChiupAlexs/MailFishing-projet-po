@@ -496,6 +496,25 @@ a.lienGoose {
     }
 }
 
+@keyframes quete-logo-appear {
+    0% {
+        opacity: 0;
+    }
+    10% {
+        opacity: 0;
+    }
+    20% {
+        transform: scale(200%);
+        opacity: 1;
+    }
+    80% {
+        transform: scale(100%);
+    }
+    100% {
+
+    }
+}
+
 .lien-pop-up {
     position: fixed;
     bottom: 91px;
@@ -574,7 +593,6 @@ footer img {
     src: url("../fonts/Sora-VariableFont_wght.ttf") format("ttf");
     font-weight: normal;
 }
-
 
 /***************************
 

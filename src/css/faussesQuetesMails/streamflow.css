@@ -61,3 +61,113 @@ video {
     margin: 0 auto;
     display: block;
 }
+
+.pubGauche {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 220px;
+    height: 600px;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 4px 0 15px rgba(0,0,0,0.2);
+    margin-left: 10px;
+}
+
+.slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 15px;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+/* Dégradés distincts pour chaque pub */
+.slide:nth-child(1) {
+    background: linear-gradient(180deg, #B24CFC, #7369F2);
+}
+.slide:nth-child(2) {
+    background: linear-gradient(180deg, #FF6B6B, #FFB347);
+}
+.slide:nth-child(3) {
+    background: linear-gradient(180deg, #3CD3AD, #4CB8C4);
+}
+
+/* Optionnel : petite bordure animée sur le côté */
+.banner-vertical::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 5px;
+    height: 100%;
+    background: linear-gradient(180deg, #fff, rgba(255,255,255,0));
+    animation: shimmer 3s linear infinite;
+}
+
+.pubDroite {
+    position: fixed;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    width: 270px;
+    height: 600px;
+    background: url("../../images/casquePub.png") center/cover no-repeat;
+    background-size: 300px;
+    border-radius: 15px;
+    box-shadow: -4px 0 15px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    /*color: white;*/
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+}
+
+.pubDroite h3, p {
+    margin-top: 30px;
+}
+
+/* --- COUCHE DE DÉGRADÉ pour lisibilité du texte --- */
+.pubDroite::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0));
+    z-index: 1;
+}
+
+.banner-content {
+    position: relative;
+    z-index: 2;
+    padding: 20px 15px;
+}
+
+.banner-content h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.3rem;
+}
+
+.banner-content p {
+    font-size: 0.9rem;
+    line-height: 1.3rem;
+    margin: 0;
+}
+
+@keyframes shimmer {
+    0% { transform: translateY(-100%); opacity: 0; }
+    50% { transform: translateY(50%); opacity: 1; }
+    100% { transform: translateY(100%); opacity: 0; }
+}

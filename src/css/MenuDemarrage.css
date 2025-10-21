@@ -59,6 +59,17 @@ body {
     z-index: 1; /* reste au-dessus de la vidéo */
 }
 
+.menu-credit {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: left;
+    z-index: 1;
+}
+
 /* Boutons du menu */
 .menu button {
     width: 180px;
@@ -79,14 +90,39 @@ body {
     box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
 }
 
+.menu-credit button {
+    width: 120px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(128, 128, 128, 1);
+    border: 2px solid #fff;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+}
+
 @media screen and (max-width: 1900px) {
     .menu {
         top: 550px;
     }
 }
 
-
 .menu button:hover {
+    background: #fff;
+    color: black;
+    transform: scale(1.1);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+}
+
+.menu-credit button:hover {
     background: #fff;
     color: black;
     transform: scale(1.1);
@@ -99,6 +135,10 @@ a {
 }
 
 .menu a:hover {
+    color: black;
+}
+
+.menu-credit a:hover {
     color: black;
 }
 

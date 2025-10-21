@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Crédits</title>
+    <link rel="stylesheet" href="../css/credits.css">
+</head>
+<body>
+<a class="menu-credit" href="MenuDemarrage.html">
+    <button>RETOUR</button>
+</a>
+<div class="credits-container">
+    <audio id="bg-music" src="../sons/creditMusic.mp3" autoplay></audio>
+    <div class="logos">
+        <img src="../images/mailFishingLogo.svg" alt="Logo du jeu" class="credit-logo hidden">
+        <img src="../images/html5Logo.png" alt="Logo HTML5" class="credit-logo hidden">
+        <img src="../images/cssLogo.png" alt="Logo CSS" class="credit-logo hidden">
+        <img src="../images/javascriptLogo.png" alt="Logo JavaScript" class="credit-logo hidden">
+    </div>
+
+    <div class="scrolling-text hidden">
+        <p>Développé par l'équipe Mail Fishing</p>
+        <p><span class="titre">Chef de projet</span><br>Thomas Tirole</p>
+        <br>
+        <p><span class="titre">Coordinateur</span><br>Jérôme Raval</p>
+        <br>
+        <p><span class="titre">Programmation</span><br>Luca Fedele, Alexsandra Meynier, Léo Mory & Florian Grüter</p>
+        <br>
+        <p><span class="titre">Infrastructure</span><br>Florian Grüter</p>
+        <br>
+        <p><span class="titre">Création de virus</span><br>Florian Grüter</p>
+        <br>
+        <p><span class="titre">Animation</span><br>Alexsandra Meynier</p>
+        <br>
+        <p><span class="titre">Musique</span><br>Luca Fedele</p>
+        <br>
+        <p><span class="titre">Graphisme</span><br>Alexsandra Meynier, Luca Fedele, Léo Mory & Florian Grüter</p>
+        <br>
+        <p><span class="titre">Scénario</span><br>Alexsandra Meynier, Luca Fedele, Léo Mory & Florian Grüter</p>
+        <br>
+        <p><span class="titre">Analyste</span><br>Léo Mory</p>
+        <br>
+        <p><span class="titre">Testeurs</span><br>les apprentis de 1ère et 2ème année & Les professeurs</p>
+        <br>
+        <p><span class="titre">Remerciements spéciaux</span><br>Malik Houbbi & Djovensky Zetrenne</p>
+        <br>
+        <p class="merci">Merci d’avoir joué !</p>
+    </div>
+    <div class="final-image hidden">
+        <img class="image" src="../images/emtBienvenue.png" alt="Image bienvenue" width="1200" height="1200">
+    </div>
+    <div class="side-images">
+        <img src="../images/extrait1.png" alt="Extrait 1" class="side-image left hidden" width="200" height="200">
+        <img src="../images/extrait2.png" alt="Extrait 2" class="side-image right hidden" width="400" height="400">
+        <video src="../vidéos/extrait3.mp4" autoplay class="side-image left hidden" width="400" height="400"></video>
+        <img src="../images/extrait4.png" alt="Extrait 4" class="side-image right hidden" width="400" height="400">
+        <img src="../images/extrait5.jpg" alt="Extrait 5" class="side-image right hidden" width="400" height="400">
+        <img src="../images/extrait6.png" alt="Extrait 6" class="side-image right hidden" width="400" height="400">
+        <img src="../images/extrait7.png" alt="Extrait 7" class="side-image right hidden" width="400" height="400">
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const logos = document.querySelectorAll(".credit-logo");
+        const scrollingText = document.querySelector(".scrolling-text");
+
+        const fadeDuration = 1000;    // durée du fondu (ms)
+        const visibleDuration = 1500; // temps de visibilité avant disparition (ms)
+
+        // --- 1️⃣ Affichage séquentiel des logos ---
+        function showLogo(i = 0) {
+            if (i >= logos.length) return;
+
+            const logo = logos[i];
+            logo.classList.remove("hidden", "fade-out");
+            logo.classList.add("fade-in");
+
+            setTimeout(() => {
+                logo.classList.remove("fade-in");
+                logo.classList.add("fade-out");
+
+                setTimeout(() => {
+                    logo.classList.add("hidden");
+                    showLogo(i + 1);
+                }, fadeDuration);
+            }, visibleDuration);
+        }
+
+        // --- 2️⃣ Affichage alterné des images / vidéo sur les côtés ---
+        function showSideImages(scrollDuration) {
+            const sideImages = Array.from(document.querySelectorAll(".side-image"));
+            let index = 0;
+            let lastSide = "";
+            let stop = false;
+
+            // Arrêt avant la fin du défilement du texte
+            setTimeout(() => {
+                stop = true;
+            }, scrollDuration - 1000);
+
+            function showNextImage() {
+                if (stop || index >= sideImages.length) return;
+
+                // Trouver une image du côté opposé à la précédente
+                let nextImage = null;
+                while (index < sideImages.length) {
+                    const candidate = sideImages[index];
+                    index++;
+                    if (!candidate.classList.contains(lastSide)) {
+                        nextImage = candidate;
+                        break;
+                    }
+                }
+
+                if (!nextImage) return;
+
+                // Position verticale aléatoire
+                const randomTop = 20 + Math.random() * 50;
+                nextImage.style.top = randomTop + "%";
+
+                // Si c’est une vidéo → prépare la lecture
+                if (nextImage.tagName.toLowerCase() === "video") {
+                    nextImage.currentTime = 0;
+                    nextImage.pause();
+                }
+
+                // Affichage en fondu
+                nextImage.classList.remove("hidden");
+                nextImage.classList.add("show");
+
+                // Lecture vidéo si besoin
+                if (nextImage.tagName.toLowerCase() === "video") {
+                    nextImage.play().catch(() => {
+                    });
+                }
+
+                lastSide = nextImage.classList.contains("left") ? "left" : "right";
+
+                // Disparition après 5 secondes (vidéo un peu plus longue)
+                const displayDuration = nextImage.tagName.toLowerCase() === "video" ? 6000 : 5000;
+
+                setTimeout(() => {
+                    nextImage.classList.remove("show");
+
+                    // Pause vidéo proprement au fondu
+                    if (nextImage.tagName.toLowerCase() === "video") {
+                        setTimeout(() => nextImage.pause(), 1500);
+                    }
+
+                    // Passer à la suivante
+                    setTimeout(() => {
+                        if (!stop) showNextImage();
+                    }, 1200);
+                }, displayDuration);
+            }
+
+            showNextImage();
+        }
+
+        // --- 3️⃣ Défilement du texte + image finale ---
+        function scrollText() {
+            scrollingText.classList.remove("hidden");
+            scrollingText.classList.add("scroll-up");
+
+            const scrollDuration = 42000; // durée du défilement en ms
+
+            // Lancer les images latérales
+            showSideImages(scrollDuration);
+
+            // Afficher l'image finale à la fin
+            setTimeout(() => {
+                const finalImage = document.querySelector(".final-image");
+                finalImage.classList.remove("hidden");
+                finalImage.classList.add("show");
+            }, scrollDuration);
+        }
+
+        // --- 4️⃣ Lancement séquentiel complet ---
+        showLogo();
+        setTimeout(() => {
+            scrollText();
+        }, 12000);
+    });
+</script>
+</body>
+</html>

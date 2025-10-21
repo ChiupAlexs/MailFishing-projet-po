@@ -22,9 +22,24 @@
         }
     });
 
-    function commander() {
-        window.close()
-    }
+    document.addEventListener("DOMContentLoaded", () => {
+        const button = document.querySelector("button");
+
+        button.addEventListener("click", () => {
+            // Met en état loading
+            button.classList.add("loading");
+            button.textContent = "Paiement en cours...";
+
+            setTimeout(() => {
+                button.classList.remove("loading");
+                button.classList.add("success");
+                button.textContent = "Paiement réussi"
+                setTimeout(() => {
+                    window.close()
+                }, 1500);
+            }, 1500);
+        });
+    });
 </script>
 
 </body>

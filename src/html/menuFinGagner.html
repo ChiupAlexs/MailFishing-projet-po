@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Victoire</title>
+    <link rel="stylesheet" href="../css/menuFinGagner.css">
+</head>
+<body>
+<div id="game-win-screen">
+    <canvas id="confetti-canvas"></canvas>
+    <video class="video-bg-win" autoplay>
+        <source src="../vidéos/victoire.mp4" type="video/mp4">
+    </video>
+    <div id="win-screen-content">
+        <h1>Félicitations !</h1>
+        <p>Vous avez complété toutes les quêtes !</p>
+        <button class="retour" onclick="sessionStorage.clear();window.location.href='MenuDemarrage.html'">Retour au
+            menu
+        </button>
+    </div>
+</div>
+
+<script>
+    const video = document.querySelector('.video-bg-win');
+    const content = document.getElementById('win-screen-content');
+    const canvas = document.getElementById('confetti-canvas');
+    const ctx = canvas.getContext('2d');
+
+    let confettis = [];
+    let animationActive = false;
+
+    const colors = ['#ff0000', '#ffcc00', '#00ff00', '#00ccff', '#ff66ff', '#ffffff'];
+
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    // Création des confettis
+    function createConfettis() {
+        confettis = [];
+        for (let i = 0; i < 200; i++) {
+            confettis.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height - canvas.height,
+                r: Math.random() * 6 + 2,
+                d: Math.random() * 0.5 + 0.5,
+                color: colors[Math.floor(Math.random() * colors.length)],
+                tilt: Math.random() * 10 - 10,
+                tiltAngleIncrement: Math.random() * 0.07 + 0.05,
+                tiltAngle: 0
+            });
+        }
+    }
+
+    function drawConfettis() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        confettis.forEach(conf => {
+            ctx.beginPath();
+            ctx.lineWidth = conf.r;
+            ctx.strokeStyle = conf.color;
+            ctx.moveTo(conf.x + conf.tilt + conf.r / 2, conf.y);
+            ctx.lineTo(conf.x + conf.tilt, conf.y + conf.tilt + conf.r / 2);
+            ctx.stroke();
+        });
+        updateConfettis();
+    }
+
+    function updateConfettis() {
+        confettis.forEach(conf => {
+            conf.tiltAngle += conf.tiltAngleIncrement;
+            conf.y += (Math.cos(conf.d) + conf.r + 2) / 2;
+            conf.x += Math.sin(conf.d);
+            conf.tilt = Math.sin(conf.tiltAngle) * 15;
+
+            if (conf.y > canvas.height + 20) {
+                conf.x = Math.random() * canvas.width;
+                conf.y = -10;
+                conf.color = colors[Math.floor(Math.random() * colors.length)];
+            }
+        });
+    }
+
+    function animateConfettis() {
+        if (!animationActive) return;
+        drawConfettis();
+        requestAnimationFrame(animateConfettis);
+    }
+
+    // Quand la vidéo se termine
+    video.addEventListener('ended', () => {
+        video.style.opacity = 0;
+
+        setTimeout(() => {
+            // Affiche le texte
+            content.classList.add('show');
+            video.style.display = 'none';
+
+            // Lance les confettis
+            canvas.style.opacity = 1;
+            createConfettis();
+            animationActive = true;
+            animateConfettis();
+        }, 2000);
+    });
+</script>
+</body>
+</html>

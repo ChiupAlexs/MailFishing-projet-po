@@ -54,9 +54,8 @@
         <img src="../images/extrait2.png" alt="Extrait 2" class="side-image right hidden" width="400" height="400">
         <video src="../vidéos/extrait3.mp4" autoplay class="side-image left hidden" width="400" height="400"></video>
         <img src="../images/extrait4.png" alt="Extrait 4" class="side-image right hidden" width="400" height="400">
-        <img src="../images/extrait5.jpg" alt="Extrait 5" class="side-image right hidden" width="400" height="400">
-        <img src="../images/extrait6.png" alt="Extrait 6" class="side-image right hidden" width="400" height="400">
-        <img src="../images/extrait7.png" alt="Extrait 7" class="side-image right hidden" width="400" height="400">
+        <img src="../images/extrait6.png" alt="Extrait 6" class="side-image left hidden" width="400" height="400">
+        <img src="../images/extrait7.png" alt="Extrait 7" class="side-image right hidden" width="200" height="200">
     </div>
 </div>
 
@@ -91,70 +90,70 @@
         function showSideImages(scrollDuration) {
             const sideImages = Array.from(document.querySelectorAll(".side-image"));
             let index = 0;
-            let lastSide = "";
             let stop = false;
+            let lastSide = "";
 
-            // Arrêt avant la fin du défilement du texte
-            setTimeout(() => {
-                stop = true;
-            }, scrollDuration - 1000);
+            // Arrêt à la fin du défilement du texte
+            setTimeout(() => { stop = true; }, scrollDuration - 1000);
 
             function showNextImage() {
                 if (stop || index >= sideImages.length) return;
 
-                // Trouver une image du côté opposé à la précédente
-                let nextImage = null;
-                while (index < sideImages.length) {
-                    const candidate = sideImages[index];
+                let nextImage = sideImages[index];
+                index++;
+
+                // Si c'est le même côté que précédemment, on passe à la suivante
+                while (index < sideImages.length && nextImage.classList.contains(lastSide)) {
+                    nextImage = sideImages[index];
                     index++;
-                    if (!candidate.classList.contains(lastSide)) {
-                        nextImage = candidate;
-                        break;
-                    }
                 }
 
+                // Si plus d’image valide
                 if (!nextImage) return;
 
-                // Position verticale aléatoire
-                const randomTop = 20 + Math.random() * 50;
+                // Position verticale (fixe ou légère variation pour dynamisme)
+                const randomTop = 30 + Math.random() * 40;
                 nextImage.style.top = randomTop + "%";
 
-                // Si c’est une vidéo → prépare la lecture
+                // Prépare vidéo si besoin
                 if (nextImage.tagName.toLowerCase() === "video") {
                     nextImage.currentTime = 0;
                     nextImage.pause();
                 }
 
-                // Affichage en fondu
+                // Affiche en fondu
                 nextImage.classList.remove("hidden");
                 nextImage.classList.add("show");
 
-                // Lecture vidéo si besoin
+                // Lecture vidéo
                 if (nextImage.tagName.toLowerCase() === "video") {
-                    nextImage.play().catch(() => {
-                    });
+                    nextImage.play().catch(() => {});
                 }
 
+                // Mémorise le dernier côté affiché
                 lastSide = nextImage.classList.contains("left") ? "left" : "right";
 
-                // Disparition après 5 secondes (vidéo un peu plus longue)
+                // Durée d’affichage
                 const displayDuration = nextImage.tagName.toLowerCase() === "video" ? 6000 : 5000;
 
+                // Disparition et passage à la suivante
                 setTimeout(() => {
                     nextImage.classList.remove("show");
 
-                    // Pause vidéo proprement au fondu
+                    // Pause vidéo proprement
                     if (nextImage.tagName.toLowerCase() === "video") {
-                        setTimeout(() => nextImage.pause(), 1500);
+                        setTimeout(() => nextImage.pause(), 1200);
                     }
 
                     // Passer à la suivante
                     setTimeout(() => {
                         if (!stop) showNextImage();
-                    }, 1200);
+                    }, 1500);
+
                 }, displayDuration);
             }
 
+            // Démarre la séquence
             showNextImage();
         }
 

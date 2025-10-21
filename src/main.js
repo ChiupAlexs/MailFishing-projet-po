@@ -292,6 +292,7 @@ function ajouterTemps(secondes) {
 /******************************** Général ************************************/
 
 window.addEventListener('DOMContentLoaded', () => {
+
     const btnQuitPart = document.getElementById('QuitPartie')
     const overlayQuit = document.getElementById('overlayQuit')
     const confirmBtn = document.getElementById('confirmBtn')
@@ -497,7 +498,6 @@ async function loadMails() {
         listMails = JSON.parse(sessionStorage.getItem('mails'));
     }
 
-
     trierMailsParDateHeure()
     afficherListeMails()
 }
@@ -541,7 +541,7 @@ window.addEventListener('load', () => {
         locker?.remove();
 
         // Lancer le timer
-        startGlobalTimer(0.6, () => {
+        startGlobalTimer(3, () => {
             console.log("vrai")
             window.location.href = "../html/menuFinPerdu.html";
         });
@@ -929,6 +929,9 @@ function effacerMail() {
 
         // Affiche le feedback
         afficherfeedback("Le mail a bien été supprimé !");
+
+        // Après avoir mis à jour les points et quêtes
+        sauvegarderEtatQuetes();
     }
 }
 
@@ -1025,6 +1028,8 @@ function afficherReussiteQuete(id) {
     setTimeout(() => {
         notificationDivElement.style.display = "none"
     }, 4900);
+    verifierFinGagner();
+
 }
 
 function fermerNotification() {
@@ -1052,3 +1057,52 @@ video.addEventListener('ended', () => {
         gameOverScreen.classList.add('visible');
     }, 2000);
 });
+
+
+/*************************** page Fin Gagner *************************************/
+
+/*************************** Fin Gagner *************************************/
+
+function verifierFinGagner() {
+    // Vérifie si toutes les quêtes sont terminées
+    const toutesQuetesFinies = quetes.every(q => q.fini === true);
+
+    if (!toutesQuetesFinies) return; // Si toutes les quêtes ne sont pas finies, on ne fait rien
+
+    // Sélectionne la vidéo et l'écran de victoire
+    const videoGagner = document.querySelector('.video-bg-win');
+    const gameWinScreen = document.getElementById('game-win-screen');
+
+    if (!videoGagner) {
+        // Si pas de vidéo, redirection immédiate
+        window.location.href = "../html/menuFinGagner.html";
+        return;
+    }
+
+    // Affiche la vidéo et joue-la
+    videoGagner.style.display = 'block';
+    videoGagner.style.opacity = 1;
+    videoGagner.play();
+
+    // Quand la vidéo se termine
+    videoGagner.addEventListener('ended', () => {
+        // Fondu de la vidéo
+        videoGagner.style.transition = "opacity 2s";
+        videoGagner.style.opacity = 0;
+
+        setTimeout(() => {
+            videoGagner.style.display = 'none';
+
+            // Affiche éventuellement un écran de victoire si tu veux un overlay
+            if (gameWinScreen) {
+                gameWinScreen.classList.remove('hidden');
+                gameWinScreen.classList.add('visible');
+            }
+
+            // Redirection finale
+            window.location.href = "../html/menuFinGagner.html";
+        }, 2000); // correspond à la durée du fondu
+    });
+}
+
+

@@ -1,5 +1,6 @@
 * {
     -webkit-user-drag: none;
+    -webkit-user-select: none;
 }
 
 .video-bg {
@@ -34,9 +35,83 @@
     opacity: 1;
 }
 
-.hidden {
-    display: none;
+/* Pseudo-éléments pour simuler des lignes glitch */
+#game-over-screen.visible::before,
+#game-over-screen.visible::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+    background: transparent;
+    mix-blend-mode: screen;
+    animation: glitch-scanlines 0.5s infinite linear alternate-reverse;
 }
+
+/* Lignes horizontales qui apparaissent/disparaissent */
+@keyframes glitch-scanlines {
+    0% {
+        background: repeating-linear-gradient(
+                0deg,
+                rgba(255,255,255,0.03) 0px,
+                rgba(255,255,255,0.03) 1px,
+                transparent 1px,
+                transparent 3px
+        );
+        transform: translate(0,0);
+    }
+    50% {
+        background: repeating-linear-gradient(
+                0deg,
+                rgba(255,255,255,0.05) 0px,
+                rgba(255,255,255,0.05) 2px,
+                transparent 2px,
+                transparent 4px
+        );
+        transform: translate(-5px, 5px);
+    }
+    100% {
+        background: repeating-linear-gradient(
+                0deg,
+                rgba(255,255,255,0.02) 0px,
+                rgba(255,255,255,0.02) 1px,
+                transparent 1px,
+                transparent 3px
+        );
+        transform: translate(3px, -3px);
+    }
+}
+
+/* Décalage de couleur aléatoire sur le texte */
+#game-over-screen.visible h1 {
+    position: relative;
+    animation: glitch-color 0.3s infinite;
+}
+
+@keyframes glitch-color {
+    0% { text-shadow: 2px 0 red, -2px 0 cyan; }
+    25% { text-shadow: -2px 0 red, 2px 0 cyan; }
+    50% { text-shadow: 1px 1px red, -1px -1px cyan; }
+    75% { text-shadow: -1px -1px red, 1px 1px cyan; }
+    100% { text-shadow: 2px 0 red, -2px 0 cyan; }
+}
+
+/* Tremblement aléatoire léger de tout l'écran */
+#game-over-screen.visible {
+    animation: glitch-shake 0.2s infinite alternate;
+}
+
+@keyframes glitch-shake {
+    0% { transform: translate(0,0); }
+    25% { transform: translate(-3px,2px); }
+    50% { transform: translate(2px,-2px); }
+    75% { transform: translate(-1px,1px); }
+    100% { transform: translate(1px,-1px); }
+}
+
+/* Bouton retour */
 .retour {
     padding: 10px 20px;
     border: none;
@@ -45,7 +120,8 @@
     font-weight: bold;
     background: #0055aa;
     color: #fff;
-    margin-right: 10px;
+    margin-top: 20px;
+    transition: background 0.3s;
 }
 
 .retour:hover {

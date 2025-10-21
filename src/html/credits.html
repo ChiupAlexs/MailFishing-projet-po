@@ -50,10 +50,13 @@
         <img class="image" src="../images/emtBienvenue.png" alt="Image bienvenue" width="1200" height="1200">
     </div>
     <div class="side-images">
-        <img src="../images/login-wallpaper.jpg" alt="Extrait 1" class="side-image left hidden">
-        <img src="../images/login-wallpaper.jpg" alt="Extrait 2" class="side-image right hidden">
-        <img src="../images/login-wallpaper.jpg" alt="Extrait 3" class="side-image left hidden">
-        <img src="../images/login-wallpaper.jpg" alt="Extrait 4" class="side-image right hidden">
+        <img src="../images/extrait1.png" alt="Extrait 1" class="side-image left hidden" width="200" height="200">
+        <img src="../images/extrait2.png" alt="Extrait 2" class="side-image right hidden" width="400" height="400">
+        <video src="../vidéos/extrait3.mp4" autoplay class="side-image left hidden" width="400" height="400"></video>
+        <img src="../images/extrait4.png" alt="Extrait 4" class="side-image right hidden" width="400" height="400">
+        <img src="../images/extrait5.jpg" alt="Extrait 5" class="side-image right hidden" width="400" height="400">
+        <img src="../images/extrait6.png" alt="Extrait 6" class="side-image right hidden" width="400" height="400">
+        <img src="../images/extrait7.png" alt="Extrait 7" class="side-image right hidden" width="400" height="400">
     </div>
 </div>
 
@@ -62,24 +65,21 @@
         const logos = document.querySelectorAll(".credit-logo");
         const scrollingText = document.querySelector(".scrolling-text");
 
-        const fadeDuration = 1000;   // durée du fondu (ms)
+        const fadeDuration = 1000;    // durée du fondu (ms)
         const visibleDuration = 1500; // temps de visibilité avant disparition (ms)
 
-        // Fonction pour afficher les logos un par un
+        // --- 1️⃣ Affichage séquentiel des logos ---
         function showLogo(i = 0) {
-            if (i >= logos.length) {
-                return
-            }
+            if (i >= logos.length) return;
+
             const logo = logos[i];
             logo.classList.remove("hidden", "fade-out");
             logo.classList.add("fade-in");
 
-            // Temps total : apparition + visible
             setTimeout(() => {
                 logo.classList.remove("fade-in");
                 logo.classList.add("fade-out");
 
-                // Une fois le fondu terminé, on passe au suivant
                 setTimeout(() => {
                     logo.classList.add("hidden");
                     showLogo(i + 1);
@@ -87,19 +87,22 @@
             }, visibleDuration);
         }
 
+        // --- 2️⃣ Affichage alterné des images / vidéo sur les côtés ---
         function showSideImages(scrollDuration) {
             const sideImages = Array.from(document.querySelectorAll(".side-image"));
             let index = 0;
             let lastSide = "";
             let stop = false;
 
-            // Stop à la fin du défilement
-            setTimeout(() => { stop = true; }, scrollDuration - 500);
+            // Arrêt avant la fin du défilement du texte
+            setTimeout(() => {
+                stop = true;
+            }, scrollDuration - 1000);
 
             function showNextImage() {
                 if (stop || index >= sideImages.length) return;
 
-                // Trouver une image du côté opposé
+                // Trouver une image du côté opposé à la précédente
                 let nextImage = null;
                 while (index < sideImages.length) {
                     const candidate = sideImages[index];
@@ -112,38 +115,60 @@
 
                 if (!nextImage) return;
 
-                // Position verticale aléatoire entre 20% et 80%
-                const randomTop = 20 + Math.random() * 60;
+                // Position verticale aléatoire
+                const randomTop = 20 + Math.random() * 50;
                 nextImage.style.top = randomTop + "%";
 
-                // Afficher en fondu
+                // Si c’est une vidéo → prépare la lecture
+                if (nextImage.tagName.toLowerCase() === "video") {
+                    nextImage.currentTime = 0;
+                    nextImage.pause();
+                }
+
+                // Affichage en fondu
                 nextImage.classList.remove("hidden");
                 nextImage.classList.add("show");
 
+                // Lecture vidéo si besoin
+                if (nextImage.tagName.toLowerCase() === "video") {
+                    nextImage.play().catch(() => {
+                    });
+                }
+
                 lastSide = nextImage.classList.contains("left") ? "left" : "right";
 
-                // Disparaît après 4s, puis passe à la suivante
+                // Disparition après 5 secondes (vidéo un peu plus longue)
+                const displayDuration = nextImage.tagName.toLowerCase() === "video" ? 6000 : 5000;
+
                 setTimeout(() => {
                     nextImage.classList.remove("show");
+
+                    // Pause vidéo proprement au fondu
+                    if (nextImage.tagName.toLowerCase() === "video") {
+                        setTimeout(() => nextImage.pause(), 1500);
+                    }
+
+                    // Passer à la suivante
                     setTimeout(() => {
                         if (!stop) showNextImage();
-                    }, 1000);
-                }, 7000);
+                    }, 1200);
+                }, displayDuration);
             }
+
             showNextImage();
         }
 
-        // Fonction pour lancer le défilement du texte
+        // --- 3️⃣ Défilement du texte + image finale ---
         function scrollText() {
             scrollingText.classList.remove("hidden");
             scrollingText.classList.add("scroll-up");
 
             const scrollDuration = 42000; // durée du défilement en ms
 
-            // lancer les images latérales
+            // Lancer les images latérales
             showSideImages(scrollDuration);
 
-            // Afficher l'image finale après le défilement
+            // Afficher l'image finale à la fin
             setTimeout(() => {
                 const finalImage = document.querySelector(".final-image");
                 finalImage.classList.remove("hidden");
@@ -151,10 +176,11 @@
             }, scrollDuration);
         }
 
-        showLogo()
+        // --- 4️⃣ Lancement séquentiel complet ---
+        showLogo();
         setTimeout(() => {
-            scrollText()
-        }, 12000)
+            scrollText();
+        }, 12000);
     });
 </script>
 </body>

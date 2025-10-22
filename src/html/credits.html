@@ -6,9 +6,7 @@
     <link rel="stylesheet" href="../css/credits.css">
 </head>
 <body>
-<a class="menu-credit" href="MenuDemarrage.html">
-    <button>RETOUR</button>
-</a>
+<a class="menu-credit" href="MenuDemarrage.html"><button>RETOUR</button></a>
 <div class="credits-container">
     <audio id="bg-music" src="../sons/creditMusic.mp3" autoplay></audio>
     <div class="logos">
@@ -54,7 +52,7 @@
         <img src="../images/extrait2.png" alt="Extrait 2" class="side-image right hidden" width="400" height="400">
         <video src="../vidéos/extrait3.mp4" autoplay class="side-image left hidden" width="400" height="400"></video>
         <img src="../images/extrait4.png" alt="Extrait 4" class="side-image right hidden" width="400" height="400">
-        <img src="../images/extrait6.png" alt="Extrait 6" class="side-image left hidden" width="400" height="400">
+        <video src="../vidéos/extrait6.mp4" autoplay class="mercotte side-image left hidden" width="300" height="400"></video>
         <img src="../images/extrait7.png" alt="Extrait 7" class="side-image right hidden" width="200" height="200">
     </div>
 </div>
@@ -65,7 +63,7 @@
         const scrollingText = document.querySelector(".scrolling-text");
 
         const fadeDuration = 1000;    // durée du fondu (ms)
-        const visibleDuration = 1500; // temps de visibilité avant disparition (ms)
+        const visibleDuration = 1400; // temps de visibilité avant disparition (ms)
 
         // --- 1️⃣ Affichage séquentiel des logos ---
         function showLogo(i = 0) {
@@ -148,7 +146,7 @@
                     // Passer à la suivante
                     setTimeout(() => {
                         if (!stop) showNextImage();
-                    }, 1500);
+                    }, 500);
 
                 }, displayDuration);
             }
@@ -179,7 +177,7 @@
         showLogo();
         setTimeout(() => {
             scrollText();
-        }, 12000);
+        }, 11000);
     });
 </script>
 </body>

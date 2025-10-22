@@ -127,3 +127,11 @@
 .retour:hover {
     background: #3ea6ff;
 }
+
+#perso-container {
+    margin-bottom: 10px;
+}
+
+#perso-video {
+    border-radius: 515px 515px 0 0;
+}

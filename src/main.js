@@ -423,12 +423,15 @@ function trierMailsParDateHeure() {
 function loadQuetes() {
     const queteGarderMailElement = document.querySelector('.garderMail')
     const queteSuppMailElement = document.querySelector(".suppMail")
+    const queteOuvrirMailyElement = document.querySelector(".ouvrirMaily")
+
     console.log(32323)
     if (sessionStorage.getItem('quetes') === null) {
 
         quetes = [
             {id: 1, points: 0, but: 5, fini: false, label: "Supprimer 5 mails mauvais"},
             {id: 2, points: 0, but: 1, fini: false, label: "Consulter un bon mail."}, // TODO : modifier le label
+            {id: 3, points: 0, but: 1, fini: false, label: "Ouvrir Maily."},
         ]
 
         sessionStorage.setItem('quetes', JSON.stringify(quetes));
@@ -436,16 +439,22 @@ function loadQuetes() {
         quetes = JSON.parse(sessionStorage.getItem('quetes'));
     }
 
-    if (quetes[0].fini) {
-        queteSuppMailElement.querySelector("img").src = "../images/check-icon.png"
+    if (queteSuppMailElement) {
+
+        if (quetes[0].fini) {
+            queteSuppMailElement.querySelector("img").src = "../images/check-icon.png"
+        }
+        if (quetes[1].fini) {
+            queteGarderMailElement.querySelector("img").src = "../images/check-icon.png"
+        } else if (quetes[1].points < 0) {
+            queteGarderMailElement.querySelector("img").src = "../images/croix-rouge.png"
+            queteGarderMailElement.classList.add("perdu")
+        }
+        if (quetes[2].fini) {
+            queteOuvrirMailyElement.querySelector("img").src = "../images/check-icon.png"
+        }
+        queteSuppMailElement.querySelector("p").innerText = `Supprimer 5 mauvais mails : ${quetes[0].points} / 5`
     }
-    if (quetes[1].fini) {
-        queteGarderMailElement.querySelector("img").src = "../images/check-icon.png"
-    } else if (quetes[1].points < 0) {
-        queteGarderMailElement.querySelector("img").src = "../images/croix-rouge.png"
-        queteGarderMailElement.classList.add("perdu")
-    }
-    queteSuppMailElement.querySelector("p").innerText = `Supprimer 5 mauvais mails : ${quetes[0].points} / 5`
 }
 
 function sauvegarderEtatQuetes() {
@@ -541,13 +550,14 @@ window.addEventListener('load', () => {
         locker?.remove();
 
         // Lancer le timer
-        startGlobalTimer(3, () => {
+        startGlobalTimer(1000, () => {
             console.log("vrai")
             window.location.href = "../html/menuFinPerdu.html";
         });
     }
     loadQuetes()
-}, loadMails());
+    loadMails()
+});
 
 function afficherListeMails() {
     listMailEl.innerHTML = ""
@@ -564,6 +574,13 @@ function afficherListeMails() {
         <p class="mailHeure">${mail.time}</p>
         <p class="mailDate">${mail.date}</p>
     </div>`
+
+    }
+    if (!quetes[2].fini) {
+        quetes[2].fini = true
+        quetes[2].points = 1
+        sauvegarderEtatQuetes()
+        afficherReussiteQuete(2)
     }
 }
 

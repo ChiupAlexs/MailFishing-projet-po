@@ -14,6 +14,11 @@
     <div id="win-screen-content">
         <h1>Félicitations !</h1>
         <p>Vous avez complété toutes les quêtes !</p>
+
+        <div id="perso-container" style="display: none;">
+            <video id="perso-video" src="../vidéos/happy.mp4" autoplay muted playsinline width="400" height="400"></video>
+        </div>
+
         <button class="retour" onclick="sessionStorage.clear();window.location.href='MenuDemarrage.html'">Retour au
             menu
         </button>
@@ -25,6 +30,8 @@
     const content = document.getElementById('win-screen-content');
     const canvas = document.getElementById('confetti-canvas');
     const ctx = canvas.getContext('2d');
+    const persoContainer = document.getElementById('perso-container');
+    const persoVideo = document.getElementById('perso-video');
 
     let confettis = [];
     let animationActive = false;
@@ -89,7 +96,7 @@
         requestAnimationFrame(animateConfettis);
     }
 
-    // Quand la vidéo se termine
+    // Quand la première vidéo (victoire.mp4) se termine
     video.addEventListener('ended', () => {
         video.style.opacity = 0;
 
@@ -103,6 +110,12 @@
             createConfettis();
             animationActive = true;
             animateConfettis();
+
+            // Affiche et joue la vidéo du personnage
+            persoContainer.style.display = 'block';
+            persoVideo.currentTime = 0;
+            persoVideo.muted = false;
+            persoVideo.play();
         }, 2000);
     });
 </script>

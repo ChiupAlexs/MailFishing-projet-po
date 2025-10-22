@@ -30,15 +30,15 @@ body {
 }
 
 .menu-credit button {
-    width: 120px;
-    height: 45px;
+    width: 140px;
+    height: 55px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(128, 128, 128, 1);
+    background-color: rgba(128, 128, 128, 0.6);
     border: 2px solid #fff;
     border-radius: 12px;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
     color: #fff;
     cursor: pointer;
@@ -193,4 +193,8 @@ a {
 
 .side-image.right {
     right: 5%;
+}
+
+.mercotte {
+    border-radius: 200px;
 }

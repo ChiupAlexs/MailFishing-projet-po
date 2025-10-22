@@ -5,6 +5,8 @@
     padding: 0;
 }
 
+
+
 header {
     background-color: #333;
     padding: 20px;
@@ -95,13 +97,13 @@ video {
 }
 
 /* Dégradés distincts pour chaque pub */
-.slide:nth-child(1) {
+.slide:nth-child(2) {
     background: linear-gradient(180deg, #B24CFC, #7369F2);
 }
-.slide:nth-child(2) {
+.slide:nth-child(3) {
     background: linear-gradient(180deg, #FF6B6B, #FFB347);
 }
-.slide:nth-child(3) {
+.slide:nth-child(4) {
     background: linear-gradient(180deg, #3CD3AD, #4CB8C4);
 }
 
@@ -129,7 +131,6 @@ video {
     border-radius: 15px;
     box-shadow: -4px 0 15px rgba(0, 0, 0, 0.3);
     overflow: hidden;
-    /*color: white;*/
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -164,6 +165,31 @@ video {
     font-size: 0.9rem;
     line-height: 1.3rem;
     margin: 0;
+}
+
+.close-btn {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(2px);
+    border: 1px solid rgba(255,255,255,0.5);
+}
+
+.close-btn:hover {
+    background: rgba(255, 0, 0, 0.7);
+    transform: scale(1.1);
 }
 
 @keyframes shimmer {

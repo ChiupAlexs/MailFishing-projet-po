@@ -82,12 +82,24 @@
         ActLic.appendChild(errorMsg);
 
         // Auto-majuscule + filtre caractères
-        fields.forEach(f => {
+        fields.forEach((f, i) => {
             f.addEventListener("input", () => {
                 f.value = f.value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 4);
+
+                // Si l’utilisateur a bien écrit 4 caractères → on passe au champ suivant
+                if (f.value.length === 4 && i < fields.length - 1) {
+                    fields[i + 1].focus();
+                }
+
                 // Enlever la bordure rouge si l’utilisateur corrige
                 if (f.value.length === 4) {
                     f.style.borderColor = "";
+                }
+            });
+            // Si l’utilisateur efface tout, revenir au champ précédent
+            f.addEventListener("keydown", (e) => {
+                if (e.key === "Backspace" && f.value.length === 0 && i > 0) {
+                    fields[i - 1].focus();
                 }
             });
         });

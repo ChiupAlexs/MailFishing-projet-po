@@ -1,32 +1,20 @@
 'use strict';
-
 const {exec} = require("child_process");
 const events = require("node:events");
-
 const errorSound = new Audio('../sons/error.m4a');
 const successSound = new Audio('../sons/success.m4a');
-
 const mailOuvertEl = document.getElementById('mail-ouvert')
 const boutonRetourEl = document.querySelector('.bouton-retour')
 const listMailEl = document.querySelector('.containerMails')
-
 const NBRE_DE_MAUVAIS_MAILS_A_SUPP = 5;
-
-
 let listFauxMail = []
 let listVraiMail = []
 let listMails = []
 let currentMailIndex = null
 let quetes = []
 let introFini;
-
 let stressSound = new Audio('../sons/stress.wav');
-
 let scroll = 0
-
-/*************************** Général *******************************/
-
-/***** Gestion des clics suspects *****/
 
 // récupérer compteur existant (0 si absent)
 let clicsSuspects = Number(sessionStorage.getItem("clicsSuspects") || 0);
@@ -34,43 +22,34 @@ let clicsSuspects = Number(sessionStorage.getItem("clicsSuspects") || 0);
 // handler par délégation (capture phase pour intercepter tôt)
 function handleSuspectClick(e) {
     const suspectEl = e.target.closest('#popupOkFalse');
-    if (!suspectEl) return; // pas un clic sur un élément ciblé
-
+    if (!suspectEl) return;
     // incrémenter et sauvegarder
     clicsSuspects++;
     sessionStorage.setItem("clicsSuspects", String(clicsSuspects));
     console.log('[DEBUG] clicsSuspects =', clicsSuspects);
 
+    // Met à jour l'affichage des croix
+    const croixContainer = document.getElementById("croixContainer");
+    if (croixContainer) {
+        const croixList = croixContainer.querySelectorAll("span");
+        for (let i = 0; i < 3; i++) {
+            croixList[i].style.opacity = (i < clicsSuspects) ? "1" : "0.3";
+        }
+    }
+
     // action quand on atteint 3 clics
     if (clicsSuspects >= 3) {
-        // empêcher comportements par défaut / autres handlers si possible
-        try {
-            e.preventDefault();
-        } catch (_) {
-        }
-        try {
-            e.stopImmediatePropagation();
-        } catch (_) {
-        }
-
-        // stopper le timer et le son de stress
+        try { e.preventDefault(); } catch (_) {}
+        try { e.stopImmediatePropagation(); } catch (_) {}
         if (timerInterval) {
             clearInterval(timerInterval);
             timerInterval = null;
         }
-        try {
-            stopStressSound();
-        } catch (_) {
-        }
-
-        // marquer la partie comme finie / perdue
+        try { stopStressSound(); } catch (_) {}
         remainingTime = 0;
         sessionStorage.setItem("globalTimerFinished", "true");
         sessionStorage.removeItem("globalTimerRemaining");
-
         window.location.href = "../html/menuFinPerdu.html"
-
-        // supprimer l'affichage du timer s'il existe
         const disp = document.getElementById("timerDisplay");
         if (disp) disp.remove();
     }
@@ -91,7 +70,6 @@ function updateDisplay() {
     display.style.background = remainingTime <= 30
         ? "rgba(255,0,0,0.8)"
         : "rgba(0,0,0,0.7)";
-
     if (remainingTime === 30 && !stressSound) {
         stressSound = new Audio('../sons/stress.wav');
         stressSound.volume = 0.6;
@@ -101,75 +79,81 @@ function updateDisplay() {
 }
 
 function stopStressSound() {
-    stressSound.pause();
-    stressSound.currentTime = 0;
-    stressSound = null;
+    if (stressSound) {
+        stressSound.pause();
+        stressSound.currentTime = 0;
+        stressSound = null;
+    }
 }
 
 function startGlobalTimer(durationInMinutes, callback) {
-
-
-// Crée l'affichage si inexistant
+    // Crée l'affichage si inexistant
     if (!display) {
         display = document.createElement("div");
         display.id = displayId;
         display.style.cssText = `
-        margin-top: -9px;
-        display: none;
-        position: fixed;
-        top: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-        font-family:'Comic Sans MS', cursive;
-        font-size: 30px;
-        font-weight: light;
-        background: rgba(0,0,0,0.7);
-        color: white;
-        padding: 11px 20px;
-        border-radius: 8px;
-        z-index: 1000;
-        pointer-events: none;
-        transition: background 0.3s;
-    `;
+            margin-top: -9px;
+            display: none;
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family:'Comic Sans MS', cursive;
+            font-size: 30px;
+            font-weight: light;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 11px 20px;
+            border-radius: 8px;
+            z-index: 1000;
+            pointer-events: none;
+            transition: background 0.3s;
+        `;
         document.body.appendChild(display);
 
         // Ajoute un conteneur pour les trois croix
         const croixContainer = document.createElement("div");
         croixContainer.id = "croixContainer";
-        document.body.appendChild(croixContainer);
         croixContainer.style.cssText = `
-        position: fixed;
-        top: 60px;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 24px;
-        color: red;
-        z-index: 1000;
-        pointer-events: none;
-        display: flex;
-        gap: 5px;
-    `;
-        croixContainer.innerHTML ='<img src="images/marque-x.png" alt="croix">';
-    }
+            position: fixed;
+            top: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            color: red;
+            z-index: 1000;
+            pointer-events: none;
+            display: flex;
+            gap: 5px;
+        `;
+        document.body.appendChild(croixContainer);
 
+        // Ajoute les trois croix
+        for (let i = 0; i < 3; i++) {
+            const croix = document.createElement("span");
+            croix.textContent = "✖";
+            croix.style.cssText = `
+                font-size: 24px;
+                color: red;
+                opacity: ${i < clicsSuspects ? "1" : "0.3"};
+                transition: opacity 0.3s;
+            `;
+            croixContainer.appendChild(croix);
+        }
+    }
 
     // Vérifier si le timer est déjà terminé
     if (sessionStorage.getItem("globalTimerFinished") === "true") {
         const display = document.getElementById("timerDisplay");
-        if (display) {
-            display.remove();
-        }
+        if (display) display.remove();
         return;
     }
 
     // Récupérer temps restant depuis sessionStorage si existant
     remainingTime = parseInt(sessionStorage.getItem("globalTimerRemaining"));
     if (isNaN(remainingTime)) remainingTime = durationInMinutes * 60;
-
     display.style.display = "block";
-
     let stressSoundPlayed = sessionStorage.getItem("stressSoundPlayed") === "true";
-
     updateDisplay();
 
     // Nettoyer un ancien intervalle si existant

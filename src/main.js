@@ -109,30 +109,49 @@ function stopStressSound() {
 function startGlobalTimer(durationInMinutes, callback) {
 
 
-    // Crée l'affichage si inexistant
+// Crée l'affichage si inexistant
     if (!display) {
         display = document.createElement("div");
         display.id = displayId;
         display.style.cssText = `
-            margin-top: -9px;
-            display: none;
-            position: fixed;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-family:'Comic Sans MS', cursive;    
-            font-size: 30px;
-            font-weight: light;
-            background: rgba(0,0,0,0.7);
-            color: white;
-            padding: 11px 20px;
-            border-radius: 8px;
-            z-index: 1000;
-            pointer-events: none;
-            transition: background 0.3s;
-        `;
+        margin-top: -9px;
+        display: none;
+        position: fixed;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family:'Comic Sans MS', cursive;
+        font-size: 30px;
+        font-weight: light;
+        background: rgba(0,0,0,0.7);
+        color: white;
+        padding: 11px 20px;
+        border-radius: 8px;
+        z-index: 1000;
+        pointer-events: none;
+        transition: background 0.3s;
+    `;
         document.body.appendChild(display);
+
+        // Ajoute un conteneur pour les trois croix
+        const croixContainer = document.createElement("div");
+        croixContainer.id = "croixContainer";
+        document.body.appendChild(croixContainer);
+        croixContainer.style.cssText = `
+        position: fixed;
+        top: 60px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 24px;
+        color: red;
+        z-index: 1000;
+        pointer-events: none;
+        display: flex;
+        gap: 5px;
+    `;
+        croixContainer.innerHTML ='<img src="images/marque-x.png" alt="croix">';
     }
+
 
     // Vérifier si le timer est déjà terminé
     if (sessionStorage.getItem("globalTimerFinished") === "true") {
@@ -223,7 +242,7 @@ function retirerTemps(secondes) {
         opacity: 1;
         pointer-events: none;
         z-index: 2000;
-        transition: transform 1s ease, opacity 1s ease;
+        transition: transform 0.3s ease-out, opacity 0.3s ease-out;
     `;
     document.body.appendChild(anim);
 

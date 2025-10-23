@@ -1,0 +1,25 @@
+body {
+    font-family: Sora, sans-serif;
+    margin: 0;
+}
+h1 {
+    text-align: center;
+}
+
+.image-mails,
+.text-rapport {
+    max-width: 50vw;
+
+}
+main {
+    margin: 0;
+    display: flex;
+    justify-content: space-around;
+}
+img {
+    max-width: 400px;
+    border-radius: 10px;
+}
+.text-rapport .text {
+    max-width: 100%;
+}

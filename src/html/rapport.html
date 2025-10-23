@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rapport de partie</title>
+    <link rel="stylesheet" href="../css/rapport.css">
+</head>
+<body>
+<h1>Rapport de partie</h1>
+<main>
+    <div class="image-mails">
+        <img src="" alt="" class="img-mail">
+        <img src="" alt="" class="img-pop-up">
+    </div>
+    <div class="text-rapport">
+        <h2 class="titre-rapport"></h2>
+        <div class="text"></div>
+    </div>
+</main>
+
+<script>
+    //let rapports = JSON.parse(sessionStorage.getItem("rapports"));
+    let rapports = [{
+        realName: "La poste",
+        imgLienPopUp: "",
+        imgMail: "poste.png",
+        text: "Comme vous pouvez le voir le nom de domaine de l'adresse mail est jaimelaposte.ch et pas post.ch ce qui permet d'indiquer que c'est un mail usurpateur.\n\nEn réalité la poste n'envoie jamais de mail pour communiquer avec vous mais elle envoie des courriers."
+    }]
+    let currentMailIndex = 0
+
+    let titreRapport = document.querySelector(".titre-rapport");
+    let textRapport = document.querySelector(".text")
+    let imgMailElement = document.querySelector(".img-mail");
+    let imgPopUpElement = document.querySelector(".img-pop-up")
+
+    function afficherRapport() {
+        let rapport = rapports[currentMailIndex]
+
+        titreRapport.innerText = rapport.realName
+        let text = rapport.text.replace(/\n/g, "<br>");
+        textRapport.innerHTML = text
+        imgMailElement.src = "../images/screen-shot-mails/" + rapport.imgMail
+        imgPopUpElement.src = rapport.imgLienPopUp
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        afficherRapport()
+        console.log("Rapport de partie")
+    })
+
+
+</script>
+</body>
+</html>

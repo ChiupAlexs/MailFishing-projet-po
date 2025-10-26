@@ -450,6 +450,7 @@ function loadQuetes() {
         if (quetes[1].fini) {
             queteGarderMailElement.querySelector("img").src = "../images/check-icon.png"
         } else if (quetes[1].points < 0) {
+            //ajout de croix rouge pour montrer le nombre de faute
             queteGarderMailElement.querySelector("img").src = "../images/croix-rouge.png"
             queteGarderMailElement.classList.add("perdu")
         }

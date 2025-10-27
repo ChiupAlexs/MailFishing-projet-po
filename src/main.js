@@ -1,18 +1,12 @@
 'use strict';
-
 const {exec} = require("child_process");
 const events = require("node:events");
-
 const errorSound = new Audio('../sons/error.m4a');
 const successSound = new Audio('../sons/success.m4a');
-
 const mailOuvertEl = document.getElementById('mail-ouvert')
 const boutonRetourEl = document.querySelector('.bouton-retour')
 const listMailEl = document.querySelector('.containerMails')
-
 const NBRE_DE_MAUVAIS_MAILS_A_SUPP = 5;
-
-
 let listFauxMail = []
 let listVraiMail = []
 let listMails = []
@@ -22,12 +16,7 @@ let introFini;
 let rapports = []
 
 let stressSound = new Audio('../sons/stress.wav');
-
 let scroll = 0
-
-/*************************** Général *******************************/
-
-/***** Gestion des clics suspects *****/
 
 // récupérer compteur existant (0 si absent)
 let clicsSuspects = Number(sessionStorage.getItem("clicsSuspects") || 0);
@@ -35,43 +24,34 @@ let clicsSuspects = Number(sessionStorage.getItem("clicsSuspects") || 0);
 // handler par délégation (capture phase pour intercepter tôt)
 function handleSuspectClick(e) {
     const suspectEl = e.target.closest('#popupOkFalse');
-    if (!suspectEl) return; // pas un clic sur un élément ciblé
-
+    if (!suspectEl) return;
     // incrémenter et sauvegarder
     clicsSuspects++;
     sessionStorage.setItem("clicsSuspects", String(clicsSuspects));
     console.log('[DEBUG] clicsSuspects =', clicsSuspects);
 
+    // Met à jour l'affichage des croix
+    const croixContainer = document.getElementById("croixContainer");
+    if (croixContainer) {
+        const croixList = croixContainer.querySelectorAll("span");
+        for (let i = 0; i < 3; i++) {
+            croixList[i].style.opacity = (i < clicsSuspects) ? "1" : "0.3";
+        }
+    }
+
     // action quand on atteint 3 clics
     if (clicsSuspects >= 3) {
-        // empêcher comportements par défaut / autres handlers si possible
-        try {
-            e.preventDefault();
-        } catch (_) {
-        }
-        try {
-            e.stopImmediatePropagation();
-        } catch (_) {
-        }
-
-        // stopper le timer et le son de stress
+        try { e.preventDefault(); } catch (_) {}
+        try { e.stopImmediatePropagation(); } catch (_) {}
         if (timerInterval) {
             clearInterval(timerInterval);
             timerInterval = null;
         }
-        try {
-            stopStressSound();
-        } catch (_) {
-        }
-
-        // marquer la partie comme finie / perdue
+        try { stopStressSound(); } catch (_) {}
         remainingTime = 0;
         sessionStorage.setItem("globalTimerFinished", "true");
         sessionStorage.removeItem("globalTimerRemaining");
-
         window.location.href = "../html/menuFinPerdu.html"
-
-        // supprimer l'affichage du timer s'il existe
         const disp = document.getElementById("timerDisplay");
         if (disp) disp.remove();
     }
@@ -92,7 +72,6 @@ function updateDisplay() {
     display.style.background = remainingTime <= 30
         ? "rgba(255,0,0,0.8)"
         : "rgba(0,0,0,0.7)";
-
     if (remainingTime === 30 && !stressSound) {
         stressSound = new Audio('../sons/stress.wav');
         stressSound.volume = 0.6;
@@ -102,14 +81,14 @@ function updateDisplay() {
 }
 
 function stopStressSound() {
-    stressSound.pause();
-    stressSound.currentTime = 0;
-    stressSound = null;
+    if (stressSound) {
+        stressSound.pause();
+        stressSound.currentTime = 0;
+        stressSound = null;
+    }
 }
 
 function startGlobalTimer(durationInMinutes, callback) {
-
-
     // Crée l'affichage si inexistant
     if (!display) {
         display = document.createElement("div");
@@ -121,7 +100,7 @@ function startGlobalTimer(durationInMinutes, callback) {
             top: 10px;
             left: 50%;
             transform: translateX(-50%);
-            font-family:'Comic Sans MS', cursive;    
+            font-family:'Comic Sans MS', cursive;
             font-size: 30px;
             font-weight: light;
             background: rgba(0,0,0,0.7);
@@ -133,25 +112,50 @@ function startGlobalTimer(durationInMinutes, callback) {
             transition: background 0.3s;
         `;
         document.body.appendChild(display);
+
+        // Ajoute un conteneur pour les trois croix
+        const croixContainer = document.createElement("div");
+        croixContainer.id = "croixContainer";
+        croixContainer.style.cssText = `
+            position: fixed;
+            top: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            color: red;
+            z-index: 1000;
+            pointer-events: none;
+            display: flex;
+            gap: 5px;
+        `;
+        document.body.appendChild(croixContainer);
+
+        // Ajoute les trois croix
+        for (let i = 0; i < 3; i++) {
+            const croix = document.createElement("span");
+            croix.textContent = "✖";
+            croix.style.cssText = `
+                font-size: 24px;
+                color: red;
+                opacity: ${i < clicsSuspects ? "1" : "0.3"};
+                transition: opacity 0.3s;
+            `;
+            croixContainer.appendChild(croix);
+        }
     }
 
     // Vérifier si le timer est déjà terminé
     if (sessionStorage.getItem("globalTimerFinished") === "true") {
         const display = document.getElementById("timerDisplay");
-        if (display) {
-            display.remove();
-        }
+        if (display) display.remove();
         return;
     }
 
     // Récupérer temps restant depuis sessionStorage si existant
     remainingTime = parseInt(sessionStorage.getItem("globalTimerRemaining"));
     if (isNaN(remainingTime)) remainingTime = durationInMinutes * 60;
-
     display.style.display = "block";
-
     let stressSoundPlayed = sessionStorage.getItem("stressSoundPlayed") === "true";
-
     updateDisplay();
 
     // Nettoyer un ancien intervalle si existant
@@ -224,7 +228,7 @@ function retirerTemps(secondes) {
         opacity: 1;
         pointer-events: none;
         z-index: 2000;
-        transition: transform 1s ease, opacity 1s ease;
+        transition: transform 0.3s ease-out, opacity 0.3s ease-out;
     `;
     document.body.appendChild(anim);
 
@@ -293,6 +297,7 @@ function ajouterTemps(secondes) {
 /******************************** Général ************************************/
 
 window.addEventListener('DOMContentLoaded', () => {
+
     const btnQuitPart = document.getElementById('QuitPartie')
     const overlayQuit = document.getElementById('overlayQuit')
     const confirmBtn = document.getElementById('confirmBtn')
@@ -423,12 +428,15 @@ function trierMailsParDateHeure() {
 function loadQuetes() {
     const queteGarderMailElement = document.querySelector('.garderMail')
     const queteSuppMailElement = document.querySelector(".suppMail")
+    const queteOuvrirMailyElement = document.querySelector(".ouvrirMaily")
+
     console.log(32323)
     if (sessionStorage.getItem('quetes') === null) {
 
         quetes = [
             {id: 1, points: 0, but: 5, fini: false, label: "Supprimer 5 mails mauvais"},
             {id: 2, points: 0, but: 1, fini: false, label: "Consulter un bon mail."}, // TODO : modifier le label
+            {id: 3, points: 0, but: 1, fini: false, label: "Ouvrir Maily."},
         ]
 
         sessionStorage.setItem('quetes', JSON.stringify(quetes));
@@ -436,16 +444,22 @@ function loadQuetes() {
         quetes = JSON.parse(sessionStorage.getItem('quetes'));
     }
 
-    if (quetes[0].fini) {
-        queteSuppMailElement.querySelector("img").src = "../images/check-icon.png"
+    if (queteSuppMailElement) {
+
+        if (quetes[0].fini) {
+            queteSuppMailElement.querySelector("img").src = "../images/check-icon.png"
+        }
+        if (quetes[1].fini) {
+            queteGarderMailElement.querySelector("img").src = "../images/check-icon.png"
+        } else if (quetes[1].points < 0) {
+            queteGarderMailElement.querySelector("img").src = "../images/croix-rouge.png"
+            queteGarderMailElement.classList.add("perdu")
+        }
+        if (quetes[2].fini) {
+            queteOuvrirMailyElement.querySelector("img").src = "../images/check-icon.png"
+        }
+        queteSuppMailElement.querySelector("p").innerText = `Supprimer 5 mauvais mails : ${quetes[0].points} / 5`
     }
-    if (quetes[1].fini) {
-        queteGarderMailElement.querySelector("img").src = "../images/check-icon.png"
-    } else if (quetes[1].points < 0) {
-        queteGarderMailElement.querySelector("img").src = "../images/croix-rouge.png"
-        queteGarderMailElement.classList.add("perdu")
-    }
-    queteSuppMailElement.querySelector("p").innerText = `Supprimer 5 mauvais mails : ${quetes[0].points} / 5`
 }
 
 function sauvegarderEtatQuetes() {
@@ -498,7 +512,6 @@ async function loadMails() {
         listMails = JSON.parse(sessionStorage.getItem('mails'));
     }
 
-
     trierMailsParDateHeure()
     afficherListeMails()
 }
@@ -542,7 +555,7 @@ window.addEventListener('load', () => {
         locker?.remove();
 
         // Lancer le timer
-        startGlobalTimer(3, () => {
+        startGlobalTimer(1000, () => {
             console.log("vrai")
             window.location.href = "../html/menuFinPerdu.html";
         });
@@ -554,7 +567,8 @@ window.addEventListener('load', () => {
     } else {
         rapports = JSON.parse(sessionStorage.getItem("rapports"));
     }
-}, loadMails());
+    loadMails()
+});
 
 function afficherListeMails() {
     listMailEl.innerHTML = ""
@@ -571,6 +585,13 @@ function afficherListeMails() {
         <p class="mailHeure">${mail.time}</p>
         <p class="mailDate">${mail.date}</p>
     </div>`
+
+    }
+    if (!quetes[2].fini) {
+        quetes[2].fini = true
+        quetes[2].points = 1
+        sauvegarderEtatQuetes()
+        afficherReussiteQuete(2)
     }
 }
 
@@ -952,6 +973,9 @@ function effacerMail() {
 
         // Affiche le feedback
         afficherfeedback("Le mail a bien été supprimé !");
+
+        // Après avoir mis à jour les points et quêtes
+        sauvegarderEtatQuetes();
     }
 }
 
@@ -1048,6 +1072,8 @@ function afficherReussiteQuete(id) {
     setTimeout(() => {
         notificationDivElement.style.display = "none"
     }, 4900);
+    verifierFinGagner();
+
 }
 
 function fermerNotification() {
@@ -1075,3 +1101,52 @@ video.addEventListener('ended', () => {
         gameOverScreen.classList.add('visible');
     }, 2000);
 });
+
+
+/*************************** page Fin Gagner *************************************/
+
+/*************************** Fin Gagner *************************************/
+
+function verifierFinGagner() {
+    // Vérifie si toutes les quêtes sont terminées
+    const toutesQuetesFinies = quetes.every(q => q.fini === true);
+
+    if (!toutesQuetesFinies) return; // Si toutes les quêtes ne sont pas finies, on ne fait rien
+
+    // Sélectionne la vidéo et l'écran de victoire
+    const videoGagner = document.querySelector('.video-bg-win');
+    const gameWinScreen = document.getElementById('game-win-screen');
+
+    if (!videoGagner) {
+        // Si pas de vidéo, redirection immédiate
+        window.location.href = "../html/menuFinGagner.html";
+        return;
+    }
+
+    // Affiche la vidéo et joue-la
+    videoGagner.style.display = 'block';
+    videoGagner.style.opacity = 1;
+    videoGagner.play();
+
+    // Quand la vidéo se termine
+    videoGagner.addEventListener('ended', () => {
+        // Fondu de la vidéo
+        videoGagner.style.transition = "opacity 2s";
+        videoGagner.style.opacity = 0;
+
+        setTimeout(() => {
+            videoGagner.style.display = 'none';
+
+            // Affiche éventuellement un écran de victoire si tu veux un overlay
+            if (gameWinScreen) {
+                gameWinScreen.classList.remove('hidden');
+                gameWinScreen.classList.add('visible');
+            }
+
+            // Redirection finale
+            window.location.href = "../html/menuFinGagner.html";
+        }, 2000); // correspond à la durée du fondu
+    });
+}
+
+

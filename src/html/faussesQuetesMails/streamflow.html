@@ -16,6 +16,18 @@
 <p>📥Cliquez sur le bouton ci-dessous pour la télécharger. 📥</p>
 <video src="../../vidéos/cMaQuestionCartoon.mp4" controls></video>
 <button>DOWNLOAD</button>
+<div class="pubGauche">
+    <span class="close-btn">&times;</span>
+    <div class="slide active">🚀 Découvrez notre nouvelle appli mobile !</div>
+    <div class="slide">🎧 Promo spéciale : -25% sur tous les casques audio</div>
+    <div class="slide">💻 Livraisons gratuites sur tout le matériel tech !</div>
+</div>
+
+<div class="pubDroite">
+    <span class="close-btn">&times;</span>
+    <h3>🎮 Nouveau casque gaming</h3>
+    <p>Son immersif et confort ultime.<br>Disponible dès maintenant.</p>
+</div>
 
 <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", () => {
@@ -41,6 +53,23 @@
                     window.close()
                 }, 1500);
             }, 1500);
+        });
+    });
+    const slides = document.querySelectorAll(".slide");
+    let index = 0;
+
+    setInterval(() => {
+        slides[index].classList.remove("active");
+        index = (index + 1) % slides.length;
+        slides[index].classList.add("active");
+    }, 4000); // changement toutes les 4 secondes
+
+    document.querySelectorAll('.close-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const pub = btn.parentElement;
+            pub.style.transition = "opacity 0.6s ease";
+            pub.style.opacity = "0";
+            setTimeout(() => pub.remove(), 600); // supprime après l'animation
         });
     });
 </script>

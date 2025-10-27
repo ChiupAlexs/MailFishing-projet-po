@@ -11,6 +11,17 @@ body {
     height: 99vh;
 }
 
+.closePageBtn {
+    position: absolute;
+    top: 157px;
+    right: 520px;
+    width: 50px;
+    height: 50px;
+    background-color: #000000;
+    padding: 0;
+    margin: 0;
+}
+
 .phone-frame {
     width: 380px;
     height: 540px;

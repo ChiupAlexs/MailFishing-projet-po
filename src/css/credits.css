@@ -1,0 +1,200 @@
+/* Style général */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #0d0d0d, #1a1a1a, #262626);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: 'Sora', sans-serif;
+    color: white;
+}
+
+.titre {
+    font-size: 30px;
+    font-weight: bold;
+    color: dodgerblue;
+}
+
+.menu-credit {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: left;
+    z-index: 1;
+}
+
+.menu-credit button {
+    width: 140px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(128, 128, 128, 0.6);
+    border: 2px solid #fff;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+}
+
+.menu-credit button:hover {
+    background: #fff;
+    color: black;
+    transform: scale(1.1);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.menu-credit a:hover {
+    color: black;
+}
+
+/* Conteneur principal */
+.credits-container {
+    text-align: center;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+
+/* Conteneur des logos */
+.logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+/* Images uniformisées et centrées */
+.credit-logo {
+    width: 250px;
+    height: auto;
+    max-width: 40%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+}
+
+/* Masqué par défaut */
+.hidden {
+    opacity: 0;
+}
+
+/* Fondu entrant et sortant */
+.fade-in {
+    animation: fadeIn 2s ease forwards;
+}
+
+.fade-out {
+    animation: fadeOut 2s ease forwards;
+}
+
+/* Animations de fondu */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+    to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    to { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+}
+
+/* Texte défilant */
+.scrolling-text {
+    position: absolute;
+    margin-bottom: -360px;
+    width: 100%;
+    text-align: center;
+    font-size: 22px;
+    opacity: 0;
+}
+
+.scroll-up {
+    animation: scrollUp 50s linear forwards;
+    opacity: 1;
+}
+
+@keyframes scrollUp {
+    from { bottom: -160%; }
+    to { bottom: 200%; }
+}
+
+/* Police */
+@font-face {
+    font-family: "Sora";
+    src: url("../fonts/Sora-VariableFont_wght.ttf") format("truetype");
+    font-weight: normal;
+}
+
+/* Conteneur de l'image finale */
+.final-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 2s ease;
+}
+
+.image {
+    border-radius: 30px;
+}
+
+/* Quand visible */
+.final-image.show {
+    opacity: 1;
+}
+
+/* Image elle-même */
+.final-image img {
+    max-width: 50%;
+    height: auto;
+}
+
+.merci {
+    font-size: 30px;
+}
+
+.side-image {
+    z-index: -100;
+    position: absolute;
+    max-width: 25%;
+    height: auto;
+    opacity: 0;
+    transition: opacity 2s ease;
+    pointer-events: none;
+}
+
+.side-image.show {
+    opacity: 1;
+}
+
+.side-image.left {
+    left: 5%;
+}
+
+.side-image.right {
+    right: 5%;
+}
+
+.mercotte {
+    border-radius: 200px;
+}

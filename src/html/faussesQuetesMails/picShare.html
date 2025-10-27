@@ -18,13 +18,25 @@
         <p>@RobloxPlayer</p>
         <p>On PicShare</p>
     </div>
-    <button class="bouton-pic-share" onclick="window.close()">S'abonner en retour</button>
+    <button class="bouton-pic-share">S'abonner en retour</button>
 </main>
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         if (document.documentElement.requestFullscreen) {
             document.documentElement.requestFullscreen();
         }
+    });
+    document.addEventListener("DOMContentLoaded", () => {
+        const button = document.querySelector("button");
+
+        button.addEventListener("click", () => {
+            setTimeout(() => {
+                button.textContent = "Suivi(e)"
+                setTimeout(() => {
+                    window.close()
+                }, 2000);
+            }, 500);
+        });
     });
 </script>
 </body>

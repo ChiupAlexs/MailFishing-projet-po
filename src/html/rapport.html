@@ -7,6 +7,7 @@
 </head>
 <body>
 <h1>Rapport de partie</h1>
+<img src="../images/next-icon.png" alt="" class="next-icon">
 <main>
     <div class="image-mails">
         <img src="" alt="" class="img-mail">
@@ -20,12 +21,7 @@
 
 <script>
     //let rapports = JSON.parse(sessionStorage.getItem("rapports"));
-    let rapports = [{
-        realName: "La poste",
-        imgLienPopUp: "",
-        imgMail: "poste.png",
-        text: "Comme vous pouvez le voir le nom de domaine de l'adresse mail est jaimelaposte.ch et pas post.ch ce qui permet d'indiquer que c'est un mail usurpateur.\n\nEn réalité la poste n'envoie jamais de mail pour communiquer avec vous mais elle envoie des courriers."
-    }]
+    let rapports = []
     let currentMailIndex = 0
 
     let titreRapport = document.querySelector(".titre-rapport");
@@ -41,11 +37,23 @@
         textRapport.innerHTML = text
         imgMailElement.src = "../images/screen-shot-mails/" + rapport.imgMail
         imgPopUpElement.src = rapport.imgLienPopUp
+
+        if (currentMailIndex === rapports.length - 1) {
+            document.querySelector(".next-icon").style.display = "none";
+        }
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+
+        rapports = JSON.parse(sessionStorage.getItem('rapports'))
+        console.log("test")
         afficherRapport()
         console.log("Rapport de partie")
+    })
+
+    document.querySelector(".next-icon").addEventListener("click", () => {
+        currentMailIndex++
+        afficherRapport()
     })
 
 

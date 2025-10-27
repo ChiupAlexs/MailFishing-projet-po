@@ -17,9 +17,17 @@ main {
     justify-content: space-around;
 }
 img {
-    max-width: 400px;
+    max-width: 600px;
     border-radius: 10px;
 }
 .text-rapport .text {
     max-width: 100%;
+}
+
+.next-icon {
+    cursor: pointer;
+    max-width: 30px;
+    position: fixed;
+    top: 50px;
+    right: 20px;
 }

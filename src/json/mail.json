@@ -130,7 +130,7 @@
         "realName": "TikTok",
         "imgLienPopUp": "",
         "imgMail": "tiktok.png",
-        "text": "Le lien du mail n'est pas le vrai site tiktok.com car c'est tiktouk.com."
+        "text": "Le lien du mail n'est pas le vrai site tiktok.com car c'est tiktouk.com.\n\nDe plus si c'était un mail généré par tiktok l'adresse aurait pas @gmail.com mais directement tiktok.com."
       }
     },
     {
@@ -212,7 +212,7 @@
     {
       "icon": "gameZone.png",
       "realName":"GameZone",
-      "sender": "GameZone@update.eu",
+      "sender": "costumer@gamesone.com",
       "object": "Mise à jour disponible",
       "time": "13:21",
       "date": "08/10/2025",
@@ -220,18 +220,18 @@
       "secret" : "",
       "backgroundImage": "gameZoneBackground.png",
       "bonMail": false,
-      "lienPopUp": "https://www.gamezone.com/update/98765",
+      "lienPopUp": "https://www.gamesone.com/update/98765",
       "rapport": {
         "realName": "GameZone",
-        "imgLienPopUp": "",
+        "imgLienPopUp": "gamezone-lien-pop-up.png",
         "imgMail": "gamezone.com",
-        "text": "Le nom de domaine de l'adresse email (la partie après le @) est update.eu qui n'est pas le site gamezone.com alors c'est un mail indésirable."
+        "text": "Le nom de domaine de l'adresse email (la partie après le @) est gamesone.com qui n'est pas le site gamezone.com alors c'est un mail indésirable.\n\nOn peut aussi voir la même chose quand on passe la souris sur le lien (gamesone.com)."
       }
     },
     {
       "icon": "foodly.png",
       "realName":"Foodly",
-      "sender": "Robert@LeCamembert.com",
+      "sender": "Robert@foodly.ch",
       "object": "Votre repas est en route",
       "time": "19:42",
       "date": "08/10/2025",
@@ -239,12 +239,12 @@
       "secret" : "",
       "backgroundImage": "foodlyBackground.png",
       "bonMail": false,
-      "lienPopUp": "https://www.foodly.com/track/54321",
+      "lienPopUp": "https://www.foodly.ch/track/54321",
       "rapport": {
         "realName": "Foodly",
-        "imgLienPopUp": "",
+        "imgLienPopUp": "foodly-lien-pop-up.png",
         "imgMail": "foodly.png",
-        "text": "Le nom de domaine de l'adresse email (la partie après le @) est LeCamembert.com et cela devrait, si le mail était fiable, Robert@foodly.com."
+        "text": "Le nom de domaine de l'adresse email (la partie après le @) est foodly.ch et cela devrait, si le mail était fiable, Robert@foodly.com.\n\nOn peut aussi voir quand on passe la souris sur le lien que c'est foodly.ch alors il essaie de te faire ouvrir un autre site."
       }
     },
     {

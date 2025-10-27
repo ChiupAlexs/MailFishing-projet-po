@@ -19,6 +19,7 @@ let listMails = []
 let currentMailIndex = null
 let quetes = []
 let introFini;
+let rapports = []
 
 let stressSound = new Audio('../sons/stress.wav');
 
@@ -547,6 +548,12 @@ window.addEventListener('load', () => {
         });
     }
     loadQuetes()
+
+    if (sessionStorage.getItem("rapports") === null) {
+        sessionStorage.setItem("rapports", JSON.stringify(rapports));
+    } else {
+        rapports = JSON.parse(sessionStorage.getItem("rapports"));
+    }
 }, loadMails());
 
 function afficherListeMails() {
@@ -623,6 +630,8 @@ async function ouvrirMail(id) {
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
                 retirerTemps(10);
+                rapports.push(listMails[currentMailIndex].rapport)
+                sessionStorage.setItem("rapports", JSON.stringify(rapports))
             }, {once: true});
         })
     }
@@ -652,6 +661,8 @@ async function ouvrirMail(id) {
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
                 retirerTemps(10);
+                rapports.push(listMails[currentMailIndex].rapport)
+                sessionStorage.setItem("rapports", JSON.stringify(rapports))
             }, {once: true});
         })
     }
@@ -681,6 +692,8 @@ async function ouvrirMail(id) {
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
                 retirerTemps(10);
+                rapports.push(listMails[currentMailIndex].rapport)
+                sessionStorage.setItem("rapports", JSON.stringify(rapports))
             }, {once: true});
         })
     }
@@ -754,6 +767,8 @@ async function ouvrirMail(id) {
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
                 retirerTemps(10);
+                rapports.push(listMails[currentMailIndex].rapport)
+                sessionStorage.setItem("rapports", JSON.stringify(rapports))
             }, {once: true});
         })
     }
@@ -784,6 +799,8 @@ async function ouvrirMail(id) {
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
                 retirerTemps(10);
+                rapports.push(listMails[currentMailIndex].rapport)
+                sessionStorage.setItem("rapports", JSON.stringify(rapports))
             }, {once: true});
         })
     }
@@ -814,6 +831,9 @@ async function ouvrirMail(id) {
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
                 retirerTemps(10);
+
+                rapports.push(listMails[currentMailIndex].rapport)
+                sessionStorage.setItem("rapports", JSON.stringify(rapports))
             }, {once: true});
         })
     }
@@ -837,12 +857,15 @@ async function ouvrirMail(id) {
             // Faire apparaître après un certain temps
             setTimeout(() => {
                 overlay.classList.remove("hiddenFalse");
+
             }, 400)
 
             // Bouton Confirmer
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
                 retirerTemps(10);
+                rapports.push(listMails[currentMailIndex].rapport)
+                sessionStorage.setItem("rapports", JSON.stringify(rapports))
             }, {once: true});
         })
     }

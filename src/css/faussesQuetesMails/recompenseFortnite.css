@@ -1,3 +1,8 @@
+* {
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -20,6 +25,7 @@ body {
 }
 
 h1 {
+    margin-top: -100px;
     font-size: 2.2rem;
     text-transform: uppercase;
     color: #e0f7ff;
@@ -43,6 +49,7 @@ p {
 }
 
 .container {
+    margin-top: 80px;
     background: rgba(255, 255, 255, 0.05); /* sobre et transparent */
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 16px;
@@ -133,3 +140,19 @@ button.success {
     background: linear-gradient(120deg, #28a745, #218838);
     box-shadow: 0 0 15px rgba(40, 167, 69, 0.6);
 }
+
+/* === Étoiles filantes (+ qui tournent) === */
+.plus {
+    position: absolute;
+    font-size: 24px;
+    color: rgba(255,255,255,0.3);
+    animation: spin 2s linear infinite, move 6s linear infinite;
+    z-index: -100;
+    pointer-events: none; /* ne bloque jamais les clics */
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+

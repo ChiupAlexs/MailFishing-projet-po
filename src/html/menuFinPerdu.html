@@ -11,10 +11,28 @@
 </video>
 
 <div id="game-over-screen" class="hidden">
-    <h1>Game Over</h1>
-    <button class="retour" onclick="sessionStorage.clear();window.location.href='MenuDemarrage.html'">Retour au menu</button>
+    <h1 class="glitch" data-text="GAME OVER">GAME OVER</h1>
+    <div id="perso-container" style="display: none;">
+        <video id="perso-video" src="../vidéos/angry.mp4" autoplay muted playsinline width="400" height="400"></video>
+    </div>
+    <button class="retour" onclick="sessionStorage.clear();window.location.href='MenuDemarrage.html'">Retour au menu
+    </button>
 </div>
-
+<div class="glitch-overlay"></div>
 <script src="../main.js"></script>
+<script>
+    const persoContainer = document.getElementById('perso-container');
+    const persoVideo = document.getElementById('perso-video');
+
+    window.addEventListener('load', () => {
+        setTimeout(()=> {
+            persoContainer.style.display = 'block';
+            persoVideo.muted = false;
+            persoVideo.currentTime = 0;
+            persoVideo.play();
+        }, 23900)
+    })
+
+</script>
 </body>
 </html>

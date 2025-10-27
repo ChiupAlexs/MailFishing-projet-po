@@ -73,7 +73,7 @@
 
         const fields = document.querySelectorAll(".code");
 
-        // Message d’erreur
+        // Message d’erreur : champs incomplets
         const errorMsg = document.createElement("p");
         errorMsg.style.color = "red";
         errorMsg.style.fontSize = "14px";
@@ -81,22 +81,26 @@
         errorMsg.textContent = "Chaque champ doit contenir exactement 4 caractères.";
         ActLic.appendChild(errorMsg);
 
+        // Message d’erreur : licence invalide
+        const errorInvalide = document.createElement("p");
+        errorInvalide.style.color = "red";
+        errorInvalide.style.fontSize = "14px";
+        errorInvalide.style.display = "none";
+        errorInvalide.textContent = "Licence invalide.";
+        ActLic.appendChild(errorInvalide);
+
         // Auto-majuscule + filtre caractères
         fields.forEach((f, i) => {
             f.addEventListener("input", () => {
                 f.value = f.value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 4);
-
-                // Si l’utilisateur a bien écrit 4 caractères → on passe au champ suivant
                 if (f.value.length === 4 && i < fields.length - 1) {
                     fields[i + 1].focus();
                 }
-
-                // Enlever la bordure rouge si l’utilisateur corrige
                 if (f.value.length === 4) {
                     f.style.borderColor = "";
                 }
             });
-            // Si l’utilisateur efface tout, revenir au champ précédent
+
             f.addEventListener("keydown", (e) => {
                 if (e.key === "Backspace" && f.value.length === 0 && i > 0) {
                     fields[i - 1].focus();
@@ -111,24 +115,50 @@
             fields.forEach(f => {
                 if (f.value.length !== 4) {
                     allFilled = false;
-                    f.style.borderColor = "red"; // met en évidence le champ incorrect
+                    f.style.borderColor = "red";
                 }
             });
 
+            // Si les champs ne sont pas remplis correctement
             if (!allFilled) {
                 errorMsg.style.display = "block";
-                return; // stop
+                errorInvalide.style.display = "none";
+                return;
             }
 
-            errorMsg.style.display = "none";
-            ActLic.style.display = "none";
-            confirmPop.style.display = "block";
+            // Si les champs sont remplis, on valide les licences
+            if (validerLicences()) {
+                errorMsg.style.display = "none";
+                errorInvalide.style.display = "none";
+                ActLic.style.display = "none";
+                confirmPop.style.display = "block";
+            } else {
+                errorMsg.style.display = "none";
+                errorInvalide.style.display = "block";
+            }
         });
 
         closeBtn.addEventListener("click", () => {
             window.close();
         });
+
+        function validerLicences() {
+            // On récupère les inputs de chaque groupe
+            const licenceWordInputs = document.querySelectorAll("#licenceWord .code");
+            const licenceExcelInputs = document.querySelectorAll("#licenceExcel .code");
+
+            // On concatène les valeurs (sans les tirets)
+            const licenceWord = Array.from(licenceWordInputs).map(i => i.value).join("");
+            const licenceExcel = Array.from(licenceExcelInputs).map(i => i.value).join("");
+
+            // Vérification
+            return (
+                licenceWord === "L4D2R2D2RDR2C3PO" &&
+                licenceExcel === "A4UP3TMKE7Q64HU8"
+            );
+        }
     });
 </script>
+
 </body>
 </html>

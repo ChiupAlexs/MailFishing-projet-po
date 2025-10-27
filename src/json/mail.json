@@ -11,7 +11,13 @@
       "secret" : "",
       "backgroundImage": "posteBackground.png",
       "bonMail": false,
-      "lienPopUp": "https://laposte.ch"
+      "lienPopUp": "https://laposte.ch",
+      "rapport": {
+        "realName": "La poste",
+        "imgLienPopUp": "",
+        "imgMail": "poste.png",
+        "text": "Comme vous pouvez le voir le nom de domaine de l'adresse mail est jaimelaposte.ch et pas post.ch ce qui permet d'indiquer que c'est un mail usurpateur.\n\nEn réalité la poste n'envoie jamais de mail pour communiquer avec vous mais elle envoie des courriers."
+      }
     },
     {
       "icon": "gngngnDirection.png",
@@ -24,7 +30,13 @@
       "secret" : "",
       "backgroundImage": "gngngnDirectionBackground.png",
       "bonMail": false,
-      "lienPopUp": "https://gnnggn.ch/politique"
+      "lienPopUp": "https://gnnggn.ch/politique",
+      "rapport": {
+        "realName": "Direction gngngn",
+        "imgLienPopUp": "",
+        "imgMail": "direction-gngngn.png",
+        "text": "Le nom de domaine de l'adresse email n'est pas juste (c'est la partie après le @). C'est gnnggn.ch au lieu de gngngn.ch."
+      }
     },
     {
       "icon": "licepo.png",
@@ -37,7 +49,13 @@
       "secret" : "",
       "backgroundImage": "policeBackground.png",
       "bonMail": false,
-      "lienPopUp": "https://lapolice.cz"
+      "lienPopUp": "https://lapolice.cz",
+      "rapport": {
+        "realName": "Police",
+        "imgLienPopUp": "",
+        "imgMail": "police.png",
+        "text": "Le nom de domaine de l'adresse email (c'est la partie de l'adresse mail après le @) c'est lesflics.ch c'est pas la vrai adresse de la police.\n\nEn plus de ça le lien est un site avec cz à la fin alors que un site suisse devrait avec ch.\n\nEn réalité"
+      }
     },
     {
       "icon": "fnak.png",
@@ -50,7 +68,13 @@
       "secret" : "",
       "backgroundImage": "fnakBackground.png",
       "bonMail": false,
-      "lienPopUp": "https://gagnant.fnak.ch"
+      "lienPopUp": "https://gagnant.fnak.ch",
+      "rapport": {
+        "realName": "Fnac",
+        "imgLienPopUp": "",
+        "imgMail": "fnac.png",
+        "text": "Le vrai site de la fnac se nomme fnac.ch et pas fnak.ch."
+      }
     },
     {
       "icon": "banque.png",
@@ -63,7 +87,13 @@
       "secret" : "",
       "backgroundImage": "banqueBackground.png",
       "bonMail": false,
-      "lienPopUp": "https://minasuojelensinua.bankre.de"
+      "lienPopUp": "https://minasuojelensinua.bankre.de",
+      "rapport": {
+        "realName": "Banque BCJ",
+        "imgLienPopUp": "",
+        "imgMail": "bcj.png",
+        "text": "Le nom de domaine de l'adresse email (la partie après le @) est bcj.fr et le .fr signifie que c'est un site en France alors que la bcj est une banque suisse. Cela aurait du être bcj.ch."
+      }
     },
     {
       "icon": "bosh.png",
@@ -76,20 +106,32 @@
       "secret" : "",
       "backgroundImage": "boshBackground.png",
       "bonMail": false,
-      "lienPopUp": "https://bosh-promo.fr"
+      "lienPopUp": "https://bosh-promo.fr",
+      "rapport": {
+        "realName": "Bosch",
+        "imgLienPopUp": "",
+        "imgMail": "bosch.png",
+        "text": "Le site bosh-promo.fr n'est pas le vrai site de bosch."
+      }
     },
     {
       "icon": "tiktouk.png",
       "realName":"TikTok",
-      "sender": "TikTok@gmail.ch",
+      "sender": "TikTok@gmail.com",
       "object": "Votre nouveau clip est prêt",
       "time": "10:34",
       "date": "08/10/2025",
-      "body": "Vous avez récemment créer un clip sur notre plateform.\n\nAppuyez sur ce lien pour le visualiser : <a href='faussesQuetesMails/interfaceTiktok.html' class='lien' target='blank'>https://www.tiktouk.com/@gngngn_user/video/1234567890123456789</a>\n\n\nService d'informations TikTouk",
-      "secret" : "",
+      "body": "Vous avez récemment créer un clip sur notre plateform.\n\nAppuyez sur ce lien pour le visualiser : <a href='faussesQuetesMails/interfaceTiktok.html' class='lien' target='blank'>https://www.tiktouk.com/@gngngn_user/video/1234567890123456789</a>\n\n\nService d'informations TikTok",
+      "secret": "",
       "backgroundImage": "tiktoukBackground.png",
       "bonMail": false,
-      "lienPopUp": "https://www.tiktouk.com/@gngngn_user/video/1234567890123456789"
+      "lienPopUp": "https://www.tiktouk.com/@gngngn_user/video/1234567890123456789",
+      "rapport": {
+        "realName": "TikTok",
+        "imgLienPopUp": "",
+        "imgMail": "tiktok.png",
+        "text": "Le lien du mail n'est pas le vrai site tiktok.com car c'est tiktouk.com.\n\nDe plus si c'était un mail généré par tiktok l'adresse aurait pas @gmail.com mais directement tiktok.com."
+      }
     },
     {
       "icon": "streamFlow.png",
@@ -102,7 +144,13 @@
       "secret" : "",
       "backgroundImage": "streamFlowBackground.png",
       "bonMail": false,
-      "lienPopUp": "https://www.streamflow.com/watch/xuafliam123456"
+      "lienPopUp": "http://www.streamfiow.com/watch/xuafliam123456",
+      "rapport": {
+        "realName": "Streamflow",
+        "imgLienPopUp": "streamflow-lien-pop-up.png",
+        "imgMail": "streamflow.png",
+        "text": "Le lien du mail paraît correct mais quand on passe la souris dessus on peut voir le vrai lien et le lien diffère du lien du vrai site alors c'est un mauvais mail."
+      }
     },
     {
       "icon": "quickShop.png",
@@ -115,7 +163,13 @@
       "secret" : "",
       "backgroundImage": "quickShopBackground.png",
       "bonMail": false,
-      "lienPopUp": "https://www.quickshop.com/orders/4721"
+      "lienPopUp": "https://www.quickshod.com/orders/4721",
+      "rapport": {
+        "realName": "QuickShop",
+        "imgLienPopUp": "quickshop-lien-pop-up.png",
+        "imgMail": "quickshop.png",
+        "text": "Le lien du mail paraît juste mais quand on passe la souris dessus un pop-up apparait en bas de l'écran et affiche le vrai lien qui n'est pas quickshop.com mais quickshod.com alors c'est un mauvais mail."
+      }
     },
     {
       "icon": "picShare.png",
@@ -128,7 +182,13 @@
       "secret" : "",
       "backgroundImage": "picShareBackground.png",
       "bonMail": false,
-      "lienPopUp": "https://www.jeTaiEu.com/@my_profile/followers"
+      "lienPopUp": "https://www.jeTaiEu.com/@my_profile/followers",
+      "rapport": {
+        "realName": "PicShare",
+        "imgLienPopUp": "",
+        "imgMail": "picshare.png",
+        "text": "Comme il est très simple de le voir le lien du mail est jeTaiEu.com alors c'est un mauvais mail."
+      }
     },
     {
       "icon": "mailFast.png",
@@ -141,12 +201,18 @@
       "secret" : "",
       "backgroundImage": "mailFastBackground.png",
       "bonMail": false,
-      "lienPopUp": "https://www.mailfist.com/security/logincheck"
+      "lienPopUp": "https://www.mailfist.com/security/logincheck",
+      "rapport": {
+        "realName": "Mail Fast",
+        "imgLienPopUp": "",
+        "imgMail": "mailfast.png",
+        "text": "Le lien du mail est mailfist.com alors qu'il devrait être mailfast.com."
+      }
     },
     {
       "icon": "gameZone.png",
       "realName":"GameZone",
-      "sender": "GameZone@update.eu",
+      "sender": "costumer@gamesone.com",
       "object": "Mise à jour disponible",
       "time": "13:21",
       "date": "08/10/2025",
@@ -154,12 +220,18 @@
       "secret" : "",
       "backgroundImage": "gameZoneBackground.png",
       "bonMail": false,
-      "lienPopUp": "https://www.gamezone.com/update/98765"
+      "lienPopUp": "https://www.gamesone.com/update/98765",
+      "rapport": {
+        "realName": "GameZone",
+        "imgLienPopUp": "gamezone-lien-pop-up.png",
+        "imgMail": "gamezone.com",
+        "text": "Le nom de domaine de l'adresse email (la partie après le @) est gamesone.com qui n'est pas le site gamezone.com alors c'est un mail indésirable.\n\nOn peut aussi voir la même chose quand on passe la souris sur le lien (gamesone.com)."
+      }
     },
     {
       "icon": "foodly.png",
       "realName":"Foodly",
-      "sender": "Robert@LeCamembert.com",
+      "sender": "Robert@foodly.ch",
       "object": "Votre repas est en route",
       "time": "19:42",
       "date": "08/10/2025",
@@ -167,7 +239,13 @@
       "secret" : "",
       "backgroundImage": "foodlyBackground.png",
       "bonMail": false,
-      "lienPopUp": "https://www.foodly.com/track/54321"
+      "lienPopUp": "https://www.foodly.ch/track/54321",
+      "rapport": {
+        "realName": "Foodly",
+        "imgLienPopUp": "foodly-lien-pop-up.png",
+        "imgMail": "foodly.png",
+        "text": "Le nom de domaine de l'adresse email (la partie après le @) est foodly.ch et cela devrait, si le mail était fiable, Robert@foodly.com.\n\nOn peut aussi voir quand on passe la souris sur le lien que c'est foodly.ch alors il essaie de te faire ouvrir un autre site."
+      }
     },
     {
       "icon": "travelio.png",
@@ -180,7 +258,13 @@
       "secret" : "",
       "backgroundImage": "travelioBackground.png",
       "bonMail": false,
-      "lienPopUp": "https://www.travelio.com/ticket/abc987654"
+      "lienPopUp": "https://www.travelio.com/ticket/abc987654",
+      "rapport": {
+        "realName": "Travelio",
+        "imgLienPopUp": "",
+        "imgMail": "Travelyo.png",
+        "text": "Le mail essaie de te faire aller sur le site travelio.com qui n'est pas le vrai site travelyo.com."
+      }
     },
     {
       "icon": "fitLife.png",
@@ -193,7 +277,13 @@
       "secret" : "",
       "backgroundImage": "fitLifeBackground.png",
       "bonMail": false,
-      "lienPopUp": "https://www.fitelife.com/sessions/123abc"
+      "lienPopUp": "https://www.fitelife.com/sessions/123abc",
+      "rapport": {
+        "realName": "FitLife",
+        "imgLienPopUp": "",
+        "imgMail": "fitlife.png",
+        "text": "Le lien du mail est fitelife.com et pas fitlife.com qui est le véritable site. Alors c'est un mauvais mail."
+      }
     },
     {
       "icon": "soundBeat.png",
@@ -202,11 +292,17 @@
       "object": "Votre playlist est prête",
       "time": "12:55",
       "date": "22/09/2025",
-      "body": "Nous avons créé une playlist rien que pour vous.\n\nÉcoutez-la maintenant : <a href='faussesQuetesMails/soundBeat.html' class='lien' target='blank'>http://www.soundbeat.com/playlist/xyz654321</a>\n",
+      "body": "Nous avons créé une playlist rien que pour vous.\n\nÉcoutez-la maintenant : <a href='faussesQuetesMails/soundBeat.html' class='lien' target='blank'>https://www.soundbeat.com/playlist/xyz654321</a>\n",
       "secret" : "",
       "backgroundImage": "soundBeatBackground.png",
       "bonMail": false,
-      "lienPopUp": "http://www.soundbeat.com/playlist/xyz654321"
+      "lienPopUp": "http://www.sounbdeat.com/playlist/xyz654321",
+      "rapport": {
+        "realName": "SoundBeat",
+        "imgLienPopUp": "soundbeat-pop-up.png",
+        "imgMail": "soundbeat.png",
+        "text": "Le lien est correct mais il cache en réalité un autre lien mais grâce au pop-up en bas à droite on peut voir le vrai lien et il n'est pas correct.\n\nLe mail essaie de te rediriger vers un autre site sûrement malfaisant."
+      }
     },
     {
       "icon": "workNet.png",
@@ -215,16 +311,22 @@
       "object": "Nouvelle offre d’emploi disponible",
       "time": "17:10",
       "date": "13/09/2025",
-      "body": "Un recruteur a publié une offre correspondant à votre profil.\n\nConsultez-la ici : <a href='faussesQuetesMails/interfaceWorkNet.html' class='lien' target='blank'>https://www.worknet.com/jobs/offer123</a>\n",
+      "body": "Un recruteur a publié une offre correspondant à votre profil.\n\nConsultez-la ici : <a href='faussesQuetesMails/interfaceWorkNet.html' class='lien' target='blank'>https://www.worcknet.com/jobs/offer123</a>\n",
       "secret" : "Je suis le virus",
       "backgroundImage": "workNetBackground.png",
       "bonMail": false,
-      "lienPopUp": "https://www.worknet.com/jobs/offer123"
+      "lienPopUp": "https://www.worcknet.com/jobs/offer123",
+      "rapport": {
+        "realName": "WorkNet",
+        "imgLienPopUp": "",
+        "imgMail": "worknet.png",
+        "text": "Le lien du mail n'est pas le vrai lien du site de worknet car c'est worcknet.com."
+      }
     },
     {
       "icon": "fortNight.png",
       "realName":"Fortnite",
-      "sender": "FortNight@epigames.com",
+      "sender": "FortNite@epigames.com",
       "object": "Votre récompense Fortnite est disponible",
       "time": "21:07",
       "date": "09/09/2025",
@@ -232,7 +334,13 @@
       "secret" : "",
       "backgroundImage": "fortNightBackground.png",
       "bonMail": false,
-      "lienPopUp": "https://www.fortnightly.com/reward/bonus123"
+      "lienPopUp": "https://www.fortnightly.com/reward/bonus123",
+      "rapport": {
+        "realName": "Fornite",
+        "imgLienPopUp": "",
+        "imgMail": "fortnite.png",
+        "text": "Le nom de domaine de l'adresse email (la partie après le @) est epigames.com et pas epicgames.com qui est la vrai entreprise qui a Fortnite.\n\nDe plus le lien devrait être fortnite.com mais ce n'est pas le cas."
+      }
     }
   ]
 }

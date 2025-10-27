@@ -555,7 +555,7 @@ window.addEventListener('load', () => {
         locker?.remove();
 
         // Lancer le timer
-        startGlobalTimer(1000, () => {
+        startGlobalTimer(5, () => {
             console.log("vrai")
             window.location.href = "../html/menuFinPerdu.html";
         });

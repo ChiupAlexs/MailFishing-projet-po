@@ -219,14 +219,16 @@ function retirerTemps(secondes) {
         top: 50px;
         left: 50%;
         transform: translateX(-50%);
-        font-family: 'Luckiest Guy', cursive;
-        font-size: 24px;
+        font-family: 'Caprasimo', cursive;
+        font-size: 40px;
         font-weight: bold;
+        text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff,
+             1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
         color: red;
         opacity: 1;
         pointer-events: none;
         z-index: 2000;
-        transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+        transition: transform 1s ease-out, opacity 1.2s ease-out;
     `;
     document.body.appendChild(anim);
 

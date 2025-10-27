@@ -222,8 +222,8 @@ function retirerTemps(secondes) {
         font-family: 'Caprasimo', cursive;
         font-size: 40px;
         font-weight: bold;
-        text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff,
-             1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
+        text-shadow: 2px 0 #FFFAE3, -2px 0 #FFFAE3, 0 2px #FFFAE3, 0 -2px #FFFAE3,
+             1px 1px #FFFAE3, -1px -1px #FFFAE3, 1px -1px #FFFAE3, -1px 1px #FFFAE3;
         color: red;
         opacity: 1;
         pointer-events: none;
@@ -453,7 +453,7 @@ function loadQuetes() {
             queteGarderMailElement.querySelector("img").src = "../images/check-icon.png"
         } else if (quetes[1].points < 0) {
             //ajout de croix rouge pour montrer le nombre de faute
-            queteGarderMailElement.querySelector("img").src = "../images/croix-rouge.png"
+            queteGarderMailElement.querySelector("img").src = "../images/cross.png"
             queteGarderMailElement.classList.add("perdu")
         }
         if (quetes[2].fini) {

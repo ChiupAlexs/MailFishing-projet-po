@@ -224,7 +224,7 @@
       "rapport": {
         "realName": "GameZone",
         "imgLienPopUp": "gamezone-lien-pop-up.png",
-        "imgMail": "gamezone.com",
+        "imgMail": "gamezone.png",
         "text": "Le nom de domaine de l'adresse email (la partie après le @) est gamesone.com qui n'est pas le site gamezone.com alors c'est un mail indésirable.\n\nOn peut aussi voir la même chose quand on passe la souris sur le lien (gamesone.com)."
       }
     },
@@ -311,16 +311,16 @@
       "object": "Nouvelle offre d’emploi disponible",
       "time": "17:10",
       "date": "13/09/2025",
-      "body": "Un recruteur a publié une offre correspondant à votre profil.\n\nConsultez-la ici : <a href='faussesQuetesMails/interfaceWorkNet.html' class='lien' target='blank'>https://www.worcknet.com/jobs/offer123</a>\n",
+      "body": "Un recruteur a publié une offre correspondant à votre profil.\n\nConsultez-la ici : <a href='faussesQuetesMails/interfaceWorkNet.html' class='lien' target='blank'>https://www.worknet.com/jobs/offer123</a>\n",
       "secret" : "Je suis le virus",
       "backgroundImage": "workNetBackground.png",
       "bonMail": false,
       "lienPopUp": "https://www.worcknet.com/jobs/offer123",
       "rapport": {
         "realName": "WorkNet",
-        "imgLienPopUp": "",
+        "imgLienPopUp": "worknet-lien-pop-up.png",
         "imgMail": "worknet.png",
-        "text": "Le lien du mail n'est pas le vrai lien du site de worknet car c'est worcknet.com."
+        "text": "En apparance le lien du mail est le bon mais quand on passe la souris sur le lien, un pop-up apparait avec dessus le vrai lien (worcknet.com au lieu de worknet.com).\nCela permet de prouver que le mail essaie de t'envoyer sur un autre site."
       }
     },
     {

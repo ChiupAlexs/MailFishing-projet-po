@@ -1,6 +1,9 @@
 body {
     font-family: Sora, sans-serif;
     margin: 0;
+    text-align: center;
+    background-color: #000;
+    color: white;
 }
 h1 {
     text-align: center;
@@ -12,22 +15,61 @@ h1 {
 
 }
 main {
-    margin: 0;
+    margin: 50px auto 0;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    background-color: #2d2d2d;
+    border-radius: 10px;
+    padding: 20px 20px;
+    max-width: 80vw;
+}
+.image-mails {
+    padding: 20px 20px 0;
 }
 img {
-    max-width: 600px;
+    max-width: 40vw;
     border-radius: 10px;
 }
 .text-rapport .text {
     max-width: 100%;
+    text-align: justify;
+}
+
+.text-rapport {
+    width: 40vw;
+}
+.last-icon {
+    cursor: pointer;
+    max-width: 50px;
+    position: fixed;
+    top: 50px;
+    left: 20px;
+    transform: rotate(180deg);
 }
 
 .next-icon {
     cursor: pointer;
-    max-width: 30px;
+    max-width: 50px;
     position: fixed;
     top: 50px;
     right: 20px;
+}
+
+.retour-menu-principal {
+    background-color: #345eeb;
+    color: white;
+    padding: 15px;
+    font-size: 1.5rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 30px auto;
+
+}
+.supprimer-mail {
+    color: red;
+}
+.retour-menu-principal:hover {
+    background-color: #2848b4;
 }

@@ -47,6 +47,9 @@ function handleSuspectClick(e) {
             clearInterval(timerInterval);
             timerInterval = null;
         }
+        rapports.push(listMails[currentMailIndex].rapport)
+        sessionStorage.setItem("rapports", JSON.stringify(rapports))
+
         try { stopStressSound(); } catch (_) {}
         remainingTime = 0;
         sessionStorage.setItem("globalTimerFinished", "true");
@@ -943,7 +946,6 @@ function effacerMail() {
                 quetes[0].fini = true
 
             }
-
             if (quetes[0].points <= NBRE_DE_MAUVAIS_MAILS_A_SUPP) {
                 afficherReussiteQuete(0)
             }

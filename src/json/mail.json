@@ -54,7 +54,7 @@
         "realName": "Police",
         "imgLienPopUp": "",
         "imgMail": "police.png",
-        "text": "Le nom de domaine de l'adresse email (c'est la partie de l'adresse mail après le @) c'est lesflics.ch c'est pas la vrai adresse de la police.\n\nEn plus de ça le lien est un site avec cz à la fin alors que un site suisse devrait avec ch.\n\nEn réalité"
+        "text": "Le nom de domaine de l'adresse email (c'est la partie de l'adresse mail après le @) c'est lesflics.ch c'est pas la vrai adresse de la police.\n\nEn plus de ça le lien est un site avec cz à la fin alors que un site suisse devrait avec ch.\n\nEn réalité pour communiquer avec vous la police n'envoie jamais de mail mais des courriers."
       }
     },
     {
@@ -187,7 +187,7 @@
         "realName": "PicShare",
         "imgLienPopUp": "",
         "imgMail": "picshare.png",
-        "text": "Comme il est très simple de le voir le lien du mail est jeTaiEu.com alors c'est un mauvais mail."
+        "text": "Comme il est très simple de le voir, le lien du mail est jeTaiEu.com alors c'est un mauvais mail."
       }
     },
     {

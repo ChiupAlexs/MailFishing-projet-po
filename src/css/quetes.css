@@ -251,18 +251,17 @@ footer nav a {
 
 .lock-badge {
     position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 25px;
-    height: 25px;
+    bottom: 45px;
+    right: -8px;
+    width: 22px;
+    height: 22px;
+    background: rgba(255, 255, 255, 0.85);
     border-radius: 50%;
-    background: #ffffffcc;
-    display: inline-flex;
-    align-items: center;
+    display: flex;
     justify-content: center;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-    color: #111;
-    pointer-events: none;
+    align-items: center;
+    font-size: 14px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
 }
 
 .app-container.lockedQuetes .app-link,

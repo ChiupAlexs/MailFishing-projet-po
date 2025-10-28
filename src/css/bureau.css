@@ -120,21 +120,25 @@ footer {
     justify-content: space-between;
     align-items: center;
     border-radius: 5px;
+    z-index: 999;
 }
-
 footer .logo img {
     margin: 5px;
 }
-
 footer nav img {
     height: 70px;
     margin: 20px;
 }
 
+.iconeFichier {
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
 .icon-notification img {
     max-height: 70px;
 }
-
 .icon-notification {
     margin-right: 10px;
 }
@@ -142,50 +146,142 @@ footer nav img {
 footer nav {
     padding: 0;
     margin: 0 auto;
-    text-align: center;
+    text-align: center; /* Enlever une fois les autres application implémentées*/
 }
-
 footer a {
     text-decoration: none;
 }
-
 footer img {
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+    filter:drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
 }
 
-.app-container {
+footer nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px; /* espace entre les icônes */
+}
+
+/* Pour les applications avec .app-container */
+footer nav .app-container {
     position: relative;
-    display: inline-block;
-    vertical-align: middle;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.app-link {
-    display: inline-block;
-    text-decoration: none;
-    outline: none;
-}
-
-.app-link img.maily {
-    display: block;
-    width: 70px;
+/* Pour que les icônes à l’intérieur aient la même taille et centrage */
+footer nav .app-container img,
+footer nav a img {
     height: 70px;
+    width: auto;
+    display: block;
 }
 
-.lock-badge {
+/* Ajuste le badge cadenas */
+footer nav .app-container .lock-badge {
     position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background: #ffffffcc;
-    display: inline-flex;
+    bottom: 12px;
+    right: -5px;
+    width: 22px;
+    height: 22px;
+    display: flex;
     align-items: center;
     justify-content: center;
+    background: #ffffffcc;
+    border-radius: 50%;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-    color: #111;
-    pointer-events: none;
 }
+
+/* Le petit point/trait Windows 11 doit aussi apparaître sous les app-container */
+footer nav .app-container::after,
+footer nav a::after {
+    content: "";
+    position: absolute;
+    bottom: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    background-color: #0078D7;
+    border-radius: 50%;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+/* Verrouillage visuel */
+footer nav .app-container.lockedQuetes img {
+    filter: grayscale(60%);
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+/* --- Correction footer : alignement cohérent entre toutes les pages --- */
+
+footer nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px; /* espace uniforme entre icônes */
+}
+
+/* Pour les conteneurs d'applications verrouillées ou normales */
+footer nav .app-container,
+footer nav a {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer nav .app-container img,
+footer nav a img {
+    height: 70px;
+    width: auto;
+    margin: 0; /* supprime les marges différentes */
+    display: block;
+}
+
+/* Petits indicateurs bleus style Windows 11 */
+footer nav .app-container::after,
+footer nav a::after {
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    background-color: #0078D7;
+    border-radius: 50%;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+
+/* Pour les badges de cadenas */
+footer nav .app-container .lock-badge {
+    position: absolute;
+    bottom: 45px;
+    right: -8px;
+    width: 22px;
+    height: 22px;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+/* Si tu veux que les applis verrouillées soient grisées */
+footer nav .app-container.lockedQuetes img {
+    filter: grayscale(60%);
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
 
 .app-container.locked .app-link,
 .app-container.locked .app-link img {

@@ -698,12 +698,23 @@ async function ouvrirMail(id) {
             const popupContent = document.getElementById("popupContentFalse");
             const popupTitle = document.getElementById("popupTitleFalse");
 
-            // Ajoute l'événement sur tous les liens avec la classe.lienDraw
-            popupTitle.innerHTML = "Dommage !"
-            popupContent.innerHTML = "Vous vous êtes fait avoir 🥸<br><strong>(-10sec)</strong>";
+            const message = "Vous vous êtes fait avoir 🥸 (-10 secondes)";
+            popupTitle.innerHTML = "Dommage !";
+            popupContent.innerHTML = "";
+            popupOk.style.display = "none";
+
             // Faire apparaître après un certain temps
             setTimeout(() => {
                 overlay.classList.remove("hiddenFalse");
+                let i = 0;
+                const interval = setInterval(() => {
+                    popupContent.innerHTML += message[i];
+                    i++;
+                    if (i >= message.length) {
+                        clearInterval(interval);
+                        popupOk.style.display = "inline-block"; // afficher le bouton ok
+                    }
+                }, 100); // vitesse d'affichage (ms par caractère)
             }, 400)
 
             // Désactiver le bouton pendant 2 secondes
@@ -740,7 +751,7 @@ async function ouvrirMail(id) {
             const popupContent = document.getElementById("popupContentFalse");
             const popupTitle = document.getElementById("popupTitleFalse");
 
-            const message = "Vous vous êtes fait avoir 🥸";
+            const message = "Vous vous êtes fait avoir 🥸 (-10 secondes)";
             popupTitle.innerHTML = "Dommage !";
             popupContent.innerHTML = "";
             popupOk.style.display = "none";
@@ -779,12 +790,22 @@ async function ouvrirMail(id) {
             const popupContent = document.getElementById("popupContentFalse");
             const popupTitle = document.getElementById("popupTitleFalse");
 
-            // Ajoute l'événement sur tous les liens avec la classe.lienScreen
-            popupTitle.innerHTML = "Dommage !"
-            popupContent.innerHTML = "Vous vous êtes fait avoir 🥸<br><strong>(-10sec)</strong>";
+            const message = "Vous vous êtes fait avoir 🥸 (-10 secondes)";
+            popupTitle.innerHTML = "Dommage !";
+            popupContent.innerHTML = "";
+            popupOk.style.display = "none";
             // Faire apparaître après un certain temps
             setTimeout(() => {
                 overlay.classList.remove("hiddenFalse");
+                let i = 0;
+                const interval = setInterval(() => {
+                    popupContent.innerHTML += message[i];
+                    i++;
+                    if (i >= message.length) {
+                        clearInterval(interval);
+                        popupOk.style.display = "inline-block"; // afficher le bouton ok
+                    }
+                }, 100); // vitesse d'affichage (ms par caractère)
             }, 400)
 
             // Désactiver le bouton pendant 2 secondes
@@ -907,12 +928,22 @@ async function ouvrirMail(id) {
             const popupContent = document.getElementById("popupContentFalse");
             const popupTitle = document.getElementById("popupTitleFalse");
 
-            // Ajoute l'événement sur tous les liens avec la classe.lienProgress
-            popupTitle.innerHTML = "Dommage !"
-            popupContent.innerHTML = "Vous vous êtes fait avoir 🥸<br><strong>(-10sec)</strong>";
+            const message = "Vous vous êtes fait avoir 🥸 (-10 secondes)";
+            popupTitle.innerHTML = "Dommage !";
+            popupContent.innerHTML = "";
+            popupOk.style.display = "none";
             // Faire apparaître après un certain temps
             setTimeout(() => {
                 overlay.classList.remove("hiddenFalse");
+                let i = 0;
+                const interval = setInterval(() => {
+                    popupContent.innerHTML += message[i];
+                    i++;
+                    if (i >= message.length) {
+                        clearInterval(interval);
+                        popupOk.style.display = "inline-block"; // afficher le bouton ok
+                    }
+                }, 100); // vitesse d'affichage (ms par caractère)
             }, 400)
 
             // Désactiver le bouton pendant 2 secondes
@@ -948,12 +979,22 @@ async function ouvrirMail(id) {
             const popupContent = document.getElementById("popupContentFalse");
             const popupTitle = document.getElementById("popupTitleFalse");
 
-            // Ajoute l'événement sur tous les liens avec la classe.lienCompliments
-            popupTitle.innerHTML = "Dommage !"
-            popupContent.innerHTML = "Vous vous êtes fait avoir 🥸<br><strong>(-10sec)</strong>";
+            const message = "Vous vous êtes fait avoir 🥸 (-10 secondes)";
+            popupTitle.innerHTML = "Dommage !";
+            popupContent.innerHTML = "";
+            popupOk.style.display = "none";
             // Faire apparaître après un certain temps
             setTimeout(() => {
                 overlay.classList.remove("hiddenFalse");
+                let i = 0;
+                const interval = setInterval(() => {
+                    popupContent.innerHTML += message[i];
+                    i++;
+                    if (i >= message.length) {
+                        clearInterval(interval);
+                        popupOk.style.display = "inline-block"; // afficher le bouton ok
+                    }
+                }, 100); // vitesse d'affichage (ms par caractère)
             }, 400)
 
             // Désactiver le bouton pendant 2 secondes
@@ -988,13 +1029,22 @@ async function ouvrirMail(id) {
             const popupContent = document.getElementById("popupContentFalse");
             const popupTitle = document.getElementById("popupTitleFalse");
 
-            // Ajoute l'événement sur tous les liens avec la classe.lienGoose
-            popupTitle.innerHTML = "Dommage !"
-            popupContent.innerHTML = "Vous vous êtes fait avoir 🥸<br><strong>(-10sec)</strong>";
+            const message = "Vous vous êtes fait avoir 🥸 (-10 secondes)";
+            popupTitle.innerHTML = "Dommage !";
+            popupContent.innerHTML = "";
+            popupOk.style.display = "none";
             // Faire apparaître après un certain temps
             setTimeout(() => {
                 overlay.classList.remove("hiddenFalse");
-
+                let i = 0;
+                const interval = setInterval(() => {
+                    popupContent.innerHTML += message[i];
+                    i++;
+                    if (i >= message.length) {
+                        clearInterval(interval);
+                        popupOk.style.display = "inline-block"; // afficher le bouton ok
+                    }
+                }, 100); // vitesse d'affichage (ms par caractère)
             }, 400)
 
             // Désactiver le bouton pendant 2 secondes

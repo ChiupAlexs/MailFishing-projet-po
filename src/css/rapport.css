@@ -22,13 +22,22 @@ main {
     border-radius: 10px;
     padding: 20px 20px;
     max-width: 80vw;
+    height: 500px
 }
 .image-mails {
     padding: 20px 20px 0;
+    text-align: left;
+    max-width: 40vw;
 }
 img {
-    max-width: 30vw;
+    max-width: 40vw;
     border-radius: 10px;
+    display: inline-block;
+    max-height: 400px;
+    margin-bottom: 10px;
+}
+img:nth-last-of-type(1) {
+    border-radius: 3px;
 }
 .text-rapport .text {
     max-width: 100%;
@@ -67,8 +76,11 @@ img {
     margin: 30px auto;
 
 }
-.supprimer-mail {
+.ouvert-mauvais-mail {
     color: red;
+}
+.supprimer-bon-mail {
+    color: orange;
 }
 .retour-menu-principal:hover {
     background-color: #2848b4;

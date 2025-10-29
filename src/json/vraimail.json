@@ -52,7 +52,7 @@
       "lienPopUp": "https://youtube.com/renouveler-abonnement",
       "rapport": {
         "realName": "Youtube",
-        "imgLienPopUp": "",
+        "imgLienPopUp": "youtube-lien-pop-up.png",
         "imgMail": "youtube.png",
         "text": "Le nom de domaine de l'adresse email (la partie après le @) est youtube.com ce qui indique que c'est bien un mail qui provient de Youtube.\n\nDe plus le lien essaie bien de nous diriger vers le vrai site youtube."
       }

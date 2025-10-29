@@ -601,6 +601,14 @@ window.addEventListener('load', () => {
     loadMails()
 });
 
+function addRapport() {
+    if (listMails[currentMailIndex].lienConsulter !== true) {
+        let rapportFinal = { ...listMails[currentMailIndex].rapport, bonMail: listMails[currentMailIndex].bonMail}
+        rapports.push(rapportFinal);
+        sessionStorage.setItem("rapports", JSON.stringify(rapports))
+    }
+}
+
 function afficherListeMails() {
     listMailEl.innerHTML = ""
     for (let index in listMails) {
@@ -663,10 +671,7 @@ async function ouvrirMail(id) {
     if (linkDraw) {
         linkDraw.addEventListener('click', e => {
 
-            if (listMails[currentMailIndex].lienConsulter !== true) {
-                rapports.push(listMails[currentMailIndex].rapport)
-                sessionStorage.setItem("rapports", JSON.stringify(rapports))
-            }
+            addRapport()
 
             listMails[currentMailIndex].lienConsulter = true;
 
@@ -698,10 +703,7 @@ async function ouvrirMail(id) {
     if (linkBeep) {
         linkBeep.addEventListener('click', e => {
 
-            if (listMails[currentMailIndex].lienConsulter !== true) {
-                rapports.push(listMails[currentMailIndex].rapport)
-                sessionStorage.setItem("rapports", JSON.stringify(rapports))
-            }
+            addRapport()
 
             listMails[currentMailIndex].lienConsulter = true;
             sauvegarderMail()
@@ -732,10 +734,7 @@ async function ouvrirMail(id) {
     const linkScreen = document.querySelector('.lienScreen');
     if (linkScreen) {
         linkScreen.addEventListener('click', e => {
-            if (listMails[currentMailIndex].lienConsulter !== true) {
-                rapports.push(listMails[currentMailIndex].rapport)
-                sessionStorage.setItem("rapports", JSON.stringify(rapports))
-            }
+            addRapport()
 
             listMails[currentMailIndex].lienConsulter = true;
             sauvegarderMail()
@@ -810,10 +809,7 @@ async function ouvrirMail(id) {
     const link = document.querySelector('.lien');
     if (link) {
         link.addEventListener('click', e => {
-            if (listMails[currentMailIndex].lienConsulter !== true) {
-                rapports.push(listMails[currentMailIndex].rapport)
-                sessionStorage.setItem("rapports", JSON.stringify(rapports))
-            }
+            addRapport()
 
             listMails[currentMailIndex].lienConsulter = true;
             sauvegarderMail()
@@ -845,10 +841,7 @@ async function ouvrirMail(id) {
     const linkDLProgress = document.querySelector('.lienProgress');
     if (linkDLProgress) {
         linkDLProgress.addEventListener('click', e => {
-            if (listMails[currentMailIndex].lienConsulter !== true) {
-                rapports.push(listMails[currentMailIndex].rapport)
-                sessionStorage.setItem("rapports", JSON.stringify(rapports))
-            }
+            addRapport()
 
             listMails[currentMailIndex].lienConsulter = true;
             sauvegarderMail()
@@ -880,10 +873,7 @@ async function ouvrirMail(id) {
     const linkCompliments = document.querySelector('.lienCompliments');
     if (linkCompliments) {
         linkCompliments.addEventListener('click', e => {
-            if (listMails[currentMailIndex].lienConsulter !== true) {
-                rapports.push(listMails[currentMailIndex].rapport)
-                sessionStorage.setItem("rapports", JSON.stringify(rapports))
-            }
+            addRapport()
 
             listMails[currentMailIndex].lienConsulter = true;
             sauvegarderMail()
@@ -914,10 +904,7 @@ async function ouvrirMail(id) {
     const linkGoose = document.querySelector('.lienGoose');
     if (linkGoose) {
         linkGoose.addEventListener('click', e => {
-            if (listMails[currentMailIndex].lienConsulter !== true) {
-                rapports.push(listMails[currentMailIndex].rapport)
-                sessionStorage.setItem("rapports", JSON.stringify(rapports))
-            }
+            addRapport()
 
             listMails[currentMailIndex].lienConsulter = true;
             sauvegarderMail()
@@ -1008,8 +995,9 @@ function effacerMail() {
         } else if (quetes[1].points === 0 && listMails[currentMailIndex].bonMail) {
 
             quetes[1].points = -1
-
             afficherReussiteQuete(1)
+
+            addRapport()
         }
 
         // Retirer le mail de la liste

@@ -30,6 +30,8 @@
     let buttonRetourMenuPrincipale = document.querySelector(".retour-menu-principal")
     let divPoints = document.querySelector(".points")
 
+    let messageFauteElement = document.querySelector(".supprimer-mail")
+
     let rapports = []
     let currentMailIndex = 0
 
@@ -51,7 +53,6 @@
             document.querySelector(".last-icon").style.display = "inline-block";
         }
         let rapport = rapports[currentMailIndex]
-
         titreRapport.innerText = rapport.realName
         let text = rapport.text.replace(/\n/g, "<br>");
         textRapport.innerHTML = text
@@ -64,6 +65,15 @@
             buttonRetourMenuPrincipale.style.display = "none";
         }
 
+        if (rapport.bonMail) {
+            messageFauteElement.innerText = "Vous avez supprimer ce bon mail"
+            messageFauteElement.classList.add("supprimer-bon-mail")
+            messageFauteElement.classList.remove("ouvert-mauvais-mail")
+        } else {
+            messageFauteElement.innerText = "Vous avez ouvert le lien de ce mail"
+            messageFauteElement.classList.add("ouvert-mauvais-mail")
+            messageFauteElement.classList.remove("supprimer-bon-mail")
+        }
         divPoints.innerHTML = ""
 
         for (let index in rapports) {

@@ -680,6 +680,15 @@ async function ouvrirMail(id) {
                 overlay.classList.remove("hiddenFalse");
             }, 400)
 
+            // Désactiver le bouton pendant 2 secondes
+            popupOk.disabled = true;
+            popupOk.style.opacity = 0.5;
+
+            setTimeout(() => {
+                popupOk.disabled = false;
+                popupOk.style.opacity = 1;
+            }, 2000);
+
             // Bouton Confirmer
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
@@ -703,15 +712,23 @@ async function ouvrirMail(id) {
             const popupContent = document.getElementById("popupContentFalse");
             const popupTitle = document.getElementById("popupTitleFalse");
 
-            // Ajoute l'événement sur tous les liens avec la classe.lienBeep
-            popupTitle.innerHTML = "Dommage !"
-            popupContent.innerHTML = "Vous vous êtes fait avoir 🥸<br><strong>(-10sec)</strong>";
-            // Faire apparaître après un certain temps
-            setTimeout(() => {
-                overlay.classList.remove("hiddenFalse");
-            }, 400)
+            const message = "Vous vous êtes fait avoir 🥸";
+            popupTitle.innerHTML = "Dommage !";
+            popupContent.innerHTML = "";
+            popupOk.style.display = "none";
 
-            // Bouton Confirmer
+            overlay.classList.remove("hiddenFalse");
+
+            let i = 0;
+            const interval = setInterval(() => {
+                popupContent.innerHTML += message[i];
+                i++;
+                if (i >= message.length) {
+                    clearInterval(interval);
+                    popupOk.style.display = "inline-block"; // afficher le bouton ok
+                }
+            }, 100); // vitesse d'affichage (ms par caractère)
+
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
                 retirerTemps(10);
@@ -741,6 +758,15 @@ async function ouvrirMail(id) {
             setTimeout(() => {
                 overlay.classList.remove("hiddenFalse");
             }, 400)
+
+            // Désactiver le bouton pendant 2 secondes
+            popupOk.disabled = true;
+            popupOk.style.opacity = 0.5;
+
+            setTimeout(() => {
+                popupOk.disabled = false;
+                popupOk.style.opacity = 1;
+            }, 2000);
 
             // Bouton Confirmer
             popupOk.addEventListener("click", () => {
@@ -817,6 +843,15 @@ async function ouvrirMail(id) {
                 overlay.classList.remove("hiddenFalse");
             }, 400)
 
+            // Désactiver le bouton pendant 2 secondes
+            popupOk.disabled = true;
+            popupOk.style.opacity = 0.5;
+
+            setTimeout(() => {
+                popupOk.disabled = false;
+                popupOk.style.opacity = 1;
+            }, 2000);
+
             // Bouton Confirmer
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
@@ -848,6 +883,15 @@ async function ouvrirMail(id) {
             setTimeout(() => {
                 overlay.classList.remove("hiddenFalse");
             }, 400)
+
+            // Désactiver le bouton pendant 2 secondes
+            popupOk.disabled = true;
+            popupOk.style.opacity = 0.5;
+
+            setTimeout(() => {
+                popupOk.disabled = false;
+                popupOk.style.opacity = 1;
+            }, 2000);
 
             // Bouton Confirmer
             popupOk.addEventListener("click", () => {
@@ -881,6 +925,15 @@ async function ouvrirMail(id) {
                 overlay.classList.remove("hiddenFalse");
             }, 400)
 
+            // Désactiver le bouton pendant 2 secondes
+            popupOk.disabled = true;
+            popupOk.style.opacity = 0.5;
+
+            setTimeout(() => {
+                popupOk.disabled = false;
+                popupOk.style.opacity = 1;
+            }, 2000);
+
             // Bouton Confirmer
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
@@ -913,6 +966,15 @@ async function ouvrirMail(id) {
                 overlay.classList.remove("hiddenFalse");
 
             }, 400)
+
+            // Désactiver le bouton pendant 2 secondes
+            popupOk.disabled = true;
+            popupOk.style.opacity = 0.5;
+
+            setTimeout(() => {
+                popupOk.disabled = false;
+                popupOk.style.opacity = 1;
+            }, 2000);
 
             // Bouton Confirmer
             popupOk.addEventListener("click", () => {

@@ -37,11 +37,21 @@
 </div>
 
 <p id="message"></p>
+<script src="../../main.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         if (document.documentElement.requestFullscreen) {
             document.documentElement.requestFullscreen();
         }
+
+        const buttonBoss = document.getElementById("saveData");
+
+        if (buttonBoss) {
+            buttonBoss.addEventListener('click', () => {
+                localStorage.setItem("pagePrincipale", "true");
+            });
+        }
+
     });
 
     const shine = document.getElementById('shine');

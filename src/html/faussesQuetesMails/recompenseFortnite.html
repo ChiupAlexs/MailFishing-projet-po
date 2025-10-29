@@ -10,14 +10,24 @@
 <div class="container">
     <img src="../../images/v-bucks.png">
     <p>13500 V-Bucks</p>
-    <button>OBTENIR</button>
+    <button id="getBtn">OBTENIR</button>
 </div>
 <div id="stars"></div>
+<script src="../../main.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         if (document.documentElement.requestFullscreen) {
             document.documentElement.requestFullscreen();
         }
+
+        const buttonFortnite = document.getElementById("getBtn");
+
+        if (buttonFortnite) {
+            buttonFortnite.addEventListener('click', () => {
+                localStorage.setItem("pagePrincipale", "true");
+            });
+        }
+
     });
 
     document.addEventListener("DOMContentLoaded", () => {

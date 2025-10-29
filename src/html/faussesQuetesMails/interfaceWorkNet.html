@@ -87,12 +87,23 @@
     </div>
 </div>
 
+
+<script src="../../main.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         // Mise en fullscreen dès le départ
         if (document.documentElement.requestFullscreen) {
             document.documentElement.requestFullscreen();
         }
+
+        const buttonWorknet = document.getElementById("submitBtn");
+
+        if (buttonWorknet) {
+            buttonWorknet.addEventListener('click', () => {
+                localStorage.setItem("pagePrincipale", "true");
+            });
+        }
+
     });
 
     const applyBtn = document.getElementById("apply-btn");

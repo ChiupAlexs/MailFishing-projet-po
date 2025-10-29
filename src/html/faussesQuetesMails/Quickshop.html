@@ -26,15 +26,24 @@
     </div>
     <p>Vous pouvez suivre vos colis en appuyant sur le bouton "Suivre"<br> afin de voir quand votre commande sera chez vous.</p>
 
-    <button>Suivre📦</button>
+    <button id="suiviBtn">Suivre📦</button>
 </div>
 
-
+<script src="../../main.js"></script>
 <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", () => {
         if (document.documentElement.requestFullscreen) {
             document.documentElement.requestFullscreen();
         }
+
+        const buttonQuickShop = document.getElementById("suiviBtn");
+
+        if (buttonQuickShop) {
+            buttonQuickShop.addEventListener('click', () => {
+                localStorage.setItem("pagePrincipale", "true");
+            });
+        }
+
     });
     document.addEventListener("DOMContentLoaded", () => {
         const button = document.querySelector("button");

@@ -6,9 +6,10 @@
     <link rel="stylesheet" href="../css/rapport.css">
 </head>
 <body>
-<h1>Erreurs faite dans la partie</h1>
+<h1>Erreurs faites dans la parties</h1>
 <img src="../images/next-icon.png" alt="" class="last-icon">
 <img src="../images/next-icon.png" alt="" class="next-icon">
+<p class="pas-de-faute">Vous avez réalisé un sans-faute, Bravo !</p>
 <main>
     <div class="image-mails">
         <img src="" alt="" class="img-mail">
@@ -20,10 +21,16 @@
         <div class="text"></div>
     </div>
 </main>
+<div class="points"></div>
 
 <button class="retour-menu-principal" onclick="window.open('MenuDemarrage.html', '_self')">Menu Principal</button>
 
 <script>
+
+    let buttonRetourMenuPrincipale = document.querySelector(".retour-menu-principal")
+    let divPoints = document.querySelector(".points")
+
+    let messageFauteElement = document.querySelector(".supprimer-mail")
 
     let rapports = []
     let currentMailIndex = 0
@@ -46,17 +53,47 @@
             document.querySelector(".last-icon").style.display = "inline-block";
         }
         let rapport = rapports[currentMailIndex]
-
         titreRapport.innerText = rapport.realName
         let text = rapport.text.replace(/\n/g, "<br>");
         textRapport.innerHTML = text
         imgMailElement.src = "../images/screen-shot-mails/" + rapport.imgMail
         imgPopUpElement.src = "../images/screen-shot-mails/" + rapport.imgLienPopUp
+
+        if (currentMailIndex + 1 === rapports.length) {
+            buttonRetourMenuPrincipale.style.display = "block";
+        } else {
+            buttonRetourMenuPrincipale.style.display = "none";
+        }
+
+        if (rapport.bonMail) {
+            messageFauteElement.innerText = "Vous avez supprimer ce bon mail"
+            messageFauteElement.classList.add("supprimer-bon-mail")
+            messageFauteElement.classList.remove("ouvert-mauvais-mail")
+        } else {
+            messageFauteElement.innerText = "Vous avez ouvert le lien de ce mail"
+            messageFauteElement.classList.add("ouvert-mauvais-mail")
+            messageFauteElement.classList.remove("supprimer-bon-mail")
+        }
+        divPoints.innerHTML = ""
+
+        for (let index in rapports) {
+            console.log(currentMailIndex + " " + index)
+            if (currentMailIndex == index) {
+                divPoints.innerHTML += "<div class='actif'>"
+                console.log("yess la teammmmm")
+            } else {
+                divPoints.innerHTML += "<div class='point'>"
+            }
+        }
     }
 
     document.addEventListener('DOMContentLoaded', () => {
 
         rapports = JSON.parse(sessionStorage.getItem('rapports'))
+
+        if (rapports.length === 0) {
+            document.querySelector(".pas-de-faute").style.display = "block";
+        }
         console.log("test")
         afficherRapport()
         console.log("Rapport de partie")

@@ -47,8 +47,6 @@ function handleSuspectClick(e) {
             clearInterval(timerInterval);
             timerInterval = null;
         }
-        rapports.push(listMails[currentMailIndex].rapport)
-        sessionStorage.setItem("rapports", JSON.stringify(rapports))
 
         try { stopStressSound(); } catch (_) {}
         remainingTime = 0;
@@ -603,6 +601,14 @@ window.addEventListener('load', () => {
     loadMails()
 });
 
+function addRapport() {
+    if (listMails[currentMailIndex].lienConsulter !== true) {
+        let rapportFinal = { ...listMails[currentMailIndex].rapport, bonMail: listMails[currentMailIndex].bonMail}
+        rapports.push(rapportFinal);
+        sessionStorage.setItem("rapports", JSON.stringify(rapports))
+    }
+}
+
 function afficherListeMails() {
     listMailEl.innerHTML = ""
     for (let index in listMails) {
@@ -664,6 +670,11 @@ async function ouvrirMail(id) {
     const linkDraw = document.querySelector('.lienDraw');
     if (linkDraw) {
         linkDraw.addEventListener('click', e => {
+
+            addRapport()
+
+            listMails[currentMailIndex].lienConsulter = true;
+
             exec('.\\resources\\app\\src\\virus\\dessinVirus', (error, stdout, stderr) => {
                 console.log(stderr)
             });
@@ -693,14 +704,16 @@ async function ouvrirMail(id) {
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
                 retirerTemps(10);
-                rapports.push(listMails[currentMailIndex].rapport)
-                sessionStorage.setItem("rapports", JSON.stringify(rapports))
+
             }, {once: true});
         })
     }
     const linkBeep = document.querySelector('.lienBeep');
     if (linkBeep) {
         linkBeep.addEventListener('click', e => {
+
+            addRapport()
+
             listMails[currentMailIndex].lienConsulter = true;
             sauvegarderMail()
 
@@ -732,14 +745,14 @@ async function ouvrirMail(id) {
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
                 retirerTemps(10);
-                rapports.push(listMails[currentMailIndex].rapport)
-                sessionStorage.setItem("rapports", JSON.stringify(rapports))
             }, {once: true});
         })
     }
     const linkScreen = document.querySelector('.lienScreen');
     if (linkScreen) {
         linkScreen.addEventListener('click', e => {
+            addRapport()
+
             listMails[currentMailIndex].lienConsulter = true;
             sauvegarderMail()
 
@@ -772,8 +785,6 @@ async function ouvrirMail(id) {
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
                 retirerTemps(10);
-                rapports.push(listMails[currentMailIndex].rapport)
-                sessionStorage.setItem("rapports", JSON.stringify(rapports))
             }, {once: true});
         })
     }
@@ -824,6 +835,8 @@ async function ouvrirMail(id) {
     const link = document.querySelector('.lien');
     if (link) {
         link.addEventListener('click', e => {
+            addRapport()
+
             listMails[currentMailIndex].lienConsulter = true;
             sauvegarderMail()
 
@@ -856,8 +869,6 @@ async function ouvrirMail(id) {
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
                 retirerTemps(10);
-                rapports.push(listMails[currentMailIndex].rapport)
-                sessionStorage.setItem("rapports", JSON.stringify(rapports))
             }, {once: true});
         })
     }
@@ -865,6 +876,8 @@ async function ouvrirMail(id) {
     const linkDLProgress = document.querySelector('.lienProgress');
     if (linkDLProgress) {
         linkDLProgress.addEventListener('click', e => {
+            addRapport()
+
             listMails[currentMailIndex].lienConsulter = true;
             sauvegarderMail()
 
@@ -897,8 +910,6 @@ async function ouvrirMail(id) {
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
                 retirerTemps(10);
-                rapports.push(listMails[currentMailIndex].rapport)
-                sessionStorage.setItem("rapports", JSON.stringify(rapports))
             }, {once: true});
         })
     }
@@ -906,6 +917,8 @@ async function ouvrirMail(id) {
     const linkCompliments = document.querySelector('.lienCompliments');
     if (linkCompliments) {
         linkCompliments.addEventListener('click', e => {
+            addRapport()
+
             listMails[currentMailIndex].lienConsulter = true;
             sauvegarderMail()
 
@@ -938,15 +951,14 @@ async function ouvrirMail(id) {
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
                 retirerTemps(10);
-
-                rapports.push(listMails[currentMailIndex].rapport)
-                sessionStorage.setItem("rapports", JSON.stringify(rapports))
             }, {once: true});
         })
     }
     const linkGoose = document.querySelector('.lienGoose');
     if (linkGoose) {
         linkGoose.addEventListener('click', e => {
+            addRapport()
+
             listMails[currentMailIndex].lienConsulter = true;
             sauvegarderMail()
 
@@ -980,8 +992,6 @@ async function ouvrirMail(id) {
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
                 retirerTemps(10);
-                rapports.push(listMails[currentMailIndex].rapport)
-                sessionStorage.setItem("rapports", JSON.stringify(rapports))
             }, {once: true});
         })
     }
@@ -1047,8 +1057,9 @@ function effacerMail() {
         } else if (quetes[1].points === 0 && listMails[currentMailIndex].bonMail) {
 
             quetes[1].points = -1
-
             afficherReussiteQuete(1)
+
+            addRapport()
         }
 
         // Retirer le mail de la liste

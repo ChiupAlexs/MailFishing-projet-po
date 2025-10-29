@@ -35,13 +35,22 @@
         <button class="cancel" id="cancelBtn">Annuler</button>
     </div>
 </div>
-
+<script src="../../main.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         // Mise en fullscreen dès le départ
         if (document.documentElement.requestFullscreen) {
             document.documentElement.requestFullscreen();
         }
+
+        const buttonYoutube = document.getElementById("cancelBtn");
+
+        if (buttonYoutube) {
+            buttonYoutube.addEventListener('click', () => {
+                localStorage.setItem("pagePrincipale", "true");
+            });
+        }
+
     });
 
     document.addEventListener("DOMContentLoaded", () => {

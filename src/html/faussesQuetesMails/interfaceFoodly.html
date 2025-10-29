@@ -44,10 +44,20 @@
     <a class="button" id="trackBtn">Suivre en temps réel</a>
     <a class="button hidden retour" id="backBtn">Retour</a>
 </div>
+
+<script src="../../main.js"></script>
+
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         if (document.documentElement.requestFullscreen) {
             document.documentElement.requestFullscreen();
+        }
+        const buttonFoodly = document.getElementById("backBtn");
+
+        if (buttonFoodly) {
+            buttonFoodly.addEventListener('click', () => {
+                localStorage.setItem("pagePrincipale", "true");
+            });
         }
     });
 
@@ -120,6 +130,7 @@
         if (document.documentElement.requestFullscreen) {
             document.documentElement.requestFullscreen();
         }
+
     });
 </script>
 </body>

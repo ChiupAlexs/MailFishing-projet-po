@@ -22,12 +22,22 @@
         <button id="closePopup">Fermer</button>
     </div>
 </div>
+<script src="../../main.js"></script>
 <script>
 
     document.addEventListener("DOMContentLoaded", () => {
         if (document.documentElement.requestFullscreen) {
             document.documentElement.requestFullscreen();
         }
+
+        const buttonTravelio = document.getElementById("closePopup");
+
+        if (buttonTravelio) {
+            buttonTravelio.addEventListener('click', () => {
+                localStorage.setItem("pagePrincipale", "true");
+            });
+        }
+
         const ticketsContainer = document.getElementById("ticketsContainer");
 
         // Exemple de billets

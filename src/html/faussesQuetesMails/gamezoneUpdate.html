@@ -17,7 +17,7 @@
 </div>
 
 <div id="stars"></div>
-
+<script src="../../main.js"></script>
 <script>
     function startDownload() {
         const btn = document.getElementById("downloadBtn");
@@ -70,6 +70,13 @@
         if (document.documentElement.requestFullscreen) {
             document.documentElement.requestFullscreen();
         }
+            const buttonGamezone = document.getElementById("downloadBtn");
+
+            if (buttonGamezone) {
+                buttonGamezone.addEventListener('click', () => {
+                    localStorage.setItem("pagePrincipale", "true");
+                });
+            }
     });
 
 </script>

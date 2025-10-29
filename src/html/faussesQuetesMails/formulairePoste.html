@@ -239,6 +239,13 @@
         if (document.documentElement.requestFullscreen) {
             document.documentElement.requestFullscreen();
         }
+        const buttonPoste = document.getElementById("closePopup");
+
+        if (buttonPoste) {
+            buttonPoste.addEventListener('click', () => {
+                localStorage.setItem("pagePrincipale", "true");
+            });
+        }
     });
 
     /* --- Animation du bus --- */

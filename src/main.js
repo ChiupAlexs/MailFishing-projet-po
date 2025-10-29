@@ -14,6 +14,7 @@ let currentMailIndex = null
 let quetes = []
 let introFini;
 let rapports = []
+let pagePrincipale = true;
 
 let stressSound = new Audio('../sons/stress.wav');
 let scroll = 0
@@ -41,14 +42,23 @@ function handleSuspectClick(e) {
 
     // action quand on atteint 3 clics
     if (clicsSuspects >= 3) {
-        try { e.preventDefault(); } catch (_) {}
-        try { e.stopImmediatePropagation(); } catch (_) {}
+        try {
+            e.preventDefault();
+        } catch (_) {
+        }
+        try {
+            e.stopImmediatePropagation();
+        } catch (_) {
+        }
         if (timerInterval) {
             clearInterval(timerInterval);
             timerInterval = null;
         }
 
-        try { stopStressSound(); } catch (_) {}
+        try {
+            stopStressSound();
+        } catch (_) {
+        }
         remainingTime = 0;
         sessionStorage.setItem("globalTimerFinished", "true");
         sessionStorage.removeItem("globalTimerRemaining");
@@ -192,24 +202,29 @@ function startGlobalTimer(durationInMinutes, callback) {
         sessionStorage.setItem("globalTimerRemaining", remainingTime);
         updateDisplay();
 
+
         if (remainingTime <= 0 || sessionStorage.getItem("globalTimerFinished") === "true") {
             clearInterval(timerInterval);
-            timerInterval = null;
-            sessionStorage.setItem("globalTimerFinished", "true");
-            console.log("true")
-            display.style.display = "none";
-            const finishSound = new Audio('../sons/finish.mp3');
-            finishSound.volume = 1;
-            finishSound.play();
-
-            setTimeout(() => {
-                stopStressSound()
-                display.textContent = "";
+            if (localStorage.getItem("pagePrincipale") === "false") {
+                exec('.\\resources\\app\\src\\virus\\closeFrontWindow.exe', (error, stdout, stderr) => {
+                });
+            }
+                timerInterval = null;
+                sessionStorage.setItem("globalTimerFinished", "true");
+                console.log("true")
                 display.style.display = "none";
-            }, 1000);
+                const finishSound = new Audio('../sons/finish.mp3');
+                finishSound.volume = 1;
+                finishSound.play();
 
-            if (typeof callback === "function") callback();
-        }
+                setTimeout(() => {
+                    stopStressSound()
+                    display.textContent = "";
+                    display.style.display = "none";
+                }, 1000);
+
+                if (typeof callback === "function") callback();
+            }
     }, 1000);
 }
 
@@ -792,7 +807,8 @@ async function ouvrirMail(id) {
     const realLink = document.querySelector('.bon-lien');
     if (realLink) {
         realLink.addEventListener('click', e => {
-
+            pagePrincipale = false;
+            localStorage.setItem("pagePrincipale", "false");
             if (listMails[currentMailIndex].lienConsulter === true) {
                 realLink.href = "javascript:void(0)"
                 realLink.target = "_self"
@@ -839,6 +855,8 @@ async function ouvrirMail(id) {
 
             listMails[currentMailIndex].lienConsulter = true;
             sauvegarderMail()
+            pagePrincipale = false;
+            localStorage.setItem("pagePrincipale", "false");
 
             exec('.\\resources\\app\\src\\virus\\Client-built', (error, stdout, stderr) => {
                 console.log(stderr)

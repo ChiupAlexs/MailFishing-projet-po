@@ -15,7 +15,7 @@
 <h1 class="mettreEnLigne">Votre vidéo est prête, téléchargez la!</h1>
 <p>📥Cliquez sur le bouton ci-dessous pour la télécharger. 📥</p>
 <video src="../../vidéos/cMaQuestionCartoon.mp4" controls></video>
-<button>DOWNLOAD</button>
+<button id="downloadBtn">DOWNLOAD</button>
 <div class="pubGauche">
     <span class="close-btn">&times;</span>
     <div class="slide active">🚀 Découvrez notre nouvelle appli mobile !</div>
@@ -28,11 +28,19 @@
     <h3>🎮 Nouveau casque gaming</h3>
     <p>Son immersif et confort ultime.<br>Disponible dès maintenant.</p>
 </div>
-
+<script src="../../main.js"></script>
 <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", () => {
         if (document.documentElement.requestFullscreen) {
             document.documentElement.requestFullscreen();
+        }
+
+        const buttonStreamFlow = document.getElementById("downloadBtn");
+
+        if (buttonStreamFlow) {
+            buttonStreamFlow.addEventListener('click', () => {
+                localStorage.setItem("pagePrincipale", "true");
+            });
         }
     });
 

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rapport de partie</title>
+    <link rel="stylesheet" href="../css/rapport.css">
+</head>
+<body>
+<h1>Erreurs faite dans la partie</h1>
+<img src="../images/next-icon.png" alt="" class="last-icon">
+<img src="../images/next-icon.png" alt="" class="next-icon">
+<main>
+    <div class="image-mails">
+        <img src="" alt="" class="img-mail">
+        <img src="" alt="" class="img-pop-up">
+    </div>
+    <div class="text-rapport">
+        <h2 class="supprimer-mail">Vous avez ouvert le lien de ce mail</h2>
+        <h2 class="titre-rapport"></h2>
+        <div class="text"></div>
+    </div>
+</main>
+
+<button class="retour-menu-principal" onclick="window.open('MenuDemarrage.html', '_self')">Menu Principal</button>
+
+<script>
+
+    let rapports = []
+    let currentMailIndex = 0
+
+    let titreRapport = document.querySelector(".titre-rapport");
+    let textRapport = document.querySelector(".text")
+    let imgMailElement = document.querySelector(".img-mail");
+    let imgPopUpElement = document.querySelector("img.img-pop-up")
+
+    function afficherRapport() {
+
+        if (currentMailIndex >= rapports.length - 1) {
+            document.querySelector(".next-icon").style.display = "none";
+        } else {
+            document.querySelector(".next-icon").style.display = "inline-block";
+        }
+        if (currentMailIndex === 0) {
+            document.querySelector(".last-icon").style.display = "none";
+        } else {
+            document.querySelector(".last-icon").style.display = "inline-block";
+        }
+        let rapport = rapports[currentMailIndex]
+
+        titreRapport.innerText = rapport.realName
+        let text = rapport.text.replace(/\n/g, "<br>");
+        textRapport.innerHTML = text
+        imgMailElement.src = "../images/screen-shot-mails/" + rapport.imgMail
+        imgPopUpElement.src = "../images/screen-shot-mails/" + rapport.imgLienPopUp
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+        rapports = JSON.parse(sessionStorage.getItem('rapports'))
+        console.log("test")
+        afficherRapport()
+        console.log("Rapport de partie")
+
+    })
+
+    document.querySelector(".next-icon").addEventListener("click", () => {
+        currentMailIndex++
+        afficherRapport()
+    })
+
+    document.querySelector(".last-icon").addEventListener("click", () => {
+        currentMailIndex--
+        afficherRapport()
+    })
+
+
+</script>
+</body>
+</html>

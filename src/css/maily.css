@@ -560,6 +560,12 @@ footer nav img {
     margin: 20px;
 }
 
+.iconeFichier {
+    position: relative; /* ✅ reste dans le flux */
+    top: 0; /* ajuste si nécessaire */
+    left: 0;
+}
+
 .icon-notification img {
     max-height: 70px;
 }
@@ -570,13 +576,93 @@ footer nav img {
 footer nav {
     padding: 0;
     margin: 0 auto;
-    text-align: center; /* Enlever une fois les autres application implémentées*/
+    text-align: center;
 }
 footer a {
     text-decoration: none;
 }
 footer img {
-    filter:drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+/* Ajout : indicateur Windows 11 */
+footer nav a {
+    position: relative;
+    display: inline-block;
+}
+
+footer nav a::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    background-color: #0078D7;
+    border-radius: 50%;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+    margin-bottom: 5px;
+}
+
+footer nav a.active::after {
+    width: 20px;
+    height: 4px;
+    border-radius: 2px;
+    bottom: -10px;
+    background-color: #0078D7;
+    margin-bottom: 5px;
+}
+
+/* --- Correction footer : alignement cohérent entre toutes les pages --- */
+
+footer nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px; /* espace uniforme entre icônes */
+}
+
+/* Pour les conteneurs d'applications verrouillées ou normales */
+footer nav .app-container,
+footer nav a {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer nav .app-container img,
+footer nav a img {
+    height: 70px;
+    width: auto;
+    margin: 0; /* supprime les marges différentes */
+    display: block;
+}
+
+/* Petits indicateurs bleus style Windows 11 */
+footer nav .app-container::after,
+footer nav a::after {
+    content: "";
+    position: absolute;
+    bottom: -11px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    background-color: #0078D7;
+    border-radius: 50%;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+footer nav a.active::after,
+footer nav .app-container.active::after {
+    width: 20px;
+    height: 4px;
+    border-radius: 2px;
+    bottom: -10px;
 }
 
 /***************************

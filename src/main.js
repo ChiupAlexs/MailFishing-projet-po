@@ -13,6 +13,8 @@ let listMails = []
 let currentMailIndex = null
 let quetes = []
 let introFini;
+let rapports = []
+
 let stressSound = new Audio('../sons/stress.wav');
 let scroll = 0
 
@@ -45,14 +47,31 @@ function handleSuspectClick(e) {
             clearInterval(timerInterval);
             timerInterval = null;
         }
+        rapports.push(listMails[currentMailIndex].rapport)
+        sessionStorage.setItem("rapports", JSON.stringify(rapports))
+
         try { stopStressSound(); } catch (_) {}
         remainingTime = 0;
         sessionStorage.setItem("globalTimerFinished", "true");
         sessionStorage.removeItem("globalTimerRemaining");
-        window.location.href = "../html/menuFinPerdu.html"
+
+        // Supprime les croix après 3 clics
+        const croixContainer = document.getElementById("croixContainer");
+        if (croixContainer) {
+            croixContainer.style.transition = "opacity 0.3s ease";
+            croixContainer.style.opacity = "0";
+            setTimeout(() => croixContainer.remove(), 300);
+        }
+
         const disp = document.getElementById("timerDisplay");
         if (disp) disp.remove();
+
+        // Attendre un peu avant de changer de page
+        setTimeout(() => {
+            window.location.href = "../html/menuFinPerdu.html";
+        }, 400);
     }
+
 }
 
 // écouter au niveau document (capture=true pour intercepter avant handlers ajoutés après)
@@ -87,6 +106,16 @@ function stopStressSound() {
 }
 
 function startGlobalTimer(durationInMinutes, callback) {
+    // Si le timer est terminé ou si on est sur la page de fin on ne crée rien
+    if (sessionStorage.getItem("globalTimerFinished") === "true" ||
+        window.location.pathname.includes("menuFinPerdu.html") ||
+        window.location.pathname.includes("menuFinGagne.html")) {
+        const display = document.getElementById("timerDisplay");
+        if (display) display.remove();
+        const croixContainer = document.getElementById("croixContainer");
+        if (croixContainer) croixContainer.remove();
+        return;
+    }
     // Crée l'affichage si inexistant
     if (!display) {
         display = document.createElement("div");
@@ -133,7 +162,7 @@ function startGlobalTimer(durationInMinutes, callback) {
             const croix = document.createElement("span");
             croix.textContent = "✖";
             croix.style.cssText = `
-                font-size: 24px;
+                font-size: 42px;
                 color: red;
                 opacity: ${i < clicsSuspects ? "1" : "0.3"};
                 transition: opacity 0.3s;
@@ -220,13 +249,15 @@ function retirerTemps(secondes) {
         left: 50%;
         transform: translateX(-50%);
         font-family: 'Luckiest Guy', cursive;
-        font-size: 24px;
+        font-size: 40px;
         font-weight: bold;
+        text-shadow: 2px 0 #FFFAE3, -2px 0 #FFFAE3, 0 2px #FFFAE3, 0 -2px #FFFAE3,
+             1px 1px #FFFAE3, -1px -1px #FFFAE3, 1px -1px #FFFAE3, -1px 1px #FFFAE3;
         color: red;
         opacity: 1;
         pointer-events: none;
         z-index: 2000;
-        transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+        transition: transform 1s ease-out, opacity 1.2s ease-out;
     `;
     document.body.appendChild(anim);
 
@@ -274,13 +305,16 @@ function ajouterTemps(secondes) {
         left: 50%;
         transform: translateX(-50%);
         font-family: 'Luckiest Guy', cursive;
-        font-size: 24px;
+        font-size: 40px;
         font-weight: bold;
         color: limegreen;
         opacity: 1;
         pointer-events: none;
         z-index: 2000;
         transition: transform 1s ease, opacity 1s ease;
+        text-shadow: 2px 0 #FFFAE3, -2px 0 #FFFAE3, 0 2px #FFFAE3, 0 -2px #FFFAE3,
+                     1px 1px #FFFAE3, -1px -1px #FFFAE3, 1px -1px #FFFAE3, -1px 1px #FFFAE3;
+        transition: transform 1s ease-out, opacity 1.2s ease-out;
     `;
     document.body.appendChild(anim);
 
@@ -450,7 +484,8 @@ function loadQuetes() {
         if (quetes[1].fini) {
             queteGarderMailElement.querySelector("img").src = "../images/check-icon.png"
         } else if (quetes[1].points < 0) {
-            queteGarderMailElement.querySelector("img").src = "../images/croix-rouge.png"
+            //ajout de croix rouge pour montrer le nombre de faute
+            queteGarderMailElement.querySelector("img").src = "../images/cross.png"
             queteGarderMailElement.classList.add("perdu")
         }
         if (quetes[2].fini) {
@@ -559,6 +594,12 @@ window.addEventListener('load', () => {
         });
     }
     loadQuetes()
+
+    if (sessionStorage.getItem("rapports") === null) {
+        sessionStorage.setItem("rapports", JSON.stringify(rapports));
+    } else {
+        rapports = JSON.parse(sessionStorage.getItem("rapports"));
+    }
     loadMails()
 });
 
@@ -633,7 +674,7 @@ async function ouvrirMail(id) {
 
             // Ajoute l'événement sur tous les liens avec la classe.lienDraw
             popupTitle.innerHTML = "Dommage !"
-            popupContent.innerHTML = "Vous vous êtes fait avoir 🥸";
+            popupContent.innerHTML = "Vous vous êtes fait avoir 🥸<br><strong>(-10sec)</strong>";
             // Faire apparaître après un certain temps
             setTimeout(() => {
                 overlay.classList.remove("hiddenFalse");
@@ -652,6 +693,8 @@ async function ouvrirMail(id) {
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
                 retirerTemps(10);
+                rapports.push(listMails[currentMailIndex].rapport)
+                sessionStorage.setItem("rapports", JSON.stringify(rapports))
             }, {once: true});
         })
     }
@@ -689,6 +732,8 @@ async function ouvrirMail(id) {
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
                 retirerTemps(10);
+                rapports.push(listMails[currentMailIndex].rapport)
+                sessionStorage.setItem("rapports", JSON.stringify(rapports))
             }, {once: true});
         })
     }
@@ -708,7 +753,7 @@ async function ouvrirMail(id) {
 
             // Ajoute l'événement sur tous les liens avec la classe.lienScreen
             popupTitle.innerHTML = "Dommage !"
-            popupContent.innerHTML = "Vous vous êtes fait avoir 🥸";
+            popupContent.innerHTML = "Vous vous êtes fait avoir 🥸<br><strong>(-10sec)</strong>";
             // Faire apparaître après un certain temps
             setTimeout(() => {
                 overlay.classList.remove("hiddenFalse");
@@ -727,6 +772,8 @@ async function ouvrirMail(id) {
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
                 retirerTemps(10);
+                rapports.push(listMails[currentMailIndex].rapport)
+                sessionStorage.setItem("rapports", JSON.stringify(rapports))
             }, {once: true});
         })
     }
@@ -751,7 +798,7 @@ async function ouvrirMail(id) {
 
                 // Ajoute l'événement sur tous les liens avec la classe .bon-lien
                 popupTitle.innerHTML = "Bravo !"
-                popupContent.innerHTML = "Vous avez trouvé le bon mail ☝️🤓";
+                popupContent.innerHTML = "Vous avez trouvé le bon mail ☝️🤓<br><strong>(+15sec)</strong>";
                 // Faire apparaître après un certain temps
                 setTimeout(() => {
                     overlay.classList.remove("hiddenTrue");
@@ -790,7 +837,7 @@ async function ouvrirMail(id) {
 
             // Ajoute l'événement sur tous les liens avec la classe .lien
             popupTitle.innerHTML = "Dommage !"
-            popupContent.innerHTML = "Vous vous êtes fait avoir 🥸";
+            popupContent.innerHTML = "Vous vous êtes fait avoir 🥸<br><strong>(-10sec)</strong>";
             // Faire apparaître après un certain temps
             setTimeout(() => {
                 overlay.classList.remove("hiddenFalse");
@@ -809,6 +856,8 @@ async function ouvrirMail(id) {
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
                 retirerTemps(10);
+                rapports.push(listMails[currentMailIndex].rapport)
+                sessionStorage.setItem("rapports", JSON.stringify(rapports))
             }, {once: true});
         })
     }
@@ -829,7 +878,7 @@ async function ouvrirMail(id) {
 
             // Ajoute l'événement sur tous les liens avec la classe.lienProgress
             popupTitle.innerHTML = "Dommage !"
-            popupContent.innerHTML = "Vous vous êtes fait avoir 🥸";
+            popupContent.innerHTML = "Vous vous êtes fait avoir 🥸<br><strong>(-10sec)</strong>";
             // Faire apparaître après un certain temps
             setTimeout(() => {
                 overlay.classList.remove("hiddenFalse");
@@ -848,6 +897,8 @@ async function ouvrirMail(id) {
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
                 retirerTemps(10);
+                rapports.push(listMails[currentMailIndex].rapport)
+                sessionStorage.setItem("rapports", JSON.stringify(rapports))
             }, {once: true});
         })
     }
@@ -868,7 +919,7 @@ async function ouvrirMail(id) {
 
             // Ajoute l'événement sur tous les liens avec la classe.lienCompliments
             popupTitle.innerHTML = "Dommage !"
-            popupContent.innerHTML = "Vous vous êtes fait avoir 🥸";
+            popupContent.innerHTML = "Vous vous êtes fait avoir 🥸<br><strong>(-10sec)</strong>";
             // Faire apparaître après un certain temps
             setTimeout(() => {
                 overlay.classList.remove("hiddenFalse");
@@ -887,6 +938,9 @@ async function ouvrirMail(id) {
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
                 retirerTemps(10);
+
+                rapports.push(listMails[currentMailIndex].rapport)
+                sessionStorage.setItem("rapports", JSON.stringify(rapports))
             }, {once: true});
         })
     }
@@ -906,10 +960,11 @@ async function ouvrirMail(id) {
 
             // Ajoute l'événement sur tous les liens avec la classe.lienGoose
             popupTitle.innerHTML = "Dommage !"
-            popupContent.innerHTML = "Vous vous êtes fait avoir 🥸";
+            popupContent.innerHTML = "Vous vous êtes fait avoir 🥸<br><strong>(-10sec)</strong>";
             // Faire apparaître après un certain temps
             setTimeout(() => {
                 overlay.classList.remove("hiddenFalse");
+
             }, 400)
 
             // Désactiver le bouton pendant 2 secondes
@@ -925,6 +980,8 @@ async function ouvrirMail(id) {
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
                 retirerTemps(10);
+                rapports.push(listMails[currentMailIndex].rapport)
+                sessionStorage.setItem("rapports", JSON.stringify(rapports))
             }, {once: true});
         })
     }
@@ -981,7 +1038,6 @@ function effacerMail() {
                 quetes[0].fini = true
 
             }
-
             if (quetes[0].points <= NBRE_DE_MAUVAIS_MAILS_A_SUPP) {
                 afficherReussiteQuete(0)
             }

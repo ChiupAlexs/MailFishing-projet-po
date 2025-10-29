@@ -25,8 +25,9 @@
 
 <button class="retour-menu-principal" onclick="window.open('MenuDemarrage.html', '_self')">Menu Principal</button>
 
-<script>
+    <script>
 
+    let mainElement = document.querySelector("main")
     let buttonRetourMenuPrincipale = document.querySelector(".retour-menu-principal")
     let divPoints = document.querySelector(".points")
 
@@ -93,6 +94,7 @@
 
         if (rapports.length === 0) {
             document.querySelector(".pas-de-faute").style.display = "block";
+            mainElement.style.display = "none"
         }
         console.log("test")
         afficherRapport()

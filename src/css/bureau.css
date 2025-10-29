@@ -124,6 +124,7 @@ footer {
 
 footer .logo img {
     margin: 5px;
+    cursor: pointer;
 }
 
 footer nav img {

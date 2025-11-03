@@ -16,7 +16,7 @@
         "realName": "La poste",
         "imgLienPopUp": "",
         "imgMail": "poste.png",
-        "text": "Comme vous pouvez le voir le nom de domaine de l'adresse mail est jaimelaposte.ch et pas post.ch ce qui permet d'indiquer que c'est un mail usurpateur.\n\nEn réalité la poste n'envoie jamais de mail pour communiquer avec vous mais elle envoie des courriers."
+        "text": " - Le nom de domaine de l'adresse mail (après le @) est jaimelaposte.ch et pas post.ch ce qui permet d'indiquer que c'est un mail usurpateur.\n\n - En réalité la poste n'envoie jamais de mail pour communiquer avec vous mais elle envoie des courriers."
       }
     },
     {
@@ -35,7 +35,7 @@
         "realName": "Direction gngngn",
         "imgLienPopUp": "",
         "imgMail": "direction-gngngn.png",
-        "text": "Le nom de domaine de l'adresse email n'est pas juste (c'est la partie après le @). C'est gnnggn.ch au lieu de gngngn.ch."
+        "text": " - Le nom de domaine de l'adresse email (après le @) n'est pas juste c'est gnnggn.ch au lieu de gngngn.ch."
       }
     },
     {
@@ -54,7 +54,7 @@
         "realName": "Police",
         "imgLienPopUp": "",
         "imgMail": "police.png",
-        "text": "Le nom de domaine de l'adresse email (c'est la partie de l'adresse mail après le @) c'est lesflics.ch c'est pas la vrai adresse de la police.\n\nEn plus de ça le lien est un site avec cz à la fin alors que un site suisse devrait avec ch.\n\nEn réalité pour communiquer avec vous la police n'envoie jamais de mail mais des courriers."
+        "text": " - Le nom de domaine de l'adresse email (après le @) c'est lesflics.ch c'est pas la vrai adresse de la police.\n\n - Le lien est un site .cz à la fin alors que un site suisse devrait avec ch.\n\n - En réalité pour communiquer avec vous la police n'envoie jamais de mail mais des courriers."
       }
     },
     {
@@ -73,7 +73,7 @@
         "realName": "Fnac",
         "imgLienPopUp": "",
         "imgMail": "fnac.png",
-        "text": "Le vrai site de la fnac se nomme fnac.ch et pas fnak.ch."
+        "text": " - Le vrai site de la fnac se nomme fnac.ch et pas fnak.ch."
       }
     },
     {
@@ -92,7 +92,7 @@
         "realName": "Banque BCJ",
         "imgLienPopUp": "",
         "imgMail": "bcj.png",
-        "text": "Le nom de domaine de l'adresse email (la partie après le @) est bcj.fr et le .fr signifie que c'est un site en France alors que la bcj est une banque suisse. Cela aurait du être bcj.ch."
+        "text": " - Le nom de domaine de l'adresse email (après le @) est bcj.fr (.fr : france) alors que la bcj est une banque suisse. Cela aurait du être bcj.ch."
       }
     },
     {
@@ -111,7 +111,7 @@
         "realName": "Bosch",
         "imgLienPopUp": "",
         "imgMail": "bosch.png",
-        "text": "Le site bosh-promo.fr n'est pas le vrai site de bosch."
+        "text": " - Le site bosh-promo.fr n'est pas le vrai site de bosch."
       }
     },
     {
@@ -130,7 +130,7 @@
         "realName": "TikTok",
         "imgLienPopUp": "",
         "imgMail": "tiktok.png",
-        "text": "Le lien du mail n'est pas le vrai site tiktok.com car c'est tiktouk.com.\n\nDe plus si c'était un mail généré par tiktok l'adresse aurait pas @gmail.com mais directement tiktok.com."
+        "text": " - Le lien du mail n'est pas le vrai site tiktok.com car c'est tiktouk.com.\n\n - Si c'était un mail généré par tiktok l'adresse aurait pas @gmail.com mais directement tiktok.com."
       }
     },
     {
@@ -149,7 +149,7 @@
         "realName": "Streamflow",
         "imgLienPopUp": "streamflow-lien-pop-up.png",
         "imgMail": "streamflow.png",
-        "text": "Le lien du mail paraît correct mais quand on passe la souris dessus on peut voir le vrai lien et le lien diffère du lien du vrai site alors c'est un mauvais mail."
+        "text": " - Le lien du mail paraît correct mais quand on passe la souris dessus on peut voir le vrai lien et le lien diffère du lien du vrai site alors c'est un mauvais mail."
       }
     },
     {
@@ -168,7 +168,7 @@
         "realName": "QuickShop",
         "imgLienPopUp": "quickshop-lien-pop-up.png",
         "imgMail": "quickshop.png",
-        "text": "Le lien du mail paraît juste mais quand on passe la souris dessus un pop-up apparait en bas de l'écran et affiche le vrai lien qui n'est pas quickshop.com mais quickshod.com alors c'est un mauvais mail."
+        "text": " - Le lien du mail paraît juste mais quand on passe la souris dessus un pop-up apparait en bas de l'écran et affiche le vrai lien qui n'est pas quickshop.com mais quickshod.com alors c'est un mauvais mail."
       }
     },
     {
@@ -187,7 +187,7 @@
         "realName": "PicShare",
         "imgLienPopUp": "",
         "imgMail": "picshare.png",
-        "text": "Comme il est très simple de le voir, le lien du mail est jeTaiEu.com alors c'est un mauvais mail."
+        "text": " - Le lien du mail est jeTaiEu.com alors c'est un mauvais mail."
       }
     },
     {
@@ -206,7 +206,7 @@
         "realName": "Mail Fast",
         "imgLienPopUp": "",
         "imgMail": "mailfast.png",
-        "text": "Le lien du mail est mailfist.com alors qu'il devrait être mailfast.com."
+        "text": " - Le lien du mail est mailfist.com alors qu'il devrait être mailfast.com."
       }
     },
     {
@@ -225,7 +225,7 @@
         "realName": "GameZone",
         "imgLienPopUp": "gamezone-lien-pop-up.png",
         "imgMail": "gamezone.png",
-        "text": "Le nom de domaine de l'adresse email (la partie après le @) est gamesone.com qui n'est pas le site gamezone.com alors c'est un mail indésirable.\n\nOn peut aussi voir la même chose quand on passe la souris sur le lien (gamesone.com)."
+        "text": " - Le nom de domaine de l'adresse email (après le @) est gamesone.com qui n'est pas le site gamezone.com alors c'est un mail indésirable.\n\n - On peut voir la même chose quand on passe la souris sur le lien (gamesone.com)."
       }
     },
     {
@@ -244,7 +244,7 @@
         "realName": "Foodly",
         "imgLienPopUp": "foodly-lien-pop-up.png",
         "imgMail": "foodly.png",
-        "text": "Le nom de domaine de l'adresse email (la partie après le @) est foodly.ch et cela devrait, si le mail était fiable, Robert@foodly.com.\n\nOn peut aussi voir quand on passe la souris sur le lien que c'est foodly.ch alors il essaie de te faire ouvrir un autre site."
+        "text": " - Le nom de domaine de l'adresse email (après le @) est foodly.ch et cela devrait, si le mail était fiable, Robert@foodly.com.\n\n - Quand on passe la souris sur le lien, un pop-up affiche foodly.ch alors il essaie de te faire ouvrir un autre site."
       }
     },
     {
@@ -263,7 +263,7 @@
         "realName": "Travelio",
         "imgLienPopUp": "",
         "imgMail": "Travelyo.png",
-        "text": "Le mail essaie de te faire aller sur le site travelio.com qui n'est pas le vrai site travelyo.com."
+        "text": " - Le mail essaie de te faire aller sur le site travelio.com qui n'est pas le vrai site travelyo.com."
       }
     },
     {
@@ -282,7 +282,7 @@
         "realName": "FitLife",
         "imgLienPopUp": "",
         "imgMail": "fitlife.png",
-        "text": "Le lien du mail est fitelife.com et pas fitlife.com qui est le véritable site. Alors c'est un mauvais mail."
+        "text": " - Le lien du mail est fitelife.com et pas fitlife.com qui est le véritable site. C'est un mauvais mail."
       }
     },
     {
@@ -301,7 +301,7 @@
         "realName": "SoundBeat",
         "imgLienPopUp": "soundbeat-pop-up.png",
         "imgMail": "soundbeat.png",
-        "text": "Le lien est correct mais il cache en réalité un autre lien mais grâce au pop-up en bas à droite on peut voir le vrai lien et il n'est pas correct.\n\nLe mail essaie de te rediriger vers un autre site sûrement malfaisant."
+        "text": " - Quand on passe la souris sur le lien, cela affiche le vrai lien. Le site essaie de te rediriger vers un autre site."
       }
     },
     {
@@ -320,7 +320,7 @@
         "realName": "WorkNet",
         "imgLienPopUp": "worknet-lien-pop-up.png",
         "imgMail": "worknet.png",
-        "text": "En apparance le lien du mail est le bon mais quand on passe la souris sur le lien, un pop-up apparait avec dessus le vrai lien (worcknet.com au lieu de worknet.com).\nCela permet de prouver que le mail essaie de t'envoyer sur un autre site."
+        "text": " - Quand on passe la souris sur le lien, cela affiche le vrai lien. Le mail essaie de te rediriger vers un autre site."
       }
     },
     {
@@ -339,7 +339,7 @@
         "realName": "Fornite",
         "imgLienPopUp": "",
         "imgMail": "fortnite.png",
-        "text": "Le nom de domaine de l'adresse email (la partie après le @) est epigames.com et pas epicgames.com qui est la vrai entreprise qui a Fortnite.\n\nDe plus le lien devrait être fortnite.com mais ce n'est pas le cas."
+        "text": " - Le nom de domaine de l'adresse email (après le @) est epigames.com et pas epicgames.com qui est la vrai entreprise qui a Fortnite.\n\n - Le lien devrait être fortnite.com mais ce n'est pas le cas."
       }
     }
   ]

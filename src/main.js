@@ -479,9 +479,9 @@ function loadQuetes() {
     if (sessionStorage.getItem('quetes') === null) {
 
         quetes = [
-            {id: 1, points: 0, but: 5, fini: false, label: "Supprimer 5 mails mauvais"},
-            {id: 2, points: 0, but: 1, fini: false, label: "Consulter un bon mail."}, // TODO : modifier le label
-            {id: 3, points: 0, but: 1, fini: false, label: "Ouvrir Maily."},
+            {id: 0, points: 0, but: 5, fini: false, label: "Supprimer 5 mails mauvais"},
+            {id: 1, points: 0, but: 1, fini: false, label: "Consulter un bon mail."}, // TODO : modifier le label
+            {id: 2, points: 0, but: 1, fini: false, label: "Ouvrir Maily."},
         ]
 
         sessionStorage.setItem('quetes', JSON.stringify(quetes));
@@ -510,7 +510,28 @@ function loadQuetes() {
 
 function sauvegarderEtatQuetes() {
     sessionStorage.setItem('quetes', JSON.stringify(quetes));
+
+    // Vérifie si une quête est perdue
+    const quetePerdue = quetes.some(q => q.points < 0);
+
+    // Vérifie si toutes les quêtes sont finies
+    const toutesFinies = quetes.every(q => q.fini || q.points < 0);
+
+    if (toutesFinies) {
+        if (quetePerdue) {
+            console.log("Une quête est perdue => fin du jeu perdue");
+            setTimeout(() => {
+                window.location.href = "../html/menuFinPerdu.html";
+            }, 1000);
+        } else {
+            console.log("Toutes les quêtes réussies => fin du jeu gagnée");
+            setTimeout(() => {
+                window.location.href = "../html/menuFinGagne.html";
+            }, 1000);
+        }
+    }
 }
+
 
 async function loadMails() {
 
@@ -861,8 +882,8 @@ async function ouvrirMail(id) {
                     // Permet d'indiquer que la quête d'ouverture du bon mail soit complété
                     quetes[1].points = 1
                     quetes[1].fini = true
-                    afficherReussiteQuete(1)
-
+                    afficherReussiteQuete(1);
+                    sauvegarderEtatQuetes();
                 }, {once: true})
 
             }
@@ -1284,6 +1305,7 @@ function verifierFinGagner() {
     // Vérifie si toutes les quêtes sont terminées
     const toutesQuetesFinies = quetes.every(q => q.fini === true);
 
+
     if (!toutesQuetesFinies) return; // Si toutes les quêtes ne sont pas finies, on ne fait rien
 
     // Sélectionne la vidéo et l'écran de victoire
@@ -1321,5 +1343,3 @@ function verifierFinGagner() {
         }, 2000); // correspond à la durée du fondu
     });
 }
-
-

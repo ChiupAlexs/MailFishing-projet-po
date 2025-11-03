@@ -116,6 +116,10 @@ function startGlobalTimer(durationInMinutes, callback) {
         if (croixContainer) croixContainer.remove();
         return;
     }
+
+    let display = document.getElementById("timerDisplay");
+    const displayId = "timerDisplay";
+
     // Crée l'affichage si inexistant
     if (!display) {
         display = document.createElement("div");
@@ -140,7 +144,7 @@ function startGlobalTimer(durationInMinutes, callback) {
         `;
         document.body.appendChild(display);
 
-        // Ajoute un conteneur pour les trois croix
+        // conteneur de croix et le texte
         const croixContainer = document.createElement("div");
         croixContainer.id = "croixContainer";
         croixContainer.style.cssText = `
@@ -153,9 +157,28 @@ function startGlobalTimer(durationInMinutes, callback) {
             z-index: 1000;
             pointer-events: none;
             display: flex;
-            gap: 5px;
+            align-items: center;
+            gap: 10px;
         `;
         document.body.appendChild(croixContainer);
+
+        // Ajoute le texte au-dessus des croix
+        const texteCroix = document.createElement("p");
+        texteCroix.textContent = "Nombre d’erreurs autorisé : ";
+        texteCroix.style.cssText = `
+            font-size: 20px;
+            color: black;
+            margin-top: 20px;
+        `;
+        croixContainer.appendChild(texteCroix);
+
+        // Conteneur des croix
+        const croixRow = document.createElement("div");
+        croixRow.style.cssText = `
+            display: flex;
+            gap: 5px;
+        `;
+        croixContainer.appendChild(croixRow);
 
         // Ajoute les trois croix
         for (let i = 0; i < 3; i++) {
@@ -167,7 +190,7 @@ function startGlobalTimer(durationInMinutes, callback) {
                 opacity: ${i < clicsSuspects ? "1" : "0.3"};
                 transition: opacity 0.3s;
             `;
-            croixContainer.appendChild(croix);
+            croixRow.appendChild(croix);
         }
     }
 
@@ -179,10 +202,18 @@ function startGlobalTimer(durationInMinutes, callback) {
     }
 
     // Récupérer temps restant depuis sessionStorage si existant
-    remainingTime = parseInt(sessionStorage.getItem("globalTimerRemaining"));
+    let remainingTime = parseInt(sessionStorage.getItem("globalTimerRemaining"));
     if (isNaN(remainingTime)) remainingTime = durationInMinutes * 60;
+
     display.style.display = "block";
     let stressSoundPlayed = sessionStorage.getItem("stressSoundPlayed") === "true";
+
+    // Fonction d’affichage du timer
+    function updateDisplay() {
+        const minutes = Math.floor(remainingTime / 60);
+        const seconds = remainingTime % 60;
+        display.textContent = `${minutes}:${seconds.toString().padStart(2, "0")}`;
+    }
     updateDisplay();
 
     // Nettoyer un ancien intervalle si existant
@@ -190,7 +221,6 @@ function startGlobalTimer(durationInMinutes, callback) {
 
     timerInterval = setInterval(() => {
         remainingTime--;
-
         sessionStorage.setItem("globalTimerRemaining", remainingTime);
         updateDisplay();
 
@@ -198,14 +228,14 @@ function startGlobalTimer(durationInMinutes, callback) {
             clearInterval(timerInterval);
             timerInterval = null;
             sessionStorage.setItem("globalTimerFinished", "true");
-            console.log("true")
+
             display.style.display = "none";
             const finishSound = new Audio('../sons/finish.mp3');
             finishSound.volume = 1;
             finishSound.play();
 
             setTimeout(() => {
-                stopStressSound()
+                stopStressSound();
                 display.textContent = "";
                 display.style.display = "none";
             }, 1000);
@@ -214,6 +244,7 @@ function startGlobalTimer(durationInMinutes, callback) {
         }
     }, 1000);
 }
+
 
 // Soustrait un temps au timer global et met à jour sessionStorage
 function retirerTemps(secondes) {

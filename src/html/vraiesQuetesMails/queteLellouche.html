@@ -59,11 +59,19 @@
         <button id="closeBtn" class="closeBtn">Fermer</button>
     </div>
 </div>
-
+<script src="../../main.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         if (document.documentElement.requestFullscreen) {
             document.documentElement.requestFullscreen();
+        }
+
+        const buttonLellouche = document.getElementById("closeBtn");
+
+        if (buttonLellouche) {
+            buttonLellouche.addEventListener('click', () => {
+                localStorage.setItem("pagePrincipale", "true");
+            });
         }
 
         const applyBtn = document.getElementById("apply-btn");

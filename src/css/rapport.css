@@ -14,6 +14,9 @@ h1 {
     max-width: 50vw;
 
 }
+.text {
+    font-size: 1.3rem;
+}
 main {
     margin: 50px auto 0;
     display: flex;
@@ -22,13 +25,22 @@ main {
     border-radius: 10px;
     padding: 20px 20px;
     max-width: 80vw;
+    height: 500px
 }
 .image-mails {
     padding: 20px 20px 0;
+    text-align: left;
+    max-width: 40vw;
 }
 img {
     max-width: 40vw;
     border-radius: 10px;
+    display: inline-block;
+    max-height: 400px;
+    margin-bottom: 10px;
+}
+img:nth-last-of-type(1) {
+    border-radius: 3px;
 }
 .text-rapport .text {
     max-width: 100%;
@@ -42,8 +54,8 @@ img {
     cursor: pointer;
     max-width: 50px;
     position: fixed;
-    top: 50px;
-    left: 20px;
+    top: 300px;
+    left: 50px;
     transform: rotate(180deg);
 }
 
@@ -51,8 +63,8 @@ img {
     cursor: pointer;
     max-width: 50px;
     position: fixed;
-    top: 50px;
-    right: 20px;
+    top: 300px;
+    right: 50px;
 }
 
 .retour-menu-principal {
@@ -67,9 +79,36 @@ img {
     margin: 30px auto;
 
 }
-.supprimer-mail {
+.ouvert-mauvais-mail {
     color: red;
+}
+.supprimer-bon-mail {
+    color: orange;
 }
 .retour-menu-principal:hover {
     background-color: #2848b4;
+}
+
+.pas-de-faute {
+    display: none;
+}
+
+.points div {
+    display: inline-block;
+    margin: 5px;
+    border-radius: 100%;
+    width: 10px;
+    height: 10px;
+}
+
+.point {
+    background-color: #5d5d5d;
+}
+
+.actif {
+    background-color: #9d9d9d;
+}
+
+.points {
+    margin-top: 10px;
 }

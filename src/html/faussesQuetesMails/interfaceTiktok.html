@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../../css/faussesQuetesMails/interfaceTiktok.css">
 </head>
 <body>
-<button onclick="window.close()"><img src="../../images/iconQuitter.png" class="closePageBtn"></button>
+<button onclick="window.close()"><img src="../../images/iconQuitter.png" id="closePageBtn" class="closePageBtn"></button>
 <div class="phone-frame">
     <div class="video-container">
         <video src="../../vidéos/videoTiktok.mp4" autoplay loop muted></video>
@@ -68,7 +68,7 @@
         </div>
     </div>
 </div>
-
+<script src="../../main.js"></script>
 <script>
     function openComments() {
         document.getElementById("commentOverlay").style.display = "flex";
@@ -170,6 +170,13 @@
         document.addEventListener("DOMContentLoaded", () => {
             if (document.documentElement.requestFullscreen) {
                 document.documentElement.requestFullscreen();
+            }
+            const buttonTiktok = document.getElementById("closePageBtn");
+
+            if (buttonTiktok) {
+                buttonTiktok.addEventListener('click', () => {
+                    localStorage.setItem("pagePrincipale", "true");
+                });
             }
         });
         // Accessibility: when shown, set aria-hidden to false (call this when opening)

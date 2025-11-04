@@ -18,12 +18,20 @@
         <p>@RobloxPlayer</p>
         <p>On PicShare</p>
     </div>
-    <button class="bouton-pic-share">S'abonner en retour</button>
+    <button id="followBtn" class="bouton-pic-share">S'abonner en retour</button>
 </main>
+<script src="../../main.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         if (document.documentElement.requestFullscreen) {
             document.documentElement.requestFullscreen();
+        }
+        const buttonPicShare = document.getElementById("followBtn");
+
+        if (buttonPicShare) {
+            buttonPicShare.addEventListener('click', () => {
+                localStorage.setItem("pagePrincipale", "true");
+            });
         }
     });
     document.addEventListener("DOMContentLoaded", () => {

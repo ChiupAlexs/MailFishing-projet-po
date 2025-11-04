@@ -37,40 +37,42 @@
 </div>
 
 <p id="message"></p>
+<script src="../../main.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         if (document.documentElement.requestFullscreen) {
             document.documentElement.requestFullscreen();
         }
+
+        const buttonBoss = document.getElementById("saveData");
+        if (buttonBoss) {
+            buttonBoss.addEventListener('click', () => {
+                localStorage.setItem("pagePrincipale", "true");
+            });
+        }
     });
 
+    // Effet visuel du "shine"
     const shine = document.getElementById('shine');
 
     function animateShine() {
-        // Position aléatoire de départ
         shine.style.left = '-50%';
         shine.style.transition = 'none';
-
-        // Petit délai avant de lancer le mouvement
         setTimeout(() => {
             shine.style.transition = 'left 1s ease-in-out';
             shine.style.left = '100%';
         }, 50);
-
-        // Rejouer l'animation après un temps aléatoire entre 1 et 3 secondes
         setTimeout(animateShine, 1000 + Math.random() * 2000);
     }
 
     animateShine();
 
     const addBtn = document.getElementById("addRow");
+    const removeBtn = document.getElementById("removeRow");
     const saveBtn = document.getElementById("saveData");
     const message = document.getElementById("message");
 
-    let prankCycles = 5;
-    let prankActive = true;
-    let moving = false;
-
+    // ➕ Ajouter une ligne
     addBtn.addEventListener("click", () => {
         let table = document.getElementById("excelTable").getElementsByTagName("tbody")[0];
         let newRow = table.insertRow();
@@ -82,13 +84,12 @@
             cell.appendChild(input);
         });
     });
-    const removeBtn = document.getElementById("removeRow");
 
+    // ➖ Supprimer une ligne
     removeBtn.addEventListener("click", () => {
         const tableBody = document.getElementById("excelTable").getElementsByTagName("tbody")[0];
         const rowCount = tableBody.rows.length;
-
-        if (rowCount > 1) { // Toujours garder au moins une ligne
+        if (rowCount > 1) {
             tableBody.deleteRow(rowCount - 1);
         } else {
             message.textContent = "⚠️ Impossible de supprimer la dernière ligne.";
@@ -101,62 +102,58 @@
             .every(input => input.value.trim() !== "");
     }
 
-    function moveButton() {
-        if (!prankActive || !allFieldsValid()) return;
+    // Vérifie la présence et la validité des utilisateurs requis
+    function checkUsers() {
+        const rows = [...document.querySelectorAll("#excelTable tbody tr")];
+        let foundMorel = false;
+        let foundDupont = false;
 
-        if (prankCycles <= 0) {
-            prankActive = false;
+        rows.forEach(row => {
+            const inputs = row.querySelectorAll("input");
+            const nom = inputs[0].value.trim().toLowerCase();
+            const prenom = inputs[1].value.trim().toLowerCase();
+            const email = inputs[2].value.trim().toLowerCase();
+            const age = parseInt(inputs[3].value.trim());
+
+            // Vérifie Morel Léa
+            if (nom === "morel" && prenom === "léa" && email === "morel.lea@gngngn.ch" && age === 25) {
+                foundMorel = true;
+            }
+
+            // Vérifie Dupont Mathis
+            if (nom === "dupont" && prenom === "mathis" && email === "dupont.mathis@gngngn.ch" && age === 30) {
+                foundDupont = true;
+            }
+        });
+
+        return {foundMorel, foundDupont};
+    }
+
+    // 💾 Sauvegarde
+    saveBtn.addEventListener("click", () => {
+        if (!allFieldsValid()) {
+            message.textContent = "⚠️ Remplis tous les champs avant de sauvegarder.";
+            message.className = "error";
             return;
         }
 
-        const btnWidth = saveBtn.offsetWidth;
-        const btnHeight = saveBtn.offsetHeight;
-        const maxX = window.innerWidth - btnWidth - 10; // -10 pour ne pas toucher les bords
-        const maxY = window.innerHeight - btnHeight - 10;
+        const {foundMorel, foundDupont, hasWrongMorel, hasWrongDupont} = checkUsers();
 
-        const targetX = Math.random() * maxX;
-        const targetY = Math.random() * maxY;
-
-        let currentX = saveBtn.offsetLeft;
-        let currentY = saveBtn.offsetTop;
-
-        let step = 20; // vitesse plus rapide
-
-        function animate() {
-            const dx = targetX - currentX;
-            const dy = targetY - currentY;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-
-            if (dist < step) {
-                currentX = targetX;
-                currentY = targetY;
-                saveBtn.style.left = currentX + "px";
-                saveBtn.style.top = currentY + "px";
-                prankCycles--;
-            } else {
-                currentX += dx / dist * step;
-                currentY += dy / dist * step;
-                saveBtn.style.left = currentX + "px";
-                saveBtn.style.top = currentY + "px";
-                requestAnimationFrame(animate);
-            }
-        }
-
-        animate();
-    }
-
-    saveBtn.addEventListener("mouseenter", moveButton);
-
-    saveBtn.addEventListener("click", () => {
-        if (allFieldsValid() && !prankActive) {
+        // ✅ Les deux corrects
+        if (foundMorel && foundDupont) {
             message.textContent = "✅ Données sauvegardées avec succès !";
             message.className = "success";
             addBtn.disabled = true;
-            setTimeout(() => {
-                window.close()
-            },3000)
-        } else if (!allFieldsValid() && prankActive) {
-            message.textContent = "⚠️ Remplis tous les champs avant de sauvegarder.";
+            setTimeout(() => window.close(), 2000);
+        }
+        // ❌ Un trouvé et l’autre incorrect
+        else if (foundMorel || foundDupont) {
+            message.textContent = "❌ Utilisateurs manquants.";
+            message.className = "error";
+        }
+        // ❌ Aucun trouvé
+        else {
+            message.textContent = "❌ Utilisateurs introuvables.";
             message.className = "error";
         }
     });

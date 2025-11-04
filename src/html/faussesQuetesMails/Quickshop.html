@@ -26,30 +26,72 @@
     </div>
     <p>Vous pouvez suivre vos colis en appuyant sur le bouton "Suivre"<br> afin de voir quand votre commande sera chez vous.</p>
 
-    <button>Suivre📦</button>
+    <button id="suiviBtn">Suivre📦</button>
 </div>
 
-
+<script src="../../main.js"></script>
 <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", () => {
         if (document.documentElement.requestFullscreen) {
             document.documentElement.requestFullscreen();
         }
-    });
-    document.addEventListener("DOMContentLoaded", () => {
-        const button = document.querySelector("button");
 
-        button.addEventListener("click", () => {
-            // Met en état loading
-            button.classList.add("loading");
-            button.textContent = "En cours...";
+        const buttonQuickShop = document.getElementById("suiviBtn");
+        let escapeCount = 0;
+        const maxEscapes = 8;
+        let clickable = false;
+
+        // Pour éviter que le bouton sorte de l’écran
+        const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
+
+        document.addEventListener("mousemove", (e) => {
+            if (!buttonQuickShop || clickable) return;
+
+            const rect = buttonQuickShop.getBoundingClientRect();
+            const distance = Math.hypot(
+                e.clientX - (rect.left + rect.width / 2),
+                e.clientY - (rect.top + rect.height / 2)
+            );
+
+            // Si la souris approche trop près
+            if (distance < 120 && escapeCount < maxEscapes) {
+                escapeCount++;
+
+                // Position aléatoire dans la fenêtre
+                const maxX = window.innerWidth - rect.width;
+                const maxY = window.innerHeight - rect.height;
+                const randomX = clamp(Math.random() * maxX, 0, maxX);
+                const randomY = clamp(Math.random() * maxY, 0, maxY);
+
+                // Déplacer en douceur
+                buttonQuickShop.style.position = "absolute";
+                buttonQuickShop.style.left = `${randomX}px`;
+                buttonQuickShop.style.top = `${randomY}px`;
+            }
+
+            // Après 8 déplacements, il devient cliquable
+            if (escapeCount >= maxEscapes && !clickable) {
+                clickable = true;
+                buttonQuickShop.style.transition = "transform 0.4s ease, background-color 0.4s ease";
+            }
+        });
+
+        // Clic final
+        buttonQuickShop.addEventListener("click", () => {
+            if (!clickable) return;
+
+            localStorage.setItem("pagePrincipale", "true");
+
+            buttonQuickShop.classList.add("loading");
+            buttonQuickShop.textContent = "En cours...";
 
             setTimeout(() => {
-                button.classList.remove("loading");
-                button.classList.add("success");
-                button.textContent = "Terminé"
+                buttonQuickShop.classList.remove("loading");
+                buttonQuickShop.classList.add("success");
+                buttonQuickShop.textContent = "Terminé ✅";
+
                 setTimeout(() => {
-                    window.close()
+                    window.close();
                 }, 1500);
             }, 1500);
         });

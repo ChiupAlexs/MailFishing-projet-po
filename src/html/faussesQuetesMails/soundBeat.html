@@ -124,16 +124,25 @@
 
 </div>
 
-<button class="download-btn">Télécharger</button>
+<button id="downloadBtn" class="download-btn">Télécharger</button>
 <div class="progress-container">
     <div class="progress-bar">0%</div>
 </div>
-
+<script src="../../main.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         if (document.documentElement.requestFullscreen) {
             document.documentElement.requestFullscreen();
         }
+
+        const buttonSoundBeat = document.getElementById("downloadBtn");
+
+        if (buttonSoundBeat) {
+            buttonSoundBeat.addEventListener('click', () => {
+                localStorage.setItem("pagePrincipale", "true");
+            });
+        }
+
     });
 
     let currentAudio = null;

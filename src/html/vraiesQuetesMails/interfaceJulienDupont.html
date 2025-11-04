@@ -71,12 +71,22 @@
 <footer>
     <p>&copy; 2025 gngngn - Rapport trimestriel</p>
 </footer>
+<script src="../../main.js"></script>
 <script>
 
     document.addEventListener("DOMContentLoaded", () => {
         if (document.documentElement.requestFullscreen) {
             document.documentElement.requestFullscreen();
         }
+
+        const buttonJulien = document.getElementById("popupOk");
+
+        if (buttonJulien) {
+            buttonJulien.addEventListener('click', () => {
+                localStorage.setItem("pagePrincipale", "true");
+            });
+        }
+
         const dateEl = document.getElementById("date");
         const today = new Date();
         const options = { weekday: "long", year: "numeric", month: "long", day: "numeric" };

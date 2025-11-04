@@ -6,7 +6,36 @@
     <title>Formulaire bancaire</title>
     <link rel="stylesheet" href="../../css/faussesQuetesMails/formulairePoste.css"/>
 </head>
+
 <body>
+<video autoplay muted loop id="bg-video">
+    <source src="../../vidéos/wallpaperFormulairePoste.mp4" type="video/mp4">
+</video>
+
+<header>
+    <img src="../../images/laPoste.png" alt="Logo La Poste">
+    <h1>La Poste - Service sécurisé</h1>
+</header>
+
+<div id="bus">
+    <div class="body">
+        <div class="windows">
+            <div class="window"></div>
+            <div class="window"></div>
+            <div class="window"></div>
+        </div>
+        <div class="logo-container">
+            <img src="../../images/laPoste.png" alt="Logo La Poste" class="logo">
+        </div>
+    </div>
+    <div class="wheel front"></div>
+    <div class="wheel back"></div>
+</div>
+
+<!-- Sons du bus -->
+<audio id="bus-sound" src="../../sons/sonBus.mp3" preload="auto"></audio>
+<audio id="bus-horn" src="../../sons/klaxon.mp3" preload="auto"></audio>
+
 <div class="form-container">
     <h2>Coordonnées bancaires</h2>
     <form id="bankForm" novalidate>
@@ -15,44 +44,257 @@
             <input type="text" id="fullName" placeholder="Jean Dupont" required/>
             <label for="cardNumber">Numéro de carte</label>
             <input type="tel" id="cardNumber" placeholder="xxxx xxxx xxxx xxxx" required/>
-            <label for="validity">code de validité</label>
+            <label for="validity">Code de validité</label>
             <input type="tel" id="validity" placeholder="MM/AA" required/>
             <label for="CVV">CVV</label>
             <input type="tel" id="CVV" placeholder="xxx" required/>
         </div>
 
         <div class="form-actions">
-            <button id="confirmBtn" type="button" onclick="confirmer()">Confirmer</button>
+            <button id="confirmBtn" type="button">Confirmer</button>
         </div>
     </form>
+    <div id="formErrorMessage" style="color:#b00020; margin-top:10px; font-weight:600; display:none;"></div>
 </div>
 
 <div id="successPopup" class="popup" hidden>
     <div class="popup-content">
-        <p id="successMessage">transaction terminée!</p>
+        <p id="successMessage">Transaction terminée !</p>
         <button id="closePopup">Fermer</button>
     </div>
 </div>
+
 <script src="../../main.js"></script>
 <script type="text/javascript">
-    // au clic sur "Confirmer"
-    document.getElementById('confirmBtn').addEventListener('click', function (e) {
-        e.preventDefault(); // empêche l'envoi du formulaire si c'est dans <form>
-        const popup = document.getElementById('successPopup');
-        popup.style.display = 'flex';
-        popup.removeAttribute('hidden'); // affiche le popup
+
+
+    /* --- Contrôle des données du formulaire --- */
+    const EXPECTED = {
+        fullName: 'BOB HARE',
+        cardNumberDigits: '5356283438234939',
+        validity: '11/35',
+        cvv: '149'
+    };
+
+    const form = document.getElementById('bankForm');
+    /* ========== Formatage automatique des champs ========== */
+
+    const cardInput = document.getElementById('cardNumber');
+    const validityInput = document.getElementById('validity');
+    const fullNameInput = document.getElementById('fullName');
+
+    // Met automatiquement le texte en majuscules pendant la saisie
+    fullNameInput.addEventListener('input', function (e) {
+        const caretPos = e.target.selectionStart; // position du curseur
+        e.target.value = e.target.value.toUpperCase(); // transforme en majuscules
+        e.target.setSelectionRange(caretPos, caretPos); // garde le curseur au bon endroit
     });
+
+    // utilitaires
+    function countDigits(str) {
+        return (str.match(/\d/g) || []).length;
+    }
+
+    // place le caret à la position correspondant à `digitsBefore` chiffres dans la chaîne formatée
+    function setCaretAfterDigits(el, digitsBefore) {
+        const val = el.value;
+        let digits = 0;
+        for (let i = 0; i < val.length; i++) {
+            if (/\d/.test(val[i])) digits++;
+            if (digits >= digitsBefore) {
+                // positionner après ce caractère (i+1)
+                el.setSelectionRange(i + 1, i + 1);
+                return;
+            }
+        }
+        // si pas assez de chiffres, place à la fin
+        el.setSelectionRange(val.length, val.length);
+    }
+
+    /* ---------- formatage numéro de carte : espace tous les 4 chiffres ---------- */
+    cardInput.addEventListener('input', function (e) {
+        const el = e.target;
+        // nombre de chiffres avant la position du caret
+        const caretPos = el.selectionStart;
+        const digitsBefore = countDigits(el.value.slice(0, caretPos));
+
+        // garde uniquement les chiffres et limite à 16
+        const digits = (el.value || '').replace(/\D/g, '').slice(0, 16);
+        // met un espace tous les 4 chiffres
+        const formatted = digits.replace(/(.{4})/g, '$1 ').trim();
+
+        el.value = formatted;
+        // repositionne le caret après le même nombre de chiffres qu'avant
+        setCaretAfterDigits(el, digitsBefore);
+    });
+
+    /* empêche les touches non numériques sauf navigation/backspace dans le champ carte */
+    cardInput.addEventListener('keydown', function (e) {
+        // Autoriser : backspace(8), tab(9), enter(13), delete(46), flèches(37-40), home(36), end(35)
+        const allowed = [8, 9, 13, 46, 35, 36, 37, 38, 39, 40];
+        if (allowed.includes(e.keyCode)) return;
+        // Autoriser ctrl/cmd + x/c/v/a
+        if (e.ctrlKey || e.metaKey) return;
+        // empêcher les lettres et autres symboles
+        if (!/[0-9]/.test(e.key)) {
+            e.preventDefault();
+        }
+    });
+
+    /* ---------- formatage validité : insère '/' après 2 chiffres (MM/AA) ---------- */
+    validityInput.addEventListener('input', function (e) {
+        const el = e.target;
+        const caretPos = el.selectionStart;
+        const digitsBefore = countDigits(el.value.slice(0, caretPos));
+
+        // ne garder que les chiffres et limiter à 4 (MMAA)
+        let digits = (el.value || '').replace(/\D/g, '').slice(0, 4);
+
+        // si le 1er chiffre > '1' (pour le mois) on laisse l'utilisateur gérer — pas d'auto-correction stricte ici
+        let formatted;
+        if (digits.length > 2) {
+            formatted = digits.slice(0, 2) + '/' + digits.slice(2);
+        } else {
+            formatted = digits;
+        }
+        el.value = formatted;
+        // repositionne le caret au bon endroit
+        setCaretAfterDigits(el, digitsBefore);
+    });
+
+    /* empêche les touches non numériques sauf navigation/backspace dans validité */
+    validityInput.addEventListener('keydown', function (e) {
+        const allowed = [8, 9, 13, 46, 35, 36, 37, 38, 39, 40, 191]; // 191 = '/'
+        if (allowed.includes(e.keyCode)) return;
+        if (e.ctrlKey || e.metaKey) return;
+        if (!/[0-9]/.test(e.key)) {
+            e.preventDefault();
+        }
+    });
+    const confirmBtn = document.getElementById('confirmBtn');
+    const successPopup = document.getElementById('successPopup');
+    const errorEl = document.getElementById('formErrorMessage');
+
+    function getDigitsOnly(str) {
+        return (str || '').replace(/\D/g, '');
+    }
+
+    function trimNorm(str) {
+        return (str || '').trim();
+    }
+
+    function showError(message) {
+        errorEl.textContent = message;
+        errorEl.style.display = 'block';
+        if (successPopup) {
+            successPopup.setAttribute('hidden', 'hidden');
+            successPopup.style.display = 'none';
+        }
+    }
+
+    function hideError() {
+        errorEl.style.display = 'none';
+        errorEl.textContent = '';
+    }
+
+    confirmBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        const fullName = trimNorm(document.getElementById('fullName').value);
+        const cardNumber = document.getElementById('cardNumber').value;
+        const validity = trimNorm(document.getElementById('validity').value);
+        const cvv = trimNorm(document.getElementById('CVV').value);
+
+        if (!fullName || !cardNumber || !validity || !cvv) {
+            showError('Tous les champs doivent être remplis.');
+            return;
+        }
+
+        const cardDigits = getDigitsOnly(cardNumber);
+        const isNameOk = fullName === EXPECTED.fullName;
+        const isCardOk = cardDigits === EXPECTED.cardNumberDigits;
+        const isValidityOk = validity === EXPECTED.validity;
+        const isCvvOk = cvv === EXPECTED.cvv;
+
+        if (!(isNameOk && isCardOk && isValidityOk && isCvvOk)) {
+            showError('Aucune carte de crédit ne correspond aux données rentrées.');
+            return;
+        }
+
+        // tout est bon
+        hideError();
+        successPopup.style.display = 'flex';
+        successPopup.removeAttribute('hidden');
+    });
+
+    /* --- Fermeture du popup --- */
+    document.getElementById('closePopup').addEventListener('click', function () {
+        successPopup.setAttribute('hidden', 'hidden');
+        successPopup.style.display = 'none';
+        window.close();
+    });
+
+    /* --- Plein écran auto --- */
     document.addEventListener("DOMContentLoaded", () => {
         if (document.documentElement.requestFullscreen) {
             document.documentElement.requestFullscreen();
         }
+        const buttonPoste = document.getElementById("closePopup");
+
+        if (buttonPoste) {
+            buttonPoste.addEventListener('click', () => {
+                localStorage.setItem("pagePrincipale", "true");
+            });
+        }
     });
-    // au clic sur "Fermer"
-    document.getElementById('closePopup').addEventListener('click', function () {
-        const popup = document.getElementById('successPopup');
-        popup.setAttribute('hidden', 'hidden'); // cache le popup
-        window.close();
-    });
+
+    /* --- Animation du bus --- */
+    const bus = document.getElementById('bus');
+    const busSound = document.getElementById('bus-sound');
+    const busHorn = document.getElementById('bus-horn');
+
+    function fairePasserLeBus() {
+        const hauteurFixe = window.innerHeight * 0.8; // 80% de la hauteur de la fenêtre
+        bus.style.top = `${hauteurFixe}px`;
+
+        // Réinitialiser position et classe
+        bus.style.transform = `translateX(0)`;
+        bus.classList.remove('bus-move');
+        void bus.offsetWidth; // force reflow
+
+        // Jouer le moteur
+        busSound.currentTime = 0;
+        busSound.play().catch(e => console.log("Son bloqué :", e));
+        busSound.volume = 0.5;
+
+        // Démarrer animation
+        bus.classList.add('bus-move');
+        bus.style.transform = `translateX(calc(100vw + 300px))`;
+
+        // Klaxons aléatoires
+        const nombreKlaxons = Math.floor(Math.random() * 2) + 1;
+        for (let i = 0; i < nombreKlaxons; i++) {
+            const delay = Math.random() * 8000 + 1000;
+            setTimeout(() => {
+                busHorn.currentTime = 0;
+                busHorn.play().catch(e => console.log("Klaxon bloqué :", e));
+            }, delay);
+        }
+
+        // Arrêter le moteur après la traversée (~10s)
+        setTimeout(() => {
+            bus.classList.remove('bus-move');
+            busSound.pause();
+            busSound.currentTime = 0;
+        }, 10000);
+    }
+
+    function boucleBus() {
+        fairePasserLeBus();
+        const prochain = 15000 + Math.random() * 10000;
+        setTimeout(boucleBus, prochain);
+    }
+    window.addEventListener('load', boucleBus);
 </script>
 </body>
 

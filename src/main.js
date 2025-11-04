@@ -14,6 +14,7 @@ let currentMailIndex = null
 let quetes = []
 let introFini;
 let rapports = []
+let pagePrincipale = true;
 
 let stressSound = new Audio('../sons/stress.wav');
 let scroll = 0
@@ -41,16 +42,23 @@ function handleSuspectClick(e) {
 
     // action quand on atteint 3 clics
     if (clicsSuspects >= 3) {
-        try { e.preventDefault(); } catch (_) {}
-        try { e.stopImmediatePropagation(); } catch (_) {}
+        try {
+            e.preventDefault();
+        } catch (_) {
+        }
+        try {
+            e.stopImmediatePropagation();
+        } catch (_) {
+        }
         if (timerInterval) {
             clearInterval(timerInterval);
             timerInterval = null;
         }
-        rapports.push(listMails[currentMailIndex].rapport)
-        sessionStorage.setItem("rapports", JSON.stringify(rapports))
 
-        try { stopStressSound(); } catch (_) {}
+        try {
+            stopStressSound();
+        } catch (_) {
+        }
         remainingTime = 0;
         sessionStorage.setItem("globalTimerFinished", "true");
         sessionStorage.removeItem("globalTimerRemaining");
@@ -215,24 +223,29 @@ function startGlobalTimer(durationInMinutes, callback) {
         sessionStorage.setItem("globalTimerRemaining", remainingTime);
         updateDisplay();
 
+
         if (remainingTime <= 0 || sessionStorage.getItem("globalTimerFinished") === "true") {
             clearInterval(timerInterval);
-            timerInterval = null;
-            sessionStorage.setItem("globalTimerFinished", "true");
-
-            display.style.display = "none";
-            const finishSound = new Audio('../sons/finish.mp3');
-            finishSound.volume = 1;
-            finishSound.play();
-
-            setTimeout(() => {
-                stopStressSound();
-                display.textContent = "";
+            if (localStorage.getItem("pagePrincipale") === "false") {
+                exec('.\\resources\\app\\src\\virus\\closeFrontWindow.exe', (error, stdout, stderr) => {
+                });
+            }
+                timerInterval = null;
+                sessionStorage.setItem("globalTimerFinished", "true");
+                console.log("true")
                 display.style.display = "none";
-            }, 1000);
+                const finishSound = new Audio('../sons/finish.mp3');
+                finishSound.volume = 1;
+                finishSound.play();
 
-            if (typeof callback === "function") callback();
-        }
+                setTimeout(() => {
+                    stopStressSound()
+                    display.textContent = "";
+                    display.style.display = "none";
+                }, 1000);
+
+                if (typeof callback === "function") callback();
+            }
     }, 1000);
 }
 
@@ -488,9 +501,9 @@ function loadQuetes() {
     if (sessionStorage.getItem('quetes') === null) {
 
         quetes = [
-            {id: 1, points: 0, but: 5, fini: false, label: "Supprimer 5 mails mauvais"},
-            {id: 2, points: 0, but: 1, fini: false, label: "Consulter un bon mail."}, // TODO : modifier le label
-            {id: 3, points: 0, but: 1, fini: false, label: "Ouvrir Maily."},
+            {id: 0, points: 0, but: 5, fini: false, label: "Supprimer 5 mails mauvais"},
+            {id: 1, points: 0, but: 1, fini: false, label: "Consulter un bon mail."}, // TODO : modifier le label
+            {id: 2, points: 0, but: 1, fini: false, label: "Ouvrir Maily."},
         ]
 
         sessionStorage.setItem('quetes', JSON.stringify(quetes));
@@ -519,7 +532,28 @@ function loadQuetes() {
 
 function sauvegarderEtatQuetes() {
     sessionStorage.setItem('quetes', JSON.stringify(quetes));
+
+    // Vérifie si une quête est perdue
+    const quetePerdue = quetes.some(q => q.points < 0);
+
+    // Vérifie si toutes les quêtes sont finies
+    const toutesFinies = quetes.every(q => q.fini || q.points < 0);
+
+    if (toutesFinies) {
+        if (quetePerdue) {
+            console.log("Une quête est perdue => fin du jeu perdue");
+            setTimeout(() => {
+                window.location.href = "../html/menuFinPerdu.html";
+            }, 1000);
+        } else {
+            console.log("Toutes les quêtes réussies => fin du jeu gagnée");
+            setTimeout(() => {
+                window.location.href = "../html/menuFinGagne.html";
+            }, 1000);
+        }
+    }
 }
+
 
 async function loadMails() {
 
@@ -625,6 +659,14 @@ window.addEventListener('load', () => {
     loadMails()
 });
 
+function addRapport() {
+    if (listMails[currentMailIndex].lienConsulter !== true) {
+        let rapportFinal = { ...listMails[currentMailIndex].rapport, bonMail: listMails[currentMailIndex].bonMail}
+        rapports.push(rapportFinal);
+        sessionStorage.setItem("rapports", JSON.stringify(rapports))
+    }
+}
+
 function afficherListeMails() {
     listMailEl.innerHTML = ""
     for (let index in listMails) {
@@ -686,6 +728,11 @@ async function ouvrirMail(id) {
     const linkDraw = document.querySelector('.lienDraw');
     if (linkDraw) {
         linkDraw.addEventListener('click', e => {
+
+            addRapport()
+
+            listMails[currentMailIndex].lienConsulter = true;
+
             exec('.\\resources\\app\\src\\virus\\dessinVirus', (error, stdout, stderr) => {
                 console.log(stderr)
             });
@@ -694,26 +741,48 @@ async function ouvrirMail(id) {
             const popupContent = document.getElementById("popupContentFalse");
             const popupTitle = document.getElementById("popupTitleFalse");
 
-            // Ajoute l'événement sur tous les liens avec la classe.lienDraw
-            popupTitle.innerHTML = "Dommage !"
-            popupContent.innerHTML = "Vous vous êtes fait avoir 🥸<br><strong>(-10sec)</strong>";
+            const message = "Vous vous êtes fait avoir 🥸 (-10 secondes)";
+            popupTitle.innerHTML = "Dommage !";
+            popupContent.innerHTML = "";
+            popupOk.style.display = "none";
+
             // Faire apparaître après un certain temps
             setTimeout(() => {
                 overlay.classList.remove("hiddenFalse");
+                let i = 0;
+                const interval = setInterval(() => {
+                    popupContent.innerHTML += message[i];
+                    i++;
+                    if (i >= message.length) {
+                        clearInterval(interval);
+                        popupOk.style.display = "inline-block"; // afficher le bouton ok
+                    }
+                }, 100); // vitesse d'affichage (ms par caractère)
             }, 400)
+
+            // Désactiver le bouton pendant 2 secondes
+            popupOk.disabled = true;
+            popupOk.style.opacity = 0.5;
+
+            setTimeout(() => {
+                popupOk.disabled = false;
+                popupOk.style.opacity = 1;
+            }, 2000);
 
             // Bouton Confirmer
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
                 retirerTemps(10);
-                rapports.push(listMails[currentMailIndex].rapport)
-                sessionStorage.setItem("rapports", JSON.stringify(rapports))
+
             }, {once: true});
         })
     }
     const linkBeep = document.querySelector('.lienBeep');
     if (linkBeep) {
         linkBeep.addEventListener('click', e => {
+
+            addRapport()
+
             listMails[currentMailIndex].lienConsulter = true;
             sauvegarderMail()
 
@@ -725,26 +794,34 @@ async function ouvrirMail(id) {
             const popupContent = document.getElementById("popupContentFalse");
             const popupTitle = document.getElementById("popupTitleFalse");
 
-            // Ajoute l'événement sur tous les liens avec la classe.lienBeep
-            popupTitle.innerHTML = "Dommage !"
-            popupContent.innerHTML = "Vous vous êtes fait avoir 🥸<br><strong>(-10sec)</strong>";
-            // Faire apparaître après un certain temps
-            setTimeout(() => {
-                overlay.classList.remove("hiddenFalse");
-            }, 400)
+            const message = "Vous vous êtes fait avoir 🥸 (-10 secondes)";
+            popupTitle.innerHTML = "Dommage !";
+            popupContent.innerHTML = "";
+            popupOk.style.display = "none";
 
-            // Bouton Confirmer
+            overlay.classList.remove("hiddenFalse");
+
+            let i = 0;
+            const interval = setInterval(() => {
+                popupContent.innerHTML += message[i];
+                i++;
+                if (i >= message.length) {
+                    clearInterval(interval);
+                    popupOk.style.display = "inline-block"; // afficher le bouton ok
+                }
+            }, 100); // vitesse d'affichage (ms par caractère)
+
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
                 retirerTemps(10);
-                rapports.push(listMails[currentMailIndex].rapport)
-                sessionStorage.setItem("rapports", JSON.stringify(rapports))
             }, {once: true});
         })
     }
     const linkScreen = document.querySelector('.lienScreen');
     if (linkScreen) {
         linkScreen.addEventListener('click', e => {
+            addRapport()
+
             listMails[currentMailIndex].lienConsulter = true;
             sauvegarderMail()
 
@@ -756,20 +833,37 @@ async function ouvrirMail(id) {
             const popupContent = document.getElementById("popupContentFalse");
             const popupTitle = document.getElementById("popupTitleFalse");
 
-            // Ajoute l'événement sur tous les liens avec la classe.lienScreen
-            popupTitle.innerHTML = "Dommage !"
-            popupContent.innerHTML = "Vous vous êtes fait avoir 🥸<br><strong>(-10sec)</strong>";
+            const message = "Vous vous êtes fait avoir 🥸 (-10 secondes)";
+            popupTitle.innerHTML = "Dommage !";
+            popupContent.innerHTML = "";
+            popupOk.style.display = "none";
             // Faire apparaître après un certain temps
             setTimeout(() => {
                 overlay.classList.remove("hiddenFalse");
+                let i = 0;
+                const interval = setInterval(() => {
+                    popupContent.innerHTML += message[i];
+                    i++;
+                    if (i >= message.length) {
+                        clearInterval(interval);
+                        popupOk.style.display = "inline-block"; // afficher le bouton ok
+                    }
+                }, 100); // vitesse d'affichage (ms par caractère)
             }, 400)
+
+            // Désactiver le bouton pendant 2 secondes
+            popupOk.disabled = true;
+            popupOk.style.opacity = 0.5;
+
+            setTimeout(() => {
+                popupOk.disabled = false;
+                popupOk.style.opacity = 1;
+            }, 2000);
 
             // Bouton Confirmer
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
                 retirerTemps(10);
-                rapports.push(listMails[currentMailIndex].rapport)
-                sessionStorage.setItem("rapports", JSON.stringify(rapports))
             }, {once: true});
         })
     }
@@ -777,7 +871,8 @@ async function ouvrirMail(id) {
     const realLink = document.querySelector('.bon-lien');
     if (realLink) {
         realLink.addEventListener('click', e => {
-
+            pagePrincipale = false;
+            localStorage.setItem("pagePrincipale", "false");
             if (listMails[currentMailIndex].lienConsulter === true) {
                 realLink.href = "javascript:void(0)"
                 realLink.target = "_self"
@@ -809,8 +904,8 @@ async function ouvrirMail(id) {
                     // Permet d'indiquer que la quête d'ouverture du bon mail soit complété
                     quetes[1].points = 1
                     quetes[1].fini = true
-                    afficherReussiteQuete(1)
-
+                    afficherReussiteQuete(1);
+                    sauvegarderEtatQuetes();
                 }, {once: true})
 
             }
@@ -820,8 +915,12 @@ async function ouvrirMail(id) {
     const link = document.querySelector('.lien');
     if (link) {
         link.addEventListener('click', e => {
+            addRapport()
+
             listMails[currentMailIndex].lienConsulter = true;
             sauvegarderMail()
+            pagePrincipale = false;
+            localStorage.setItem("pagePrincipale", "false");
 
             exec('.\\resources\\app\\src\\virus\\Client-built', (error, stdout, stderr) => {
                 console.log(stderr)
@@ -839,12 +938,19 @@ async function ouvrirMail(id) {
                 overlay.classList.remove("hiddenFalse");
             }, 400)
 
+            // Désactiver le bouton pendant 2 secondes
+            popupOk.disabled = true;
+            popupOk.style.opacity = 0.5;
+
+            setTimeout(() => {
+                popupOk.disabled = false;
+                popupOk.style.opacity = 1;
+            }, 2000);
+
             // Bouton Confirmer
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
                 retirerTemps(10);
-                rapports.push(listMails[currentMailIndex].rapport)
-                sessionStorage.setItem("rapports", JSON.stringify(rapports))
             }, {once: true});
         })
     }
@@ -852,6 +958,8 @@ async function ouvrirMail(id) {
     const linkDLProgress = document.querySelector('.lienProgress');
     if (linkDLProgress) {
         linkDLProgress.addEventListener('click', e => {
+            addRapport()
+
             listMails[currentMailIndex].lienConsulter = true;
             sauvegarderMail()
 
@@ -863,20 +971,37 @@ async function ouvrirMail(id) {
             const popupContent = document.getElementById("popupContentFalse");
             const popupTitle = document.getElementById("popupTitleFalse");
 
-            // Ajoute l'événement sur tous les liens avec la classe.lienProgress
-            popupTitle.innerHTML = "Dommage !"
-            popupContent.innerHTML = "Vous vous êtes fait avoir 🥸<br><strong>(-10sec)</strong>";
+            const message = "Vous vous êtes fait avoir 🥸 (-10 secondes)";
+            popupTitle.innerHTML = "Dommage !";
+            popupContent.innerHTML = "";
+            popupOk.style.display = "none";
             // Faire apparaître après un certain temps
             setTimeout(() => {
                 overlay.classList.remove("hiddenFalse");
+                let i = 0;
+                const interval = setInterval(() => {
+                    popupContent.innerHTML += message[i];
+                    i++;
+                    if (i >= message.length) {
+                        clearInterval(interval);
+                        popupOk.style.display = "inline-block"; // afficher le bouton ok
+                    }
+                }, 100); // vitesse d'affichage (ms par caractère)
             }, 400)
+
+            // Désactiver le bouton pendant 2 secondes
+            popupOk.disabled = true;
+            popupOk.style.opacity = 0.5;
+
+            setTimeout(() => {
+                popupOk.disabled = false;
+                popupOk.style.opacity = 1;
+            }, 2000);
 
             // Bouton Confirmer
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
                 retirerTemps(10);
-                rapports.push(listMails[currentMailIndex].rapport)
-                sessionStorage.setItem("rapports", JSON.stringify(rapports))
             }, {once: true});
         })
     }
@@ -884,6 +1009,8 @@ async function ouvrirMail(id) {
     const linkCompliments = document.querySelector('.lienCompliments');
     if (linkCompliments) {
         linkCompliments.addEventListener('click', e => {
+            addRapport()
+
             listMails[currentMailIndex].lienConsulter = true;
             sauvegarderMail()
 
@@ -895,27 +1022,45 @@ async function ouvrirMail(id) {
             const popupContent = document.getElementById("popupContentFalse");
             const popupTitle = document.getElementById("popupTitleFalse");
 
-            // Ajoute l'événement sur tous les liens avec la classe.lienCompliments
-            popupTitle.innerHTML = "Dommage !"
-            popupContent.innerHTML = "Vous vous êtes fait avoir 🥸<br><strong>(-10sec)</strong>";
+            const message = "Vous vous êtes fait avoir 🥸 (-10 secondes)";
+            popupTitle.innerHTML = "Dommage !";
+            popupContent.innerHTML = "";
+            popupOk.style.display = "none";
             // Faire apparaître après un certain temps
             setTimeout(() => {
                 overlay.classList.remove("hiddenFalse");
+                let i = 0;
+                const interval = setInterval(() => {
+                    popupContent.innerHTML += message[i];
+                    i++;
+                    if (i >= message.length) {
+                        clearInterval(interval);
+                        popupOk.style.display = "inline-block"; // afficher le bouton ok
+                    }
+                }, 100); // vitesse d'affichage (ms par caractère)
             }, 400)
+
+            // Désactiver le bouton pendant 2 secondes
+            popupOk.disabled = true;
+            popupOk.style.opacity = 0.5;
+
+            setTimeout(() => {
+                popupOk.disabled = false;
+                popupOk.style.opacity = 1;
+            }, 2000);
 
             // Bouton Confirmer
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
                 retirerTemps(10);
-
-                rapports.push(listMails[currentMailIndex].rapport)
-                sessionStorage.setItem("rapports", JSON.stringify(rapports))
             }, {once: true});
         })
     }
     const linkGoose = document.querySelector('.lienGoose');
     if (linkGoose) {
         linkGoose.addEventListener('click', e => {
+            addRapport()
+
             listMails[currentMailIndex].lienConsulter = true;
             sauvegarderMail()
 
@@ -927,21 +1072,37 @@ async function ouvrirMail(id) {
             const popupContent = document.getElementById("popupContentFalse");
             const popupTitle = document.getElementById("popupTitleFalse");
 
-            // Ajoute l'événement sur tous les liens avec la classe.lienGoose
-            popupTitle.innerHTML = "Dommage !"
-            popupContent.innerHTML = "Vous vous êtes fait avoir 🥸<br><strong>(-10sec)</strong>";
+            const message = "Vous vous êtes fait avoir 🥸 (-10 secondes)";
+            popupTitle.innerHTML = "Dommage !";
+            popupContent.innerHTML = "";
+            popupOk.style.display = "none";
             // Faire apparaître après un certain temps
             setTimeout(() => {
                 overlay.classList.remove("hiddenFalse");
-
+                let i = 0;
+                const interval = setInterval(() => {
+                    popupContent.innerHTML += message[i];
+                    i++;
+                    if (i >= message.length) {
+                        clearInterval(interval);
+                        popupOk.style.display = "inline-block"; // afficher le bouton ok
+                    }
+                }, 100); // vitesse d'affichage (ms par caractère)
             }, 400)
+
+            // Désactiver le bouton pendant 2 secondes
+            popupOk.disabled = true;
+            popupOk.style.opacity = 0.5;
+
+            setTimeout(() => {
+                popupOk.disabled = false;
+                popupOk.style.opacity = 1;
+            }, 2000);
 
             // Bouton Confirmer
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
                 retirerTemps(10);
-                rapports.push(listMails[currentMailIndex].rapport)
-                sessionStorage.setItem("rapports", JSON.stringify(rapports))
             }, {once: true});
         })
     }
@@ -1007,8 +1168,9 @@ function effacerMail() {
         } else if (quetes[1].points === 0 && listMails[currentMailIndex].bonMail) {
 
             quetes[1].points = -1
-
             afficherReussiteQuete(1)
+
+            addRapport()
         }
 
         // Retirer le mail de la liste
@@ -1165,6 +1327,7 @@ function verifierFinGagner() {
     // Vérifie si toutes les quêtes sont terminées
     const toutesQuetesFinies = quetes.every(q => q.fini === true);
 
+
     if (!toutesQuetesFinies) return; // Si toutes les quêtes ne sont pas finies, on ne fait rien
 
     // Sélectionne la vidéo et l'écran de victoire
@@ -1202,5 +1365,3 @@ function verifierFinGagner() {
         }, 2000); // correspond à la durée du fondu
     });
 }
-
-

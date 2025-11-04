@@ -157,25 +157,16 @@ function startGlobalTimer(durationInMinutes, callback) {
             z-index: 1000;
             pointer-events: none;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 10px;
         `;
         document.body.appendChild(croixContainer);
-
-        // Ajoute le texte au-dessus des croix
-        const texteCroix = document.createElement("p");
-        texteCroix.textContent = "Nombre d’erreurs autorisé : ";
-        texteCroix.style.cssText = `
-            font-size: 20px;
-            color: black;
-            margin-top: 20px;
-        `;
-        croixContainer.appendChild(texteCroix);
 
         // Conteneur des croix
         const croixRow = document.createElement("div");
         croixRow.style.cssText = `
             display: flex;
+            padding: 5px;
             gap: 5px;
         `;
         croixContainer.appendChild(croixRow);

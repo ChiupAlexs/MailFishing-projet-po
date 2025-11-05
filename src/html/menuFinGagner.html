@@ -12,16 +12,40 @@
         <source src="../vidéos/victoire.mp4" type="video/mp4">
     </video>
     <div id="win-screen-content">
-        <h1>Félicitations !</h1>
-        <p>Vous avez complété toutes les quêtes !</p>
+        <span class="win-screen">
+            <h1>Félicitations !</h1>
+            <p>Vous avez complété toutes les quêtes !</p>
 
-        <div id="perso-container" style="display: none;">
-            <video id="perso-video" src="../vidéos/happy.mp4" autoplay muted playsinline width="400" height="400"></video>
+            <div id="perso-container" style="display: none;">
+                <video id="perso-video" src="../vidéos/happy.mp4" autoplay muted playsinline width="400" height="400"></video>
+            </div>
+        </span>
+        <!--<button class="retour" onclick="window.location.href='rapport.html'">Rapport de partie</button>-->
+        <div class="rapports">
+            <h1>Erreurs faites dans la partie</h1>
+            <img src="../images/next-icon.png" alt="" class="last-icon">
+            <img src="../images/next-icon.png" alt="" class="next-icon">
+            <p class="pas-de-faute">Vous avez réalisé un sans-faute, Bravo !</p>
+
+            <div class="rapport">
+                <h2 class="supprimer-mail">Vous avez ouvert le lien de ce mail</h2>
+                <div class="image-mails">
+                    <img src="" alt="" class="img-mail">
+                    <img src="" alt="" class="img-pop-up">
+                </div>
+                <div class="text-rapport">
+                    <h2 class="titre-rapport"></h2>
+                    <div class="text"></div>
+                </div>
+            </div>
+            <div class="points"></div>
+
+            <button class="retour-menu-principal" onclick="window.open('MenuDemarrage.html', '_self')">Menu Principal</button>
         </div>
-
-        <button class="retour" onclick="window.location.href='rapport.html'">Rapport de partie</button>
     </div>
+
 </div>
+
 
 <script>
     const video = document.querySelector('.video-bg-win');
@@ -35,6 +59,22 @@
     let animationActive = false;
 
     const colors = ['#ff0000', '#ffcc00', '#00ff00', '#00ccff', '#ff66ff', '#ffffff'];
+
+    // code pour le rapport
+    const mainElement = document.querySelector("div.rapport")
+    const buttonRetourMenuPrincipale = document.querySelector(".retour-menu-principal")
+    const divPoints = document.querySelector(".points")
+
+    const messageFauteElement = document.querySelector(".supprimer-mail")
+
+    const titreRapport = document.querySelector(".titre-rapport");
+    const textRapport = document.querySelector(".text")
+    const imgMailElement = document.querySelector(".img-mail");
+    const imgPopUpElement = document.querySelector("img.img-pop-up")
+
+    let rapports = []
+    let currentRapportIndex = 0
+
 
     function resizeCanvas() {
         canvas.width = window.innerWidth;
@@ -114,8 +154,101 @@
             persoVideo.currentTime = 0;
             persoVideo.muted = false;
             persoVideo.play();
+
+            if (rapports.length === 0) {
+                document.querySelector(".pas-de-faute").style.display = "block";
+                mainElement.style.display = "none"
+            }
+            afficherRapport()
         }, 2000);
+
+        persoVideo.addEventListener('ended', () => {
+            let winScreenElement = document.querySelector('.win-screen')
+            winScreenElement.style.animationName = "move-left"
+            winScreenElement.style.animationDuration = "2s"
+            winScreenElement.style.transform = "translateX(-25vw)"
+
+            let elementRapport = document.querySelector(".rapports")
+
+            elementRapport.style.animationName = "rapport-appear"
+            elementRapport.style.animationDuration = "2s"
+            elementRapport.style.display = "block"
+        })
+        rapports = JSON.parse(sessionStorage.getItem("rapports"))
     });
+
+    function afficherRapport() {
+
+        if (currentRapportIndex >= rapports.length - 1) {
+            document.querySelector(".next-icon").style.display = "none";
+        } else {
+            document.querySelector(".next-icon").style.display = "inline-block";
+        }
+        if (currentRapportIndex === 0) {
+            document.querySelector(".last-icon").style.display = "none";
+            document.querySelector(".next-icon").style.right = "calc(-40vw - 40px)";
+        } else {
+            document.querySelector(".last-icon").style.display = "inline-block";
+            document.querySelector(".next-icon").style.right = "calc(-40vw + 10px)";
+        }
+        let rapport = rapports.at(currentRapportIndex)
+        titreRapport.innerText = rapport.realName
+        let text = rapport.text.replace(/\n/g, "<br>");
+        textRapport.innerHTML = text
+        imgMailElement.src = "../images/screen-shot-mails/" + rapport.imgMail
+        imgPopUpElement.src = "../images/screen-shot-mails/" + rapport.imgLienPopUp
+
+        if (currentRapportIndex + 1 === rapports.length) {
+            buttonRetourMenuPrincipale.style.display = "block";
+        } else {
+            buttonRetourMenuPrincipale.style.display = "none";
+        }
+
+        if (rapport.bonMail) {
+            messageFauteElement.innerText = "Vous avez supprimer ce bon mail"
+            messageFauteElement.classList.add("supprimer-bon-mail")
+            messageFauteElement.classList.remove("ouvert-mauvais-mail")
+        } else {
+            messageFauteElement.innerText = "Vous avez ouvert le lien de ce mail"
+            messageFauteElement.classList.add("ouvert-mauvais-mail")
+            messageFauteElement.classList.remove("supprimer-bon-mail")
+        }
+        divPoints.innerHTML = ""
+
+        for (let index in rapports) {
+            console.log(currentRapportIndex + " " + index)
+            if (currentRapportIndex == index) {
+                divPoints.innerHTML += "<div class='actif'>"
+                console.log("yess la teammmmm")
+            } else {
+                divPoints.innerHTML += "<div class='point'>"
+            }
+        }
+    }
+
+    /*document.addEventListener('DOMContentLoaded', () => {
+
+        rapports = JSON.parse(sessionStorage.getItem('rapports'))
+
+        if (rapports.length === 0) {
+            document.querySelector(".pas-de-faute").style.display = "block";
+            mainElement.style.display = "none"
+        }
+        console.log("test")
+        afficherRapport()
+        console.log("Rapport de partie")
+
+    })*/
+
+    document.querySelector(".next-icon").addEventListener("click", () => {
+        currentRapportIndex++
+        afficherRapport()
+    })
+
+    document.querySelector(".last-icon").addEventListener("click", () => {
+        currentRapportIndex--
+        afficherRapport()
+    })
 </script>
 </body>
 </html>

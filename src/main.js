@@ -1315,6 +1315,23 @@ video.addEventListener('ended', () => {
         video.style.display = 'none';
         gameOverScreen.classList.remove('hidden');
         gameOverScreen.classList.add('visible');
+
+        let persoVideoElement = document.getElementById("perso-video")
+
+        persoVideoElement.addEventListener("ended", () => {
+
+            let gameOverElement = document.querySelector('.game-over')
+            gameOverElement.style.animationName = "move-left"
+            gameOverElement.style.animationDuration = "2s"
+            gameOverElement.style.transform = "translateX(-30vw)"
+
+            let elementRapport = document.querySelector(".rapports")
+
+            elementRapport.style.animationName = "rapport-appear"
+            elementRapport.style.animationDuration = "2s"
+            elementRapport.style.display = "block"
+
+        })
     }, 2000);
 });
 

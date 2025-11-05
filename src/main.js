@@ -209,22 +209,22 @@ function startGlobalTimer(durationInMinutes, callback) {
                 exec('.\\resources\\app\\src\\virus\\closeFrontWindow.exe', (error, stdout, stderr) => {
                 });
             }
-                timerInterval = null;
-                sessionStorage.setItem("globalTimerFinished", "true");
-                console.log("true")
+            timerInterval = null;
+            sessionStorage.setItem("globalTimerFinished", "true");
+            console.log("true")
+            display.style.display = "none";
+            const finishSound = new Audio('../sons/finish.mp3');
+            finishSound.volume = 1;
+            finishSound.play();
+
+            setTimeout(() => {
+                stopStressSound()
+                display.textContent = "";
                 display.style.display = "none";
-                const finishSound = new Audio('../sons/finish.mp3');
-                finishSound.volume = 1;
-                finishSound.play();
+            }, 1000);
 
-                setTimeout(() => {
-                    stopStressSound()
-                    display.textContent = "";
-                    display.style.display = "none";
-                }, 1000);
-
-                if (typeof callback === "function") callback();
-            }
+            if (typeof callback === "function") callback();
+        }
     }, 1000);
 }
 
@@ -639,7 +639,7 @@ window.addEventListener('load', () => {
 
 function addRapport() {
     if (listMails[currentMailIndex].lienConsulter !== true) {
-        let rapportFinal = { ...listMails[currentMailIndex].rapport, bonMail: listMails[currentMailIndex].bonMail}
+        let rapportFinal = {...listMails[currentMailIndex].rapport, bonMail: listMails[currentMailIndex].bonMail}
         rapports.push(rapportFinal);
         sessionStorage.setItem("rapports", JSON.stringify(rapports))
     }

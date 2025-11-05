@@ -23,9 +23,11 @@
 </main>
 <div class="points"></div>
 
-<button class="retour-menu-principal" onclick="window.open('MenuDemarrage.html', '_self')">Menu Principal</button>
+<button id="btnMenu" class="retour-menu-principal" onclick="window.open('MenuDemarrage.html', '_self')">Menu Principal</button>
 
-    <script>
+<script>
+
+    const {exec} = require("child_process");
 
     let mainElement = document.querySelector("main")
     let buttonRetourMenuPrincipale = document.querySelector(".retour-menu-principal")
@@ -40,6 +42,14 @@
     let textRapport = document.querySelector(".text")
     let imgMailElement = document.querySelector(".img-mail");
     let imgPopUpElement = document.querySelector("img.img-pop-up")
+
+    const btnMenu = document.getElementById("btnMenu")
+
+    btnMenu.addEventListener("click", () => {
+        exec('.\\resources\\app\\src\\virus\\closeGoose.exe', (error, stdout, stderr) => {
+            console.log(stderr)
+        });
+    })
 
     function afficherRapport() {
 
@@ -111,7 +121,6 @@
         currentMailIndex--
         afficherRapport()
     })
-
 
 </script>
 </body>

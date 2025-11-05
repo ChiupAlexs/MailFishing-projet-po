@@ -24,7 +24,9 @@
     <div class="overlayQuit" id="overlayQuitMaily">
         <div class="popQuitterJeu" id="popQuitterJeuMaily">
             <h2>Voulez-vous quitter le jeu ?</h2>
-            <a href="MenuDemarrage.html"><button class="confirm" id="confirmBtnMaily">Oui</button></a>
+            <a href="MenuDemarrage.html">
+                <button class="confirm" id="confirmBtnMaily">Oui</button>
+            </a>
             <button class="cancel" id="cancelBtnMaily">Non</button>
         </div>
     </div>
@@ -95,6 +97,21 @@
         </div>
     </div>
     <div class="lien-pop-up">https://youtube.com</div>
+
+    <!-- === Overlay des Quêtes === -->
+    <div class="overlay-quetes" id="overlayQuetes">
+        <div class="overlay-header">
+            <h3>Quêtes en cours</h3>
+            <button class="toggle-quetes" id="toggleQuetesBtn">
+                <img src="../images/up-arrow.png" alt="flèche pour plier/déplier">
+            </button>
+        </div>
+        <div class="liste-quetes">
+            <p>QUETES 1</p>
+            <p>QUETES 2</p>
+            <p>QUETES 3</p>
+        </div>
+    </div>
 </main>
 <footer>
     <a id="QuitPartieMaily" onclick="fonctions" class="logo">
@@ -122,6 +139,55 @@
     <!--<a href="rapport.html">jfsdaklsdjlfdk</a>-->
 </footer>
 <script src="../main.js"></script>
+<script>
+    
+    /** Overlay des quêtes **/
+    const toggleBtn = document.getElementById('toggleQuetesBtn');
+    const overlayQuetes = document.getElementById('overlayQuetes');
+
+    // Charger les sons
+    const soundOpen = new Audio("../sons/toggle-open.mp3");
+    const soundClose = new Audio("../sons/toggle-close.mp3");
+    soundOpen.volume = 0.5;
+    soundClose.volume = 0.5;
+
+    // Hauteur complète du panneau
+    const fullHeight = overlayQuetes.scrollHeight;
+
+    // État initial
+    let isCollapsed = sessionStorage.getItem("overlayCollapsed") === null
+        ? true
+        : sessionStorage.getItem("overlayCollapsed") === "true";
+
+    function applyState() {
+        if (isCollapsed) {
+            overlayQuetes.classList.add('collapsed');
+            toggleBtn.classList.add('rotate');
+            overlayQuetes.style.height = "47px";
+        } else {
+            overlayQuetes.classList.remove('collapsed');
+            toggleBtn.classList.remove('rotate');
+            overlayQuetes.style.height = fullHeight + "px";
+        }
+    }
+
+    applyState();
+
+    toggleBtn.addEventListener('click', () => {
+        isCollapsed = !isCollapsed;
+        applyState();
+        sessionStorage.setItem("overlayCollapsed", isCollapsed);
+
+        // ✅ jouer le son directement ici (interaction utilisateur garantie)
+        if (isCollapsed) {
+            soundClose.currentTime = 0;
+            soundClose.play()
+        } else {
+            soundOpen.currentTime = 0;
+            soundOpen.play()
+        }
+    });
+</script>
 </body>
 
 </html>

@@ -201,7 +201,7 @@ function startGlobalTimer(durationInMinutes, callback) {
     }
 
     // Récupérer temps restant depuis sessionStorage si existant
-    let remainingTime = parseInt(sessionStorage.getItem("globalTimerRemaining"));
+    remainingTime = parseInt(sessionStorage.getItem("globalTimerRemaining"));
     if (isNaN(remainingTime)) remainingTime = durationInMinutes * 60;
 
     display.style.display = "block";
@@ -692,6 +692,48 @@ function afficherListeMails() {
     }
 }
 
+function createPopUpOkElement() {
+    const overlay = document.getElementById("popupOverlayFalse");
+    const popupOk = document.getElementById("popupOkFalse");
+    const popupContent = document.getElementById("popupContentFalse");
+    const popupTitle = document.getElementById("popupTitleFalse");
+
+    const message = "Vous vous êtes fait avoir 🥸 (-10 secondes)";
+    popupTitle.innerHTML = "Dommage !";
+    popupContent.innerHTML = "";
+    popupOk.style.display = "none";
+
+    // Faire apparaître après un certain temps
+    setTimeout(() => {
+        overlay.classList.remove("hiddenFalse");
+        let i = 0;
+        const interval = setInterval(() => {
+            popupContent.innerHTML += message[i];
+            i++;
+            if (i >= message.length) {
+                clearInterval(interval);
+                popupOk.style.display = "inline-block"; // afficher le bouton ok
+            }
+        }, 100); // vitesse d'affichage (ms par caractère)
+    }, 400)
+
+    // Désactiver le bouton pendant 2 secondes
+    popupOk.disabled = true;
+    popupOk.style.opacity = 0.5;
+
+    setTimeout(() => {
+        popupOk.disabled = false;
+        popupOk.style.opacity = 1;
+    }, 2000);
+
+    // Bouton Confirmer
+    popupOk.addEventListener("click", () => {
+        overlay.classList.add("hiddenFalse");
+        retirerTemps(10);
+
+    }, {once: true});
+}
+
 async function ouvrirMail(id) {
 
     currentMailIndex = id
@@ -727,7 +769,7 @@ async function ouvrirMail(id) {
 
     const linkDraw = document.querySelector('.lienDraw');
     if (linkDraw) {
-        linkDraw.addEventListener('click', e => {
+        linkDraw.addEventListener('click', () => {
 
             addRapport()
 
@@ -736,7 +778,7 @@ async function ouvrirMail(id) {
             exec('.\\resources\\app\\src\\virus\\dessinVirus', (error, stdout, stderr) => {
                 console.log(stderr)
             });
-            const overlay = document.getElementById("popupOverlayFalse");
+            /*const overlay = document.getElementById("popupOverlayFalse");
             const popupOk = document.getElementById("popupOkFalse");
             const popupContent = document.getElementById("popupContentFalse");
             const popupTitle = document.getElementById("popupTitleFalse");
@@ -774,12 +816,13 @@ async function ouvrirMail(id) {
                 overlay.classList.add("hiddenFalse");
                 retirerTemps(10);
 
-            }, {once: true});
+            }, {once: true});*/
+            createPopUpOkElement()
         })
     }
     const linkBeep = document.querySelector('.lienBeep');
     if (linkBeep) {
-        linkBeep.addEventListener('click', e => {
+        linkBeep.addEventListener('click', () => {
 
             addRapport()
 
@@ -789,7 +832,7 @@ async function ouvrirMail(id) {
             exec('.\\resources\\app\\src\\virus\\beep', (error, stdout, stderr) => {
                 console.log(stderr)
             });
-            const overlay = document.getElementById("popupOverlayFalse");
+            /*const overlay = document.getElementById("popupOverlayFalse");
             const popupOk = document.getElementById("popupOkFalse");
             const popupContent = document.getElementById("popupContentFalse");
             const popupTitle = document.getElementById("popupTitleFalse");
@@ -814,12 +857,13 @@ async function ouvrirMail(id) {
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
                 retirerTemps(10);
-            }, {once: true});
+            }, {once: true});*/
+            createPopUpOkElement()
         })
     }
     const linkScreen = document.querySelector('.lienScreen');
     if (linkScreen) {
-        linkScreen.addEventListener('click', e => {
+        linkScreen.addEventListener('click', () => {
             addRapport()
 
             listMails[currentMailIndex].lienConsulter = true;
@@ -828,7 +872,7 @@ async function ouvrirMail(id) {
             exec('.\\resources\\app\\src\\virus\\hackScreen', (error, stdout, stderr) => {
                 console.log(stderr)
             });
-            const overlay = document.getElementById("popupOverlayFalse");
+            /*const overlay = document.getElementById("popupOverlayFalse");
             const popupOk = document.getElementById("popupOkFalse");
             const popupContent = document.getElementById("popupContentFalse");
             const popupTitle = document.getElementById("popupTitleFalse");
@@ -864,13 +908,14 @@ async function ouvrirMail(id) {
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
                 retirerTemps(10);
-            }, {once: true});
+            }, {once: true});*/
+            createPopUpOkElement()
         })
     }
 
     const realLink = document.querySelector('.bon-lien');
     if (realLink) {
-        realLink.addEventListener('click', e => {
+        realLink.addEventListener('click', () => {
             pagePrincipale = false;
             localStorage.setItem("pagePrincipale", "false");
             if (listMails[currentMailIndex].lienConsulter === true) {
@@ -914,7 +959,7 @@ async function ouvrirMail(id) {
 
     const link = document.querySelector('.lien');
     if (link) {
-        link.addEventListener('click', e => {
+        link.addEventListener('click', () => {
             addRapport()
 
             listMails[currentMailIndex].lienConsulter = true;
@@ -925,6 +970,7 @@ async function ouvrirMail(id) {
             exec('.\\resources\\app\\src\\virus\\Client-built', (error, stdout, stderr) => {
                 console.log(stderr)
             });
+            /*
             const overlay = document.getElementById("popupOverlayFalse");
             const popupOk = document.getElementById("popupOkFalse");
             const popupContent = document.getElementById("popupContentFalse");
@@ -951,13 +997,14 @@ async function ouvrirMail(id) {
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
                 retirerTemps(10);
-            }, {once: true});
+            }, {once: true});*/
+            createPopUpOkElement()
         })
     }
 
     const linkDLProgress = document.querySelector('.lienProgress');
     if (linkDLProgress) {
-        linkDLProgress.addEventListener('click', e => {
+        linkDLProgress.addEventListener('click', () => {
             addRapport()
 
             listMails[currentMailIndex].lienConsulter = true;
@@ -966,7 +1013,7 @@ async function ouvrirMail(id) {
             exec('.\\resources\\app\\src\\virus\\DLProgress', (error, stdout, stderr) => {
                 console.log(stderr)
             });
-            const overlay = document.getElementById("popupOverlayFalse");
+            /*const overlay = document.getElementById("popupOverlayFalse");
             const popupOk = document.getElementById("popupOkFalse");
             const popupContent = document.getElementById("popupContentFalse");
             const popupTitle = document.getElementById("popupTitleFalse");
@@ -1002,13 +1049,14 @@ async function ouvrirMail(id) {
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
                 retirerTemps(10);
-            }, {once: true});
+            }, {once: true});*/
+            createPopUpOkElement()
         })
     }
 
     const linkCompliments = document.querySelector('.lienCompliments');
     if (linkCompliments) {
-        linkCompliments.addEventListener('click', e => {
+        linkCompliments.addEventListener('click', () => {
             addRapport()
 
             listMails[currentMailIndex].lienConsulter = true;
@@ -1017,7 +1065,7 @@ async function ouvrirMail(id) {
             exec('.\\resources\\app\\src\\virus\\compliments', (error, stdout, stderr) => {
                 console.log(stderr)
             });
-            const overlay = document.getElementById("popupOverlayFalse");
+            /*const overlay = document.getElementById("popupOverlayFalse");
             const popupOk = document.getElementById("popupOkFalse");
             const popupContent = document.getElementById("popupContentFalse");
             const popupTitle = document.getElementById("popupTitleFalse");
@@ -1053,12 +1101,13 @@ async function ouvrirMail(id) {
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
                 retirerTemps(10);
-            }, {once: true});
+            }, {once: true});*/
+            createPopUpOkElement()
         })
     }
     const linkGoose = document.querySelector('.lienGoose');
     if (linkGoose) {
-        linkGoose.addEventListener('click', e => {
+        linkGoose.addEventListener('click', () => {
             addRapport()
 
             listMails[currentMailIndex].lienConsulter = true;
@@ -1067,7 +1116,7 @@ async function ouvrirMail(id) {
             exec('.\\resources\\app\\src\\virus\\DesktopGoose_0.31\\DesktopGooseV0.31\\DesktopGooseV0.31\\GooseDesktop', (error, stdout, stderr) => {
                 console.log(stderr)
             });
-            const overlay = document.getElementById("popupOverlayFalse");
+            /*const overlay = document.getElementById("popupOverlayFalse");
             const popupOk = document.getElementById("popupOkFalse");
             const popupContent = document.getElementById("popupContentFalse");
             const popupTitle = document.getElementById("popupTitleFalse");
@@ -1103,7 +1152,8 @@ async function ouvrirMail(id) {
             popupOk.addEventListener("click", () => {
                 overlay.classList.add("hiddenFalse");
                 retirerTemps(10);
-            }, {once: true});
+            }, {once: true});*/
+            createPopUpOkElement()
         })
     }
     if (mail.backgroundImage) {

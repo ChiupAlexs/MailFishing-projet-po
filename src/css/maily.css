@@ -2,6 +2,7 @@
     box-sizing: border-box;
     font-family: 'Sora', sans-serif;
     -webkit-user-drag: none;
+    cursor: url("../images/curseur.png"),pointer;
 }
 
 *::selection {
@@ -66,7 +67,7 @@ body {
 .toggle-quetes {
     background: none;
     border: none;
-    cursor: pointer;
+    cursor: url("../images/curseur_hover.png"),pointer;
     transition: transform 0.3s ease;
 }
 
@@ -90,7 +91,7 @@ body {
 }
 
 .quete-item {
-    cursor: pointer;
+    cursor: url("../images/curseur_hover.png"),pointer;
     background: rgba(255,255,255,0.05);
     border-radius: 6px;
     padding: 8px;
@@ -135,7 +136,7 @@ body {
     padding: 10px 20px;
     border: none;
     border-radius: 6px;
-    cursor: pointer;
+    cursor: url("../images/curseur_hover.png"),pointer;
     font-weight: bold;
 }
 .popQuitterJeu button:hover {
@@ -204,7 +205,7 @@ header h1 {
 }
 
 .iconQuitter:hover {
-    cursor: pointer;
+    cursor: url("../images/curseur_hover.png"),pointer;
 }
 
 /***************************************
@@ -256,7 +257,7 @@ p {
 }
 
 .suppBouton:hover {
-    cursor: pointer;
+    cursor: url("../images/curseur_hover.png"),pointer;
 }
 
 .containerProfilGestion {
@@ -296,17 +297,20 @@ p {
 }
 
 .reception {
+    position: relative;
     font-size: 20px;
     color: #000;
     background: linear-gradient(to right, #E3E3E3, #41B6FF);
     width: 300px;
     padding: 20px;
+    cursor: url("../images/curseur_hover.png"),pointer;
 }
 
 .icon {
     width: 65px;
     height: 65px;
     border-radius: 50px;
+    cursor: url("../images/curseur_hover.png"),pointer;
 }
 
 .mails1 {
@@ -361,7 +365,7 @@ p {
 .bouton-retour {
     max-height: 40px;
     display: none;
-    cursor: pointer;
+    cursor: url("../images/curseur_hover.png"),pointer;
     background-color: #6192ff;
     border-radius: 100px;
     padding: 3px;
@@ -402,11 +406,13 @@ p {
 
 .info-apercu p {
     margin: 0;
+    cursor: url("../images/curseur_hover.png"),pointer;
 }
 
 .apercu-realName {
     font-weight: bold;
     font-size: 1.2rem;
+    cursor: url("../images/curseur_hover.png"),pointer;
 }
 /* Écrans de 1024px ou moins */
 @media screen and (min-width: 1824px) {
@@ -421,16 +427,17 @@ p {
 }
 
 .mails1:hover {
-    cursor: pointer;
+    cursor: url("../images/curseur_hover.png"),pointer;
     background: linear-gradient(to right, #41B6FF, #E3E3E3);
 }
 
 .mails:hover {
-    cursor: pointer;
+    cursor: url("../images/curseur_hover.png"),pointer;
     background: linear-gradient(to right, #41B6FF, #E3E3E3);
 }
 
 .mailHeure, .mailDate {
+    cursor: url("../images/curseur_hover.png"),pointer;
     font-size: 15px;
     color: #000;
     float: right;
@@ -631,11 +638,12 @@ footer {
 }
 footer .logo img {
     margin: 5px;
-    cursor: pointer;
+    cursor: url("../images/curseur_hover.png"),pointer;
 }
 footer nav img {
     height: 70px;
     margin: 20px;
+    cursor: url("../images/curseur_hover.png"),pointer;
 }
 
 .iconeFichier {
@@ -817,7 +825,7 @@ footer nav .app-container.active::after {
     padding: 10px 20px;
     border: none;
     border-radius: 8px;
-    cursor: pointer;
+    cursor: url("../images/curseur_hover.png"),pointer;
     font-weight: bold;
     transition: transform 0.2s;
 }
@@ -884,7 +892,7 @@ footer nav .app-container.active::after {
     padding: 10px 20px;
     border: none;
     border-radius: 8px;
-    cursor: pointer;
+    cursor: url("../images/curseur_hover.png"),pointer;
     font-weight: bold;
     transition: transform 0.2s;
 }

@@ -3,6 +3,7 @@
     font-family: 'Sora', sans-serif;
     margin: 0;
     padding: 0;
+    cursor: url("../images/curseur.png"), pointer;
 }
 
 body {
@@ -16,7 +17,7 @@ body {
 
 img {
     width: 200px;
-    background-color: rgba(255,255,255, 0.1);
+    background-color: rgba(255, 255, 255, 0.1);
     border-radius: 100%;
     align-items: center;
     margin-left: 43%;
@@ -36,14 +37,14 @@ input {
     border-radius: 7px;
     margin-left: 40%;
     margin-top: 10px;
-    background-color: rgba(255,255,255,0.2);
+    background-color: rgba(255, 255, 255, 0.2);
     color: white;
     font-size: 20px;
     padding-left: 10px;
     padding-right: 10px;
     border: none;
     outline: none;
-    border-bottom: 2px solid rgba(255,255,255,0.5);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
     display: flex;
     vertical-align: middle;
 }
@@ -58,9 +59,9 @@ input {
     background: none;
     height: 70px;
     width: 70px;
-    margin-left: 0%;
+    margin-left: 0;
     margin-top: 10px;
-    cursor: pointer;
+    cursor: url("../images/curseur_hover.png"),pointer;
 }
 
 /*Animations*/
@@ -75,13 +76,25 @@ input {
 }
 
 @keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-40px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(40px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Animation changement fenêtre */
@@ -90,8 +103,14 @@ input {
 }
 
 @keyframes fadeOut {
-    from { opacity: 1; transform: scale(1); }
-    to { opacity: 0; transform: scale(1.1); }
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(1.1);
+    }
 }
 
 button {
@@ -100,30 +119,42 @@ button {
     padding: 10px 20px;
     border-radius: 7px;
     border: none;
-    background-color: rgba(255,255,255,0.2);
+    background-color: rgba(255, 255, 255, 0.2);
     color: white;
     font-size: 18px;
-    cursor: pointer;
+    cursor: url("../images/curseur_hover.png"),pointer;
     transition: background 0.3s;
 }
 
 button:hover {
-    background-color: rgba(255,255,255,0.4);
+    background-color: rgba(255, 255, 255, 0.4);
 }
 
 input::placeholder {
-    color: rgba(255,255,255,0.5);
+    color: rgba(255, 255, 255, 0.5);
     font-size: 15px;
 }
 
 /* Secousse */
 @keyframes shake {
-    0% { transform: translateX(0); }
-    20% { transform: translateX(-8px); }
-    40% { transform: translateX(8px); }
-    60% { transform: translateX(-8px); }
-    80% { transform: translateX(8px); }
-    100% { transform: translateX(0); }
+    0% {
+        transform: translateX(0);
+    }
+    20% {
+        transform: translateX(-8px);
+    }
+    40% {
+        transform: translateX(8px);
+    }
+    60% {
+        transform: translateX(-8px);
+    }
+    80% {
+        transform: translateX(8px);
+    }
+    100% {
+        transform: translateX(0);
+    }
 }
 
 input.error {

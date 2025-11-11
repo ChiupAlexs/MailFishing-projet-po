@@ -2,6 +2,7 @@
     box-sizing: border-box;
     font-family: Sora, sans-serif;
     -webkit-user-drag: none;
+    cursor: url("../images/curseur.png"),pointer;
 }
 
 *::selection {
@@ -56,7 +57,7 @@ body {
 .toggle-quetes {
     background: none;
     border: none;
-    cursor: pointer;
+    cursor: url("../images/curseur_hover.png"),pointer;
     transition: transform 0.3s ease;
 }
 
@@ -75,7 +76,7 @@ body {
 }
 
 .quete-item {
-    cursor: pointer;
+    cursor: url("../images/curseur_hover.png"),pointer;
     background: rgba(255,255,255,0.05);
     border-radius: 6px;
     padding: 8px;
@@ -120,7 +121,7 @@ body {
     padding: 10px 20px;
     border: none;
     border-radius: 6px;
-    cursor: pointer;
+    cursor: url("../images/curseur_hover.png"),pointer;
     font-weight: bold;
 }
 .popQuitterJeu button:hover {
@@ -197,11 +198,12 @@ footer {
 }
 footer .logo img {
     margin: 5px;
-    cursor: pointer;
+    cursor: url("../images/curseur_hover.png"),pointer;
 }
 footer nav img {
     height: 70px;
     margin: 20px;
+    cursor: url("../images/curseur_hover.png"),pointer;
 }
 
 .iconeFichier {

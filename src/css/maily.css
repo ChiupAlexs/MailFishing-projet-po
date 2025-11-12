@@ -82,7 +82,7 @@ body {
 }
 
 .liste-quetes {
-    padding: 10px 15px;
+    /*padding: 10px 0 0;*/
 }
 
 .liste-quetes p {
@@ -467,11 +467,17 @@ p {
     position: relative;
     top: 6px;
     /*margin-bottom: 10px;*/
+    margin: 0;
 }
+
+/*.liste-quetes > div.win {
+    background-color: #4f4f4f
+}*/
 .liste-quetes > div {
     border-bottom: solid 1px white;
     margin: 0;
-    padding-bottom: 10px;
+    padding: 10px 15px 20px 15px;
+
 }
 
 .liste-quetes > div:last-child {
@@ -532,6 +538,21 @@ a.lienGoose {
         transform: translateX(1150px); /* part à droite (part) *//*
     }
 }*/
+
+@keyframes quete-light-up {
+    0% {
+        background: none;
+    }
+    20% {
+        background-color: #4f4f4f;
+    }
+    80% {
+        background-color: #4f4f4f;
+    }
+    100% {
+        background: none;
+    }
+}
 
 @keyframes slideIn {
     0% {

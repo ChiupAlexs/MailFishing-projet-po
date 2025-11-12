@@ -1082,6 +1082,10 @@ function loadQuetesOverlay(idWin) {
             if (quete.id === idWin) {
                 imgElement.style.animationName = "quete-logo-appear"
                 imgElement.style.animationDuration = '1s'
+
+                //queteDiv.classList.add("win")
+                queteDiv.style.animationName = "quete-light-up"
+                queteDiv.style.animationDuration = "4s"
             }
 
             quetePElement.innerText = quete.label + " : " + quete.points + " / " + quete.but
@@ -1101,7 +1105,7 @@ function afficherReussiteQuete(id) {
 
     loadQuetesOverlay(id)
 
-    if (quetes.points >= quetes.but) {
+    if (quetes[id].points >= quetes[id].but) {
         successSound.volume = 0.7;
         successSound.play();
     }
@@ -1111,9 +1115,8 @@ function afficherReussiteQuete(id) {
     }
 
     verifierFinGagner();
-    /*setTimeout(() => {
-        if (!isCollapsed)
-            toggleStateQuestOverlay()}, 4000)*/
+    //setTimeout(() => {
+      //  document.querySelector("div.win").classList.remove("win")}, 4000)
 }
 
 /*************************** page Fin Perdu *************************************/

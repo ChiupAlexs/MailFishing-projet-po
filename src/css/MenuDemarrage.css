@@ -1,5 +1,6 @@
 * {
     -webkit-user-drag: none;
+    cursor: url("../images/curseur.png"), pointer;
 }
 
 *::selection {
@@ -83,7 +84,7 @@ body {
     font-size: 18px;
     font-weight: bold;
     color: #fff;
-    cursor: pointer;
+    cursor: url("../images/curseur_hover.png"),pointer;
     transition: all 0.3s ease;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -102,7 +103,7 @@ body {
     font-size: 16px;
     font-weight: bold;
     color: #fff;
-    cursor: pointer;
+    cursor: url("../images/curseur_hover.png"),pointer;
     transition: all 0.3s ease;
     letter-spacing: 2px;
     text-transform: uppercase;

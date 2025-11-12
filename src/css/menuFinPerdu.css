@@ -1,6 +1,7 @@
 * {
     -webkit-user-drag: none;
     -webkit-user-select: none;
+    cursor: url("../images/curseur.png"), pointer;
 }
 
 h1 {
@@ -15,6 +16,23 @@ h1 {
     object-fit: cover;
     z-index: 1;
     transition: opacity 2s ease;
+}
+
+/* Style du texte "Appuyez sur espace" */
+.press-space {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2em;
+    color: white;
+    text-shadow: 0 0 10px black;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.visible {
+    opacity: 1;
 }
 
 #game-over-screen {
@@ -119,7 +137,7 @@ h1 {
     padding: 10px 20px;
     border: none;
     border-radius: 6px;
-    cursor: pointer;
+    cursor: url("../images/curseur_hover.png"),pointer;
     font-weight: bold;
     background: #0055aa;
     color: #fff;
@@ -192,9 +210,13 @@ h1 {
 
 .pas-de-faute {
     display: none;
+    font-size: 30px;
+    font-weight: bold;
+    color: red;
 }
+
 .last-icon {
-    cursor: pointer;
+    cursor: url("../images/curseur_hover.png"),pointer;
     max-width: 50px;
     position: relative;
     top: 200px;
@@ -203,7 +225,7 @@ h1 {
 }
 
 .next-icon {
-    cursor: pointer;
+    cursor: url("../images/curseur_hover.png"),pointer;
     max-width: 50px;
     position: relative;
     top: 200px;
@@ -249,9 +271,9 @@ h1 {
     font-size: 1.5rem;
     border-radius: 10px;
     border: none;
-    cursor: pointer;
+    cursor: url("../images/curseur_hover.png"),pointer;
     font-weight: bold;
-    margin: 30px auto;
+    margin: 40px auto;
 
 }
 

@@ -2,6 +2,7 @@
     box-sizing: border-box;
     font-family: 'Sora', sans-serif;
     -webkit-user-drag: none;
+    cursor: url("../images/curseur.png"), pointer;
 }
 
 *::selection {
@@ -42,7 +43,7 @@ body {
     background: rgba(20, 20, 20, 0.9);
     color: white;
     border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     width: 360px;
     overflow: hidden;
     transition: height 0.4s ease, opacity 0.3s ease;
@@ -54,8 +55,8 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 10px 15px;
-    background: rgba(255,255,255,0.05);
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .overlay-header h3 {
@@ -66,7 +67,7 @@ body {
 .toggle-quetes {
     background: none;
     border: none;
-    cursor: pointer;
+    cursor: url("../images/curseur_hover.png"), pointer;
     transition: transform 0.3s ease;
 }
 
@@ -90,8 +91,8 @@ body {
 }
 
 .quete-item {
-    cursor: pointer;
-    background: rgba(255,255,255,0.05);
+    cursor: url("../images/curseur_hover.png"), pointer;
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 6px;
     padding: 8px;
     margin-bottom: 8px;
@@ -99,7 +100,7 @@ body {
 }
 
 .quete-item:hover {
-    background: rgba(0,170,255,0.2);
+    background: rgba(0, 170, 255, 0.2);
 }
 
 .quete-item p {
@@ -135,9 +136,10 @@ body {
     padding: 10px 20px;
     border: none;
     border-radius: 6px;
-    cursor: pointer;
+    cursor: url("../images/curseur_hover.png"), pointer;
     font-weight: bold;
 }
+
 .popQuitterJeu button:hover {
     background-color: #0055aa;
 }
@@ -204,7 +206,7 @@ header h1 {
 }
 
 .iconQuitter:hover {
-    cursor: pointer;
+    cursor: url("../images/curseur_hover.png"), pointer;
 }
 
 /***************************************
@@ -248,15 +250,15 @@ p {
 
 @media screen and (min-width: 1824px) {
     .suppBouton {
-        font-size: 20px;   /* garde la même taille de texte */
-            /* garde la même largeur */
-        padding: 10px;     /* garde le même padding */
+        font-size: 20px; /* garde la même taille de texte */
+        /* garde la même largeur */
+        padding: 10px; /* garde le même padding */
         margin-right: 440px;
     }
 }
 
 .suppBouton:hover {
-    cursor: pointer;
+    cursor: url("../images/curseur_hover.png"), pointer;
 }
 
 .containerProfilGestion {
@@ -296,17 +298,27 @@ p {
 }
 
 .reception {
+    position: relative;
     font-size: 20px;
     color: #000;
     background: linear-gradient(to right, #E3E3E3, #41B6FF);
     width: 300px;
     padding: 20px;
+    cursor: url("../images/curseur_hover.png"), pointer;
+}
+
+.mail-ouvert .icon {
+    width: 65px;
+    height: 65px;
+    border-radius: 50px;
+    cursor: url("../images/curseur.png"), pointer;;
 }
 
 .icon {
     width: 65px;
     height: 65px;
     border-radius: 50px;
+    cursor: url("../images/curseur_hover.png"), pointer;
 }
 
 .mails1 {
@@ -321,7 +333,7 @@ p {
     width: 1150px;
 }
 
-.mails1 .mail-picture{
+.mails1 .mail-picture {
     margin-top: 20px;
 }
 
@@ -352,6 +364,9 @@ p {
     font-weight: bold;
 }
 
+.mail-ouvert a {
+    cursor: url("../images/curseur_hover.png"), pointer;
+}
 
 .sender, .objet {
     font-size: 17px;
@@ -361,7 +376,7 @@ p {
 .bouton-retour {
     max-height: 40px;
     display: none;
-    cursor: pointer;
+    cursor: url("../images/curseur_hover.png"), pointer;
     background-color: #6192ff;
     border-radius: 100px;
     padding: 3px;
@@ -402,11 +417,13 @@ p {
 
 .info-apercu p {
     margin: 0;
+    cursor: url("../images/curseur_hover.png"), pointer;
 }
 
 .apercu-realName {
     font-weight: bold;
     font-size: 1.2rem;
+    cursor: url("../images/curseur_hover.png"), pointer;
 }
 /* Écrans de 1024px ou moins */
 @media screen and (min-width: 1824px) {
@@ -421,16 +438,17 @@ p {
 }
 
 .mails1:hover {
-    cursor: pointer;
+    cursor: url("../images/curseur_hover.png"), pointer;
     background: linear-gradient(to right, #41B6FF, #E3E3E3);
 }
 
 .mails:hover {
-    cursor: pointer;
+    cursor: url("../images/curseur_hover.png"), pointer;
     background: linear-gradient(to right, #41B6FF, #E3E3E3);
 }
 
 .mailHeure, .mailDate {
+    cursor: url("../images/curseur_hover.png"), pointer;
     font-size: 15px;
     color: #000;
     float: right;
@@ -483,6 +501,7 @@ p {
     bottom: 10px;
 
 }
+
 a.lien,
 a.lienDraw,
 a.lienBeep,
@@ -571,6 +590,7 @@ a.lienGoose {
     transition: 0.2s opacity ease;
     opacity: 0;
 }
+
 .lien-pop-up.actif {
     opacity: 1;
 }
@@ -596,13 +616,16 @@ footer {
     border-radius: 5px;
     z-index: 999;
 }
+
 footer .logo img {
     margin: 5px;
-    cursor: pointer;
+    cursor: url("../images/curseur_hover.png"), pointer;
 }
+
 footer nav img {
     height: 70px;
     margin: 20px;
+    cursor: url("../images/curseur_hover.png"), pointer;
 }
 
 .iconeFichier {
@@ -614,6 +637,7 @@ footer nav img {
 .icon-notification img {
     max-height: 70px;
 }
+
 .icon-notification {
     margin-right: 10px;
 }
@@ -623,9 +647,11 @@ footer nav {
     margin: 0 auto;
     text-align: center;
 }
+
 footer a {
     text-decoration: none;
 }
+
 footer img {
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
 }
@@ -720,6 +746,7 @@ footer nav .app-container.active::after {
     src: url("../fonts/orbitron.woff2") format("woff2");
     font-weight: normal;
 }
+
 @font-face {
     font-family: "Sora";
     src: url("../fonts/Sora-VariableFont_wght.ttf") format("ttf");
@@ -738,7 +765,7 @@ footer nav .app-container.active::after {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0,0,0,0.75);
+    background: rgba(0, 0, 0, 0.75);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -784,7 +811,7 @@ footer nav .app-container.active::after {
     padding: 10px 20px;
     border: none;
     border-radius: 8px;
-    cursor: pointer;
+    cursor: url("../images/curseur_hover.png"), pointer;
     font-weight: bold;
     transition: transform 0.2s;
 }
@@ -805,7 +832,7 @@ footer nav .app-container.active::after {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0,0,0,0.75);
+    background: rgba(0, 0, 0, 0.75);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -851,7 +878,7 @@ footer nav .app-container.active::after {
     padding: 10px 20px;
     border: none;
     border-radius: 8px;
-    cursor: pointer;
+    cursor: url("../images/curseur_hover.png"), pointer;
     font-weight: bold;
     transition: transform 0.2s;
 }

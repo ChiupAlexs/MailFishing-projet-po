@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Mailfishing</title>
     <link rel="stylesheet" href="../css/maily.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <div id="feedback" class="feedback">Mail supprimé avec succès !</div>
 <body>
@@ -41,7 +42,7 @@
     <div class="containerRecepetion">
         <p onclick="fermerMail()" class="reception">Boîte de reception</p>
     </div>
-    <div class="containerMails">
+    <div class="containerMails" data-aos="fade-up">
         <!--<div class="mails1" onclick="ouvrirMail(0)">
             <img class="mail" src="../images/mail1.png" alt="mailPP">
             <p class="mailHeure">12:00</p>
@@ -138,9 +139,10 @@
     </a>-->
     <!--<a href="rapport.html">jfsdaklsdjlfdk</a>-->
 </footer>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script src="../main.js"></script>
 <script>
-
+    AOS.init();
 </script>
 </body>
 

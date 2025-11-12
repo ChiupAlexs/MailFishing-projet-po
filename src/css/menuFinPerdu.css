@@ -18,6 +18,23 @@ h1 {
     transition: opacity 2s ease;
 }
 
+/* Style du texte "Appuyez sur espace" */
+.press-space {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2em;
+    color: white;
+    text-shadow: 0 0 10px black;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.visible {
+    opacity: 1;
+}
+
 #game-over-screen {
     position: fixed;
     top: 0;
@@ -193,7 +210,11 @@ h1 {
 
 .pas-de-faute {
     display: none;
+    font-size: 30px;
+    font-weight: bold;
+    color: red;
 }
+
 .last-icon {
     cursor: url("../images/curseur_hover.png"),pointer;
     max-width: 50px;
@@ -252,7 +273,7 @@ h1 {
     border: none;
     cursor: url("../images/curseur_hover.png"),pointer;
     font-weight: bold;
-    margin: 30px auto;
+    margin: 40px auto;
 
 }
 

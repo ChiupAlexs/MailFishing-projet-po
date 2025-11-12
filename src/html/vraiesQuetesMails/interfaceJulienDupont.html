@@ -73,14 +73,12 @@
 </footer>
 <script src="../../main.js"></script>
 <script>
-
     document.addEventListener("DOMContentLoaded", () => {
         if (document.documentElement.requestFullscreen) {
             document.documentElement.requestFullscreen();
         }
 
         const buttonJulien = document.getElementById("popupOk");
-
         if (buttonJulien) {
             buttonJulien.addEventListener('click', () => {
                 localStorage.setItem("pagePrincipale", "true");
@@ -100,19 +98,25 @@
         const popupCancel = document.getElementById("popupCancel");
         const popupOk = document.getElementById("popupOk");
 
-        // Ouvrir le popup
+        // Vérification et ouverture du popup
         confirmBtn.addEventListener("click", () => {
-            const ca = document.getElementById("ca").value;
-            const benefice = document.getElementById("benefice").value;
-            const marge = document.getElementById("marge").value;
+            const ca = parseInt(document.getElementById("ca").value);
+            const benefice = parseInt(document.getElementById("benefice").value);
+            const marge = parseInt(document.getElementById("marge").value);
 
-            popupContent.innerHTML = `
-            <strong>Chiffre d’affaires :</strong> ${ca} €<br>
-            <strong>Bénéfice net :</strong> ${benefice} €<br>
-            <strong>Marge opérationnelle :</strong> ${marge} %
-        `;
-
-            overlay.classList.remove("hidden");
+            // Vérification des valeurs exactes
+            if (ca === 3400000 && benefice === 436000 && marge === 13) {
+                popupContent.innerHTML = `
+                <strong>Chiffre d’affaires :</strong> ${ca.toLocaleString("fr-CH")} CHF<br>
+                <strong>Bénéfice net :</strong> ${benefice.toLocaleString("fr-CH")} CHF<br>
+                <strong>Marge opérationnelle :</strong> ${marge} %
+            `;
+                confirmMsg.textContent = "";
+                overlay.classList.remove("hidden");
+            } else {
+                confirmMsg.textContent = "⚠️ Données invalides.";
+                confirmMsg.style.color = "red";
+            }
         });
 
         // Fermer popup (annuler)
@@ -129,11 +133,10 @@
             confirmMsg.style.color = "#28a745";
             confirmBtn.disabled = true;
             setTimeout(() => {
-                window.close()
-            },3000)
+                window.close();
+            }, 3000);
         });
     });
-
 </script>
 </body>
 </html>

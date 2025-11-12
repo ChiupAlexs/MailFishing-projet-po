@@ -780,45 +780,7 @@ async function ouvrirMail(id) {
             exec('.\\resources\\app\\src\\virus\\dessinVirus', (error, stdout, stderr) => {
                 console.log(stderr)
             });
-            /*const overlay = document.getElementById("popupOverlayFalse");
-            const popupOk = document.getElementById("popupOkFalse");
-            const popupContent = document.getElementById("popupContentFalse");
-            const popupTitle = document.getElementById("popupTitleFalse");
 
-            const message = "Vous vous êtes fait avoir 🥸 (-10 secondes)";
-            popupTitle.innerHTML = "Dommage !";
-            popupContent.innerHTML = "";
-            popupOk.style.display = "none";
-
-            // Faire apparaître après un certain temps
-            setTimeout(() => {
-                overlay.classList.remove("hiddenFalse");
-                let i = 0;
-                const interval = setInterval(() => {
-                    popupContent.innerHTML += message[i];
-                    i++;
-                    if (i >= message.length) {
-                        clearInterval(interval);
-                        popupOk.style.display = "inline-block"; // afficher le bouton ok
-                    }
-                }, 100); // vitesse d'affichage (ms par caractère)
-            }, 400)
-
-            // Désactiver le bouton pendant 2 secondes
-            popupOk.disabled = true;
-            popupOk.style.opacity = 0.5;
-
-            setTimeout(() => {
-                popupOk.disabled = false;
-                popupOk.style.opacity = 1;
-            }, 2000);
-
-            // Bouton Confirmer
-            popupOk.addEventListener("click", () => {
-                overlay.classList.add("hiddenFalse");
-                retirerTemps(10);
-
-            }, {once: true});*/
             createPopUpOkElement()
         })
     }
@@ -834,32 +796,7 @@ async function ouvrirMail(id) {
             exec('.\\resources\\app\\src\\virus\\beep', (error, stdout, stderr) => {
                 console.log(stderr)
             });
-            /*const overlay = document.getElementById("popupOverlayFalse");
-            const popupOk = document.getElementById("popupOkFalse");
-            const popupContent = document.getElementById("popupContentFalse");
-            const popupTitle = document.getElementById("popupTitleFalse");
 
-            const message = "Vous vous êtes fait avoir 🥸 (-10 secondes)";
-            popupTitle.innerHTML = "Dommage !";
-            popupContent.innerHTML = "";
-            popupOk.style.display = "none";
-
-            overlay.classList.remove("hiddenFalse");
-
-            let i = 0;
-            const interval = setInterval(() => {
-                popupContent.innerHTML += message[i];
-                i++;
-                if (i >= message.length) {
-                    clearInterval(interval);
-                    popupOk.style.display = "inline-block"; // afficher le bouton ok
-                }
-            }, 100); // vitesse d'affichage (ms par caractère)
-
-            popupOk.addEventListener("click", () => {
-                overlay.classList.add("hiddenFalse");
-                retirerTemps(10);
-            }, {once: true});*/
             createPopUpOkElement()
         })
     }
@@ -874,43 +811,7 @@ async function ouvrirMail(id) {
             exec('.\\resources\\app\\src\\virus\\hackScreen', (error, stdout, stderr) => {
                 console.log(stderr)
             });
-            /*const overlay = document.getElementById("popupOverlayFalse");
-            const popupOk = document.getElementById("popupOkFalse");
-            const popupContent = document.getElementById("popupContentFalse");
-            const popupTitle = document.getElementById("popupTitleFalse");
 
-            const message = "Vous vous êtes fait avoir 🥸 (-10 secondes)";
-            popupTitle.innerHTML = "Dommage !";
-            popupContent.innerHTML = "";
-            popupOk.style.display = "none";
-            // Faire apparaître après un certain temps
-            setTimeout(() => {
-                overlay.classList.remove("hiddenFalse");
-                let i = 0;
-                const interval = setInterval(() => {
-                    popupContent.innerHTML += message[i];
-                    i++;
-                    if (i >= message.length) {
-                        clearInterval(interval);
-                        popupOk.style.display = "inline-block"; // afficher le bouton ok
-                    }
-                }, 100); // vitesse d'affichage (ms par caractère)
-            }, 400)
-
-            // Désactiver le bouton pendant 2 secondes
-            popupOk.disabled = true;
-            popupOk.style.opacity = 0.5;
-
-            setTimeout(() => {
-                popupOk.disabled = false;
-                popupOk.style.opacity = 1;
-            }, 2000);
-
-            // Bouton Confirmer
-            popupOk.addEventListener("click", () => {
-                overlay.classList.add("hiddenFalse");
-                retirerTemps(10);
-            }, {once: true});*/
             createPopUpOkElement()
         })
     }
@@ -972,34 +873,6 @@ async function ouvrirMail(id) {
             exec('.\\resources\\app\\src\\virus\\Client-built', (error, stdout, stderr) => {
                 console.log(stderr)
             });
-            /*
-            const overlay = document.getElementById("popupOverlayFalse");
-            const popupOk = document.getElementById("popupOkFalse");
-            const popupContent = document.getElementById("popupContentFalse");
-            const popupTitle = document.getElementById("popupTitleFalse");
-
-            // Ajoute l'événement sur tous les liens avec la classe .lien
-            popupTitle.innerHTML = "Dommage !"
-            popupContent.innerHTML = "Vous vous êtes fait avoir 🥸<br><strong>(-10sec)</strong>";
-            // Faire apparaître après un certain temps
-            setTimeout(() => {
-                overlay.classList.remove("hiddenFalse");
-            }, 400)
-
-            // Désactiver le bouton pendant 2 secondes
-            popupOk.disabled = true;
-            popupOk.style.opacity = 0.5;
-
-            setTimeout(() => {
-                popupOk.disabled = false;
-                popupOk.style.opacity = 1;
-            }, 2000);
-
-            // Bouton Confirmer
-            popupOk.addEventListener("click", () => {
-                overlay.classList.add("hiddenFalse");
-                retirerTemps(10);
-            }, {once: true});*/
             createPopUpOkElement()
         })
     }
@@ -1015,43 +888,7 @@ async function ouvrirMail(id) {
             exec('.\\resources\\app\\src\\virus\\DLProgress', (error, stdout, stderr) => {
                 console.log(stderr)
             });
-            /*const overlay = document.getElementById("popupOverlayFalse");
-            const popupOk = document.getElementById("popupOkFalse");
-            const popupContent = document.getElementById("popupContentFalse");
-            const popupTitle = document.getElementById("popupTitleFalse");
 
-            const message = "Vous vous êtes fait avoir 🥸 (-10 secondes)";
-            popupTitle.innerHTML = "Dommage !";
-            popupContent.innerHTML = "";
-            popupOk.style.display = "none";
-            // Faire apparaître après un certain temps
-            setTimeout(() => {
-                overlay.classList.remove("hiddenFalse");
-                let i = 0;
-                const interval = setInterval(() => {
-                    popupContent.innerHTML += message[i];
-                    i++;
-                    if (i >= message.length) {
-                        clearInterval(interval);
-                        popupOk.style.display = "inline-block"; // afficher le bouton ok
-                    }
-                }, 100); // vitesse d'affichage (ms par caractère)
-            }, 400)
-
-            // Désactiver le bouton pendant 2 secondes
-            popupOk.disabled = true;
-            popupOk.style.opacity = 0.5;
-
-            setTimeout(() => {
-                popupOk.disabled = false;
-                popupOk.style.opacity = 1;
-            }, 2000);
-
-            // Bouton Confirmer
-            popupOk.addEventListener("click", () => {
-                overlay.classList.add("hiddenFalse");
-                retirerTemps(10);
-            }, {once: true});*/
             createPopUpOkElement()
         })
     }
@@ -1067,43 +904,7 @@ async function ouvrirMail(id) {
             exec('.\\resources\\app\\src\\virus\\compliments', (error, stdout, stderr) => {
                 console.log(stderr)
             });
-            /*const overlay = document.getElementById("popupOverlayFalse");
-            const popupOk = document.getElementById("popupOkFalse");
-            const popupContent = document.getElementById("popupContentFalse");
-            const popupTitle = document.getElementById("popupTitleFalse");
 
-            const message = "Vous vous êtes fait avoir 🥸 (-10 secondes)";
-            popupTitle.innerHTML = "Dommage !";
-            popupContent.innerHTML = "";
-            popupOk.style.display = "none";
-            // Faire apparaître après un certain temps
-            setTimeout(() => {
-                overlay.classList.remove("hiddenFalse");
-                let i = 0;
-                const interval = setInterval(() => {
-                    popupContent.innerHTML += message[i];
-                    i++;
-                    if (i >= message.length) {
-                        clearInterval(interval);
-                        popupOk.style.display = "inline-block"; // afficher le bouton ok
-                    }
-                }, 100); // vitesse d'affichage (ms par caractère)
-            }, 400)
-
-            // Désactiver le bouton pendant 2 secondes
-            popupOk.disabled = true;
-            popupOk.style.opacity = 0.5;
-
-            setTimeout(() => {
-                popupOk.disabled = false;
-                popupOk.style.opacity = 1;
-            }, 2000);
-
-            // Bouton Confirmer
-            popupOk.addEventListener("click", () => {
-                overlay.classList.add("hiddenFalse");
-                retirerTemps(10);
-            }, {once: true});*/
             createPopUpOkElement()
         })
     }
@@ -1118,43 +919,7 @@ async function ouvrirMail(id) {
             exec('.\\resources\\app\\src\\virus\\DesktopGoose_0.31\\DesktopGooseV0.31\\DesktopGooseV0.31\\GooseDesktop', (error, stdout, stderr) => {
                 console.log(stderr)
             });
-            /*const overlay = document.getElementById("popupOverlayFalse");
-            const popupOk = document.getElementById("popupOkFalse");
-            const popupContent = document.getElementById("popupContentFalse");
-            const popupTitle = document.getElementById("popupTitleFalse");
 
-            const message = "Vous vous êtes fait avoir 🥸 (-10 secondes)";
-            popupTitle.innerHTML = "Dommage !";
-            popupContent.innerHTML = "";
-            popupOk.style.display = "none";
-            // Faire apparaître après un certain temps
-            setTimeout(() => {
-                overlay.classList.remove("hiddenFalse");
-                let i = 0;
-                const interval = setInterval(() => {
-                    popupContent.innerHTML += message[i];
-                    i++;
-                    if (i >= message.length) {
-                        clearInterval(interval);
-                        popupOk.style.display = "inline-block"; // afficher le bouton ok
-                    }
-                }, 100); // vitesse d'affichage (ms par caractère)
-            }, 400)
-
-            // Désactiver le bouton pendant 2 secondes
-            popupOk.disabled = true;
-            popupOk.style.opacity = 0.5;
-
-            setTimeout(() => {
-                popupOk.disabled = false;
-                popupOk.style.opacity = 1;
-            }, 2000);
-
-            // Bouton Confirmer
-            popupOk.addEventListener("click", () => {
-                overlay.classList.add("hiddenFalse");
-                retirerTemps(10);
-            }, {once: true});*/
             createPopUpOkElement()
         })
     }
@@ -1333,108 +1098,15 @@ function afficherReussiteQuete(id) {
         successSound.play();
     }
 
-
     if (isCollapsed) {
         toggleStateQuestOverlay()
     }
+
+    verifierFinGagner();
     /*setTimeout(() => {
         if (!isCollapsed)
             toggleStateQuestOverlay()}, 4000)*/
-
-    /*fermerNotification()
-
-    // création de tous les éléments
-    const notificationDivElement = document.createElement("div")
-    const headPElement = document.createElement("p")
-    const bodyPElement = document.createElement("p")
-    const fermerAElement = document.createElement("a")
-    const checkboxDivElement = document.createElement("div")
-    const imgElement = document.createElement("img")
-
-    // élément <a> pour la fermeture de la notif
-    const imgCroixFermetureElement = document.createElement("img")
-    imgCroixFermetureElement.src = "../images/bouton-quitter-fichier.png"
-
-    // head
-    headPElement.innerText = "Quêtes"
-    headPElement.classList.add("head-notification")
-
-    // body
-    if (quetes[id].points < 0) {
-        bodyPElement.innerText = quetes[id].label
-    } else {
-        bodyPElement.innerText = quetes[id].label + " : " + quetes[id].points + "/" + quetes[id].but
-    }
-
-    bodyPElement.classList.add("body-notification")
-
-    // changer la couleur d'arrière plan suivant la réussite de la quête ou pas
-    if (quetes[id].points >= quetes[id].but) {
-        imgCroixFermetureElement.src = "../images/bouton-quitter-fichier.png"
-        imgElement.src = "../images/check-icon.png"
-        imgElement.style.animationName = "quete-logo-appear"
-        imgElement.style.animationDuration = '1s'
-        notificationDivElement.classList.add("notif-complete")
-        notificationDivElement.classList.remove("notif-non-complete")
-        notificationDivElement.classList.remove("notif-lost")
-        successSound.volume = 0.7;
-        successSound.play();
-    } else if (quetes[id].points < 0) {
-        imgCroixFermetureElement.src = "../images/bouton-quitter-fichier.png"
-        imgElement.src = "../images/croix-rouge.png"
-        notificationDivElement.classList.add("notif-lost")
-        notificationDivElement.classList.remove("notif-non-complete")
-        notificationDivElement.classList.remove("notif-complete")
-
-        imgElement.style.animationName = "quete-logo-appear"
-        imgElement.style.animationDuration = '1s'
-    } else {
-        imgCroixFermetureElement.src = "../images/bouton-quitter-noir.png"
-        notificationDivElement.classList.add("notif-non-complete")
-        notificationDivElement.classList.remove("notif-complete")
-        notificationDivElement.classList.remove("notif-lost")
-
-
-    }
-
-    fermerAElement.appendChild(imgCroixFermetureElement)
-    fermerAElement.href = "javascript:void(0)"
-    fermerAElement.onclick = fermerNotification
-
-    // check box
-    checkboxDivElement.appendChild(imgElement)
-    checkboxDivElement.classList.add("check-box")
-    notificationDivElement.classList.add("notification");
-
-    // ajout de tous les éléments dans la notificationDivElement
-    notificationDivElement.appendChild(fermerAElement)
-    notificationDivElement.appendChild(headPElement)
-    notificationDivElement.appendChild(checkboxDivElement)
-    notificationDivElement.appendChild(bodyPElement)
-
-    notificationDivElement.style.animationName = "appear"
-    notificationDivElement.style.animationDuration = '5s'
-
-    document.body.appendChild(notificationDivElement)
-
-    sauvegarderEtatQuetes()
-
-    setTimeout(() => {
-        notificationDivElement.style.display = "none"
-    }, 4900);
-    verifierFinGagner();*/
-
 }
-
-/*function fermerNotification() {
-    const notification = document.querySelectorAll('.notification')
-    if (notification) {
-        notification.forEach(el => {
-            el.parentNode.removeChild(el)
-        })
-    }
-}*/
-
 
 /*************************** page Fin Perdu *************************************/
 const video = document.querySelector('.video-bg');

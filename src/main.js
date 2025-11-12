@@ -627,8 +627,16 @@ window.addEventListener('load', () => {
         btnOk.addEventListener("click", () => {
             introFini = true;
             sessionStorage.setItem('introFini', JSON.stringify(true));
-            appLockQuetes.classList.remove("lockedQuetes");
-            lockerQuetes.remove()
+
+            // Débloque la partie quêtes
+            appLockQuetes?.classList.remove("lockedQuetes");
+            lockerQuetes?.remove();
+
+            // Débloque Maily
+            appLock?.classList.remove("locked");
+            locker?.remove();
+            voile?.classList.remove("voile");
+            fleche?.remove();
         });
         if (introFini) {
             if (appLockQuetes && lockerQuetes) {

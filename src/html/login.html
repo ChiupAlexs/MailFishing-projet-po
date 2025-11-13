@@ -8,13 +8,15 @@
 </head>
 <body>
 <div id="login-container">
-    <img class="fade-in-down" src="../images/Profile-pic.png" alt="Profile">
-    <h1 class="fade-in-down">Informatique de Gestion</h1>
-    <div class="input-container">
-        <input type="password" id="password" placeholder="Mot de passe" class="fade-in-down"/>
-        <img class="fade-in-down" src="../images/eyeClosed.png" id="eye" onclick="changer()" alt="mot de passe caché"></img>
+    <div class="login-information">
+        <img class="profil-pic" src="../images/Profile-pic.png" alt="Profile">
+        <h1>Informatique de Gestion</h1>
     </div>
-    <button class="fade-in-up" id="loginBtn">Connexion</button>
+    <div class="input-container">
+        <input type="password" id="password" placeholder="Mot de passe"/>
+        <img class="eye" src="../images/eyeClosed.png" id="eye" onclick="changer()" alt="mot de passe caché"></img>
+    </div>
+    <button id="loginBtn">Connexion</button>
 </div>
 <script src="../login.js"></script>
 </body>

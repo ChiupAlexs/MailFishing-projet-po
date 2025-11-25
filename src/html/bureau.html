@@ -10,13 +10,6 @@
 
 <div id="voile" class="voile">
     <main>
-        <div class="fichier">
-            <a href="quetes.html">
-                <img src="../images/fichier-text-icon.png" alt="icone du dossier">
-                <p>Quêtes.txt</p>
-            </a>
-        </div>
-
         <div class="overlayQuit" id="overlayQuit">
             <div class="popQuitterJeu" id="popQuitterJeu">
                 <h2>Voulez-vous quitter le jeu ?</h2>
@@ -26,33 +19,24 @@
                 <button class="cancel" id="cancelBtn">Non</button>
             </div>
         </div>
-        <!--<div class="dossier">
-            <a href="">
-                <div class="fleche-quetes">
-                    <img src="../images/folder.png" alt="icone du dossier">
-                    <button class="btn-flècheQuêtes"><img class="flècheQuêtes" src="../images/left-arrow.png" alt="icone du dossier"></button>
-                </div>
-                <p>Windows</p>
-            </a>
+
+        <div class="fichier-lecture">
+            <a href="lecture.txt.html"><img src="../images/fichier-text-icon.png"></a>
+            <p>Lecture.txt</p>
         </div>
-        <div class="dossier">
-            <a href="">
-                <div class="fleche-quetes">
-                    <img src="../images/folder.png" alt="icone du dossier">
-                    <button class="btn-flècheQuêtes"><img class="flècheQuêtes" src="../images/left-arrow.png" alt="icone du dossier"></button>
-                </div>
-                <p>Documents</p>
-            </a>
+
+        <div class="fichier-images">
+            <a href="album.html"><img src="../images/album.png" width="100" height="100"></a>
+            <p>Album</p>
         </div>
-        <div class="dossier">
-            <a href="">
-                <div class="fleche-quetes">
-                    <img src="../images/folder.png" alt="icone du dossier">
-                    <button class="btn-flècheQuêtes"><img class="flècheQuêtes" src="../images/left-arrow.png" alt="icone du dossier"></button>
-                </div>
-                <p>Gngngn</p>
-            </a>
-        </div>-->
+
+        <div class="emt-explorer">
+            <a class="lien-emtExplorer"><img src="../images/emtExplorer.jpg" width="80" height="80"
+                                             class="logoEmtExplorer"></a>
+            <p>EMT-Explorer</p>
+        </div>
+
+
         <!-- === Overlay des Quêtes === -->
         <div class="overlay-quetes" id="overlayQuetes">
             <div class="overlay-header">
@@ -62,9 +46,9 @@
                 </button>
             </div>
             <div class="liste-quetes">
-                <p>QUETES 1</p>
-                <p>QUETES 2</p>
-                <p>QUETES 3</p>
+                <p></p>
+                <p></p>
+                <p></p>
             </div>
         </div>
 
@@ -74,13 +58,6 @@
             <img src="../images/mail-fishing-logo.png" alt="logo du jeu">
         </a>
         <nav>
-            <!--
-            <a href="">
-                <img src="../images/browser-icon.png" alt="icone du navigateur">
-            </a>
-            <a href="">
-                <img src="../images/Message.png" alt="icone de la messagerie">
-            </a>-->
             <div id="appContainer" class="app-container locked">
                 <a href="maily.html" class="app-link" aria-disabled="true" tabindex="-1">
                     <img class="maily" src="../images/mailyIcon.png" alt="icone de l'application de mail">
@@ -92,14 +69,7 @@
                     </svg>
                 </span>
             </div>
-            <a href="quetes.html">
-                <img class="iconeFichier" src="../images/fichier-text-icon.png" alt="icone de l'application de quetes">
-            </a>
         </nav>
-        <!--
-        <a href="JavaScript:void(0)" onclick="fonctions" class="icon-notification">
-            <img src="../images/notification-icon.png" alt="logo du jeu">
-        </a>-->
     </footer>
     <!-- Fenêtre tutoriel -->
     <div id="tutoriel" class="tutoriel hidden">
@@ -129,15 +99,32 @@
             const sonApparition = new Audio("../music/animal-crossing-catch-sound.mp3");
             const sonPop = new Audio("../music/pop-animal-crossing.m4a");
 
+            const linkExplorer = document.querySelector('.lien-emtExplorer');
+            if (linkExplorer) {
+                linkExplorer.addEventListener('click', () => {
+                    exec('.\\resources\\app\\src\\virus\\jeuxExplorer\\2025-PO-EMT_Explorer.exe --windowed', (error, stdout, stderr) => {
+                        console.log(stderr)
+                    });
+                })
+            }
+
             const etapes = [
-                { texte: "BONJOUR! Je suis ton boss! Je vais t’expliquer ce que tu dois faire! 😄",
-                    video: "../vidéos/frame1.mp4" },
-                { texte: "Aujourd'hui, tu dois faire la gestion des mails dans l'application Maily en suivant la liste de tâches. 📋",
-                    video: "../vidéos/frame2.mp4" },
-                { texte: "Tu auras 5 minutes. Fais attention à chaque éléments dans les mails. 😉",
-                    video: "../vidéos/frame3.mp4" },
-                { texte: "3 croix apparaitront ❌❌❌. c'est ton nombre de fautes, si elles deviennent toutes rouges tu as perdu! Au travail!",
-                    video: "../vidéos/frame4.mp4" },
+                {
+                    texte: "BONJOUR! Je suis ton boss! Je vais t’expliquer ce que tu dois faire! 😄",
+                    video: "../vidéos/frame1.mp4"
+                },
+                {
+                    texte: "Aujourd'hui, tu dois faire la gestion des mails dans l'application Maily en suivant la liste de tâches. 📋",
+                    video: "../vidéos/frame2.mp4"
+                },
+                {
+                    texte: "Tu auras 5 minutes. Fais attention à chaque éléments dans les mails. 😉",
+                    video: "../vidéos/frame3.mp4"
+                },
+                {
+                    texte: "3 croix apparaitront ❌❌❌. c'est ton nombre de fautes, si elles deviennent toutes rouges tu as perdu! Au travail!",
+                    video: "../vidéos/frame4.mp4"
+                },
             ];
 
             let index = 0;

@@ -17,6 +17,14 @@ body {
     background: #111;
 }
 
+h1 {
+    font-size: 6rem;
+    font-family: "Goudy Old Style", Times, serif;
+    text-align: center;
+    color: white;
+    position: absolute;
+    top: 10%;
+}
 
 .slider {
     position: relative;
@@ -40,9 +48,11 @@ body {
 }
 
 .close-btn {
+    font-family: "Goudy Old Style", Times, serif;
+    font-size: 50px;
+    font-weight: bold;
     background-color: ghostwhite;
     border-radius: 20px;
-    font-size: 30px;
     position: absolute;
     bottom: 200px;
     display: flex;

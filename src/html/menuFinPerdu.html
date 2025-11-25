@@ -14,7 +14,8 @@
     <span class="game-over">
         <h1 data-text="GAME OVER">GAME OVER</h1>
         <div id="perso-container" style="display: none;">
-            <video id="perso-video" src="../vidéos/angry.mp4" autoplay muted playsinline width="400" height="400"></video>
+            <video id="perso-video" src="../vidéos/angry.mp4" autoplay muted playsinline width="400"
+                   height="400"></video>
         </div>
     </span>
     <div class="rapports">
@@ -36,7 +37,9 @@
         </div>
         <div class="points"></div>
 
-        <button class="retour-menu-principal" onclick="window.open('MenuDemarrage.html', '_self')">Menu Principal</button>
+        <button id="btnMenuPrincipal" class="retour-menu-principal"
+                onclick="">Menu Principal
+        </button>
     </div>
     <!--<button class="retour" onclick="window.location.href='rapport.html'">Rapport de partie</button>-->
 </div>
@@ -58,10 +61,10 @@
     const titreRapport = document.querySelector(".titre-rapport");
     const textRapport = document.querySelector(".text")
     const imgMailElement = document.querySelector(".img-mail");
-    const imgPopUpElement = document.querySelector("img.img-pop-up")
+    const imgPopUpElement = document.querySelector("img.img-pop-up");
 
     window.addEventListener('load', () => {
-        setTimeout(()=> {
+        setTimeout(() => {
             persoContainer.style.display = 'block';
             persoVideo.muted = false;
             persoVideo.currentTime = 0;

@@ -1,0 +1,368 @@
+* {
+    box-sizing: border-box;
+    font-family: Sora, sans-serif;
+    -webkit-user-drag: none;
+    cursor: url("../images/curseur.png"), pointer;
+}
+
+*::selection {
+    background: transparent;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    background-color: #505050;
+}
+
+
+.overlayQuit {
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(6px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.popQuitterJeu {
+    text-align: center;
+}
+
+.popQuitterJeu:hover {
+    cursor: url("../images/curseur_hover.png"), pointer;
+}
+
+.popQuitterJeu button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+}
+.popQuitterJeu button:hover {
+    background-color: #0055aa;
+    cursor: url("../images/curseur_hover.png"), pointer;
+}
+
+.confirm {
+    background: #3ea6ff;
+    color: #fff;
+    margin-right: 10px;
+}
+
+.confirm:hover {
+    cursor: url("../images/curseur_hover.png"), pointer;
+}
+
+.overlayQuit a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.overlayQuit a:hover {
+    cursor: url("../images/curseur_hover.png"), pointer;
+}
+
+.cancel {
+    background: #3ea6ff;
+    color: #fff;
+    margin-left: 10px;
+}
+
+.cancel:hover {
+    cursor: url("../images/curseur_hover.png"), pointer;
+}
+
+
+/*********************************
+
+    En-tete de la page des quêtes
+
+*********************************/
+header {
+    max-height: 30px;
+    position: fixed;
+    top: 0;
+    background-color: #505050;
+    width: 100vw;
+    border-bottom: rgba(255, 255, 255, 0.5) solid 2px;
+}
+.nom-fichier {
+    padding: 5px;
+    max-height: 30px;
+    max-width: 200px;
+    color: white;
+    background-color: #808080;
+    border-bottom: rgba(255, 255, 255, 0.5) solid 2px;
+    border-right: rgba(255, 255, 255, 0.5) solid 2px;
+}
+.nom-fichier img {
+    max-height: 20px;
+    display: inline-block;
+}
+.nom-fichier p {
+    display: inline-block;
+    position: fixed;
+    top: 6px;
+    left: 25px;
+    margin: 0;
+}
+.bouton-quitter-fichier div {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 30px;
+    width: 40px;
+    background-color: #f00;
+    border-bottom: rgba(255, 255, 255, 0.5) solid 2px;
+    border-right: rgba(255, 255, 255, 0.5) solid 2px;
+    border-left: rgba(255, 255, 255, 0.5) solid 2px;
+}
+.bouton-quitter-fichier img {
+    max-height: 30px;
+    position: fixed;
+    right: 5px;
+}
+
+.bouton-quitter-fichier img:hover {
+    cursor: url("../images/curseur_hover.png"), pointer;
+}
+
+/*********************************
+
+  partie principale de la page (main)
+
+*********************************/
+
+
+main {
+    padding-left: 20px;
+    margin-top: 50px;
+    color: white;
+}
+.text-histoire {
+    line-height: 1.8;
+}
+
+.dialect{
+    color: orange;
+    font-weight: bold;
+}
+
+.taches {
+    margin-bottom: 20px;
+}
+
+.taches div {
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border: 5px solid black;
+    float: left;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.taches p {
+    font-size: 1.3rem;
+    display: inline-block;
+    margin: 4px 0 0 0;
+    position: relative;
+    top: -18px;
+}
+
+.taches div img {
+    max-height: 40px;
+    position: relative;
+    bottom: 10px;
+    right: 5px;
+}
+
+.icon-quete {
+    position: relative;
+    max-width: 40px;
+    max-height: 40px;
+    left: 5px;
+    bottom: 3px;
+}
+.taches.perdu div img {
+    max-height: 30px;
+    bottom: 4px;
+}
+
+/*********************************
+
+   Pied de page (barre des tâches)
+
+*********************************/
+footer {
+    border-top: 2px solid lightgray;
+    position: fixed;
+    bottom: 0;
+    height: 91px;
+    width: 100%;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+    z-index: 999;
+}
+
+footer .logo img {
+    margin: 5px;
+}
+
+footer .logo img:hover {
+    cursor: url("../images/curseur_hover.png"), pointer;
+}
+
+
+footer nav img {
+    height: 70px;
+    margin: 20px;
+}
+
+footer nav img:hover {
+    cursor: url("../images/curseur_hover.png"), pointer;
+}
+
+.icon-notification img {
+    max-height: 70px;
+}
+.icon-notification {
+    margin-right: 10px;
+}
+
+footer nav {
+    padding: 0;
+    margin: 0 auto;
+    text-align: center;
+}
+
+footer a {
+    text-decoration: none;
+}
+footer img {
+    filter:drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+/* Ajout : indicateur Windows 11 */
+footer nav a {
+    position: relative;
+    display: inline-block;
+}
+
+.iconeFichier {
+    position: relative; /* ✅ reste dans le flux */
+    top: 0; /* ajuste si nécessaire */
+    left: 0;
+}
+
+.app-container {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.app-link {
+    display: inline-block;
+    text-decoration: none;
+    outline: none;
+}
+
+.app-link img.maily {
+    display: block;
+    width: 70px;
+    height: 70px;
+}
+
+.lock-badge {
+    position: absolute;
+    bottom: 45px;
+    right: -8px;
+    width: 22px;
+    height: 22px;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.app-container.lockedQuetes .app-link,
+.app-container.lockedQuetes .app-link img {
+    filter: grayscale(60%);
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.app-container.lockedQuetes .app-link {
+    pointer-events: none;
+}
+
+.app-container.lockedQuetes .lock-badge {
+    background: #ffffffd9;
+}
+
+.notification {
+    position: fixed;
+}
+
+footer nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px; /* espace uniforme entre icônes */
+}
+
+/* Pour les conteneurs d'applications verrouillées ou normales*/
+footer nav .app-container,
+footer nav a {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer nav .app-container img,
+footer nav a img {
+    height: 70px;
+    width: auto;
+    margin: 0; /* supprime les marges différentes */
+    display: block;
+}
+
+/* Petits indicateurs bleus style Windows 11 */
+footer nav .app-container::after,
+footer nav a::after {
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    background-color: #0078D7;
+    border-radius: 50%;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+footer nav a.active::after,
+footer nav .app-container.active::after {
+    width: 20px;
+    height: 4px;
+    border-radius: 2px;
+    bottom: -5px;
+}

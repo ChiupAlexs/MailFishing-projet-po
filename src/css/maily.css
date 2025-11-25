@@ -39,7 +39,7 @@ body {
 .overlay-quetes {
     position: fixed;
     top: 10px;
-    right: 25%;
+    right: 27%;
     background: rgba(20, 20, 20, 0.9);
     color: white;
     border-radius: 12px;
@@ -47,7 +47,7 @@ body {
     width: 360px;
     overflow: hidden;
     transition: height 0.4s ease, opacity 0.3s ease;
-    z-index: 1000;
+    z-index: 100;
 }
 
 .overlay-header {

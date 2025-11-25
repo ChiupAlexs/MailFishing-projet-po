@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Album</title>
+    <link rel="stylesheet" href="../css/album.css">
+</head>
+<body>
+<button id="quit" class="close-btn">Quitter</button>
+<div class="slider">
+    <button class="btn" id="prev">&#10094;</button>
+    <div class="slides" id="slides">
+        <div class="slide slide-1"><img src="../images/slide1.webp" alt="1" width="900" height="500"></div>
+        <div class="slide slide-2"><img src="../images/slide2.png" alt="2" width="900" height="500"></div>
+        <div class="slide slide-3"><img src="../images/slide3.webp" alt="3" width="900" height="500"></div>
+        <div class="slide slide-4"><img src="../images/slide4.png" alt="4" width="900" height="500"></div>
+        <div class="slide slide-5"><img src="../images/slide5.avif" alt="5" width="900" height="500"></div>
+        <div class="slide slide-6"><img src="../images/slide6.webp" alt="6" width="900" height="500"></div>
+        <div class="slide slide-7"><img src="../images/slide7.jpg" alt="7" width="900" height="500"></div>
+        <div class="slide"><img src="../images/slide8.jpg" alt="8" width="900" height="500"></div>
+        <div class="slide"><img src="../images/slide9.png" alt="9" width="900" height="500"></div>
+        <div class="slide"><img src="../images/slide10.png" alt="10" width="900" height="500"></div>
+        <div class="slide"><img src="" alt="11"></div>
+        <div class="slide"><img src="https://picsum.photos/id/1080/900/500" alt="12"></div>
+        <div class="slide"><img src="../images/slide13.jpg" alt="13" width="900" height="500"></div>
+        <div class="slide"><img src="../images/slide14.jpg" alt="14" width="900" height="500"></div>
+        <div class="slide"><img src="../images/slide15.avif" alt="15" width="900" height="500"></div>
+    </div>
+    <button class="btn" id="next">&#10095;</button>
+</div>
+
+<script src="../main.js"></script>
+<script>
+    const quit = document.getElementById('quit')
+    quit.addEventListener('click', () => {
+        window.location.replace("bureau.html")
+    })
+
+    const slides = document.getElementById('slides');
+    const slideCount = slides.children.length;
+    let index = 0;
+
+
+    function showSlide(i) {
+        index = (i + slideCount) % slideCount;
+        slides.style.transform = `translateX(-${index * 100}%)`;
+    }
+
+
+    document.getElementById('next').addEventListener('click', () => {
+        showSlide(index + 1);
+    });
+
+
+    document.getElementById('prev').addEventListener('click', () => {
+        showSlide(index - 1);
+    });
+
+    // Création du canvas
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    document.body.appendChild(canvas);
+
+    canvas.style.position = "fixed";
+    canvas.style.top = 0;
+    canvas.style.left = 0;
+    canvas.style.zIndex = -1;
+    canvas.style.width = "100vw";
+    canvas.style.height = "100vh";
+    canvas.style.pointerEvents = "none";
+
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    // Animation
+    let time = 0;
+
+    // Couleurs "eau"
+    const waveColors = [
+        "rgba(0, 120, 255, 0.25)",  // bleu clair
+        "rgba(0, 90, 200, 0.25)",   // bleu moyen
+        "rgba(0, 160, 255, 0.20)",  // cyan
+        "rgba(0, 70, 160, 0.25)"    // bleu profond
+    ];
+
+    // Fonction vague sinus + bruit
+    function drawWave(amplitude, speed, wavelength, color, offsetY) {
+        ctx.beginPath();
+
+        for (let x = 0; x <= canvas.width; x++) {
+            const y =
+                Math.sin((x + time * speed) / wavelength) * amplitude +
+                Math.cos((x * 0.5 + time * speed) / (wavelength * 0.5)) * amplitude * 0.2 +
+                offsetY;
+
+            if (x === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        }
+
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 3;
+        ctx.stroke();
+    }
+
+    // Animation principale
+    function animateWater() {
+        time += 1;
+
+        // Fond dégradé animé
+        const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+        gradient.addColorStop(
+            0,
+            `rgba(${0 + Math.sin(time * 0.002) * 20}, 80, 200, 1)`
+        );
+        gradient.addColorStop(1, "rgba(0, 40, 100, 1)");
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Vagues superposées
+        let baseY = canvas.height * 0.55;
+
+        for (let i = 0; i < waveColors.length; i++) {
+            drawWave(
+                35 + i * 10,        // amplitude
+                0.6 + i * 0.2,      // vitesse
+                90 + i * 20,        // longueur d’onde
+                waveColors[i],      // couleur
+                baseY + i * 12      // décalage vertical
+            );
+        }
+
+        requestAnimationFrame(animateWater);
+    }
+
+    animateWater();
+
+</script>
+</body>
+</html>

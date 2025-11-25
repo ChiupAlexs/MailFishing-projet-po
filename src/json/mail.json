@@ -58,7 +58,7 @@
       }
     },
     {
-      "icon": "fnak.png",
+      "icon": "fnac.png",
       "realName":"Fnac",
       "sender": "service-client@fnak.ch",
       "time": "12:45",
@@ -231,7 +231,7 @@
     {
       "icon": "foodly.png",
       "realName":"Foodly",
-      "sender": "Robert@foodly.ch",
+      "sender": "Robert@foodli.com",
       "object": "Votre repas est en route",
       "time": "19:42",
       "date": "08/10/2025",
@@ -239,7 +239,7 @@
       "secret" : "",
       "backgroundImage": "foodlyBackground.png",
       "bonMail": false,
-      "lienPopUp": "https://www.foodly.ch/track/54321",
+      "lienPopUp": "https://www.foodli.com/track/54321",
       "rapport": {
         "realName": "Foodly",
         "imgLienPopUp": "foodly-lien-pop-up.png",

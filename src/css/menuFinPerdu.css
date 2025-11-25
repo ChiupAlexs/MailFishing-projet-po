@@ -215,6 +215,12 @@ h1 {
     color: red;
 }
 
+div.text {
+    width: calc(40vw - 10px);
+    text-align: left;
+    padding-left: 10px;
+}
+
 .last-icon {
     cursor: url("../images/curseur_hover.png"),pointer;
     max-width: 50px;

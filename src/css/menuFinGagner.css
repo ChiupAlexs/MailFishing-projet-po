@@ -160,9 +160,12 @@ body, html {
 }
 .text-rapport p {
     text-align: left;
+    width: 100%;
 }
+
 .text-rapport {
     padding-left: 10px;
+
 }
 @keyframes rapport-appear {
     0% {

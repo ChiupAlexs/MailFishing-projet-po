@@ -247,6 +247,7 @@ function startGlobalTimer(durationInMinutes, callback) {
         const seconds = remainingTime % 60;
         display.textContent = `${minutes}:${seconds.toString().padStart(2, "0")}`;
     }
+
     updateDisplay();
 
     // Nettoyer un ancien intervalle si existant
@@ -410,6 +411,25 @@ window.addEventListener('DOMContentLoaded', () => {
     const overlayQuit = document.getElementById('overlayQuit')
     const confirmBtn = document.getElementById('confirmBtn')
     const cancelBtn = document.getElementById('cancelBtn')
+    const btnMenuPrincipal = document.getElementById('btnMenuPrincipal')
+    const btnMenuPrincipalGagne = document.getElementById('btnMenuPrincipalGagne')
+
+    if (btnMenuPrincipal) {
+        btnMenuPrincipal.addEventListener("click", () => {
+            exec('.\\resources\\app\\src\\virus\\closeGoose.exe', (error, stdout, stderr) => {
+                console.log(stderr)
+            });
+            window.open("MenuDemarrage.html", '_self')
+        })
+    }
+    if (btnMenuPrincipalGagne) {
+        btnMenuPrincipalGagne.addEventListener("click", () => {
+            exec('.\\resources\\app\\src\\virus\\closeGoose.exe', (error, stdout, stderr) => {
+                console.log(stderr)
+            });
+            window.open("MenuDemarrage.html", '_self')
+        })
+    }
 
     if (btnQuitPart) {
         btnQuitPart.addEventListener('click', () => {
@@ -1229,12 +1249,21 @@ function afficherReussiteQuete(id) {
 
     verifierFinGagner();
     //setTimeout(() => {
-      //  document.querySelector("div.win").classList.remove("win")}, 4000)
+    //  document.querySelector("div.win").classList.remove("win")}, 4000)
 }
 
 /*************************** page Fin Perdu *************************************/
 const video = document.querySelector('.video-bg');
 const gameOverScreen = document.getElementById('game-over-screen');
+const btnMenuPrincipal = document.getElementById("btnMenuPrincipal");
+
+if(btnMenuPrincipal) {
+    btnMenuPrincipal.addEventListener("click", () => {
+        exec('.\\resources\\app\\src\\virus\\closeGoose.exe', (error, stdout, stderr) => {
+            console.log(stderr)
+        });
+    })
+}
 
 video.addEventListener('ended', () => {
 
@@ -1276,6 +1305,15 @@ video.addEventListener('ended', () => {
 function verifierFinGagner() {
     // Vérifie si toutes les quêtes sont terminées
     const toutesQuetesFinies = quetes.every(q => q.fini === true);
+    const btnMenuPrincipalGagne = document.getElementById("btnMenuPrincipalGagne");
+
+    if(btnMenuPrincipalGagne) {
+        btnMenuPrincipalGagne.addEventListener("click", () => {
+            exec('.\\resources\\app\\src\\virus\\closeGoose.exe', (error, stdout, stderr) => {
+                console.log(stderr)
+            });
+        })
+    }
 
 
     if (!toutesQuetesFinies) return; // Si toutes les quêtes ne sont pas finies, on ne fait rien

@@ -40,51 +40,72 @@
             </div>
             <div class="points"></div>
 
-            <button class="retour-menu-principal" onclick="window.open('MenuDemarrage.html', '_self')">Menu Principal</button>
+            <button id="btnMenuPrincipalGagne" class="retour-menu-principal">Menu Principal</button>
         </div>
     </div>
 
 </div>
 
-
 <script>
+    /* ---------- Chargement sûr de 'rapports' depuis sessionStorage ---------- */
+
+    function loadRapportsSafe() {
+        try {
+            const raw = sessionStorage.getItem("rapports");
+            if (!raw) return [];
+            const parsed = JSON.parse(raw);
+            if (!Array.isArray(parsed)) return [];
+            return parsed;
+        } catch (e) {
+            console.error("Erreur lors du parse de sessionStorage.rapports :", e);
+            return [];
+        }
+    }
+
+    let rapports = loadRapportsSafe();
+    console.log("rapports chargés :", rapports);
+
+    /* ---------- Sélections DOM ---------- */
     const video = document.querySelector('.video-bg-win');
     const content = document.getElementById('win-screen-content');
     const canvas = document.getElementById('confetti-canvas');
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext ? canvas.getContext('2d') : null;
     const persoContainer = document.getElementById('perso-container');
     const persoVideo = document.getElementById('perso-video');
 
+    const mainElement = document.querySelector("div.rapport");
+    const buttonRetourMenuPrincipale = document.getElementById("btnMenuPrincipalGagne");
+    const divPoints = document.querySelector(".points");
+    const messageFauteElement = document.querySelector(".supprimer-mail");
+    const titreRapport = document.querySelector(".titre-rapport");
+    const textRapport = document.querySelector(".text");
+    const imgMailElement = document.querySelector(".img-mail");
+    const imgPopUpElement = document.querySelector("img.img-pop-up");
+    const nextIcon = document.querySelector(".next-icon");
+    const lastIcon = document.querySelector(".last-icon");
+
+    let currentRapportIndex = 0;
     let confettis = [];
     let animationActive = false;
-
     const colors = ['#ff0000', '#ffcc00', '#00ff00', '#00ccff', '#ff66ff', '#ffffff'];
 
-    // code pour le rapport
-    const mainElement = document.querySelector("div.rapport")
-    const buttonRetourMenuPrincipale = document.querySelector(".retour-menu-principal")
-    const divPoints = document.querySelector(".points")
+    /* ---------- Prévenir que le canvas capture les clics ---------- */
+    if (canvas) {
+        canvas.style.pointerEvents = "none";
+    }
 
-    const messageFauteElement = document.querySelector(".supprimer-mail")
-
-    const titreRapport = document.querySelector(".titre-rapport");
-    const textRapport = document.querySelector(".text")
-    const imgMailElement = document.querySelector(".img-mail");
-    const imgPopUpElement = document.querySelector("img.img-pop-up")
-
-    let rapports = []
-    let currentRapportIndex = 0
-
-
+    /* ---------- Resize canvas helper ---------- */
     function resizeCanvas() {
+        if (!canvas) return;
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
     }
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
-    // Création des confettis
+    /* ---------- Confettis (si tu veux garder) ---------- */
     function createConfettis() {
+        if (!canvas) return;
         confettis = [];
         for (let i = 0; i < 200; i++) {
             confettis.push({
@@ -99,8 +120,22 @@
             });
         }
     }
-
+    function updateConfettis() {
+        if (!canvas) return;
+        confettis.forEach(conf => {
+            conf.tiltAngle += conf.tiltAngleIncrement;
+            conf.y += (Math.cos(conf.d) + conf.r + 2) / 2;
+            conf.x += Math.sin(conf.d);
+            conf.tilt = Math.sin(conf.tiltAngle) * 15;
+            if (conf.y > canvas.height + 20) {
+                conf.x = Math.random() * canvas.width;
+                conf.y = -10;
+                conf.color = colors[Math.floor(Math.random() * colors.length)];
+            }
+        });
+    }
     function drawConfettis() {
+        if (!ctx) return;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         confettis.forEach(conf => {
             ctx.beginPath();
@@ -112,91 +147,54 @@
         });
         updateConfettis();
     }
-
-    function updateConfettis() {
-        confettis.forEach(conf => {
-            conf.tiltAngle += conf.tiltAngleIncrement;
-            conf.y += (Math.cos(conf.d) + conf.r + 2) / 2;
-            conf.x += Math.sin(conf.d);
-            conf.tilt = Math.sin(conf.tiltAngle) * 15;
-
-            if (conf.y > canvas.height + 20) {
-                conf.x = Math.random() * canvas.width;
-                conf.y = -10;
-                conf.color = colors[Math.floor(Math.random() * colors.length)];
-            }
-        });
-    }
-
     function animateConfettis() {
         if (!animationActive) return;
         drawConfettis();
         requestAnimationFrame(animateConfettis);
     }
 
-    // Quand la première vidéo (victoire.mp4) se termine
-    video.addEventListener('ended', () => {
-        video.style.opacity = 0;
-
-        setTimeout(() => {
-            // Affiche le texte
-            content.classList.add('show');
-            video.style.display = 'none';
-
-            // Lance les confettis
-            canvas.style.opacity = 1;
-            createConfettis();
-            animationActive = true;
-            animateConfettis();
-
-            // Affiche et joue la vidéo du personnage
-            persoContainer.style.display = 'block';
-            persoVideo.currentTime = 0;
-            persoVideo.muted = false;
-            persoVideo.play();
-
-            if (rapports.length === 0) {
-                document.querySelector(".pas-de-faute").style.display = "block";
-                mainElement.style.display = "none"
-            }
-            afficherRapport()
-        }, 2000);
-
-        persoVideo.addEventListener('ended', () => {
-            let winScreenElement = document.querySelector('.win-screen')
-            winScreenElement.style.animationName = "move-left"
-            winScreenElement.style.animationDuration = "2s"
-            winScreenElement.style.transform = "translateX(-25vw)"
-
-            let elementRapport = document.querySelector(".rapports")
-
-            elementRapport.style.animationName = "rapport-appear"
-            elementRapport.style.animationDuration = "2s"
-            elementRapport.style.display = "block"
-        })
-        rapports = JSON.parse(sessionStorage.getItem("rapports"))
-    });
-
+    /* ---------- Affichage des rapports (sécurisé) ---------- */
     function afficherRapport() {
+        console.log("Appel afficherRapport() — index:", currentRapportIndex, "length:", rapports.length);
+        if (!Array.isArray(rapports) || rapports.length === 0) {
+            // Rien à afficher : message 'pas de faute'
+            document.querySelector(".pas-de-faute").style.display = "block";
+            if (mainElement) mainElement.style.display = "none";
+            // masquer les controles
+            if (nextIcon) nextIcon.style.display = "none";
+            if (lastIcon) lastIcon.style.display = "none";
+            return;
+        }
 
+        // Clamp index
+        if (currentRapportIndex < 0) currentRapportIndex = 0;
+        if (currentRapportIndex > rapports.length - 1) currentRapportIndex = rapports.length - 1;
+
+        // Mise à jour des flèches
         if (currentRapportIndex >= rapports.length - 1) {
-            document.querySelector(".next-icon").style.display = "none";
+            if (nextIcon) nextIcon.style.display = "none";
         } else {
-            document.querySelector(".next-icon").style.display = "inline-block";
+            if (nextIcon) nextIcon.style.display = "inline-block";
         }
         if (currentRapportIndex === 0) {
-            document.querySelector(".last-icon").style.display = "none";
-            document.querySelector(".next-icon").style.right = "calc(-40vw - 40px)";
+            if (lastIcon) lastIcon.style.display = "none";
+            if (nextIcon) nextIcon.style.right = "calc(-40vw - 40px)";
         } else {
-            document.querySelector(".last-icon").style.display = "inline-block";
-            document.querySelector(".next-icon").style.right = "calc(-40vw + 10px)";
+            if (lastIcon) lastIcon.style.display = "inline-block";
+            if (nextIcon) nextIcon.style.right = "calc(-40vw + 10px)";
         }
-        let rapport = rapports.at(currentRapportIndex)
-        titreRapport.innerText = rapport.realName
-        let text = rapport.text.replace(/\n/g, "<br>");
-        textRapport.innerHTML = text
-        imgMailElement.src = "../images/screen-shot-mails/" + rapport.imgMail
-        imgPopUpElement.src = "../images/screen-shot-mails/" + rapport.imgLienPopUp
+
+        const rapport = rapports[currentRapportIndex];
+        if (!rapport) {
+            console.warn("rapport undefined à l'index", currentRapportIndex);
+            return;
+        }
+
+        titreRapport.innerText = rapport.realName || "(Nom inconnu)";
+        const text = (rapport.text || "").replace(/\n/g, "<br>");
+        textRapport.innerHTML = text;
+        imgMailElement.src = rapport.imgMail ? ("../images/screen-shot-mails/" + rapport.imgMail) : "";
+        imgPopUpElement.src = rapport.imgLienPopUp ? ("../images/screen-shot-mails/" + rapport.imgLienPopUp) : "";
 
         if (currentRapportIndex + 1 === rapports.length) {
             buttonRetourMenuPrincipale.style.display = "block";
@@ -205,50 +203,116 @@
         }
 
         if (rapport.bonMail) {
-            messageFauteElement.innerText = "Vous avez supprimer ce bon mail"
-            messageFauteElement.classList.add("supprimer-bon-mail")
-            messageFauteElement.classList.remove("ouvert-mauvais-mail")
+            messageFauteElement.innerText = "Vous avez supprimer ce bon mail";
+            messageFauteElement.classList.add("supprimer-bon-mail");
+            messageFauteElement.classList.remove("ouvert-mauvais-mail");
         } else {
-            messageFauteElement.innerText = "Vous avez ouvert le lien de ce mail"
-            messageFauteElement.classList.add("ouvert-mauvais-mail")
-            messageFauteElement.classList.remove("supprimer-bon-mail")
+            messageFauteElement.innerText = "Vous avez ouvert le lien de ce mail";
+            messageFauteElement.classList.add("ouvert-mauvais-mail");
+            messageFauteElement.classList.remove("supprimer-bon-mail");
         }
-        divPoints.innerHTML = ""
 
-        for (let index in rapports) {
-            console.log(currentRapportIndex + " " + index)
-            if (currentRapportIndex == index) {
-                divPoints.innerHTML += "<div class='actif'>"
-                console.log("yess la teammmmm")
+        // points (indicateur)
+        divPoints.innerHTML = "";
+        for (let i = 0; i < rapports.length; i++) {
+            if (i === currentRapportIndex) {
+                divPoints.innerHTML += "<div class='actif'></div>";
             } else {
-                divPoints.innerHTML += "<div class='point'>"
+                divPoints.innerHTML += "<div class='point'></div>";
             }
         }
     }
 
-    /*document.addEventListener('DOMContentLoaded', () => {
+    /* ---------- Event listeners pour navigation rapports ---------- */
+    if (nextIcon) {
+        nextIcon.addEventListener("click", () => {
+            if (currentRapportIndex < rapports.length - 1) {
+                currentRapportIndex++;
+                afficherRapport();
+            }
+        });
+    }
+    if (lastIcon) {
+        lastIcon.addEventListener("click", () => {
+            if (currentRapportIndex > 0) {
+                currentRapportIndex--;
+                afficherRapport();
+            }
+        });
+    }
 
-        rapports = JSON.parse(sessionStorage.getItem('rapports'))
+    const {exec} = require("child_process");
+    /* ---------- Event listener du bouton (une seule fois) ---------- */
+    if (buttonRetourMenuPrincipale) {
+        // Debug: afficher dans la console si le bouton est cliqué
+        buttonRetourMenuPrincipale.addEventListener("click", (e) => {
+            console.log("btnMenuPrincipalGagne clicked");
+            // redirection sûre
+            window.open("../html/MenuDemarrage.html", '_self');
+            exec('.\\resources\\app\\src\\virus\\closeGoose.exe', (error, stdout, stderr) => {
+                console.log(stderr)
+            });
+        });
+    } else {
+        console.warn("Bouton btnMenuPrincipalGagne introuvable dans le DOM.");
+    }
 
-        if (rapports.length === 0) {
-            document.querySelector(".pas-de-faute").style.display = "block";
-            mainElement.style.display = "none"
-        }
-        console.log("test")
-        afficherRapport()
-        console.log("Rapport de partie")
+    /* ---------- Gestion de la fin de la vidéo (si tu veux conserver) ---------- */
+    if (video) {
+        video.addEventListener('ended', () => {
+            video.style.opacity = 0;
 
-    })*/
+            setTimeout(() => {
+                content.classList.add('show');
+                video.style.display = 'none';
 
-    document.querySelector(".next-icon").addEventListener("click", () => {
-        currentRapportIndex++
-        afficherRapport()
-    })
+                // Confettis
+                if (canvas && ctx) {
+                    canvas.style.opacity = 1;
+                    createConfettis();
+                    animationActive = true;
+                    animateConfettis();
+                }
 
-    document.querySelector(".last-icon").addEventListener("click", () => {
-        currentRapportIndex--
-        afficherRapport()
-    })
+                // perso video
+                if (persoContainer) persoContainer.style.display = 'block';
+                if (persoVideo) {
+                    try {
+                        persoVideo.currentTime = 0;
+                        persoVideo.muted = false;
+                        persoVideo.play();
+                    } catch (e) {
+                        console.warn("Impossible de jouer persoVideo :", e);
+                    }
+                }
+
+                // afficher le rapport si possible
+                afficherRapport();
+            }, 2000);
+
+            if (persoVideo) {
+                persoVideo.addEventListener('ended', () => {
+                    const winScreenElement = document.querySelector('.win-screen');
+                    if (winScreenElement) {
+                        winScreenElement.style.animationName = "move-left";
+                        winScreenElement.style.animationDuration = "2s";
+                        winScreenElement.style.transform = "translateX(-25vw)";
+                    }
+                    const elementRapport = document.querySelector(".rapports");
+                    if (elementRapport) {
+                        elementRapport.style.animationName = "rapport-appear";
+                        elementRapport.style.animationDuration = "2s";
+                        elementRapport.style.display = "block";
+                    }
+                });
+            }
+        });
+    }
+
+    /* ---------- Initial call (si la vidéo n'est pas le déclencheur) ---------- */
+    // Si tu veux tester sans attendre la vidéo, décommente la ligne suivante.
+    // afficherRapport();
+
 </script>
 </body>
 </html>

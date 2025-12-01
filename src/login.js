@@ -2,7 +2,7 @@
 function validerMotDePasse() {
     const password = document.getElementById("password").value;
 
-    if (password === "1234") {
+    if (password === "Le1r0T") {
         const container = document.getElementById("login-container");
         container.classList.add("fade-out");
 

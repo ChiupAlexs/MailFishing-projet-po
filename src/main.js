@@ -38,7 +38,9 @@ let isCollapsed = sessionStorage.getItem("overlayCollapsed") === null
 
 let fullHeight
 
-// handler par délégation (capture phase pour intercepter tôt)
+/**
+ * vérifie le nombre de cliques suspects et va activer la fin si on clique sur trop de mauvais liens
+ */
 function handleSuspectClick(e) {
     const suspectEl = e.target.closest('#popupOkFalse');
     if (!suspectEl) return;
@@ -77,7 +79,10 @@ function handleSuspectClick(e) {
         }
         remainingTime = 0;
         sessionStorage.setItem("globalTimerFinished", "true");
+
+        sessionStorage.setItem("finalTime", sessionStorage.getItem("globalTimerRemaining"))
         sessionStorage.removeItem("globalTimerRemaining");
+
 
         // Supprime les croix après 3 clics
         const croixContainer = document.getElementById("croixContainer");
@@ -106,6 +111,11 @@ let remainingTime = 0;
 const displayId = "timerDisplay";
 let display = document.getElementById(displayId);
 
+/**
+ * modifie le temps qui est affiché par le display
+ * (est exécuté chaque seconde)
+ * et si le temps est inférieur à 30 secondes il va activer le stress Sound
+ */
 function updateDisplay() {
     let minutes = Math.floor(remainingTime / 60);
     let seconds = remainingTime % 60;
@@ -121,6 +131,9 @@ function updateDisplay() {
     }
 }
 
+/**
+ * arrête le stressSound
+ */
 function stopStressSound() {
     if (stressSound) {
         stressSound.pause();
@@ -129,6 +142,11 @@ function stopStressSound() {
     }
 }
 
+/**
+ * lance le timer du jeu et va créer les displays de timer etc.
+ * @param durationInMinutes temps du timer en minute
+ * @param callback fonction qui se lance à la fin du timer
+ */
 function startGlobalTimer(durationInMinutes, callback) {
     // Si le timer est terminé ou si on est sur la page de fin on ne crée rien
     if (sessionStorage.getItem("globalTimerFinished") === "true" ||
@@ -266,7 +284,10 @@ function startGlobalTimer(durationInMinutes, callback) {
 }
 
 
-// Soustrait un temps au timer global et met à jour sessionStorage
+/**
+ * Retire du temps au timer et sauvegarde ce temps dans le sessionStorage
+ * @param secondes temps retiré au timer
+ */
 function retirerTemps(secondes) {
     if (remainingTime <= 0) return;
 
@@ -323,7 +344,10 @@ function retirerTemps(secondes) {
 }
 
 
-// Ajoute un temps au timer global et met à jour sessionStorage
+/**
+ * Ajoute du temps au timer et le sauvegarde dans le sessionStorage
+ * @param secondes temps ajouter au timer
+ */
 function ajouterTemps(secondes) {
     if (remainingTime <= 0) return;
 
@@ -379,6 +403,7 @@ function ajouterTemps(secondes) {
 
 /******************************** Général ************************************/
 
+// Menu qui permet de quitter le jeu
 window.addEventListener('DOMContentLoaded', () => {
 
     const btnQuitPart = document.getElementById('QuitPartie')
@@ -407,18 +432,30 @@ window.addEventListener('DOMContentLoaded', () => {
 
 /*************************** Menu de démarrage *******************************/
 
+/**
+ * Ferme la fenêtre du jeu
+ */
 function quitter() {
     window.close();
 }
 
 /*************************** Maily *******************************************/
 
-// génère une date aléatoire entre 2 bornes
+/**
+ * Génère une date aléatoire entre 2 bornes
+ * @param start borne inférieur
+ * @param end borne supérieur
+ * @returns {Date} la date aléatoire
+ */
 function randomDate(start, end) {
     return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 }
 
-// --- Helpers robustes ---
+/**
+ * Remet en forme la date pour pour l'analyser
+ * @param str date en format string
+ * @returns {{d: number, m: number, y: number}|null} la date reformer
+ */
 function getDateParts(str) {
     if (!str || typeof str !== "string") return null;
     const s = str.trim();
@@ -434,6 +471,11 @@ function getDateParts(str) {
     return null;
 }
 
+/**
+ * Permet d'obtenir chaque partie d'une heure (heures, minutes)
+ * @param str heures et minute en string
+ * @returns {{h: number, min: number}} heures remis en forme
+ */
 function getTimeParts(str) {
     if (!str || typeof str !== "string") return {h: 0, min: 0};
     const m = str.trim().match(/^(\d{1,2}):(\d{2})$/);
@@ -441,7 +483,11 @@ function getTimeParts(str) {
     return {h: +m[1], min: +m[2]};
 }
 
-// Normalise le champ mail.date en jj/mm/aaaa (si possible)
+/**
+ * Normalise le champ mail.date en jj/mm/aaaa (si possible)
+ * @param mail normalise la date du mail
+ * @returns {mail} la date normalisée
+ */
 function normaliserDateFormat(mail) {
     const p = getDateParts(mail.date);
     if (!p) return mail;
@@ -452,6 +498,11 @@ function normaliserDateFormat(mail) {
     return mail;
 }
 
+/**
+ * récupère le time stamp de la date d'un mail
+ * @param mail mail à analyser
+ * @returns {number} timeStamp de la date du mail
+ */
 function toTimestamp(mail) {
     const dp = getDateParts(mail.date);
     if (!dp) return -Infinity;
@@ -459,7 +510,9 @@ function toTimestamp(mail) {
     return new Date(dp.y, dp.m - 1, dp.d, tp.h, tp.min).getTime();
 }
 
-// --- Tri principal ---
+/**
+ * Trie les mails par ordre chronologique
+ */
 function trierMailsParDateHeure() {
     // normaliser les dates (utile si sessionStorage contient encore des dates ISO)
     listMails = listMails.map(normaliserDateFormat);
@@ -470,6 +523,10 @@ function trierMailsParDateHeure() {
     sauvegarderMail();
 }
 
+/**
+ * charge les quêtes et les sauvegardent dans le sessionStorage et les initialise si ils n'ont pas
+ * encore été initialisé (lancement du jeu)
+ */
 function loadQuetes() {
     const queteGarderMailElement = document.querySelector('.garderMail')
     const queteSuppMailElement = document.querySelector(".suppMail")
@@ -480,7 +537,7 @@ function loadQuetes() {
 
         quetes = [
             {id: 0, points: 0, but: 5, fini: false, label: "Supprimer 5 mails mauvais"},
-            {id: 1, points: 0, but: 1, fini: false, label: "Effectuer la tâche du bon mail"}, // TODO : modifier le label
+            {id: 1, points: 0, but: 1, fini: false, label: "Effectuer la tâche du bon mail"},
             {id: 2, points: 0, but: 1, fini: false, label: "Ouvrir Maily"},
         ]
 
@@ -510,6 +567,9 @@ function loadQuetes() {
     loadQuetesOverlay(null)
 }
 
+/**
+ * Sauvegarde l'état des quêtes dans le sessionStorage
+ */
 function sauvegarderEtatQuetes() {
     sessionStorage.setItem('quetes', JSON.stringify(quetes));
 
@@ -534,7 +594,10 @@ function sauvegarderEtatQuetes() {
     }
 }
 
-
+/**
+ * Charge les mails depuis les fichiers json (mail.json, vraimail.json) et les
+ * sauvegardent dans le sessionStorage au lancement de l'application
+ */
 async function loadMails() {
 
     if (sessionStorage.getItem('mails') === null) {
@@ -577,6 +640,17 @@ async function loadMails() {
 
         // Sauvegarder
         sauvegarderMail()
+/*
+        for (let mail of listVraiMail) {
+            let rapportFinal = {...mail.rapport, bonMail: mail.bonMail}
+            rapports.push(rapportFinal);
+        }
+        for (let mail of listFauxMail) {
+            let rapportFinal = {...mail.rapport, bonMail: mail.bonMail}
+            rapports.push(rapportFinal);
+        }
+
+        sessionStorage.setItem("rapports", JSON.stringify(rapports))*/
     } else {
         listMails = JSON.parse(sessionStorage.getItem('mails'));
     }
@@ -585,6 +659,7 @@ async function loadMails() {
     afficherListeMails()
 }
 
+// lancement de l'application
 window.addEventListener('load', () => {
     errorSound.volume = 0;
     errorSound.play();
@@ -669,6 +744,9 @@ window.addEventListener('load', () => {
     loadMails()
 });
 
+/**
+ * Ajoute le rapport du mail courrant dans la variable rapports et l'enregistre dans le sessionStorage
+ */
 function addRapport() {
     if (listMails[currentMailIndex].lienConsulter !== true) {
         let rapportFinal = {...listMails[currentMailIndex].rapport, bonMail: listMails[currentMailIndex].bonMail}
@@ -677,6 +755,9 @@ function addRapport() {
     }
 }
 
+/**
+ * affiche la listes des mails dans l'application maily
+ */
 function afficherListeMails() {
     listMailEl.innerHTML = ""
     for (let index in listMails) {
@@ -702,6 +783,9 @@ function afficherListeMails() {
     }
 }
 
+/**
+ * Crée le pop-up Ok qui apparait quand on clique sur un mauvais mail
+ */
 function createPopUpOkElement() {
     const overlay = document.getElementById("popupOverlayFalse");
     const popupOk = document.getElementById("popupOkFalse");
@@ -744,6 +828,10 @@ function createPopUpOkElement() {
     }, {once: true});
 }
 
+/**
+ * Affiche le mail en grand et ajoute un event listener de clique sur le lien
+ * @param id id du mail à afficher
+ */
 async function ouvrirMail(id) {
 
     currentMailIndex = id
@@ -954,6 +1042,9 @@ async function ouvrirMail(id) {
     sauvegarderMail()
 }
 
+/**
+ * Ferme le mail et réaffiche la liste des mails
+ */
 function fermerMail() {
 
     mailOuvertEl.style.display = 'none';
@@ -970,10 +1061,16 @@ function fermerMail() {
     window.scrollTo(0, scroll)
 }
 
+/**
+ * sauvegarde les mails restants dans le sessionStorage
+ */
 function sauvegarderMail() {
     sessionStorage.setItem('mails', JSON.stringify(listMails))
 }
 
+/**
+ * efface le mail courrant de la liste des mails et sauvegarde dans le sessionStorage
+ */
 function effacerMail() {
     if (currentMailIndex !== null) {
 
@@ -1020,6 +1117,10 @@ function effacerMail() {
     }
 }
 
+/**
+ * affiche un feedback visuel qui contient la chaîne de charactères donnée
+ * @param message
+ */
 function afficherfeedback(message) {
     const popup = document.getElementById("feedback");
     popup.textContent = message;
@@ -1030,6 +1131,9 @@ function afficherfeedback(message) {
     }, 2000);
 }
 
+/**
+ * Ouvre et ferme le menu des quêtes
+ */
 function toggleStateQuestOverlay() {
     isCollapsed = !isCollapsed;
     if (isCollapsed) {
@@ -1053,6 +1157,11 @@ function toggleStateQuestOverlay() {
         soundOpen.play()
     }
 }
+
+/**
+ * Met le contenu des quêtes dans l'onglet des quêtes
+ * @param idWin
+ */
 function loadQuetesOverlay(idWin) {
     const bodyPElement = document.querySelector(".liste-quetes")
 
@@ -1101,6 +1210,10 @@ function loadQuetesOverlay(idWin) {
     }
 }
 
+/**
+ * ouvre l'onglet des quêtes pour afficher le fait qu'on a avancé dans une quête.
+ * @param id id de la quête qui a avancé
+ */
 function afficherReussiteQuete(id) {
 
     loadQuetesOverlay(id)
@@ -1157,6 +1270,9 @@ video.addEventListener('ended', () => {
 
 /*************************** Fin Gagner *************************************/
 
+/**
+ * vérifie que toutes les quêtes soient finies pour lancer l'écran de fin de victoire
+ */
 function verifierFinGagner() {
     // Vérifie si toutes les quêtes sont terminées
     const toutesQuetesFinies = quetes.every(q => q.fini === true);

@@ -25,6 +25,11 @@ h1 {
     position: absolute;
     top: 10%;
 }
+@media screen and (max-width: 1894px) {
+    h1 {
+        top: 5%;
+    }
+}
 
 .slider {
     position: relative;
@@ -33,6 +38,12 @@ h1 {
     overflow: hidden;
     border-radius: 15px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+}
+
+@media screen and (max-width: 1894px) {
+    .slider {
+        top: 5%;
+    }
 }
 
 
@@ -58,6 +69,13 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 10;
+}
+
+@media screen and (max-width: 1894px) {
+    .close-btn {
+
+    }
 }
 
 .close-btn:hover {

@@ -283,6 +283,12 @@ div.text {
 
 }
 
+@media screen and (max-width: 1894px) {
+    .retour-menu-principal {
+        margin-top: 5px;
+    }
+}
+
 .image-mails {
     border-bottom: #dbeafe solid 1px;
 }

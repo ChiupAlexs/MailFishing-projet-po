@@ -50,6 +50,12 @@ body {
     z-index: 100;
 }
 
+@media screen and (max-width: 1894px) {
+    .overlay-quetes {
+        right: 20%;
+    }
+}
+
 .overlay-header {
     display: flex;
     justify-content: space-between;

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+</head>
+<body>
+
+<h1 id="titre">0</h1>
+
+<button id="bouton">CLICK</button>
+
+<ul>
+    <li>banane</li>
+    <li>pomme</li>
+    <li>cerise</li>
+</ul>
+
+<a href="rapport.html">click</a>
+
+
+
+</body>
+<style>
+
+    * {
+       font-family : Arial, sans-serif;
+    }
+
+    li {
+        font-size: 30px;
+        font-weight: bold;
+        text-align: center;
+        color: blue;
+    }
+
+    a {
+        text-decoration: none;
+        text-transform: uppercase;
+        color: red;
+    }
+
+    body {
+        background-color: yellow;
+    }
+
+/*
+    ul li {
+        list-style: none;
+        display: inline-block;
+        margin-right: 5px;
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 50px;
+        margin: 30px 0 0 0;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    button {
+        font-family: "Goudy Old Style", Times, sans-serif;
+        border: 3px solid red;
+        border-radius: 10px;
+        font-size: 50px;
+        text-align: center;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+    }
+
+    button:hover {
+        background-color: greenyellow;
+        cursor: pointer;
+        scale: 120%;
+    }
+*/
+</style>
+
+<script>
+    const titre = document.getElementById('titre');
+    const bouton = document.getElementById('bouton');
+    let compteur = 0;
+
+    bouton.onclick = () => {
+        compteur++;
+        titre.innerHTML = compteur;
+    }
+</script>
+
+</html>

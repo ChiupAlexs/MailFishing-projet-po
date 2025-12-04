@@ -1,6 +1,4 @@
 'use strict';
-const {exec} = require("child_process");
-const events = require("node:events");
 const errorSound = new Audio('../sons/error.m4a');
 const successSound = new Audio('../sons/success.m4a');
 const mailOuvertEl = document.getElementById('mail-ouvert')
@@ -243,10 +241,6 @@ function startGlobalTimer(durationInMinutes, callback) {
 
         if (remainingTime <= 0 || sessionStorage.getItem("globalTimerFinished") === "true") {
             clearInterval(timerInterval);
-            if (localStorage.getItem("pagePrincipale") === "false") {
-                exec('.\\resources\\app\\src\\virus\\closeFrontWindow.exe', (error, stdout, stderr) => {
-                });
-            }
             timerInterval = null;
             sessionStorage.setItem("globalTimerFinished", "true");
             console.log("true")
@@ -391,17 +385,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
     if (btnMenuPrincipal) {
         btnMenuPrincipal.addEventListener("click", () => {
-            exec('.\\resources\\app\\src\\virus\\closeGoose.exe', (error, stdout, stderr) => {
-                console.log(stderr)
-            });
             window.open("MenuDemarrage.html", '_self')
         })
     }
     if (btnMenuPrincipalGagne) {
         btnMenuPrincipalGagne.addEventListener("click", () => {
-            exec('.\\resources\\app\\src\\virus\\closeGoose.exe', (error, stdout, stderr) => {
-                console.log(stderr)
-            });
             window.open("MenuDemarrage.html", '_self')
         })
     }
@@ -797,53 +785,6 @@ async function ouvrirMail(id) {
         lienPopUpElement.classList.remove('actif')
     })
 
-    const linkDraw = document.querySelector('.lienDraw');
-    if (linkDraw) {
-        linkDraw.addEventListener('click', () => {
-
-            addRapport()
-
-            listMails[currentMailIndex].lienConsulter = true;
-
-            exec('.\\resources\\app\\src\\virus\\dessinVirus', (error, stdout, stderr) => {
-                console.log(stderr)
-            });
-
-            createPopUpOkElement()
-        })
-    }
-    const linkBeep = document.querySelector('.lienBeep');
-    if (linkBeep) {
-        linkBeep.addEventListener('click', () => {
-
-            addRapport()
-
-            listMails[currentMailIndex].lienConsulter = true;
-            sauvegarderMail()
-
-            exec('.\\resources\\app\\src\\virus\\beep', (error, stdout, stderr) => {
-                console.log(stderr)
-            });
-
-            createPopUpOkElement()
-        })
-    }
-    const linkScreen = document.querySelector('.lienScreen');
-    if (linkScreen) {
-        linkScreen.addEventListener('click', () => {
-            addRapport()
-
-            listMails[currentMailIndex].lienConsulter = true;
-            sauvegarderMail()
-
-            exec('.\\resources\\app\\src\\virus\\hackScreen', (error, stdout, stderr) => {
-                console.log(stderr)
-            });
-
-            createPopUpOkElement()
-        })
-    }
-
     const realLink = document.querySelector('.bon-lien');
     if (realLink) {
         realLink.addEventListener('click', () => {
@@ -876,7 +817,6 @@ async function ouvrirMail(id) {
                     overlay.classList.add("hiddenTrue");
                     ajouterTemps(15)
 
-
                     // Permet d'indiquer que la quête d'ouverture du bon mail soit complété
                     quetes[1].points = 1
                     quetes[1].fini = true
@@ -888,7 +828,7 @@ async function ouvrirMail(id) {
         })
     }
 
-    const link = document.querySelector('.lien');
+    const link = document.querySelector('.lien,.lienDraw, .lienBeep, .lienScreen, .lienProgress, .lienCompliments, .lienGoose');
     if (link) {
         link.addEventListener('click', () => {
             addRapport()
@@ -898,59 +838,10 @@ async function ouvrirMail(id) {
             pagePrincipale = false;
             localStorage.setItem("pagePrincipale", "false");
 
-            exec('.\\resources\\app\\src\\virus\\Client-built', (error, stdout, stderr) => {
-                console.log(stderr)
-            });
             createPopUpOkElement()
         })
     }
 
-    const linkDLProgress = document.querySelector('.lienProgress');
-    if (linkDLProgress) {
-        linkDLProgress.addEventListener('click', () => {
-            addRapport()
-
-            listMails[currentMailIndex].lienConsulter = true;
-            sauvegarderMail()
-
-            exec('.\\resources\\app\\src\\virus\\DLProgress', (error, stdout, stderr) => {
-                console.log(stderr)
-            });
-
-            createPopUpOkElement()
-        })
-    }
-
-    const linkCompliments = document.querySelector('.lienCompliments');
-    if (linkCompliments) {
-        linkCompliments.addEventListener('click', () => {
-            addRapport()
-
-            listMails[currentMailIndex].lienConsulter = true;
-            sauvegarderMail()
-
-            exec('.\\resources\\app\\src\\virus\\compliments', (error, stdout, stderr) => {
-                console.log(stderr)
-            });
-
-            createPopUpOkElement()
-        })
-    }
-    const linkGoose = document.querySelector('.lienGoose');
-    if (linkGoose) {
-        linkGoose.addEventListener('click', () => {
-            addRapport()
-
-            listMails[currentMailIndex].lienConsulter = true;
-            sauvegarderMail()
-
-            exec('.\\resources\\app\\src\\virus\\DesktopGoose_0.31\\DesktopGooseV0.31\\DesktopGooseV0.31\\GooseDesktop', (error, stdout, stderr) => {
-                console.log(stderr)
-            });
-
-            createPopUpOkElement()
-        })
-    }
     if (mail.backgroundImage) {
         mailOuvertEl.style.backgroundImage = `linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('../images/${mail.backgroundImage}')`
         mailOuvertEl.style.backgroundSize = "cover"
@@ -1143,15 +1034,6 @@ function afficherReussiteQuete(id) {
 /*************************** page Fin Perdu *************************************/
 const video = document.querySelector('.video-bg');
 const gameOverScreen = document.getElementById('game-over-screen');
-const btnMenuPrincipal = document.getElementById("btnMenuPrincipal");
-
-if(btnMenuPrincipal) {
-    btnMenuPrincipal.addEventListener("click", () => {
-        exec('.\\resources\\app\\src\\virus\\closeGoose.exe', (error, stdout, stderr) => {
-            console.log(stderr)
-        });
-    })
-}
 
 video.addEventListener('ended', () => {
 
@@ -1190,15 +1072,6 @@ video.addEventListener('ended', () => {
 function verifierFinGagner() {
     // Vérifie si toutes les quêtes sont terminées
     const toutesQuetesFinies = quetes.every(q => q.fini === true);
-    const btnMenuPrincipalGagne = document.getElementById("btnMenuPrincipalGagne");
-
-    if(btnMenuPrincipalGagne) {
-        btnMenuPrincipalGagne.addEventListener("click", () => {
-            exec('.\\resources\\app\\src\\virus\\closeGoose.exe', (error, stdout, stderr) => {
-                console.log(stderr)
-            });
-        })
-    }
 
 
     if (!toutesQuetesFinies) return; // Si toutes les quêtes ne sont pas finies, on ne fait rien

@@ -150,6 +150,13 @@ main {
     line-height: 1.8;
 }
 
+@media screen and (max-width: 1894px) {
+    .text-histoire {
+        line-height: 1.4;
+        font-size: 15px;
+    }
+}
+
 .dialect{
     color: orange;
     font-weight: bold;
